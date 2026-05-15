@@ -1038,6 +1038,12 @@
       position: relative;
       min-height: 390px;
       padding-right: 240px;
+      isolation: isolate;
+    }
+
+    .heritage-copy::after {
+      content: none;
+      display: none;
     }
 
     .heritage-kicker {
@@ -1067,6 +1073,40 @@
       height: 2px;
       background: #b85f45;
       margin-top: 24px;
+    }
+
+    .heritage-title .heritage-flag {
+      display: inline-flex;
+      width: 70px;
+      height: 42px;
+      margin-left: 16px;
+      vertical-align: middle;
+      border: 3px solid #fff;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #178b4a 0 33.333%, #ffffff 33.333% 66.666%, #d22f27 66.666% 100%);
+      box-shadow: 0 12px 24px rgba(80,48,6,.16);
+      transform: rotate(-4deg) translateY(-4px);
+      position: relative;
+    }
+
+    .heritage-title .heritage-flag::before {
+      content: "";
+      position: absolute;
+      left: -10px;
+      top: -8px;
+      width: 4px;
+      height: 62px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #7b5a34, #3f2a13);
+      box-shadow: 0 8px 14px rgba(80,48,6,.18);
+    }
+
+    .heritage-kicker,
+    .heritage-title,
+    .heritage-copy p:not(.heritage-kicker),
+    .heritage-btn {
+      position: relative;
+      z-index: 2;
     }
 
     .heritage-copy p:not(.heritage-kicker) {
@@ -1101,13 +1141,16 @@
 
     .heritage-italy-map {
       position: absolute;
-      right: 20px;
-      top: 6px;
-      width: 235px;
-      height: 310px;
-      opacity: .24;
-      color: #807265;
-      z-index: -1;
+      right: 10px;
+      top: -4px;
+      width: 255px;
+      height: auto;
+      max-height: 325px;
+      object-fit: contain;
+      opacity: .34;
+      z-index: 1;
+      pointer-events: none;
+      filter: none;
     }
 
     .heritage-italy-label {
@@ -1142,7 +1185,7 @@
         display: block;
         margin-top: 24px;
       }
-      .heritage-italy-map { width: 210px; height: 250px; }
+      .heritage-italy-map { width: 210px; height: 250px; opacity: .42; }
       .heritage-italy-label { width: fit-content; margin-left: auto; margin-right: 30px; }
     }
 
@@ -1154,6 +1197,22 @@
       .heritage-badge { right: -10px; bottom: -18px; width: 86px; height: 86px; }
       .heritage-title { font-size: clamp(36px, 12vw, 48px); }
       .heritage-copy p:not(.heritage-kicker) { font-size: 15px; }
+    }
+
+    @media (max-width: 620px) {
+      .heritage-title .heritage-flag {
+        width: 54px;
+        height: 32px;
+        margin-left: 10px;
+        border-width: 2px;
+        transform: rotate(-4deg) translateY(-2px);
+      }
+      .heritage-title .heritage-flag::before {
+        left: -8px;
+        top: -6px;
+        width: 3px;
+        height: 48px;
+      }
     }
 
   </style>
@@ -1350,15 +1409,12 @@
 
         <div class="heritage-copy">
           <p class="heritage-kicker">Über Eis Büffel</p>
-          <h2 class="heritage-title">Eine Familiengeschichte voller Leidenschaft.</h2>
+          <h2 class="heritage-title">Eine Familiengeschichte voller Leidenschaft.<span class="heritage-flag" aria-label="Italienische Flagge" role="img"></span></h2>
           <p>Seit über 50 Jahren stellen wir in Deutschland italienisches Eis nach traditionellen Rezepturen her. Was uns ausmacht? Echte Zutaten, ehrliches Handwerk und die Liebe zum Detail.</p>
           <a class="heritage-btn" href="#kontakt">Mehr über uns →</a>
 
-          <svg class="heritage-italy-map" viewBox="0 0 210 260" aria-label="Italien Karte" role="img">
-            <path fill="currentColor" d="M107 8c17 5 27 19 24 36-2 11 4 22 14 28 17 10 25 29 17 44-6 12-5 25 3 36 9 13 3 28-12 34-12 5-17 17-13 29 3 10-4 20-15 21-9 1-16 7-19 15-3 8-13 9-18 2-7-10-6-23 3-31 9-8 8-21-2-28-12-8-15-25-6-37 8-10 6-24-4-32-12-10-14-27-4-39 8-10 7-24-2-33-10-10-10-25 0-35C82 8 94 4 107 8Z"/>
-            <path fill="currentColor" d="M49 172c18 4 28 16 25 31-3 18-22 30-41 28-15-2-24-12-20-25 4-14 19-28 36-34Z"/>
-            <path fill="currentColor" d="M152 217c16-6 32-1 38 11 5 10-1 22-14 27-17 6-34 1-39-11-5-11 1-22 15-27Z"/>
-          </svg>
+          <!-- أضف صورة خريطة إيطاليا الخاصة بك هنا بنفس الاسم والمسار التالي -->
+          <img class="heritage-italy-map" src="assets/italy-map.png" alt="Italien Karte" />
           <div class="heritage-italy-label">Prodotto<br />in Italia<br /><b>▬ ▬</b></div>
         </div>
       </div>
