@@ -7,6 +7,7 @@
   <meta name="description" content="Premium Eisgroßhandel für Gastronomie, Eiscafés und Großkunden." />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Great+Vibes&family=Inter:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Homemade+Apple&display=swap');
 
     :root {
       --gold: #a66a13;
@@ -147,6 +148,27 @@
         radial-gradient(circle at 16% 18%, rgba(198,145,53,.10), transparent 24%);
       z-index: -1;
     }
+
+    /* Hero bottom organic wave - same torn/soft movement under the hero image */
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: -2%;
+      right: -2%;
+      bottom: -1px;
+      height: 88px;
+      background: #fff8ee;
+      z-index: 2;
+      pointer-events: none;
+      clip-path: polygon(
+        0 42%, 5% 48%, 10% 58%, 16% 51%, 22% 63%,
+        29% 55%, 36% 68%, 44% 58%, 52% 70%, 60% 56%,
+        68% 66%, 76% 52%, 84% 62%, 92% 50%, 100% 59%,
+        100% 100%, 0 100%
+      );
+      filter: drop-shadow(0 -10px 18px rgba(80, 48, 6, .04));
+    }
+
     .hero__content { width: 50%; max-width: 690px; z-index: 3; }
     .eyebrow {
       color: var(--gold);
@@ -217,7 +239,8 @@
     .experience p { font-size: 13px; line-height: 1.65; color: #4c3820; align-self: center; }
 
     .quality-taste {
-      padding: 58px 48px 72px;
+      margin-top: -1px;
+      padding: 78px 48px 72px;
       background:
         radial-gradient(circle at 18% 20%, rgba(198,145,53,.10), transparent 26%),
         radial-gradient(circle at 86% 42%, rgba(198,145,53,.08), transparent 28%),
@@ -378,25 +401,32 @@
     .card h3, .step h3 { color: var(--gold-dark); font-size: 22px; margin-bottom: 12px; }
     .card p, .step p { color: var(--muted); line-height: 1.75; }
 
+    .products {
+      padding: 46px 0 0;
+    }
+
     .stats-strip {
-      max-width: 1280px;
-      margin: 0 auto 34px;
+      width: 100vw;
+      max-width: none;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
       background: linear-gradient(180deg, #5a3703 0%, #2f1d02 100%);
-      border-radius: 8px;
+      border-radius: 0;
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       color: #fff8e8;
       box-shadow: 0 18px 42px rgba(53, 33, 5, .18);
       overflow: hidden;
-      border: 1px solid rgba(240,196,109,.28);
+      border-top: 1px solid rgba(240,196,109,.28);
+      border-bottom: 1px solid rgba(240,196,109,.28);
     }
     .stat-item {
-      min-height: 138px;
+      min-height: 132px;
       display: grid;
-      grid-template-columns: 70px 1fr;
+      grid-template-columns: 68px 1fr;
       align-items: center;
       gap: 14px;
-      padding: 22px 24px;
+      padding: 18px 28px;
       position: relative;
     }
     .stat-item:not(:last-child)::after {
@@ -409,8 +439,8 @@
       background: rgba(240,196,109,.36);
     }
     .stat-icon {
-      width: 66px;
-      height: 66px;
+      width: 62px;
+      height: 62px;
       object-fit: contain;
       opacity: 1;
       filter: none;
@@ -419,7 +449,7 @@
       display: block;
       font-family: Cinzel, serif;
       color: var(--gold-3);
-      font-size: clamp(26px, 2.3vw, 38px);
+      font-size: clamp(26px, 2.2vw, 38px);
       line-height: .98;
       margin-bottom: 7px;
       letter-spacing: .5px;
@@ -436,7 +466,7 @@
     }
     .stat-content p {
       font-size: 11px;
-      line-height: 1.45;
+      line-height: 1.55;
       color: rgba(255,255,255,.86);
     }
 
@@ -736,14 +766,17 @@
       .footer__inner { grid-template-columns: repeat(2, 1fr); gap: 30px; padding: 42px 24px; }
       .footer__social { align-items: flex-start; text-align: left; }
       .footer__icons { justify-content: flex-start; }
-      .quality-taste { padding: 58px 24px 66px; }
+      .quality-taste { padding: 76px 24px 66px; }
       .taste-card { grid-template-columns: 1fr; border-radius: 26px; }
       .taste-card__image { border-radius: 24px 24px 0 0; }
       .taste-card__content { border-radius: 0 0 24px 24px; }
+      .stats-strip { width: 100vw; border-radius: 0; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); }
+      .stat-item { min-height: 110px; padding: 16px 24px; }
       .stat-item:not(:last-child)::after { top: auto; left: 24px; right: 24px; bottom: 0; width: auto; height: 1px; }
       .quality-feature { border-right: 0; border-bottom: 1px solid rgba(166,106,19,.18); }
       .quality-feature:last-child { border-bottom: 0; }
       .section { padding: 72px 24px; }
+      .products { padding: 34px 0 0; }
       .about-banner-wrap { padding: 28px 24px; }
       .about-banner { grid-template-columns: 1fr; }
       .about-banner__image { min-height: 260px; }
@@ -763,8 +796,8 @@
       .about-signature { font-size: 36px; }
       .taste-card__content { padding: 24px 54px 24px 22px; }
       .quality-feature { grid-template-columns: 56px 1fr; padding: 22px 18px; }
-      .stat-item { grid-template-columns: 58px 1fr; min-height: 118px; padding: 18px; }
-      .stat-icon { width: 54px; height: 54px; }
+      .stat-item { grid-template-columns: 66px 1fr; min-height: 132px; padding: 22px 18px; }
+      .stat-icon { width: 60px; height: 60px; }
       .quality-feature__icon { width: 42px; height: 42px; }
       .footer__inner { grid-template-columns: 1fr; gap: 26px; padding: 38px 22px; }
       .footer__logo { width: 145px; }
@@ -819,6 +852,15 @@
         background:
           radial-gradient(circle at 50% 15%, rgba(198,145,53,.16), transparent 38%),
           radial-gradient(circle at 18% 82%, rgba(198,145,53,.12), transparent 34%);
+      }
+
+      .hero::after {
+        height: 58px;
+        clip-path: polygon(
+          0 38%, 8% 54%, 17% 45%, 27% 62%, 39% 50%,
+          51% 67%, 64% 49%, 77% 61%, 89% 46%, 100% 58%,
+          100% 100%, 0 100%
+        );
       }
 
       .hero__content {
@@ -897,6 +939,221 @@
       .hero__content { padding-top: clamp(205px, 66vw, 285px); }
       .hero h1 { font-size: clamp(39px, 16vw, 58px); }
       .brand-line img { width: .52em; height: .52em; }
+    }
+
+
+    /* About section copied from the first design: photo card + handwritten note + Italy mark */
+    .heritage-about {
+      padding: 54px 48px 58px;
+      background: #eee8df;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .heritage-about::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 28%, rgba(166,106,19,.06), transparent 28%),
+        radial-gradient(circle at 82% 48%, rgba(111,65,6,.06), transparent 30%);
+      pointer-events: none;
+    }
+
+    .heritage-about__grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .heritage-photo-note {
+      display: grid;
+      grid-template-columns: 95px 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .heritage-hand-text {
+      font-family: "Homemade Apple", cursive;
+      color: #5e4d41;
+      font-size: 19px;
+      line-height: 1.5;
+      text-align: center;
+      transform: rotate(-8deg);
+    }
+
+    .heritage-hand-text span {
+      display: block;
+      color: #b85f45;
+      font-size: 28px;
+      margin-top: 8px;
+    }
+
+    .heritage-family-photo {
+      position: relative;
+      min-height: 340px;
+      background: url("assets/anfe.png") center / cover no-repeat, #e5e0d6;
+      border: 14px solid #fff;
+      box-shadow: 0 24px 60px rgba(80, 48, 6, .16);
+      transform: rotate(-4deg);
+    }
+
+    .heritage-family-photo::before {
+      content: "";
+      position: absolute;
+      left: 22px;
+      top: -30px;
+      width: 120px;
+      height: 32px;
+      background: #718064;
+      opacity: .72;
+      transform: rotate(-8deg);
+    }
+
+    .heritage-badge {
+      position: absolute;
+      right: -34px;
+      bottom: -22px;
+      width: 104px;
+      height: 104px;
+      border-radius: 50%;
+      background: #b85f45;
+      color: #fff;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.35;
+      box-shadow: 0 14px 30px rgba(88,54,38,.20);
+    }
+
+    .heritage-badge strong { font-size: 15px; }
+
+    .heritage-copy {
+      position: relative;
+      min-height: 390px;
+      padding-right: 240px;
+    }
+
+    .heritage-kicker {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #243329;
+      font-weight: 900;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .heritage-title {
+      max-width: 610px;
+      font-family: "Cormorant Garamond", serif;
+      color: #18251b;
+      font-size: clamp(42px, 4.3vw, 64px);
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: .2px;
+      margin-bottom: 24px;
+    }
+
+    .heritage-title::after {
+      content: "";
+      display: block;
+      width: 78px;
+      height: 2px;
+      background: #b85f45;
+      margin-top: 24px;
+    }
+
+    .heritage-copy p:not(.heritage-kicker) {
+      max-width: 620px;
+      color: #3f473f;
+      line-height: 1.85;
+      font-size: 17px;
+      margin-bottom: 26px;
+    }
+
+    .heritage-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 58px;
+      padding: 0 34px;
+      border-radius: 4px;
+      border: 1px solid #c8b9aa;
+      color: #18251b;
+      background: transparent;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      transition: .25s ease;
+    }
+
+    .heritage-btn:hover {
+      background: #fff;
+      transform: translateY(-3px);
+    }
+
+    .heritage-italy-map {
+      position: absolute;
+      right: 20px;
+      top: 6px;
+      width: 235px;
+      height: 310px;
+      opacity: .24;
+      color: #807265;
+      z-index: -1;
+    }
+
+    .heritage-italy-label {
+      position: absolute;
+      right: 32px;
+      bottom: 22px;
+      font-family: "Homemade Apple", cursive;
+      font-size: 18px;
+      line-height: 1.5;
+      transform: rotate(-7deg);
+      color: #473c34;
+      text-align: center;
+    }
+
+    .heritage-italy-label b {
+      font-family: Inter, sans-serif;
+      color: #b85f45;
+      font-size: 25px;
+      letter-spacing: 8px;
+    }
+
+    @media (max-width: 1050px) {
+      .heritage-about { padding: 44px 24px 54px; }
+      .heritage-about__grid { grid-template-columns: 1fr; gap: 56px; }
+      .heritage-copy { padding-right: 0; min-height: auto; }
+      .heritage-italy-map,
+      .heritage-italy-label {
+        position: relative;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        display: block;
+        margin-top: 24px;
+      }
+      .heritage-italy-map { width: 210px; height: 250px; }
+      .heritage-italy-label { width: fit-content; margin-left: auto; margin-right: 30px; }
+    }
+
+    @media (max-width: 620px) {
+      .heritage-about { padding: 38px 20px 48px; }
+      .heritage-photo-note { grid-template-columns: 1fr; gap: 22px; }
+      .heritage-hand-text { text-align: left; transform: rotate(-5deg); }
+      .heritage-family-photo { min-height: 260px; transform: none; border-width: 10px; }
+      .heritage-badge { right: -10px; bottom: -18px; width: 86px; height: 86px; }
+      .heritage-title { font-size: clamp(36px, 12vw, 48px); }
+      .heritage-copy p:not(.heritage-kicker) { font-size: 15px; }
     }
 
   </style>
@@ -1082,51 +1339,27 @@
           </div>
         </div>
       </div>
-
-      <div class="cards">
-        <article class="card">
-          <div class="card__icon">🍨</div>
-          <h3>Premium Speiseeis</h3>
-          <p>Klassische und moderne Sorten mit cremiger Textur und zuverlässiger Qualität.</p>
-        </article>
-        <article class="card">
-          <div class="card__icon">🍦</div>
-          <h3>Eiscafé Sortiment</h3>
-          <p>Ideal für Theken, Becher, Waffeln und professionelle Eispräsentation.</p>
-        </article>
-        <article class="card">
-          <div class="card__icon">📦</div>
-          <h3>Großgebinde</h3>
-          <p>Effiziente Verpackungen für Restaurants, Cafés, Catering und Wiederverkäufer.</p>
-        </article>
-      </div>
     </section>
 
-    <section id="about" class="about-banner-wrap">
-      <div class="about-banner">
-        <div class="about-banner__text">
-          <h2>Über Eis Büffel</h2>
-          <p>
-            Eis Büffel steht für traditionelle Herstellungsmethoden,
-            beste Zutaten und echten Geschmack.
-          </p>
-          <p>
-            Seit Jahren beliefern wir unsere Partner aus Gastronomie,
-            Eiscafés und Einzelhandel mit hochwertigem Speiseeis.
-            Qualität, Zuverlässigkeit und Kundenzufriedenheit sind
-            unser Versprechen.
-          </p>
-          <div class="about-signature">Eis Büffel</div>
+    <section id="about" class="heritage-about">
+      <div class="heritage-about__grid">
+        <div class="heritage-photo-note">
+          <div class="heritage-hand-text">Tradition,<br />die man<br />schmeckt.<span>♡</span></div>
+          <div class="heritage-family-photo"><div class="heritage-badge">Seit<br /><strong>1970</strong></div></div>
         </div>
 
-        <div class="about-banner__image" aria-label="Eis Büffel Bild"></div>
+        <div class="heritage-copy">
+          <p class="heritage-kicker">Über Eis Büffel</p>
+          <h2 class="heritage-title">Eine Familiengeschichte voller Leidenschaft.</h2>
+          <p>Seit über 50 Jahren stellen wir in Deutschland italienisches Eis nach traditionellen Rezepturen her. Was uns ausmacht? Echte Zutaten, ehrliches Handwerk und die Liebe zum Detail.</p>
+          <a class="heritage-btn" href="#kontakt">Mehr über uns →</a>
 
-        <div class="about-banner__contact">
-          <h3>Kontakt</h3>
-          <a href="tel:+491739675569">⌕ +49 173 9675569</a>
-          <a href="mailto:info@eis-spezial.de">✉ info@eis-spezial.de</a>
-          <span>⌖ Deutschland</span>
-          <a href="#kontakt" class="about-banner__btn">Jetzt kontaktieren →</a>
+          <svg class="heritage-italy-map" viewBox="0 0 210 260" aria-label="Italien Karte" role="img">
+            <path fill="currentColor" d="M107 8c17 5 27 19 24 36-2 11 4 22 14 28 17 10 25 29 17 44-6 12-5 25 3 36 9 13 3 28-12 34-12 5-17 17-13 29 3 10-4 20-15 21-9 1-16 7-19 15-3 8-13 9-18 2-7-10-6-23 3-31 9-8 8-21-2-28-12-8-15-25-6-37 8-10 6-24-4-32-12-10-14-27-4-39 8-10 7-24-2-33-10-10-10-25 0-35C82 8 94 4 107 8Z"/>
+            <path fill="currentColor" d="M49 172c18 4 28 16 25 31-3 18-22 30-41 28-15-2-24-12-20-25 4-14 19-28 36-34Z"/>
+            <path fill="currentColor" d="M152 217c16-6 32-1 38 11 5 10-1 22-14 27-17 6-34 1-39-11-5-11 1-22 15-27Z"/>
+          </svg>
+          <div class="heritage-italy-label">Prodotto<br />in Italia<br /><b>▬ ▬</b></div>
         </div>
       </div>
     </section>
@@ -1295,9 +1528,8 @@
       ".quality-feature",
       ".stats-strip",
       ".products .card",
-      ".about-banner__text",
-      ".about-banner__image",
-      ".about-banner__contact",
+      ".heritage-photo-note",
+      ".heritage-copy",
       ".delivery .section-head",
       ".contact__box",
       ".footer__brand",
