@@ -44,6 +44,18 @@
       font-size: 13px;
     }
     .topbar__left, .topbar__right { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+    .topbar__left span {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+    }
+    .topbar__emoji {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+      flex: 0 0 auto;
+    }
 
     .navbar {
       height: 92px;
@@ -312,9 +324,9 @@
   <header class="site-header">
     <div class="topbar">
       <div class="topbar__left">
-        <span>🚚 Schnelle Lieferung</span>
-        <span>🏅 Beste Qualität</span>
-        <span>🤝 Zuverlässiger Service</span>
+        <span><img class="topbar__emoji" src="assets/delivery.png" alt="" /> Schnelle Lieferung</span>
+        <span><img class="topbar__emoji" src="assets/quality.png" alt="" /> Beste Qualität</span>
+        <span><img class="topbar__emoji" src="assets/service.png" alt="" /> Zuverlässiger Service</span>
       </div>
       <div class="topbar__right">
         <a href="tel:+491739675569">☎ +49 173 9675569</a>
