@@ -494,6 +494,7 @@
       min-height: 245px;
       display: grid;
       grid-template-columns: 1.1fr 1.35fr .9fr;
+      align-items: stretch;
       overflow: hidden;
       border-radius: 0 0 8px 8px;
       background: #fbf3e8;
@@ -529,16 +530,15 @@
       margin-top: 12px;
     }
     .about-banner__image {
-      /*
-        ضع صورتك هنا فقط:
-        1) انسخ الصورة داخل مجلد assets
-        2) غيّر اسم الملف في السطر التالي، مثال: assets/my-photo.jpg
-      */
+      /* ضع صورتك هنا */
       background-image: url("assets/upper-image.png");
-      background-size: cover;
+      background-size: 100% 100%;
       background-position: center;
       background-repeat: no-repeat;
+      width: 100%;
+      height: 100%;
       min-height: 245px;
+      align-self: stretch;
     }
     .about-banner__contact {
       padding: 34px 36px;
@@ -784,7 +784,7 @@
       .products { padding: 34px 0 0; }
       .about-banner-wrap { padding: 28px 24px; }
       .about-banner { grid-template-columns: 1fr; }
-      .about-banner__image { min-height: 260px; }
+      .about-banner__image { width: 100%; min-height: 260px; height: 260px; }
     }
 
     @media (max-width: 620px) {
