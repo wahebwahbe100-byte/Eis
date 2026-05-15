@@ -356,6 +356,68 @@
     .card h3, .step h3 { color: var(--gold-dark); font-size: 22px; margin-bottom: 12px; }
     .card p, .step p { color: var(--muted); line-height: 1.75; }
 
+    .stats-strip {
+      max-width: 1280px;
+      margin: 0 auto 34px;
+      background: linear-gradient(180deg, #5a3703 0%, #2f1d02 100%);
+      border-radius: 8px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      color: #fff8e8;
+      box-shadow: 0 18px 42px rgba(53, 33, 5, .18);
+      overflow: hidden;
+      border: 1px solid rgba(240,196,109,.28);
+    }
+    .stat-item {
+      min-height: 138px;
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      align-items: center;
+      gap: 14px;
+      padding: 22px 24px;
+      position: relative;
+    }
+    .stat-item:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 22px;
+      bottom: 22px;
+      width: 1px;
+      background: rgba(240,196,109,.36);
+    }
+    .stat-icon {
+      width: 66px;
+      height: 66px;
+      object-fit: contain;
+      filter: brightness(0) saturate(100%) invert(68%) sepia(57%) saturate(522%) hue-rotate(352deg) brightness(93%) contrast(91%);
+    }
+    .stat-content strong {
+      display: block;
+      font-family: Cinzel, serif;
+      color: var(--gold-3);
+      font-size: clamp(26px, 2.3vw, 38px);
+      line-height: .98;
+      margin-bottom: 7px;
+      letter-spacing: .5px;
+      white-space: nowrap;
+    }
+    .stat-content span {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: #fff6dc;
+      margin-bottom: 9px;
+    }
+    .stat-content p {
+      font-size: 11px;
+      line-height: 1.45;
+      color: rgba(255,255,255,.86);
+    }
+
+
     .about {
       background: linear-gradient(180deg, #fff8ee, #f7ead4);
       display: grid;
@@ -422,9 +484,10 @@
       .nav-links.open { display: flex; }
       .hero { min-height: auto; padding: 78px 24px; background-position: center; }
       .hero__content { width: 100%; max-width: 690px; }
-      .cards, .steps, .about, .contact__box, .taste-cards, .quality-features { grid-template-columns: 1fr; }
+      .cards, .steps, .about, .contact__box, .taste-cards, .quality-features, .stats-strip { grid-template-columns: 1fr; }
       .quality-taste { padding: 58px 24px 66px; }
       .taste-card { grid-template-columns: 1fr; }
+      .stat-item:not(:last-child)::after { top: auto; left: 24px; right: 24px; bottom: 0; width: auto; height: 1px; }
       .quality-feature { border-right: 0; border-bottom: 1px solid rgba(166,106,19,.18); }
       .quality-feature:last-child { border-bottom: 0; }
       .section { padding: 72px 24px; }
@@ -440,6 +503,8 @@
       .contact__box { padding: 28px; }
       .taste-card__content { padding: 24px 54px 24px 22px; }
       .quality-feature { grid-template-columns: 56px 1fr; padding: 22px 18px; }
+      .stat-item { grid-template-columns: 58px 1fr; min-height: 118px; padding: 18px; }
+      .stat-icon { width: 54px; height: 54px; }
       .quality-feature__icon { width: 42px; height: 42px; }
     }
   </style>
@@ -508,7 +573,7 @@
 
         <div class="experience">
           <div class="experience__image">
-            <img src="assets/50.png" alt="Über 50 Jahre Erfahrung" />
+            <img src="assets/experience.png" alt="Über 50 Jahre Erfahrung" />
           </div>
           <p>
             Über fünf Jahrzehnte Erfahrung in Herstellung und Vertrieb von
@@ -582,10 +647,48 @@
 
 
     <section id="produkte" class="section products">
-      <div class="section-head">
-        <p class="eyebrow">Unsere Auswahl</p>
-        <h2>Produkte für Profis</h2>
-        <p>Sorten, Qualität und Service passend für Gastronomie und Großkunden.</p>
+      <div class="stats-strip" aria-label="Eis Büffel Kennzahlen">
+        <div class="stat-item">
+          <img class="stat-icon" src="assets/experience.png" alt="" />
+          <div class="stat-content">
+            <span>Über</span>
+            <strong class="counter" data-target="50" data-suffix="+">0</strong>
+            <span>Jahre Erfahrung</span>
+            <p>Tradition, Qualität und Vertrauen seit mehr als fünf Jahrzehnten.</p>
+          </div>
+        </div>
+        <div class="stat-item">
+          <img class="stat-icon" src="assets/service.png" alt="" />
+          <div class="stat-content">
+            <strong class="counter" data-target="1000" data-suffix="+">0</strong>
+            <span>Zufriedene Kunden</span>
+            <p>Vertrauen von Gastronomie, Eiscafés und Großkunden.</p>
+          </div>
+        </div>
+        <div class="stat-item">
+          <img class="stat-icon" src="assets/icecream.png" alt="" />
+          <div class="stat-content">
+            <strong class="counter" data-target="200" data-suffix="+">0</strong>
+            <span>Verschiedene Sorten</span>
+            <p>Große Auswahl an köstlichen Eissorten.</p>
+          </div>
+        </div>
+        <div class="stat-item">
+          <img class="stat-icon" src="assets/delivery.png" alt="" />
+          <div class="stat-content">
+            <span>Schnelle</span>
+            <strong>Lieferung</strong>
+            <p>Pünktlich, sicher und immer für Sie da.</p>
+          </div>
+        </div>
+        <div class="stat-item">
+          <img class="stat-icon" src="assets/quality.png" alt="" />
+          <div class="stat-content">
+            <strong class="counter" data-target="100" data-suffix="%">0</strong>
+            <span>Zuverlässigkeit</span>
+            <p>Beste Qualität und Service, auf den Sie sich verlassen können.</p>
+          </div>
+        </div>
       </div>
 
       <div class="cards">
@@ -679,6 +782,43 @@
     const toggle = document.querySelector(".menu-toggle");
     const nav = document.querySelector(".nav-links");
     toggle.addEventListener("click", () => nav.classList.toggle("open"));
+
+    const counters = document.querySelectorAll(".counter");
+
+    const animateCounter = (counter) => {
+      const target = Number(counter.dataset.target || 0);
+      const suffix = counter.dataset.suffix || "";
+      const duration = 1800;
+      const startTime = performance.now();
+
+      const update = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
+        const value = Math.floor(easedProgress * target);
+
+        counter.textContent = `${value}${suffix}`;
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          counter.textContent = `${target}${suffix}`;
+        }
+      };
+
+      requestAnimationFrame(update);
+    };
+
+    const counterObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.35 });
+
+    counters.forEach((counter) => counterObserver.observe(counter));
   </script>
 </body>
 </html>
