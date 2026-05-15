@@ -66,8 +66,9 @@
       background: rgba(255, 246, 232, .94);
       backdrop-filter: blur(10px);
       display: grid;
-      grid-template-columns: 220px 1fr 190px;
+      grid-template-columns: 190px minmax(0, 1fr);
       align-items: center;
+      column-gap: 26px;
       padding: 0 48px;
       position: sticky;
       top: 0;
@@ -77,8 +78,16 @@
     .logo { display: inline-flex; align-items: center; width: fit-content; user-select: none; }
     .logo img { width: 150px; height: auto; -webkit-user-drag: none; }
 
-    .nav-links { display: flex; justify-content: center; gap: 34px; font-size: 14px; font-weight: 700; }
-    .nav-links a { position: relative; padding: 10px 0; }
+    .nav-links {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      align-items: center;
+      gap: 14px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .nav-links a { position: relative; width: 100%; padding: 10px 0; text-align: center; }
     .nav-links a::after {
       content: "";
       width: 0;
@@ -102,9 +111,10 @@
       white-space: nowrap;
     }
     .nav-btn {
+      width: 100%;
       background: linear-gradient(135deg, var(--gold-2), var(--gold-dark));
       color: #fff;
-      padding: 14px 23px;
+      padding: 14px 18px;
       font-size: 13px;
       box-shadow: 0 14px 28px rgba(114, 70, 7, .24);
     }
@@ -756,7 +766,7 @@
       .navbar { grid-template-columns: 160px 1fr 54px; height: 80px; padding: 0 22px; }
       .logo img { width: 118px; }
       .menu-toggle { display: block; justify-self: end; }
-      .nav-btn { display: none; }
+      .nav-links > .nav-btn { display: inline-flex; }
       .nav-links {
         position: absolute;
         top: 80px;
@@ -838,7 +848,7 @@
 
       .logo img { width: 116px; }
       .menu-toggle { display: block; justify-self: end; }
-      .nav-btn { display: none; }
+      .nav-links > .nav-btn { display: inline-flex; }
 
       .nav-links {
         position: absolute;
@@ -1261,9 +1271,8 @@
         <a href="#produkte">Produkte</a>
         <a href="#lieferung">Lieferung</a>
         <a href="kontakt.html">Kontakt</a>
+        <a href="kontakt.html" class="nav-btn">Angebot anfragen <img class="nav-btn__icon-img" src="assets/anfrage.png" alt="" /></a>
       </div>
-
-      <a href="kontakt.html" class="nav-btn">Angebot anfragen <img class="nav-btn__icon-img" src="assets/anfrage.png" alt="" /></a>
     </nav>
   </header>
 
