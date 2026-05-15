@@ -2229,7 +2229,31 @@
       }
     }
 
-  </style>
+  
+
+/* ===== TOPBAR RESTORE ===== */
+.topbar {
+  display: flex !important;
+  min-height: 34px !important;
+  background: linear-gradient(90deg, #8e5709, #c0831a) !important;
+  color: #fff !important;
+}
+.topbar__left,
+.topbar__right {
+  display: flex !important;
+  align-items: center !important;
+}
+.topbar__left span,
+.topbar__right a {
+  color: #fff !important;
+  white-space: nowrap !important;
+}
+@media (max-width: 1050px) {
+  .topbar { display: none !important; }
+}
+/* ===== END TOPBAR RESTORE ===== */
+
+</style>
 
 
 <!-- FINAL VERIFIED MOBILE MENU FIX -->
@@ -2505,6 +2529,74 @@
   .hero__content { width: 64% !important; max-width: 320px !important; }
 }
 /* ===== END HERO / HEADER FIX ===== */
+</style>
+
+
+
+<style>
+/* ===== FINAL TOPBAR FIX: restore requested info bar and keep hero image correct ===== */
+.site-header {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+  background: transparent !important;
+}
+.topbar {
+  display: flex !important;
+  min-height: 34px !important;
+  height: 34px !important;
+  padding: 0 48px !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 18px !important;
+  background: linear-gradient(90deg, #8e5709, #c0831a) !important;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+  position: relative !important;
+  z-index: 1001 !important;
+}
+.topbar__left,
+.topbar__right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 28px !important;
+  flex-wrap: wrap !important;
+}
+.topbar__left span,
+.topbar__right a {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  color: #ffffff !important;
+  white-space: nowrap !important;
+  text-decoration: none !important;
+}
+.topbar__emoji {
+  width: 18px !important;
+  height: 18px !important;
+  object-fit: contain !important;
+  flex: 0 0 auto !important;
+}
+.navbar {
+  position: relative !important;
+  top: auto !important;
+  z-index: 1000 !important;
+}
+.hero {
+  padding-top: 184px !important;
+}
+@media (max-width: 1050px) {
+  .topbar {
+    display: none !important;
+  }
+  .hero {
+    padding-top: 110px !important;
+  }
+}
+/* ===== END FINAL TOPBAR FIX ===== */
 </style>
 
 </head>
