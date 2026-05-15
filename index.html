@@ -2412,6 +2412,137 @@
 </style>
 <!-- END FINAL VERIFIED MOBILE MENU FIX -->
 
+
+
+<!-- FINAL MOBILE HERO IMAGE FULL COVER FIX -->
+<style>
+  /* تجعل صورة الهيرو في الهاتف تغطي المساحة كاملة وتظهر تحت اللوغو وزر القائمة */
+  @media (max-width: 768px) {
+    .site-header {
+      position: relative !important;
+      z-index: 20 !important;
+    }
+
+    .navbar {
+      background: rgba(255, 246, 232, .78) !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+      box-shadow: 0 1px 0 rgba(166,106,19,.10), 0 12px 28px rgba(80,48,6,.08) !important;
+    }
+
+    .hero {
+      margin-top: -78px !important;
+      padding: 118px 16px 58px !important;
+      min-height: 100svh !important;
+      display: flex !important;
+      align-items: flex-end !important;
+      justify-content: flex-start !important;
+      overflow: hidden !important;
+      background-color: #fff6e8 !important;
+      background-image:
+        linear-gradient(180deg,
+          rgba(255,246,232,.04) 0%,
+          rgba(255,246,232,.10) 38%,
+          rgba(255,246,232,.58) 67%,
+          rgba(255,246,232,.96) 100%),
+        linear-gradient(90deg,
+          rgba(255,246,232,.74) 0%,
+          rgba(255,246,232,.38) 43%,
+          rgba(255,246,232,.04) 100%),
+        url("assets/hero-mobile.png") !important;
+      background-position: center top, center top, center top !important;
+      background-size: cover, cover, cover !important;
+      background-repeat: no-repeat, no-repeat, no-repeat !important;
+    }
+
+    .hero__content {
+      width: 100% !important;
+      max-width: 430px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      position: relative !important;
+      z-index: 5 !important;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 13vw, 66px) !important;
+      line-height: .94 !important;
+      margin-bottom: 14px !important;
+      text-shadow: 0 2px 12px rgba(255,246,232,.65) !important;
+    }
+
+    .eyebrow,
+    .hero__subtitle,
+    .hero__text {
+      text-shadow: 0 2px 12px rgba(255,246,232,.78) !important;
+    }
+
+    .hero__actions {
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+      gap: 10px !important;
+      max-width: 330px !important;
+      margin-bottom: 14px !important;
+    }
+
+    .hero__actions .btn {
+      width: 100% !important;
+      min-height: 52px !important;
+      font-size: 14px !important;
+      padding: 14px 18px !important;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .hero {
+      margin-top: -78px !important;
+      padding: 112px 14px 54px !important;
+      min-height: 100svh !important;
+      background-position: center top, center top, center top !important;
+      background-size: cover, cover, cover !important;
+    }
+
+    .hero__content {
+      max-width: 360px !important;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 14vw, 56px) !important;
+    }
+
+    .hero__text {
+      max-width: 330px !important;
+      font-size: 13.5px !important;
+      line-height: 1.58 !important;
+    }
+
+    .experience {
+      width: 100% !important;
+      max-width: 340px !important;
+      background: rgba(255,255,255,.78) !important;
+      backdrop-filter: blur(8px) !important;
+      -webkit-backdrop-filter: blur(8px) !important;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .hero {
+      padding-left: 12px !important;
+      padding-right: 12px !important;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 13.5vw, 48px) !important;
+    }
+
+    .hero__actions .btn {
+      min-height: 48px !important;
+      font-size: 12.5px !important;
+    }
+  }
+</style>
+<!-- END FINAL MOBILE HERO IMAGE FULL COVER FIX -->
+
 </head>
 <body>
   <header class="site-header">
