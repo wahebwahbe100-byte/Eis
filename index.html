@@ -529,10 +529,15 @@
       margin-top: 12px;
     }
     .about-banner__image {
-      /* ضع رابط الصورة الخارجية هنا */
-      background-image: url("https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?auto=format&fit=crop&w=1200&q=80");
+      /*
+        ضع صورتك هنا فقط:
+        1) انسخ الصورة داخل مجلد assets
+        2) غيّر اسم الملف في السطر التالي، مثال: assets/my-photo.jpg
+      */
+      background-image: url("assets/upper-image.jpg");
       background-size: cover;
       background-position: center;
+      background-repeat: no-repeat;
       min-height: 245px;
     }
     .about-banner__contact {
@@ -1423,6 +1428,7 @@
           <h3>Kontakt</h3>
           <a href="tel:+491739675569">☎ &nbsp; +49 173 9675569</a>
           <a href="mailto:info@eis-spezial.de">✉ &nbsp; info@eis-spezial.de</a>
+          <span>⌖ &nbsp; Deutschland</span>
           <a class="about-banner__btn" href="kontakt.html">Jetzt kontaktieren &nbsp; →</a>
         </div>
       </div>
