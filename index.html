@@ -859,6 +859,7 @@
 
 
     /* Complete mobile hero correction: clear image, bigger text, balanced layout on phones */
+    /* Mobile hero uses a separate image: assets/hero-mobile.png */
     @media (max-width: 768px) {
       body { min-width: 0; }
 
@@ -902,7 +903,7 @@
             rgba(255,246,232,.80) 58%,
             #fff6e8 76%,
             #fff6e8 100%),
-          url("assets/hero-bg.png") center top / auto clamp(330px, 72vw, 470px) no-repeat;
+          url("assets/hero-mobile.png") center top / auto clamp(330px, 72vw, 470px) no-repeat;
       }
 
       .hero::before {
@@ -1007,7 +1008,7 @@
             rgba(255,246,232,.84) 60%,
             #fff6e8 78%,
             #fff6e8 100%),
-          url("assets/hero-bg.png") center top / auto clamp(300px, 86vw, 390px) no-repeat;
+          url("assets/hero-mobile.png") center top / auto clamp(300px, 86vw, 390px) no-repeat;
       }
 
       .hero__content { padding-top: clamp(285px, 82vw, 380px); }
@@ -1027,7 +1028,7 @@
             rgba(255,246,232,.88) 62%,
             #fff6e8 80%,
             #fff6e8 100%),
-          url("assets/hero-bg.png") center top / auto clamp(280px, 92vw, 355px) no-repeat;
+          url("assets/hero-mobile.png") center top / auto clamp(280px, 92vw, 355px) no-repeat;
       }
 
       .hero__content { padding-top: clamp(265px, 88vw, 350px); }
@@ -1321,7 +1322,7 @@
         align-items: center;
         background:
           linear-gradient(90deg, rgba(255,246,232,.90) 0%, rgba(255,246,232,.58) 48%, rgba(255,246,232,.05) 100%),
-          url("assets/hero-bg.png") center right / cover no-repeat;
+          url("assets/hero-mobile.png") center right / cover no-repeat;
       }
 
       .hero::before {
@@ -1414,7 +1415,7 @@
         padding-right: 14px;
         background:
           linear-gradient(90deg, rgba(255,246,232,.93) 0%, rgba(255,246,232,.64) 53%, rgba(255,246,232,.06) 100%),
-          url("assets/hero-bg.png") center right / cover no-repeat;
+          url("assets/hero-mobile.png") center right / cover no-repeat;
       }
 
       .hero__content {
@@ -1457,91 +1458,6 @@
       .experience p {
         font-size: 10.5px;
       }
-    }
-
-
-    /* Final correction: HERO phone image uses a separate file name only on mobile.
-       Desktop/laptop keeps assets/hero-bg.png. */
-    @media (max-width: 768px) {
-      .hero {
-        min-height: auto !important;
-        padding: 34px 20px 50px !important;
-        align-items: flex-start !important;
-        background:
-          linear-gradient(180deg,
-            rgba(255,246,232,.02) 0%,
-            rgba(255,246,232,.16) 38%,
-            rgba(255,246,232,.88) 66%,
-            #fff6e8 84%,
-            #fff6e8 100%),
-          url("assets/hero-bg-mobile.png") center top / auto clamp(330px, 78vw, 480px) no-repeat !important;
-      }
-
-      .hero__content {
-        width: 100% !important;
-        max-width: 590px !important;
-        margin: 0 auto !important;
-        padding-top: clamp(305px, 72vw, 440px) !important;
-      }
-
-      .hero h1 {
-        font-size: clamp(52px, 15.5vw, 78px) !important;
-        line-height: .94 !important;
-      }
-
-      .hero__subtitle {
-        font-size: 16px !important;
-        line-height: 1.42 !important;
-      }
-
-      .hero__text {
-        font-size: 16px !important;
-        line-height: 1.78 !important;
-      }
-
-      .hero__actions .btn {
-        width: 100% !important;
-        min-height: 56px !important;
-        font-size: 15px !important;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .hero {
-        padding-left: 18px !important;
-        padding-right: 18px !important;
-        background:
-          linear-gradient(180deg,
-            rgba(255,246,232,.01) 0%,
-            rgba(255,246,232,.17) 36%,
-            rgba(255,246,232,.90) 64%,
-            #fff6e8 82%,
-            #fff6e8 100%),
-          url("assets/hero-bg-mobile.png") center top / auto clamp(305px, 88vw, 405px) no-repeat !important;
-      }
-
-      .hero__content { padding-top: clamp(290px, 84vw, 390px) !important; }
-      .hero h1 { font-size: clamp(48px, 16vw, 66px) !important; }
-      .hero__subtitle { font-size: 15px !important; }
-      .hero__text { font-size: 15px !important; }
-    }
-
-    @media (max-width: 420px) {
-      .hero {
-        padding-left: 16px !important;
-        padding-right: 16px !important;
-        background:
-          linear-gradient(180deg,
-            rgba(255,246,232,0) 0%,
-            rgba(255,246,232,.18) 34%,
-            rgba(255,246,232,.92) 63%,
-            #fff6e8 82%,
-            #fff6e8 100%),
-          url("assets/hero-bg-mobile.png") center top / auto clamp(285px, 96vw, 365px) no-repeat !important;
-      }
-
-      .hero__content { padding-top: clamp(270px, 91vw, 355px) !important; }
-      .hero h1 { font-size: clamp(44px, 17vw, 60px) !important; }
     }
 
   </style>
