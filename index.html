@@ -81,24 +81,43 @@
     .nav-links {
       width: 100%;
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       align-items: center;
       gap: 14px;
       font-size: 14px;
       font-weight: 700;
     }
-    .nav-links a { position: relative; width: 100%; padding: 10px 0; text-align: center; }
+    .nav-links a {
+      position: relative;
+      width: 100%;
+      min-height: 46px;
+      padding: 12px 14px;
+      text-align: center;
+      border-radius: 999px;
+      overflow: hidden;
+      transition: color .25s ease, background .25s ease, box-shadow .25s ease, transform .25s ease;
+    }
     .nav-links a::after {
       content: "";
       width: 0;
       height: 2px;
       background: var(--gold);
       position: absolute;
-      left: 0;
-      bottom: 0;
-      transition: .25s;
+      left: 50%;
+      bottom: 8px;
+      transform: translateX(-50%);
+      transition: width .25s ease;
     }
-    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--gold-dark);
+      background: rgba(211, 154, 56, .14);
+      box-shadow: 0 10px 22px rgba(114, 70, 7, .10);
+      transform: translateY(-2px);
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 42%; }
+    .nav-links .nav-btn::after { display: none; }
 
     .menu-toggle { display: none; background: none; border: 0; font-size: 28px; color: var(--gold-dark); cursor: pointer; }
     .nav-btn, .btn {
@@ -127,6 +146,11 @@
     .btn--primary { color: #fff; background: linear-gradient(135deg, #c68b2e, #754606); box-shadow: 0 18px 34px rgba(98, 58, 6, .22); }
     .btn--secondary { background: rgba(255,255,255,.82); border-color: rgba(166,106,19,.30); color: var(--brown); }
     .btn:hover, .nav-btn:hover { transform: translateY(-3px); }
+    .nav-btn:hover {
+      background: linear-gradient(135deg, var(--gold-3), var(--gold-dark));
+      box-shadow: 0 18px 34px rgba(114, 70, 7, .30);
+      color: #fff;
+    }
 
     .nav-btn__icon-img {
       width: 18px;
@@ -1270,7 +1294,6 @@
         <a href="#home" class="active">Startseite</a>
         <a href="#produkte">Produkte</a>
         <a href="#lieferung">Lieferung</a>
-        <a href="kontakt.html">Kontakt</a>
         <a href="kontakt.html" class="nav-btn">Angebot anfragen <img class="nav-btn__icon-img" src="assets/anfrage.png" alt="" /></a>
       </div>
     </nav>
