@@ -957,6 +957,37 @@
   .nav-links .nav-btn-mobile { display: flex !important; }
 }
 
+  
+
+    /* Restored Milchspeiseeise image gallery */
+    .milch-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin: 24px 0 24px;
+    }
+    .milch-gallery__item {
+      overflow: hidden;
+      min-height: 170px;
+      border-radius: 22px;
+      background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,246,232,.58));
+      border: 1px solid rgba(166,106,19,.20);
+      box-shadow: 0 16px 34px rgba(80,48,6,.10);
+    }
+    .milch-gallery__item img {
+      width: 100%;
+      height: 100%;
+      min-height: 170px;
+      object-fit: cover;
+      transition: transform .35s ease;
+    }
+    .milch-gallery__item:hover img { transform: scale(1.04); }
+    @media (max-width: 768px) {
+      .milch-gallery { grid-template-columns: 1fr; gap: 12px; }
+      .milch-gallery__item,
+      .milch-gallery__item img { min-height: 190px; }
+    }
+
   </style>
 </head>
 
@@ -1148,6 +1179,19 @@
       <p>
         u. a. Kakao, Kaffee und Schokolade über Nüsse, Nougat bis hin zu Mandeln und Vanille.
       </p>
+
+      <div class="milch-gallery" aria-label="Milchspeiseeise Bilder">
+        <figure class="milch-gallery__item">
+          <img src="assets/milchspeiseeis.png" alt="Milchspeiseeise Auswahl" />
+        </figure>
+        <figure class="milch-gallery__item">
+          <img src="assets/joghurt.png" alt="Cremige Milchspeiseeise Sorte" />
+        </figure>
+        <figure class="milch-gallery__item">
+          <img src="assets/spezialitaeten.png" alt="Milchspeiseeise Spezialität" />
+        </figure>
+      </div>
+
 
       <div class="modal-sorten-list">
         <span>Vanille</span>
