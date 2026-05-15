@@ -1468,6 +1468,64 @@
       }
     }
 
+
+    /* FINAL MOBILE HERO FIX: remove the large empty space on phones */
+    @media (max-width: 768px) {
+      .hero {
+        min-height: auto !important;
+        height: auto !important;
+        padding: 26px 18px 36px !important;
+        align-items: flex-start !important;
+        background-color: #fff6e8 !important;
+        background-image:
+          linear-gradient(90deg, rgba(255,246,232,.92) 0%, rgba(255,246,232,.62) 52%, rgba(255,246,232,.08) 100%),
+          url("assets/hero-mobile.png") !important;
+        background-position: center top, center top !important;
+        background-size: 100% auto, 100% auto !important;
+        background-repeat: no-repeat, no-repeat !important;
+      }
+
+      .hero__content {
+        width: 58% !important;
+        max-width: 390px !important;
+        margin: 0 !important;
+        padding-top: 0 !important;
+      }
+
+      .hero::after {
+        height: 34px !important;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero {
+        padding: 22px 14px 30px !important;
+      }
+
+      .hero__content {
+        width: 61% !important;
+        max-width: 285px !important;
+      }
+
+      .hero h1 {
+        font-size: clamp(29px, 8.8vw, 38px) !important;
+      }
+
+      .hero__text {
+        font-size: 11.5px !important;
+        line-height: 1.5 !important;
+        margin-bottom: 13px !important;
+      }
+
+      .hero__actions {
+        margin-bottom: 12px !important;
+      }
+
+      .experience {
+        margin-bottom: 0 !important;
+      }
+    }
+
   </style>
 </head>
 <body>
