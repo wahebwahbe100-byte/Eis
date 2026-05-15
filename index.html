@@ -1816,72 +1816,84 @@
       }
     }
 
+  
 
-    /* FIX ONLY MAIN FILE: correct desktop design for the "Angebot anfragen" button */
-    @media (min-width: 1051px) {
-      .navbar {
-        grid-template-columns: 170px minmax(0, 1fr) !important;
-        column-gap: 22px !important;
-      }
+    /* Angebot anfragen final pill effect - matches requested design */
+    .nav-links a.angebot-pill {
+      position: relative !important;
+      min-height: 58px !important;
+      padding: 0 30px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      border-radius: 999px !important;
+      color: #fff !important;
+      font-size: 16px !important;
+      font-weight: 800 !important;
+      letter-spacing: .1px !important;
+      text-align: center !important;
+      overflow: hidden !important;
+      border: 0 !important;
+      background: linear-gradient(135deg, #c88a22 0%, #9b650d 48%, #6f4305 100%) !important;
+      box-shadow:
+        0 24px 38px rgba(111, 65, 6, .28),
+        0 8px 16px rgba(111, 65, 6, .18),
+        inset 0 1px 0 rgba(255, 255, 255, .18) !important;
+      transform: none !important;
+      white-space: nowrap !important;
+      isolation: isolate !important;
+    }
 
-      .nav-links {
-        grid-template-columns: repeat(6, minmax(82px, 1fr)) minmax(185px, 1.15fr) !important;
-        gap: 7px !important;
-        font-size: 12px !important;
-      }
+    .nav-links a.angebot-pill::after {
+      display: none !important;
+    }
 
-      .nav-links a {
-        min-height: 46px !important;
-        padding: 12px 8px !important;
-        line-height: 1.15 !important;
-      }
+    .nav-links a.angebot-pill::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: inherit;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.26) 38%, transparent 72%);
+      transform: translateX(-120%);
+      transition: transform .65s ease;
+    }
 
-      .nav-links .nav-btn {
-        min-width: 185px !important;
-        padding: 14px 16px !important;
-        gap: 8px !important;
-        line-height: 1.1 !important;
-        box-shadow: 0 14px 28px rgba(114, 70, 7, .24) !important;
-      }
+    .nav-links a.angebot-pill:hover,
+    .nav-links a.angebot-pill:focus-visible {
+      color: #fff !important;
+      background: linear-gradient(135deg, #d89b32 0%, #a96f12 48%, #754606 100%) !important;
+      box-shadow:
+        0 30px 48px rgba(111, 65, 6, .34),
+        0 12px 20px rgba(111, 65, 6, .20),
+        inset 0 1px 0 rgba(255, 255, 255, .22) !important;
+      transform: translateY(-2px) !important;
+      outline: none !important;
+    }
 
-      .nav-links .nav-btn:hover {
-        transform: translateY(-3px) !important;
-      }
+    .nav-links a.angebot-pill:hover::before,
+    .nav-links a.angebot-pill:focus-visible::before {
+      transform: translateX(120%);
+    }
 
-      .nav-btn__icon-img {
-        margin-left: 0 !important;
-        width: 18px !important;
-        height: 18px !important;
+    @media (max-width: 1050px) {
+      .nav-links a.angebot-pill {
+        width: 100% !important;
+        min-height: 54px !important;
+        padding: 14px 18px !important;
+        border-radius: 999px !important;
+        color: #fff !important;
+        background: linear-gradient(135deg, #c88a22 0%, #9b650d 48%, #6f4305 100%) !important;
+        border: 0 !important;
+        box-shadow: 0 16px 30px rgba(111,65,6,.24), inset 0 1px 0 rgba(255,255,255,.18) !important;
+        font-size: 15px !important;
       }
     }
 
-    @media (min-width: 1051px) and (max-width: 1240px) {
-      .navbar {
-        padding-left: 24px !important;
-        padding-right: 24px !important;
-        grid-template-columns: 142px minmax(0, 1fr) !important;
-      }
-
-      .logo img {
-        width: 126px !important;
-      }
-
-      .nav-links {
-        grid-template-columns: repeat(6, minmax(70px, 1fr)) minmax(166px, 1.08fr) !important;
-        gap: 5px !important;
-        font-size: 11px !important;
-      }
-
-      .nav-links a {
-        padding-left: 6px !important;
-        padding-right: 6px !important;
-      }
-
-      .nav-links .nav-btn {
-        min-width: 166px !important;
-        font-size: 11.5px !important;
-        padding-left: 13px !important;
-        padding-right: 13px !important;
+    @media (max-width: 520px) {
+      .nav-links a.angebot-pill {
+        min-height: 52px !important;
+        font-size: 14px !important;
       }
     }
 
@@ -1915,7 +1927,7 @@
         <a href="service.html">Service</a>
         <a href="naehrwerttabelle.html">Nährwerttabelle</a>
         <a href="#lieferung">Lieferung</a>
-        <a href="kontakt.html" class="nav-btn">Angebot anfragen <img class="nav-btn__icon-img" src="assets/anfrage.png" alt="" /></a>
+        <a href="kontakt.html" class="angebot-pill">Angebot anfragen</a>
       </div>
     </nav>
   </header>
