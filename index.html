@@ -488,12 +488,13 @@
       padding: 32px 48px;
       background: linear-gradient(180deg, #fff8ee, #f7ead4);
     }
+
     .about-banner {
       max-width: 1280px;
       margin: 0 auto;
-      min-height: 245px;
+      min-height: 330px;
       display: grid;
-      grid-template-columns: 1.1fr 1.35fr .9fr;
+      grid-template-columns: minmax(0, 2.15fr) minmax(270px, .9fr);
       align-items: stretch;
       overflow: hidden;
       border-radius: 0 0 8px 8px;
@@ -501,12 +502,18 @@
       border: 1px solid rgba(166,106,19,.14);
       box-shadow: 0 18px 44px rgba(80,48,6,.08);
     }
+
     .about-banner__text {
-      padding: 34px 34px 26px;
+      min-height: 330px;
+      padding: 44px 46px 38px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       background:
-        linear-gradient(90deg, rgba(255,246,232,.97), rgba(255,246,232,.78)),
-        radial-gradient(circle at 10% 15%, rgba(166,106,19,.10), transparent 28%);
+        linear-gradient(90deg, rgba(255,246,232,.96) 0%, rgba(255,246,232,.78) 42%, rgba(255,246,232,.34) 100%),
+        url("assets/upper-image.png") center / cover no-repeat;
     }
+
     .about-banner__text h2,
     .about-banner__contact h3 {
       font-family: Cinzel, serif;
@@ -516,42 +523,42 @@
       margin-bottom: 14px;
       text-transform: uppercase;
     }
+
     .about-banner__text p {
-      max-width: 430px;
+      max-width: 455px;
       color: #2c2117;
       font-size: 14px;
       line-height: 1.7;
       margin-bottom: 8px;
     }
+
     .about-signature {
       font-family: "Great Vibes", cursive;
       color: var(--gold);
       font-size: 42px;
       margin-top: 12px;
     }
+
     .about-banner__image {
-      /* ضع صورتك هنا */
-      background-image: url("assets/upper-image.png");
-      background-size: 100% 100%;
-      background-position: center;
-      background-repeat: no-repeat;
-      width: 100%;
-      height: 100%;
-      min-height: 245px;
-      align-self: stretch;
+      display: none;
     }
+
     .about-banner__contact {
-      padding: 34px 36px;
+      padding: 44px 36px;
       background: #fbf3e8;
       display: flex;
       flex-direction: column;
+      justify-content: center;
       gap: 14px;
+      border-left: 1px solid rgba(166,106,19,.16);
     }
+
     .about-banner__contact a,
     .about-banner__contact span {
       color: #2f261b;
       font-size: 15px;
     }
+
     .about-banner__btn {
       margin-top: 10px;
       width: fit-content;
@@ -784,7 +791,13 @@
       .products { padding: 34px 0 0; }
       .about-banner-wrap { padding: 28px 24px; }
       .about-banner { grid-template-columns: 1fr; }
-      .about-banner__image { width: 100%; min-height: 260px; height: 260px; }
+      .about-banner__text {
+        min-height: 340px;
+        background:
+          linear-gradient(180deg, rgba(255,246,232,.94) 0%, rgba(255,246,232,.76) 58%, rgba(255,246,232,.42) 100%),
+          url("assets/upper-image.png") center / cover no-repeat;
+      }
+      .about-banner__contact { border-left: 0; border-top: 1px solid rgba(166,106,19,.16); }
     }
 
     @media (max-width: 620px) {
