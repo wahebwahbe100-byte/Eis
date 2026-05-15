@@ -606,6 +606,15 @@ img {
   filter: drop-shadow(0 7px 10px rgba(115, 70, 7, .18));
 }
 
+
+.nav-btn__icon-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  margin-right: 8px;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,.14));
+}
+
 .btn__icon-img {
   width: 22px;
   height: 22px;
@@ -656,7 +665,7 @@ img {
         <a href="#kontakt">Kontakt</a>
       </div>
 
-      <a href="#kontakt" class="nav-btn"><span class="btn-emoji">📩</span> Angebot anfragen</a>
+      <a href="#kontakt" class="nav-btn"><img class="nav-btn__icon-img" src="assets/anfrage.png" alt="" /> Angebot anfragen</a>
     </nav>
   </header>
 
@@ -782,7 +791,7 @@ img {
           <input type="email" placeholder="E-Mail Adresse" />
           <input type="tel" placeholder="Telefonnummer" />
           <textarea placeholder="Ihre Nachricht"></textarea>
-          <button type="submit" class="btn btn--primary"><span class="btn-emoji">📩</span> Anfrage senden</button>
+          <button type="submit" class="btn btn--primary">Anfrage senden</button>
         </form>
       </div>
     </section>
