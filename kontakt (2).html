@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontakt | Eis Büffel</title>
+  <meta name="description" content="Kontaktieren Sie Eis Büffel für Angebote, Lieferung und Beratung." />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      --gold: #a66a13;
+      --gold-2: #d39a38;
+      --gold-3: #f0c46d;
+      --gold-dark: #6f4106;
+      --cream: #fff6e8;
+      --brown: #352105;
+      --muted: #6b5a42;
+      --white: #ffffff;
+      --shadow: 0 24px 60px rgba(80, 48, 6, .16);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      width: 100%;
+      min-height: 100vh;
+      background: var(--cream);
+      color: var(--brown);
+      font-family: Inter, Arial, sans-serif;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .topbar {
+      min-height: 34px;
+      background: linear-gradient(90deg, #8e5709, #c0831a);
+      color: #fff;
+      padding: 0 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      font-size: 13px;
+    }
+    .topbar__left,
+    .topbar__right { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+    .topbar__left span { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+    .topbar__emoji { width: 18px; height: 18px; object-fit: contain; }
+
+    .navbar {
+      height: 92px;
+      background: rgba(255, 246, 232, .94);
+      backdrop-filter: blur(10px);
+      display: grid;
+      grid-template-columns: 220px 1fr 190px;
+      align-items: center;
+      padding: 0 48px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 1px 0 rgba(166, 106, 19, .12);
+    }
+    .logo { display: inline-flex; align-items: center; width: fit-content; user-select: none; }
+    .logo img { width: 150px; height: auto; }
+    .nav-links { display: flex; justify-content: center; gap: 34px; font-size: 14px; font-weight: 700; }
+    .nav-links a { position: relative; padding: 10px 0; }
+    .nav-links a::after {
+      content: "";
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      transition: .25s;
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
+    .menu-toggle { display: none; background: none; border: 0; font-size: 28px; color: var(--gold-dark); cursor: pointer; }
+
+    .nav-btn,
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: .25s;
+      white-space: nowrap;
+    }
+    .nav-btn {
+      background: linear-gradient(135deg, var(--gold-2), var(--gold-dark));
+      color: #fff;
+      padding: 14px 23px;
+      font-size: 13px;
+      box-shadow: 0 14px 28px rgba(114, 70, 7, .24);
+    }
+    .btn {
+      border: 1px solid transparent;
+      padding: 15px 25px;
+      font-size: 14px;
+      min-height: 54px;
+    }
+    .btn--primary {
+      color: #fff;
+      background: linear-gradient(135deg, #c68b2e, #754606);
+      box-shadow: 0 18px 34px rgba(98, 58, 6, .22);
+    }
+    .btn:hover,
+    .nav-btn:hover { transform: translateY(-3px); }
+    .nav-btn__icon-img { width: 18px; height: 18px; margin-left: 8px; object-fit: contain; }
+
+    .kontakt-page {
+      min-height: calc(100vh - 126px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 74px 48px;
+      background:
+        radial-gradient(circle at 16% 18%, rgba(240,196,109,.18), transparent 28%),
+        radial-gradient(circle at 86% 78%, rgba(255,248,236,.20), transparent 30%),
+        linear-gradient(135deg, #714306, #bd801c);
+    }
+
+    .kontakt-card {
+      width: min(1180px, 100%);
+      min-height: 620px;
+      background: rgba(255,248,236,.97);
+      border-radius: 34px;
+      padding: 58px;
+      display: grid;
+      grid-template-columns: .92fr 1.08fr;
+      gap: 48px;
+      align-items: center;
+      box-shadow: 0 34px 70px rgba(51,31,4,.25);
+      border: 1px solid rgba(255,255,255,.38);
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-family: Cinzel, serif;
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .kontakt-info h1 {
+      font-family: Cinzel, serif;
+      color: var(--gold-dark);
+      font-size: clamp(38px, 4vw, 58px);
+      line-height: 1.08;
+      margin-bottom: 18px;
+    }
+
+    .kontakt-info p:not(.eyebrow) {
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 16px;
+      max-width: 470px;
+    }
+
+    .kontakt-details {
+      margin-top: 32px;
+      display: grid;
+      gap: 16px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--brown);
+    }
+    .kontakt-details a,
+    .kontakt-details span {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .kontakt-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      background: rgba(255,255,255,.74);
+      border: 1px solid rgba(166,106,19,.18);
+      border-radius: 28px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+    .kontakt-form input,
+    .kontakt-form textarea {
+      width: 100%;
+      border: 1px solid rgba(166,106,19,.24);
+      background: #fff;
+      border-radius: 15px;
+      padding: 16px;
+      font: inherit;
+      outline: none;
+    }
+    .kontakt-form input:focus,
+    .kontakt-form textarea:focus {
+      border-color: rgba(166,106,19,.58);
+      box-shadow: 0 0 0 4px rgba(198,145,53,.12);
+    }
+    .kontakt-form textarea {
+      grid-column: 1 / -1;
+      min-height: 160px;
+      resize: vertical;
+    }
+    .kontakt-form button { border: none; cursor: pointer; width: fit-content; }
+
+    .footer-bottom {
+      padding: 18px 24px;
+      text-align: center;
+      color: #fff8e8;
+      background: linear-gradient(90deg, #5a3703, #3a2406);
+      font-size: 14px;
+    }
+
+    @media (max-width: 1050px) {
+      .topbar { display: none; }
+      .navbar {
+        grid-template-columns: 160px 1fr 54px;
+        height: 80px;
+        padding: 0 22px;
+      }
+      .logo img { width: 118px; }
+      .menu-toggle { display: block; justify-self: end; }
+      .nav-btn { display: none; }
+      .nav-links {
+        position: absolute;
+        top: 80px;
+        left: 22px;
+        right: 22px;
+        display: none;
+        flex-direction: column;
+        gap: 4px;
+        background: #fff7eb;
+        border: 1px solid rgba(166,106,19,.20);
+        border-radius: 20px;
+        padding: 18px;
+        box-shadow: var(--shadow);
+      }
+      .nav-links.open { display: flex; }
+      .kontakt-page { min-height: calc(100vh - 80px); padding: 52px 24px; }
+      .kontakt-card { grid-template-columns: 1fr; min-height: auto; padding: 42px 28px; gap: 34px; }
+    }
+
+    @media (max-width: 620px) {
+      .navbar { grid-template-columns: 140px 1fr 46px; height: 78px; padding: 0 18px; }
+      .logo img { width: 116px; }
+      .nav-links { top: 78px; left: 16px; right: 16px; }
+      .kontakt-page { padding: 32px 16px; min-height: calc(100vh - 78px); }
+      .kontakt-card { padding: 30px 20px; border-radius: 26px; }
+      .kontakt-info h1 { font-size: 34px; }
+      .kontakt-details { font-size: 15px; }
+      .kontakt-form { grid-template-columns: 1fr; padding: 22px; border-radius: 22px; }
+      .kontakt-form button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="topbar">
+      <div class="topbar__left">
+        <span><img class="topbar__emoji" src="assets/delivery.png" alt="" /> Schnelle Lieferung</span>
+        <span><img class="topbar__emoji" src="assets/quality.png" alt="" /> Beste Qualität</span>
+        <span><img class="topbar__emoji" src="assets/service.png" alt="" /> Zuverlässiger Service</span>
+      </div>
+      <div class="topbar__right">
+        <a href="tel:+491739675569">☎ +49 173 9675569</a>
+        <a href="mailto:info@eis-spezial.de">✉ info@eis-spezial.de</a>
+      </div>
+    </div>
+
+    <nav class="navbar">
+      <a class="logo" href="index.html" aria-label="Eisgroßhandel Eis Büffel Logo">
+        <img src="assets/logo.png" alt="Eisgroßhandel Eis Büffel Logo" draggable="false" />
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Menü öffnen">☰</button>
+
+      <div class="nav-links">
+        <a href="index.html">Startseite</a>
+        <a href="index.html#produkte">Produkte</a>
+        <a href="index.html#lieferung">Lieferung</a>
+        <a href="kontakt.html" class="active">Kontakt</a>
+      </div>
+
+      <a href="mailto:info@eis-spezial.de" class="nav-btn">Angebot anfragen <img class="nav-btn__icon-img" src="assets/anfrage.png" alt="" /></a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="kontakt" class="kontakt-page">
+      <div class="kontakt-card">
+        <div class="kontakt-info">
+          <p class="eyebrow">Kontakt</p>
+          <h1>Jetzt Angebot anfragen</h1>
+          <p>Schreiben Sie uns oder rufen Sie direkt an. Wir beraten Sie persönlich zu Produkten, Lieferung und Angeboten für Ihr Geschäft.</p>
+
+          <div class="kontakt-details" aria-label="Kontaktdaten">
+            <a href="tel:+491739675569">☎ <span>+49 173 9675569</span></a>
+            <a href="mailto:info@eis-spezial.de">✉ <span>info@eis-spezial.de</span></a>
+            <span>⌖ <span>Deutschland</span></span>
+          </div>
+        </div>
+
+        <form class="kontakt-form" action="mailto:info@eis-spezial.de" method="post" enctype="text/plain">
+          <input type="text" name="Name" placeholder="Ihr Name" required />
+          <input type="email" name="Email" placeholder="E-Mail Adresse" required />
+          <input type="tel" name="Telefon" placeholder="Telefonnummer" />
+          <textarea name="Nachricht" placeholder="Ihre Nachricht" required></textarea>
+          <button type="submit" class="btn btn--primary">Anfrage senden</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div class="footer-bottom">
+    <p>© 2026 Eisgroßhandel Eis Büffel. Alle Rechte vorbehalten.</p>
+  </div>
+
+  <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.nav-links');
+    if (toggle && nav) {
+      toggle.addEventListener('click', () => nav.classList.toggle('open'));
+    }
+  </script>
+</body>
+</html>
