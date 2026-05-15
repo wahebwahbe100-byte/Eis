@@ -413,7 +413,7 @@
       background: linear-gradient(180deg, #5a3703 0%, #2f1d02 100%);
       border-radius: 0;
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       color: #fff8e8;
       box-shadow: 0 18px 42px rgba(53, 33, 5, .18);
       overflow: hidden;
@@ -649,7 +649,7 @@
       margin: 0 auto;
       padding: 46px 48px 38px;
       display: grid;
-      grid-template-columns: 1.1fr .9fr .9fr .9fr 1fr;
+      grid-template-columns: 1.1fr .9fr .9fr 1fr;
       gap: 42px;
       align-items: start;
     }
@@ -1241,12 +1241,11 @@
       <div class="nav-links">
         <a href="#home" class="active">Startseite</a>
         <a href="#produkte">Produkte</a>
-        <a href="#about">Über uns</a>
         <a href="#lieferung">Lieferung</a>
-        <a href="#kontakt">Kontakt</a>
+        <a href="kontakt.html">Kontakt</a>
       </div>
 
-      <a href="#kontakt" class="nav-btn">Angebot anfragen <img class="nav-btn__icon-img" src="assets/anfrage.png" alt="" /></a>
+      <a href="kontakt.html" class="nav-btn">Angebot anfragen <img class="nav-btn__icon-img" src="assets/anfrage.png" alt="" /></a>
     </nav>
   </header>
 
@@ -1276,7 +1275,6 @@
             Zu unseren Produkten
             <img class="btn__icon-img" src="assets/product-arrow.png" alt="" />
           </a>
-          <a href="#about" class="btn btn--secondary">Mehr über uns</a>
         </div>
 
         <div class="experience">
@@ -1357,23 +1355,6 @@
     <section id="produkte" class="section products">
       <div class="stats-strip" aria-label="Eis Büffel Kennzahlen">
         <div class="stat-item">
-          <img class="stat-icon" src="assets/experience.png" alt="" />
-          <div class="stat-content">
-            <span>Über</span>
-            <strong class="counter" data-target="50" data-suffix="+">0</strong>
-            <span>Jahre Erfahrung</span>
-            <p>Tradition, Qualität und Vertrauen seit mehr als fünf Jahrzehnten.</p>
-          </div>
-        </div>
-        <div class="stat-item">
-          <img class="stat-icon" src="assets/service.png" alt="" />
-          <div class="stat-content">
-            <strong class="counter" data-target="1000" data-suffix="+">0</strong>
-            <span>Zufriedene Kunden</span>
-            <p>Vertrauen von Gastronomie, Eiscafés und Großkunden.</p>
-          </div>
-        </div>
-        <div class="stat-item">
           <img class="stat-icon" src="assets/icecream.png" alt="" />
           <div class="stat-content">
             <strong class="counter" data-target="120" data-suffix="+">0</strong>
@@ -1396,26 +1377,6 @@
             <span>Zuverlässigkeit</span>
             <p>Beste Qualität und Service, auf den Sie sich verlassen können.</p>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="heritage-about">
-      <div class="heritage-about__grid">
-        <div class="heritage-photo-note">
-          <div class="heritage-hand-text">Tradition,<br />die man<br />schmeckt.<span>♡</span></div>
-          <div class="heritage-family-photo"><div class="heritage-badge">Seit<br /><strong>1970</strong></div></div>
-        </div>
-
-        <div class="heritage-copy">
-          <p class="heritage-kicker">Über Eis Büffel</p>
-          <h2 class="heritage-title">Eine Familiengeschichte voller Leidenschaft.<span class="heritage-flag" aria-label="Italienische Flagge" role="img"></span></h2>
-          <p>Seit über 50 Jahren stellen wir in Deutschland italienisches Eis nach traditionellen Rezepturen her. Was uns ausmacht? Echte Zutaten, ehrliches Handwerk und die Liebe zum Detail.</p>
-          <a class="heritage-btn" href="#kontakt">Mehr über uns →</a>
-
-          <!-- أضف صورة خريطة إيطاليا الخاصة بك هنا بنفس الاسم والمسار التالي -->
-          <img class="heritage-italy-map" src="assets/italy-map.png" alt="Italien Karte" />
-          <div class="heritage-italy-label">Prodotto<br />in Italia<br /><b>▬ ▬</b></div>
         </div>
       </div>
     </section>
@@ -1446,21 +1407,25 @@
       </div>
     </section>
 
-    <section id="kontakt" class="section contact">
-      <div class="contact__box">
-        <div>
-          <p class="eyebrow">Kontakt</p>
-          <h2>Jetzt Angebot anfragen</h2>
-          <p>Schreiben Sie uns oder rufen Sie direkt an.</p>
+    <section class="about-banner-wrap" aria-label="Über Es Büffe Kontakt">
+      <div class="about-banner">
+        <div class="about-banner__text">
+          <h2>Über Es Büffe</h2>
+          <p>Es Büffe steht für traditionelle Herstellungsmethoden, beste Zutaten und echten Geschmack.</p>
+          <p>Seit Jahren beliefern wir unsere Partner aus Gastronomie, Eiscafés und Einzelhandel mit hochwertigem Speiseeis.</p>
+          <p>Qualität, Zuverlässigkeit und Kundenzufriedenheit sind unser Versprechen.</p>
+          <div class="about-signature">Eis Büffe</div>
         </div>
 
-        <form class="contact-form">
-          <input type="text" placeholder="Ihr Name" />
-          <input type="email" placeholder="E-Mail Adresse" />
-          <input type="tel" placeholder="Telefonnummer" />
-          <textarea placeholder="Ihre Nachricht"></textarea>
-          <button type="submit" class="btn btn--primary">Anfrage senden</button>
-        </form>
+        <div class="about-banner__image" role="img" aria-label="Cremiges Schokoladeneis in einer Wanne"></div>
+
+        <div class="about-banner__contact">
+          <h3>Kontakt</h3>
+          <a href="tel:+491739675569">☎ &nbsp; +49 173 9675569</a>
+          <a href="mailto:info@eis-spezial.de">✉ &nbsp; info@eis-spezial.de</a>
+          <span>⌖ &nbsp; Deutschland</span>
+          <a class="about-banner__btn" href="kontakt.html">Jetzt kontaktieren &nbsp; →</a>
+        </div>
       </div>
     </section>
   </main>
@@ -1476,26 +1441,16 @@
         <h3>Navigation</h3>
         <a href="#home">Startseite</a>
         <a href="#produkte">Produkte</a>
-        <a href="#about">Über uns</a>
         <a href="#lieferung">Lieferung</a>
-        <a href="#kontakt">Kontakt</a>
-      </div>
-
-      <div class="footer__col">
-        <h3>Produkte</h3>
-        <a href="#produkte">Eis in Wannen</a>
-        <a href="#produkte">Eis Kugeln</a>
-        <a href="#produkte">Eistüten &amp; Zubehör</a>
-        <a href="#produkte">Spezial Sorten</a>
-        <a href="#produkte">Desserts &amp; Mehr</a>
+        <a href="kontakt.html">Kontakt</a>
       </div>
 
       <div class="footer__col">
         <h3>Service</h3>
         <a href="#lieferung">Lieferung</a>
         <a href="mailto:info@eis-spezial.de">Qualität</a>
-        <a href="#kontakt">Häufige Fragen</a>
-        <a href="#kontakt">Angebot anfragen</a>
+        <a href="kontakt.html">Häufige Fragen</a>
+        <a href="kontakt.html">Angebot anfragen</a>
       </div>
 
       <div class="footer__social">
@@ -1588,6 +1543,7 @@
       ".heritage-copy",
       ".delivery .section-head",
       ".contact__box",
+      ".about-banner",
       ".footer__brand",
       ".footer__col",
       ".footer__social"
