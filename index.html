@@ -213,6 +213,116 @@
     .experience__image img { width: 86px; height: 86px; object-fit: contain; }
     .experience p { font-size: 13px; line-height: 1.65; color: #4c3820; align-self: center; }
 
+    .quality-taste {
+      padding: 58px 48px 72px;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(198,145,53,.10), transparent 26%),
+        radial-gradient(circle at 86% 42%, rgba(198,145,53,.08), transparent 28%),
+        #fff8ee;
+    }
+    .quality-taste__head {
+      max-width: 940px;
+      margin: 0 auto 22px;
+      text-align: center;
+    }
+    .quality-taste__head h2 {
+      font-family: Cinzel, serif;
+      color: var(--brown);
+      font-size: clamp(28px, 3.2vw, 42px);
+      line-height: 1.08;
+      margin-bottom: 10px;
+      letter-spacing: .8px;
+    }
+    .quality-taste__head p {
+      color: #1f1a13;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    .taste-cards {
+      max-width: 1180px;
+      margin: 0 auto 16px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+    .taste-card {
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.12fr .88fr;
+      min-height: 190px;
+      background: rgba(255,255,255,.56);
+      border: 1px solid rgba(166,106,19,.24);
+      border-radius: 8px;
+      box-shadow: 0 18px 44px rgba(80,48,6,.08);
+    }
+    .taste-card__image img {
+      width: 100%;
+      height: 100%;
+      min-height: 190px;
+      object-fit: cover;
+    }
+    .taste-card__content {
+      position: relative;
+      padding: 26px 58px 24px 24px;
+    }
+    .taste-card__content h3 {
+      font-family: Cinzel, serif;
+      color: var(--gold-dark);
+      font-size: 26px;
+      line-height: 1.12;
+      margin-bottom: 14px;
+    }
+    .taste-card__content p {
+      color: #2f261b;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+    .taste-card__icon {
+      position: absolute;
+      top: 22px;
+      right: 24px;
+      color: var(--gold);
+      font-size: 34px;
+      line-height: 1;
+    }
+    .quality-features {
+      max-width: 1180px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: rgba(255,255,255,.46);
+      border: 1px solid rgba(166,106,19,.24);
+      border-radius: 8px;
+      box-shadow: 0 18px 44px rgba(80,48,6,.08);
+    }
+    .quality-feature {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 16px;
+      padding: 24px 24px;
+      border-right: 1px solid rgba(166,106,19,.18);
+      align-items: start;
+    }
+    .quality-feature:last-child { border-right: 0; }
+    .quality-feature__icon {
+      color: var(--gold);
+      font-size: 45px;
+      line-height: 1;
+      display: grid;
+      place-items: center;
+    }
+    .quality-feature h3 {
+      color: var(--brown);
+      font-size: 16px;
+      margin-bottom: 9px;
+    }
+    .quality-feature p {
+      color: #2f261b;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+
     .section { padding: 94px 48px; }
     .section-head { max-width: 760px; margin: 0 auto 44px; text-align: center; }
     .section h2 { font-family: Cinzel, serif; color: var(--gold-dark); font-size: clamp(34px, 4vw, 52px); line-height: 1.1; margin-bottom: 16px; }
@@ -313,7 +423,11 @@
       .nav-links.open { display: flex; }
       .hero { min-height: auto; padding: 78px 24px; background-position: center; }
       .hero__content { width: 100%; max-width: 690px; }
-      .cards, .steps, .about, .contact__box { grid-template-columns: 1fr; }
+      .cards, .steps, .about, .contact__box, .taste-cards, .quality-features { grid-template-columns: 1fr; }
+      .quality-taste { padding: 58px 24px 66px; }
+      .taste-card { grid-template-columns: 1fr; }
+      .quality-feature { border-right: 0; border-bottom: 1px solid rgba(166,106,19,.18); }
+      .quality-feature:last-child { border-bottom: 0; }
       .section { padding: 72px 24px; }
     }
 
@@ -325,6 +439,9 @@
       .experience__image { border-right: none; border-bottom: 1px solid rgba(166,106,19,.24); padding: 0 0 12px; }
       .contact-form { grid-template-columns: 1fr; }
       .contact__box { padding: 28px; }
+      .taste-card__content { padding: 24px 54px 24px 22px; }
+      .quality-feature { grid-template-columns: 56px 1fr; padding: 22px 18px; }
+      .quality-feature__icon { font-size: 38px; }
     }
   </style>
 </head>
@@ -401,6 +518,69 @@
         </div>
       </div>
     </section>
+
+    <section class="quality-taste" aria-label="Qualität und Geschmack">
+      <div class="quality-taste__head">
+        <h2>Qualität &amp; Geschmack</h2>
+        <p>Sie möchten wissen, warum eisBüffe Speiseeis so angenehm cremig ist und so einmalig lecker schmeckt?</p>
+      </div>
+
+      <div class="taste-cards">
+        <article class="taste-card">
+          <div class="taste-card__image">
+            <img src="assets/fruchteis.png" alt="eisBüffe Fruchtspeiseeis" />
+          </div>
+          <div class="taste-card__content">
+            <div class="taste-card__icon">🍊</div>
+            <h3>eisBüffe<br />Fruchtspeiseeis</h3>
+            <p>Beim Fruchtspeiseeis besteht die Basis aus Wasser und sehr vielen frischen Früchten. Der Anteil an frischen Früchten beträgt 23%.</p>
+          </div>
+        </article>
+
+        <article class="taste-card">
+          <div class="taste-card__image">
+            <img src="assets/milchspeiseeis.png" alt="eisBüffe Milchspeiseeis" />
+          </div>
+          <div class="taste-card__content">
+            <div class="taste-card__icon">🥛</div>
+            <h3>eisBüffe<br />Milchspeiseeis</h3>
+            <p>Geschmacklich abgerundet wird es durch nahezu unbegrenzte Zutaten u. a. Kakao, Kaffee und Schokolade über Nüsse, Nougat bis hin zu Mandeln und Vanille.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="quality-features">
+        <article class="quality-feature">
+          <div class="quality-feature__icon">💎</div>
+          <div>
+            <h3>Premium Qualität</h3>
+            <p>Wir verwenden ausschließlich ausgewählte Zutaten und traditionelle Herstellungsmethoden, um höchste Qualität für Gastronomie, Cafés und Großkunden zu garantieren.</p>
+          </div>
+        </article>
+        <article class="quality-feature">
+          <div class="quality-feature__icon">🍦</div>
+          <div>
+            <h3>Große Auswahl</h3>
+            <p>Von klassischen Sorten bis hin zu exklusiven Spezialkreationen – bei Eis Büffel finden Sie für jeden Geschmack das passende Eis.</p>
+          </div>
+        </article>
+        <article class="quality-feature">
+          <div class="quality-feature__icon">🚚</div>
+          <div>
+            <h3>Zuverlässiger Service</h3>
+            <p>Schnelle Lieferung, persönliche Beratung und langjährige Erfahrung machen Eis Büffel zu Ihrem starken Partner im Speiseeis-Großhandel.</p>
+          </div>
+        </article>
+        <article class="quality-feature">
+          <div class="quality-feature__icon">♡</div>
+          <div>
+            <h3>Qualität &amp; Geschmack</h3>
+            <p>Unsere Rezepte verbinden traditionelles Handwerk mit modernen Standards – für ein unvergleichlich cremiges und aromatisches Geschmackserlebnis.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
 
     <section id="produkte" class="section products">
       <div class="section-head">
