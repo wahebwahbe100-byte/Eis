@@ -2412,6 +2412,101 @@
 </style>
 <!-- END FINAL VERIFIED MOBILE MENU FIX -->
 
+
+
+<style>
+/* ===== HERO / HEADER FIX BY CHATGPT =====
+   Removes the large flat beige header background and lets the hero image sit correctly behind the navigation. */
+.site-header {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+  background: transparent !important;
+}
+.topbar {
+  display: none !important;
+}
+.navbar {
+  height: 116px !important;
+  position: relative !important;
+  top: auto !important;
+  background: linear-gradient(180deg, rgba(255, 248, 236, .78) 0%, rgba(255, 248, 236, .45) 58%, rgba(255, 248, 236, 0) 100%) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  align-items: center !important;
+}
+.logo img {
+  width: 178px !important;
+  filter: drop-shadow(0 12px 22px rgba(70, 40, 5, .22));
+}
+.nav-links a {
+  color: #3f2b10 !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.42);
+}
+.nav-links a.active {
+  background: rgba(255, 246, 232, .64) !important;
+  box-shadow: inset 0 -2px 0 rgba(166,106,19,.75), 0 14px 34px rgba(80,48,6,.08) !important;
+}
+.nav-links a.angebot-pill {
+  color: #fff !important;
+  text-shadow: none !important;
+}
+.hero {
+  min-height: 100vh !important;
+  padding-top: 150px !important;
+  background-image:
+    linear-gradient(90deg, rgba(255,246,232,.84) 0%, rgba(255,246,232,.54) 40%, rgba(255,246,232,.08) 72%, rgba(255,246,232,.02) 100%),
+    linear-gradient(180deg, rgba(255,246,232,.30) 0%, rgba(255,246,232,.04) 24%, rgba(255,246,232,0) 60%),
+    url("assets/hero-bg.png") !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+.hero__content {
+  padding-top: 14px !important;
+}
+.hero::before {
+  background:
+    radial-gradient(circle at 82% 48%, rgba(198,145,53,.18), transparent 34%),
+    radial-gradient(circle at 14% 20%, rgba(198,145,53,.13), transparent 30%) !important;
+}
+@media (max-width: 1050px) {
+  .site-header { position: absolute !important; }
+  .navbar {
+    height: 84px !important;
+    min-height: 84px !important;
+    background: linear-gradient(180deg, rgba(255,248,236,.82), rgba(255,248,236,.24), transparent) !important;
+  }
+  .logo img { width: 128px !important; }
+  .nav-links {
+    background: rgba(255, 247, 235, .98) !important;
+  }
+  .hero {
+    padding-top: 110px !important;
+    min-height: 100vh !important;
+    background-image:
+      linear-gradient(90deg, rgba(255,246,232,.90) 0%, rgba(255,246,232,.64) 50%, rgba(255,246,232,.10) 100%),
+      url("assets/hero-mobile.png") !important;
+    background-position: center top !important;
+    background-size: cover !important;
+  }
+}
+@media (max-width: 520px) {
+  .navbar { height: 78px !important; min-height: 78px !important; }
+  .logo img { width: 112px !important; }
+  .hero {
+    padding-top: 92px !important;
+    background-position: center top !important;
+  }
+  .hero__content { width: 64% !important; max-width: 320px !important; }
+}
+/* ===== END HERO / HEADER FIX ===== */
+</style>
+
 </head>
 <body>
   <header class="site-header">
