@@ -431,6 +431,80 @@
     .about__content li { padding: 12px 0 12px 34px; position: relative; color: #4c3820; }
     .about__content li::before { content: "✓"; position: absolute; left: 0; color: var(--gold); font-weight: 900; }
 
+    .about-banner-wrap {
+      padding: 32px 48px;
+      background: linear-gradient(180deg, #fff8ee, #f7ead4);
+    }
+    .about-banner {
+      max-width: 1280px;
+      margin: 0 auto;
+      min-height: 245px;
+      display: grid;
+      grid-template-columns: 1.1fr 1.35fr .9fr;
+      overflow: hidden;
+      border-radius: 0 0 8px 8px;
+      background: #fbf3e8;
+      border: 1px solid rgba(166,106,19,.14);
+      box-shadow: 0 18px 44px rgba(80,48,6,.08);
+    }
+    .about-banner__text {
+      padding: 34px 34px 26px;
+      background:
+        linear-gradient(90deg, rgba(255,246,232,.97), rgba(255,246,232,.78)),
+        radial-gradient(circle at 10% 15%, rgba(166,106,19,.10), transparent 28%);
+    }
+    .about-banner__text h2,
+    .about-banner__contact h3 {
+      font-family: Cinzel, serif;
+      color: var(--brown);
+      font-size: 24px;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .about-banner__text p {
+      max-width: 430px;
+      color: #2c2117;
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+    .about-signature {
+      font-family: "Great Vibes", cursive;
+      color: var(--gold);
+      font-size: 42px;
+      margin-top: 12px;
+    }
+    .about-banner__image {
+      /* ضع رابط الصورة الخارجية هنا */
+      background-image: url("https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?auto=format&fit=crop&w=1200&q=80");
+      background-size: cover;
+      background-position: center;
+      min-height: 245px;
+    }
+    .about-banner__contact {
+      padding: 34px 36px;
+      background: #fbf3e8;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .about-banner__contact a,
+    .about-banner__contact span {
+      color: #2f261b;
+      font-size: 15px;
+    }
+    .about-banner__btn {
+      margin-top: 10px;
+      width: fit-content;
+      background: linear-gradient(135deg, #c0831a, #8e5709);
+      color: #fff !important;
+      padding: 15px 28px;
+      border-radius: 6px;
+      font-weight: 800;
+      box-shadow: 0 12px 26px rgba(114,70,7,.18);
+    }
+
     .delivery { background: radial-gradient(circle at 16% 20%, rgba(198,145,53,.12), transparent 25%), var(--cream); }
     .step span { font-family: Cinzel, serif; font-size: 42px; color: rgba(166,106,19,.33); font-weight: 700; }
 
@@ -491,6 +565,9 @@
       .quality-feature { border-right: 0; border-bottom: 1px solid rgba(166,106,19,.18); }
       .quality-feature:last-child { border-bottom: 0; }
       .section { padding: 72px 24px; }
+      .about-banner-wrap { padding: 28px 24px; }
+      .about-banner { grid-template-columns: 1fr; }
+      .about-banner__image { min-height: 260px; }
     }
 
     @media (max-width: 620px) {
@@ -501,6 +578,10 @@
       .experience__image { border-right: none; border-bottom: 1px solid rgba(166,106,19,.24); padding: 0 0 12px; }
       .contact-form { grid-template-columns: 1fr; }
       .contact__box { padding: 28px; }
+      .about-banner-wrap { padding: 24px 16px; }
+      .about-banner__text, .about-banner__contact { padding: 26px 22px; }
+      .about-banner__text h2, .about-banner__contact h3 { font-size: 21px; }
+      .about-signature { font-size: 36px; }
       .taste-card__content { padding: 24px 54px 24px 22px; }
       .quality-feature { grid-template-columns: 56px 1fr; padding: 22px 18px; }
       .stat-item { grid-template-columns: 58px 1fr; min-height: 118px; padding: 18px; }
@@ -710,22 +791,32 @@
       </div>
     </section>
 
-    <section id="about" class="section about">
-      <div class="about__image">
-        <img src="assets/about.jpg" alt="Eis Herstellung" />
-      </div>
-      <div class="about__content">
-        <p class="eyebrow">Über uns</p>
-        <h2>Handwerk, Erfahrung und moderner Geschmack</h2>
-        <p>
-          Eis Büffel steht für sorgfältige Auswahl, konstante Qualität und
-          partnerschaftliche Zusammenarbeit mit Kunden aus Gastronomie und Handel.
-        </p>
-        <ul>
-          <li>Große Auswahl an beliebten und saisonalen Sorten</li>
-          <li>Zuverlässige Lieferung und persönliche Beratung</li>
-          <li>Qualität für professionelle Ansprüche</li>
-        </ul>
+    <section id="about" class="about-banner-wrap">
+      <div class="about-banner">
+        <div class="about-banner__text">
+          <h2>Über Eis Büffel</h2>
+          <p>
+            Eis Büffel steht für traditionelle Herstellungsmethoden,
+            beste Zutaten und echten Geschmack.
+          </p>
+          <p>
+            Seit Jahren beliefern wir unsere Partner aus Gastronomie,
+            Eiscafés und Einzelhandel mit hochwertigem Speiseeis.
+            Qualität, Zuverlässigkeit und Kundenzufriedenheit sind
+            unser Versprechen.
+          </p>
+          <div class="about-signature">Eis Büffel</div>
+        </div>
+
+        <div class="about-banner__image" aria-label="Eis Büffel Bild"></div>
+
+        <div class="about-banner__contact">
+          <h3>Kontakt</h3>
+          <a href="tel:+491739675569">⌕ +49 173 9675569</a>
+          <a href="mailto:info@eis-spezial.de">✉ info@eis-spezial.de</a>
+          <span>⌖ Deutschland</span>
+          <a href="#kontakt" class="about-banner__btn">Jetzt kontaktieren →</a>
+        </div>
       </div>
     </section>
 
