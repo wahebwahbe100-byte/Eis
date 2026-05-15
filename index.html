@@ -1594,6 +1594,69 @@
       }
     }
 
+
+    /* LAST SECTION DESKTOP + MOBILE WAVE: same organic torn effect used under the hero */
+    .about-banner-wrap {
+      position: relative;
+      overflow: hidden;
+      padding-bottom: 116px;
+      margin-bottom: -1px;
+      --last-wave-color: #fff8ee;
+    }
+
+    .about-banner-wrap::after {
+      content: "";
+      position: absolute;
+      left: -2%;
+      right: -2%;
+      bottom: -1px;
+      height: 88px;
+      background: var(--last-wave-color);
+      z-index: 8;
+      pointer-events: none;
+      clip-path: polygon(
+        0 42%, 5% 48%, 10% 58%, 16% 51%, 22% 63%,
+        29% 55%, 36% 68%, 44% 58%, 52% 70%, 60% 56%,
+        68% 66%, 76% 52%, 84% 62%, 92% 50%, 100% 59%,
+        100% 100%, 0 100%
+      );
+      filter: drop-shadow(0 -10px 18px rgba(80, 48, 6, .04));
+    }
+
+    @media (max-width: 768px) {
+      .about-banner-wrap {
+        padding-bottom: 84px !important;
+      }
+
+      .about-banner-wrap::after {
+        left: -5%;
+        right: -5%;
+        height: 58px !important;
+        clip-path: polygon(
+          0 44%, 5% 50%, 10% 58%, 16% 49%, 22% 62%,
+          29% 53%, 36% 67%, 44% 57%, 52% 69%, 60% 55%,
+          68% 65%, 76% 51%, 84% 61%, 92% 49%, 100% 58%,
+          100% 100%, 0 100%
+        );
+        filter: drop-shadow(0 -8px 14px rgba(80,48,6,.045));
+      }
+    }
+
+    @media (max-width: 520px) {
+      .about-banner-wrap {
+        padding-bottom: 72px !important;
+      }
+
+      .about-banner-wrap::after {
+        height: 48px !important;
+        clip-path: polygon(
+          0 42%, 8% 55%, 17% 46%, 27% 63%, 39% 51%,
+          51% 68%, 64% 50%, 77% 62%, 89% 47%, 100% 59%,
+          100% 100%, 0 100%
+        );
+      }
+    }
+
   </style>
 </head>
 <body>
