@@ -281,9 +281,9 @@
       position: absolute;
       top: 22px;
       right: 24px;
-      color: var(--gold);
-      font-size: 34px;
-      line-height: 1;
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
     }
     .quality-features {
       max-width: 1180px;
@@ -305,11 +305,10 @@
     }
     .quality-feature:last-child { border-right: 0; }
     .quality-feature__icon {
-      color: var(--gold);
-      font-size: 45px;
-      line-height: 1;
-      display: grid;
-      place-items: center;
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      display: block;
     }
     .quality-feature h3 {
       color: var(--brown);
@@ -441,7 +440,7 @@
       .contact__box { padding: 28px; }
       .taste-card__content { padding: 24px 54px 24px 22px; }
       .quality-feature { grid-template-columns: 56px 1fr; padding: 22px 18px; }
-      .quality-feature__icon { font-size: 38px; }
+      .quality-feature__icon { width: 42px; height: 42px; }
     }
   </style>
 </head>
@@ -531,7 +530,7 @@
             <img src="assets/fruchteis.png" alt="eisBüffe Fruchtspeiseeis" />
           </div>
           <div class="taste-card__content">
-            <div class="taste-card__icon">🍊</div>
+            <img class="taste-card__icon" src="assets/orange.png" alt="" />
             <h3>eisBüffe<br />Fruchtspeiseeis</h3>
             <p>Beim Fruchtspeiseeis besteht die Basis aus Wasser und sehr vielen frischen Früchten. Der Anteil an frischen Früchten beträgt 23%.</p>
           </div>
@@ -542,7 +541,7 @@
             <img src="assets/milchspeiseeis.png" alt="eisBüffe Milchspeiseeis" />
           </div>
           <div class="taste-card__content">
-            <div class="taste-card__icon">🥛</div>
+            <img class="taste-card__icon" src="assets/milk.png" alt="" />
             <h3>eisBüffe<br />Milchspeiseeis</h3>
             <p>Geschmacklich abgerundet wird es durch nahezu unbegrenzte Zutaten u. a. Kakao, Kaffee und Schokolade über Nüsse, Nougat bis hin zu Mandeln und Vanille.</p>
           </div>
@@ -551,28 +550,28 @@
 
       <div class="quality-features">
         <article class="quality-feature">
-          <div class="quality-feature__icon">💎</div>
+          <img class="quality-feature__icon" src="assets/diamond.png" alt="" />
           <div>
             <h3>Premium Qualität</h3>
             <p>Wir verwenden ausschließlich ausgewählte Zutaten und traditionelle Herstellungsmethoden, um höchste Qualität für Gastronomie, Cafés und Großkunden zu garantieren.</p>
           </div>
         </article>
         <article class="quality-feature">
-          <div class="quality-feature__icon">🍦</div>
+          <img class="quality-feature__icon" src="assets/icecream.png" alt="" />
           <div>
             <h3>Große Auswahl</h3>
             <p>Von klassischen Sorten bis hin zu exklusiven Spezialkreationen – bei Eis Büffel finden Sie für jeden Geschmack das passende Eis.</p>
           </div>
         </article>
         <article class="quality-feature">
-          <div class="quality-feature__icon">🚚</div>
+          <img class="quality-feature__icon" src="assets/truck.png" alt="" />
           <div>
             <h3>Zuverlässiger Service</h3>
             <p>Schnelle Lieferung, persönliche Beratung und langjährige Erfahrung machen Eis Büffel zu Ihrem starken Partner im Speiseeis-Großhandel.</p>
           </div>
         </article>
         <article class="quality-feature">
-          <div class="quality-feature__icon">♡</div>
+          <img class="quality-feature__icon" src="assets/heart.png" alt="" />
           <div>
             <h3>Qualität &amp; Geschmack</h3>
             <p>Unsere Rezepte verbinden traditionelles Handwerk mit modernen Standards – für ein unvergleichlich cremiges und aromatisches Geschmackserlebnis.</p>
