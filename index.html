@@ -1314,15 +1314,19 @@
     }
 
 
-    /* Mobile hero corrected to keep the laptop/desktop composition only for HERO */
+    /* Mobile hero: use full mobile image without cropping from the right */
     @media (max-width: 768px) {
       .hero {
         min-height: calc(100vh - 78px);
         padding: 46px 18px 58px;
         align-items: center;
-        background:
+        background-color: #fff6e8;
+        background-image:
           linear-gradient(90deg, rgba(255,246,232,.90) 0%, rgba(255,246,232,.58) 48%, rgba(255,246,232,.05) 100%),
-          url("assets/hero-mobile.png") center right / cover no-repeat;
+          url("assets/hero-mobile.png");
+        background-position: center top, center top;
+        background-size: 100% auto, 100% auto;
+        background-repeat: no-repeat, no-repeat;
       }
 
       .hero::before {
@@ -1413,9 +1417,13 @@
       .hero {
         padding-left: 14px;
         padding-right: 14px;
-        background:
+        background-color: #fff6e8;
+        background-image:
           linear-gradient(90deg, rgba(255,246,232,.93) 0%, rgba(255,246,232,.64) 53%, rgba(255,246,232,.06) 100%),
-          url("assets/hero-mobile.png") center right / cover no-repeat;
+          url("assets/hero-mobile.png");
+        background-position: center top, center top;
+        background-size: 100% auto, 100% auto;
+        background-repeat: no-repeat, no-repeat;
       }
 
       .hero__content {
