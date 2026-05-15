@@ -1595,6 +1595,65 @@
       }
     }
 
+
+    /* FINAL FIX: full-width mobile wave across the complete page width */
+    @media (max-width: 768px) {
+      main > section,
+      .footer {
+        position: relative !important;
+        overflow: visible !important;
+        isolation: isolate;
+      }
+
+      main > section > *,
+      .footer > * {
+        position: relative;
+        z-index: 2;
+      }
+
+      main > section::after,
+      .footer::after {
+        content: "" !important;
+        position: absolute !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: -1px !important;
+        width: 100% !important;
+        min-width: 100% !important;
+        height: 72px !important;
+        transform: none !important;
+        z-index: 9 !important;
+        pointer-events: none !important;
+        background: var(--mobile-wave-color, #fff8ee) !important;
+        clip-path: polygon(
+          0 45%, 4% 54%, 9% 47%, 14% 60%, 20% 51%,
+          27% 66%, 34% 54%, 42% 70%, 50% 57%, 58% 69%,
+          66% 53%, 74% 64%, 82% 50%, 90% 61%, 96% 48%,
+          100% 56%, 100% 100%, 0 100%
+        ) !important;
+        filter: drop-shadow(0 -10px 18px rgba(80,48,6,.05));
+      }
+
+      .hero { --mobile-wave-color: #fff8ee; padding-bottom: 78px !important; }
+      .quality-taste { --mobile-wave-color: #fff6e8; padding-bottom: 92px !important; }
+      .products { --mobile-wave-color: #fff6e8; padding-bottom: 78px !important; }
+      .delivery { --mobile-wave-color: #fbf3e8; padding-bottom: 92px !important; }
+      .about-banner-wrap { --mobile-wave-color: #fff8ee; padding-bottom: 84px !important; }
+      .footer { --mobile-wave-color: #3a2406; padding-bottom: 62px !important; }
+    }
+
+    @media (max-width: 520px) {
+      main > section::after,
+      .footer::after {
+        height: 64px !important;
+        clip-path: polygon(
+          0 43%, 7% 56%, 15% 46%, 24% 63%, 34% 51%,
+          44% 69%, 54% 55%, 64% 67%, 74% 50%, 84% 62%,
+          93% 48%, 100% 58%, 100% 100%, 0 100%
+        ) !important;
+      }
+    }
+
   </style>
 </head>
 <body>
