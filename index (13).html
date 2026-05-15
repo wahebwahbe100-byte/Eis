@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eis Büffel</title>
+  <meta name="description" content="Premium Eisgroßhandel für Gastronomie, Eiscafés und Großkunden." />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Great+Vibes&family=Inter:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      --gold: #a66a13;
+      --gold-2: #d39a38;
+      --gold-3: #f0c46d;
+      --gold-dark: #6f4106;
+      --cream: #fff6e8;
+      --cream-2: #f7ead4;
+      --brown: #352105;
+      --muted: #6b5a42;
+      --white: #ffffff;
+      --shadow: 0 24px 60px rgba(80, 48, 6, .16);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      width: 100%;
+      max-width: 100%;
+      background: var(--cream);
+      color: var(--brown);
+      font-family: Inter, Arial, sans-serif;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    html, body { max-width: 100%; overflow-x: hidden; }
+
+    .topbar {
+      min-height: 34px;
+      background: linear-gradient(90deg, #8e5709, #c0831a);
+      color: #fff;
+      padding: 0 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      font-size: 13px;
+    }
+    .topbar__left, .topbar__right { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+    .topbar__left span {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+    }
+    .topbar__emoji {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+      flex: 0 0 auto;
+    }
+
+    .navbar {
+      height: 92px;
+      background: rgba(255, 246, 232, .94);
+      backdrop-filter: blur(10px);
+      display: grid;
+      grid-template-columns: 220px 1fr 190px;
+      align-items: center;
+      padding: 0 48px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 1px 0 rgba(166, 106, 19, .12);
+    }
+    .logo { display: inline-flex; align-items: center; width: fit-content; user-select: none; }
+    .logo img { width: 150px; height: auto; -webkit-user-drag: none; }
+
+    .nav-links { display: flex; justify-content: center; gap: 34px; font-size: 14px; font-weight: 700; }
+    .nav-links a { position: relative; padding: 10px 0; }
+    .nav-links a::after {
+      content: "";
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      transition: .25s;
+    }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+    .menu-toggle { display: none; background: none; border: 0; font-size: 28px; color: var(--gold-dark); cursor: pointer; }
+    .nav-btn, .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: .25s;
+      white-space: nowrap;
+    }
+    .nav-btn {
+      background: linear-gradient(135deg, var(--gold-2), var(--gold-dark));
+      color: #fff;
+      padding: 14px 23px;
+      font-size: 13px;
+      box-shadow: 0 14px 28px rgba(114, 70, 7, .24);
+    }
+    .btn {
+      border: 1px solid transparent;
+      padding: 15px 25px;
+      font-size: 14px;
+      min-height: 54px;
+    }
+    .btn--primary { color: #fff; background: linear-gradient(135deg, #c68b2e, #754606); box-shadow: 0 18px 34px rgba(98, 58, 6, .22); }
+    .btn--secondary { background: rgba(255,255,255,.82); border-color: rgba(166,106,19,.30); color: var(--brown); }
+    .btn:hover, .nav-btn:hover { transform: translateY(-3px); }
+
+    .nav-btn__icon-img {
+      width: 18px;
+      height: 18px;
+      margin-left: 8px;
+      object-fit: contain;
+      flex: 0 0 auto;
+    }
+    .btn__icon-img { width: 22px; height: 22px; margin-left: 10px; object-fit: contain; }
+
+    .hero {
+      min-height: calc(100vh - 126px);
+      position: relative;
+      isolation: isolate;
+      display: flex;
+      align-items: center;
+      padding: 54px 48px 74px;
+      background:
+        linear-gradient(90deg, rgba(255,246,232,.84) 0%, rgba(255,246,232,.42) 43%, rgba(255,246,232,.02) 100%),
+        url("assets/hero-bg.png") center right / cover no-repeat;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 82% 55%, rgba(198,145,53,.14), transparent 31%),
+        radial-gradient(circle at 16% 18%, rgba(198,145,53,.10), transparent 24%);
+      z-index: -1;
+    }
+    .hero__content { width: 50%; max-width: 690px; z-index: 3; }
+    .eyebrow {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-family: Cinzel, serif;
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-family: Cinzel, serif;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      font-size: clamp(46px, 6vw, 88px);
+      line-height: .96;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 22px;
+    }
+    .brand-line {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-top: 8px;
+      text-transform: none;
+      font-family: "Great Vibes", cursive;
+      color: var(--gold);
+      font-size: .82em;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+    .brand-line img {
+      width: .58em;
+      height: .58em;
+      object-fit: contain;
+      filter: drop-shadow(0 6px 8px rgba(111,65,6,.18));
+    }
+    .hero__subtitle {
+      font-family: Cinzel, serif;
+      color: var(--gold-dark);
+      font-weight: 800;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero__text { max-width: 570px; color: #4f3d29; line-height: 1.85; margin-bottom: 30px; font-size: 15px; }
+    .hero__actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 28px; }
+
+    .experience {
+      width: min(410px, 100%);
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 18px;
+      background: rgba(255,255,255,.73);
+      border: 1px solid rgba(166,106,19,.20);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .experience__image {
+      display: grid;
+      place-items: center;
+      border-right: 1px solid rgba(166,106,19,.24);
+      padding-right: 14px;
+    }
+    .experience__image img { width: 86px; height: 86px; object-fit: contain; }
+    .experience p { font-size: 13px; line-height: 1.65; color: #4c3820; align-self: center; }
+
+    .quality-taste {
+      padding: 58px 48px 72px;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(198,145,53,.10), transparent 26%),
+        radial-gradient(circle at 86% 42%, rgba(198,145,53,.08), transparent 28%),
+        #fff8ee;
+    }
+    .quality-taste__head {
+      max-width: 940px;
+      margin: 0 auto 22px;
+      text-align: center;
+    }
+    .quality-taste__head h2 {
+      font-family: Cinzel, serif;
+      color: var(--brown);
+      font-size: clamp(28px, 3.2vw, 42px);
+      line-height: 1.08;
+      margin-bottom: 10px;
+      letter-spacing: .8px;
+    }
+    .quality-taste__head p {
+      color: #1f1a13;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    .taste-cards {
+      max-width: 1180px;
+      margin: 0 auto 16px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+    .taste-card {
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.12fr .88fr;
+      min-height: 190px;
+      background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,246,232,.58));
+      border: 1px solid rgba(166,106,19,.22);
+      border-radius: 28px;
+      box-shadow: 0 20px 48px rgba(80,48,6,.10);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    .taste-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(166,106,19,.36);
+      box-shadow: 0 26px 58px rgba(80,48,6,.14);
+    }
+    .taste-card__image {
+      overflow: hidden;
+      border-radius: 26px 0 0 26px;
+    }
+    .taste-card__image img {
+      width: 100%;
+      height: 100%;
+      min-height: 190px;
+      object-fit: cover;
+      transition: transform .35s ease;
+    }
+    .taste-card:hover .taste-card__image img { transform: scale(1.04); }
+    .taste-card__content {
+      position: relative;
+      padding: 28px 60px 26px 26px;
+      border-radius: 0 26px 26px 0;
+    }
+    .taste-card__content h3 {
+      font-family: Cinzel, serif;
+      color: var(--gold-dark);
+      font-size: 26px;
+      line-height: 1.12;
+      margin-bottom: 14px;
+    }
+    .taste-card__content p {
+      color: #2f261b;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+    .taste-card__icon {
+      position: absolute;
+      top: 22px;
+      right: 24px;
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+    .quality-features {
+      max-width: 1180px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: linear-gradient(145deg, rgba(255,255,255,.74), rgba(255,246,232,.50));
+      border: 1px solid rgba(166,106,19,.22);
+      border-radius: 28px;
+      box-shadow: 0 20px 48px rgba(80,48,6,.10);
+      overflow: hidden;
+    }
+    .quality-feature {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 16px;
+      padding: 26px 24px;
+      border-right: 1px solid rgba(166,106,19,.16);
+      align-items: start;
+      transition: background .25s ease, transform .25s ease;
+    }
+    .quality-feature:hover {
+      background: rgba(255,255,255,.48);
+      transform: translateY(-3px);
+    }
+    .quality-feature:last-child { border-right: 0; }
+    .quality-feature__icon {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      display: block;
+    }
+    .quality-feature h3 {
+      color: var(--brown);
+      font-size: 16px;
+      margin-bottom: 9px;
+    }
+    .quality-feature p {
+      color: #2f261b;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+
+    .section { padding: 94px 48px; }
+    .section-head { max-width: 760px; margin: 0 auto 44px; text-align: center; }
+    .section h2 { font-family: Cinzel, serif; color: var(--gold-dark); font-size: clamp(34px, 4vw, 52px); line-height: 1.1; margin-bottom: 16px; }
+    .section-head p, .about__content p, .delivery p, .contact p { color: var(--muted); line-height: 1.8; }
+
+    .cards, .steps {
+      max-width: 1180px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .card, .step {
+      background: rgba(255,255,255,.74);
+      border: 1px solid rgba(166,106,19,.18);
+      border-radius: 25px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      transition: .25s;
+    }
+    .card:hover, .step:hover { transform: translateY(-6px); }
+    .card__icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(198,145,53,.22), rgba(255,255,255,.72));
+      display: grid;
+      place-items: center;
+      font-size: 30px;
+      margin-bottom: 22px;
+    }
+    .card h3, .step h3 { color: var(--gold-dark); font-size: 22px; margin-bottom: 12px; }
+    .card p, .step p { color: var(--muted); line-height: 1.75; }
+
+    .stats-strip {
+      max-width: 1280px;
+      margin: 0 auto 34px;
+      background: linear-gradient(180deg, #5a3703 0%, #2f1d02 100%);
+      border-radius: 8px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      color: #fff8e8;
+      box-shadow: 0 18px 42px rgba(53, 33, 5, .18);
+      overflow: hidden;
+      border: 1px solid rgba(240,196,109,.28);
+    }
+    .stat-item {
+      min-height: 138px;
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      align-items: center;
+      gap: 14px;
+      padding: 22px 24px;
+      position: relative;
+    }
+    .stat-item:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 22px;
+      bottom: 22px;
+      width: 1px;
+      background: rgba(240,196,109,.36);
+    }
+    .stat-icon {
+      width: 66px;
+      height: 66px;
+      object-fit: contain;
+      opacity: 1;
+      filter: none;
+    }
+    .stat-content strong {
+      display: block;
+      font-family: Cinzel, serif;
+      color: var(--gold-3);
+      font-size: clamp(26px, 2.3vw, 38px);
+      line-height: .98;
+      margin-bottom: 7px;
+      letter-spacing: .5px;
+      white-space: nowrap;
+    }
+    .stat-content span {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: #fff6dc;
+      margin-bottom: 9px;
+    }
+    .stat-content p {
+      font-size: 11px;
+      line-height: 1.45;
+      color: rgba(255,255,255,.86);
+    }
+
+
+    .about {
+      background: linear-gradient(180deg, #fff8ee, #f7ead4);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 54px;
+      align-items: center;
+    }
+    .about__image img { border-radius: 34px; box-shadow: var(--shadow); min-height: 420px; object-fit: cover; }
+    .about__content { max-width: 630px; }
+    .about__content ul { list-style: none; margin-top: 22px; }
+    .about__content li { padding: 12px 0 12px 34px; position: relative; color: #4c3820; }
+    .about__content li::before { content: "✓"; position: absolute; left: 0; color: var(--gold); font-weight: 900; }
+
+    .about-banner-wrap {
+      padding: 32px 48px;
+      background: linear-gradient(180deg, #fff8ee, #f7ead4);
+    }
+    .about-banner {
+      max-width: 1280px;
+      margin: 0 auto;
+      min-height: 245px;
+      display: grid;
+      grid-template-columns: 1.1fr 1.35fr .9fr;
+      overflow: hidden;
+      border-radius: 0 0 8px 8px;
+      background: #fbf3e8;
+      border: 1px solid rgba(166,106,19,.14);
+      box-shadow: 0 18px 44px rgba(80,48,6,.08);
+    }
+    .about-banner__text {
+      padding: 34px 34px 26px;
+      background:
+        linear-gradient(90deg, rgba(255,246,232,.97), rgba(255,246,232,.78)),
+        radial-gradient(circle at 10% 15%, rgba(166,106,19,.10), transparent 28%);
+    }
+    .about-banner__text h2,
+    .about-banner__contact h3 {
+      font-family: Cinzel, serif;
+      color: var(--brown);
+      font-size: 24px;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .about-banner__text p {
+      max-width: 430px;
+      color: #2c2117;
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+    .about-signature {
+      font-family: "Great Vibes", cursive;
+      color: var(--gold);
+      font-size: 42px;
+      margin-top: 12px;
+    }
+    .about-banner__image {
+      /* ضع رابط الصورة الخارجية هنا */
+      background-image: url("https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?auto=format&fit=crop&w=1200&q=80");
+      background-size: cover;
+      background-position: center;
+      min-height: 245px;
+    }
+    .about-banner__contact {
+      padding: 34px 36px;
+      background: #fbf3e8;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .about-banner__contact a,
+    .about-banner__contact span {
+      color: #2f261b;
+      font-size: 15px;
+    }
+    .about-banner__btn {
+      margin-top: 10px;
+      width: fit-content;
+      background: linear-gradient(135deg, #c0831a, #8e5709);
+      color: #fff !important;
+      padding: 15px 28px;
+      border-radius: 6px;
+      font-weight: 800;
+      box-shadow: 0 12px 26px rgba(114,70,7,.18);
+    }
+
+    .delivery { background: radial-gradient(circle at 16% 20%, rgba(198,145,53,.12), transparent 25%), var(--cream); }
+    .step span { font-family: Cinzel, serif; font-size: 42px; color: rgba(166,106,19,.33); font-weight: 700; }
+
+    .delivery .step {
+      opacity: .9;
+      transform: translateY(18px) scale(.99);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+    .delivery .step.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .delivery .step:nth-child(1) { transition-delay: .04s; }
+    .delivery .step:nth-child(2) { transition-delay: .22s; }
+    .delivery .step:nth-child(3) { transition-delay: .40s; }
+
+
+
+    /* Soft page opening and light gradual section reveal */
+    body {
+      opacity: .96;
+      transform: translateY(4px);
+      transition: opacity .38s ease, transform .38s ease;
+    }
+    body.page-loaded {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-on-scroll {
+      opacity: .92;
+      transform: translateY(14px);
+      transition: opacity .55s ease, transform .55s ease;
+      will-change: opacity, transform;
+    }
+    .reveal-on-scroll.reveal-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: .04s; }
+    .reveal-delay-2 { transition-delay: .08s; }
+    .reveal-delay-3 { transition-delay: .12s; }
+    .reveal-delay-4 { transition-delay: .16s; }
+    .reveal-delay-5 { transition-delay: .20s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      body,
+      .reveal-on-scroll,
+      .delivery .step {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+
+    .contact { background: linear-gradient(135deg, #714306, #bd801c); }
+    .contact__box {
+      max-width: 1180px;
+      margin: auto;
+      background: rgba(255,248,236,.97);
+      border-radius: 34px;
+      padding: 44px;
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 40px;
+      box-shadow: 0 34px 70px rgba(51,31,4,.25);
+    }
+    .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      border: 1px solid rgba(166,106,19,.24);
+      background: #fff;
+      border-radius: 15px;
+      padding: 16px;
+      font: inherit;
+      outline: none;
+    }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: rgba(166,106,19,.58); box-shadow: 0 0 0 4px rgba(198,145,53,.12); }
+    .contact-form textarea { grid-column: 1 / -1; min-height: 130px; resize: vertical; }
+    .contact-form button { border: none; cursor: pointer; }
+    .footer {
+      background: linear-gradient(180deg, #fff8ee 0%, #f3e4cd 100%);
+      color: var(--brown);
+      border-top: 1px solid rgba(166,106,19,.16);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.65);
+    }
+    .footer__inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 46px 48px 38px;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr .9fr .9fr 1fr;
+      gap: 42px;
+      align-items: start;
+    }
+    .footer__brand {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .footer__logo {
+      width: 170px;
+      height: auto;
+      filter: drop-shadow(0 10px 18px rgba(111,65,6,.12));
+    }
+    .footer__text {
+      max-width: 260px;
+      color: #6b5a42;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    .footer__col h3,
+    .footer__social h3 {
+      font-family: Cinzel, serif;
+      color: var(--gold-dark);
+      font-size: 16px;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      margin-bottom: 13px;
+    }
+    .footer__col a {
+      display: block;
+      width: fit-content;
+      color: #4f3d29;
+      font-size: 14px;
+      line-height: 1.9;
+      transition: .25s;
+    }
+    .footer__col a:hover {
+      color: var(--gold);
+      transform: translateX(4px);
+    }
+    .footer__social {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .footer__icons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 4px;
+    }
+    .footer__icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #c0831a, #8e5709);
+      color: #fff;
+      font-weight: 900;
+      font-size: 18px;
+      box-shadow: 0 12px 22px rgba(114,70,7,.18);
+      transition: .25s;
+    }
+    .footer__icon svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .footer__icon:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 28px rgba(114,70,7,.25);
+    }
+    .footer__bottom {
+      padding: 18px 24px;
+      text-align: center;
+      color: #fff8e8;
+      background: linear-gradient(90deg, #5a3703, #3a2406);
+      font-size: 14px;
+    }
+
+    @media (max-width: 1050px) {
+      .topbar { display: none; }
+      .navbar { grid-template-columns: 160px 1fr 54px; height: 80px; padding: 0 22px; }
+      .logo img { width: 118px; }
+      .menu-toggle { display: block; justify-self: end; }
+      .nav-btn { display: none; }
+      .nav-links {
+        position: absolute;
+        top: 80px;
+        left: 22px;
+        right: 22px;
+        display: none;
+        flex-direction: column;
+        gap: 4px;
+        background: #fff7eb;
+        border: 1px solid rgba(166,106,19,.20);
+        border-radius: 20px;
+        padding: 18px;
+        box-shadow: var(--shadow);
+      }
+      .nav-links.open { display: flex; }
+      .hero { min-height: auto; padding: 78px 24px; background-position: center; }
+      .hero__content { width: 100%; max-width: 690px; }
+      .cards, .steps, .about, .contact__box, .taste-cards, .quality-features, .stats-strip { grid-template-columns: 1fr; }
+      .footer__inner { grid-template-columns: repeat(2, 1fr); gap: 30px; padding: 42px 24px; }
+      .footer__social { align-items: flex-start; text-align: left; }
+      .footer__icons { justify-content: flex-start; }
+      .quality-taste { padding: 58px 24px 66px; }
+      .taste-card { grid-template-columns: 1fr; border-radius: 26px; }
+      .taste-card__image { border-radius: 24px 24px 0 0; }
+      .taste-card__content { border-radius: 0 0 24px 24px; }
+      .stat-item:not(:last-child)::after { top: auto; left: 24px; right: 24px; bottom: 0; width: auto; height: 1px; }
+      .quality-feature { border-right: 0; border-bottom: 1px solid rgba(166,106,19,.18); }
+      .quality-feature:last-child { border-bottom: 0; }
+      .section { padding: 72px 24px; }
+      .about-banner-wrap { padding: 28px 24px; }
+      .about-banner { grid-template-columns: 1fr; }
+      .about-banner__image { min-height: 260px; }
+    }
+
+    @media (max-width: 620px) {
+      .hero { padding: 64px 20px; }
+      .hero h1 { font-size: 42px; }
+      .brand-line { gap: 8px; }
+      .experience { grid-template-columns: 1fr; }
+      .experience__image { border-right: none; border-bottom: 1px solid rgba(166,106,19,.24); padding: 0 0 12px; }
+      .contact-form { grid-template-columns: 1fr; }
+      .contact__box { padding: 28px; }
+      .about-banner-wrap { padding: 24px 16px; }
+      .about-banner__text, .about-banner__contact { padding: 26px 22px; }
+      .about-banner__text h2, .about-banner__contact h3 { font-size: 21px; }
+      .about-signature { font-size: 36px; }
+      .taste-card__content { padding: 24px 54px 24px 22px; }
+      .quality-feature { grid-template-columns: 56px 1fr; padding: 22px 18px; }
+      .stat-item { grid-template-columns: 58px 1fr; min-height: 118px; padding: 18px; }
+      .stat-icon { width: 54px; height: 54px; }
+      .quality-feature__icon { width: 42px; height: 42px; }
+      .footer__inner { grid-template-columns: 1fr; gap: 26px; padding: 38px 22px; }
+      .footer__logo { width: 145px; }
+      .footer__social { align-items: flex-start; text-align: left; }
+      .footer__bottom { font-size: 13px; }
+    }
+
+
+    /* Improved mobile hero: keep the ice image visible, readable, and not horizontally scaled */
+    @media (max-width: 768px) {
+      body { min-width: 0; }
+
+      .topbar { display: none; }
+
+      .navbar {
+        grid-template-columns: 140px 1fr 46px;
+        height: 78px;
+        padding: 0 18px;
+      }
+
+      .logo img { width: 116px; }
+      .menu-toggle { display: block; justify-self: end; }
+      .nav-btn { display: none; }
+
+      .nav-links {
+        position: absolute;
+        top: 78px;
+        left: 16px;
+        right: 16px;
+        display: none;
+        flex-direction: column;
+        gap: 6px;
+        background: #fff7eb;
+        border: 1px solid rgba(166,106,19,.20);
+        border-radius: 20px;
+        padding: 18px;
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.open { display: flex; }
+
+      .hero {
+        min-height: auto;
+        padding: 32px 20px 44px;
+        align-items: flex-start;
+        background:
+          linear-gradient(180deg, rgba(255,246,232,.04) 0%, rgba(255,246,232,.20) 45%, rgba(255,246,232,.94) 72%, #fff6e8 100%),
+          url("assets/hero-bg.png") center top / 100% auto no-repeat;
+      }
+
+      .hero::before {
+        background:
+          radial-gradient(circle at 50% 15%, rgba(198,145,53,.16), transparent 38%),
+          radial-gradient(circle at 18% 82%, rgba(198,145,53,.12), transparent 34%);
+      }
+
+      .hero__content {
+        width: 100%;
+        max-width: 560px;
+        margin: 0 auto;
+        padding-top: clamp(220px, 62vw, 340px);
+      }
+
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: 2.2px;
+        margin-bottom: 10px;
+      }
+
+      .hero h1 {
+        font-size: clamp(42px, 15vw, 64px);
+        line-height: .95;
+        margin-bottom: 16px;
+      }
+
+      .brand-line {
+        justify-content: flex-start;
+        gap: 9px;
+      }
+
+      .hero__subtitle {
+        font-size: 13px;
+        line-height: 1.45;
+        margin-bottom: 12px;
+      }
+
+      .hero__text {
+        max-width: 100%;
+        font-size: 14px;
+        line-height: 1.7;
+        margin-bottom: 20px;
+      }
+
+      .hero__actions {
+        gap: 10px;
+        margin-bottom: 18px;
+      }
+
+      .hero__actions .btn {
+        width: 100%;
+        min-height: 50px;
+        padding: 13px 18px;
+      }
+
+      .experience {
+        grid-template-columns: 74px 1fr;
+        gap: 12px;
+        padding: 12px;
+        border-radius: 16px;
+      }
+
+      .experience__image {
+        border-right: 1px solid rgba(166,106,19,.24);
+        border-bottom: 0;
+        padding: 0 10px 0 0;
+      }
+
+      .experience__image img { width: 58px; height: 58px; }
+      .experience p { font-size: 12px; line-height: 1.55; }
+    }
+
+    @media (max-width: 420px) {
+      .hero {
+        padding-left: 16px;
+        padding-right: 16px;
+        background-size: 100% auto;
+        background-position: center top;
+      }
+
+      .hero__content { padding-top: clamp(205px, 66vw, 285px); }
+      .hero h1 { font-size: clamp(39px, 16vw, 58px); }
+      .brand-line img { width: .52em; height: .52em; }
+    }
+
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="topbar">
+      <div class="topbar__left">
+        <span><img class="topbar__emoji" src="assets/delivery.png" alt="" /> Schnelle Lieferung</span>
+        <span><img class="topbar__emoji" src="assets/quality.png" alt="" /> Beste Qualität</span>
+        <span><img class="topbar__emoji" src="assets/service.png" alt="" /> Zuverlässiger Service</span>
+      </div>
+      <div class="topbar__right">
+        <a href="tel:+491739675569">☎ +49 173 9675569</a>
+        <a href="mailto:info@eis-spezial.de">✉ info@eis-spezial.de</a>
+      </div>
+    </div>
+
+    <nav class="navbar">
+      <div class="logo" aria-label="Eisgroßhandel Eis Büffel Logo">
+        <img src="assets/logo.png" alt="Eisgroßhandel Eis Büffel Logo" draggable="false" />
+      </div>
+
+      <button class="menu-toggle" type="button" aria-label="Menü öffnen">☰</button>
+
+      <div class="nav-links">
+        <a href="#home" class="active">Startseite</a>
+        <a href="#produkte">Produkte</a>
+        <a href="#about">Über uns</a>
+        <a href="#lieferung">Lieferung</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+
+      <a href="#kontakt" class="nav-btn">Angebot anfragen <img class="nav-btn__icon-img" src="assets/anfrage.png" alt="" /></a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero__content">
+        <p class="eyebrow">Premium Eis</p>
+
+        <h1>
+          <span class="brand-line">
+            <img src="assets/eis-left.png" alt="" />
+            Eis Büffel
+            <img src="assets/eis-right.png" alt="" />
+          </span>
+        </h1>
+
+        <p class="hero__subtitle">Traditionelle Methoden – Moderner Genuss</p>
+
+        <p class="hero__text">
+          Hochwertiges Speiseeis für Gastronomie, Eiscafés, Wiederverkäufer
+          und Großkunden. Beste Qualität, große Auswahl und zuverlässiger
+          Service – das ist Eis Büffel.
+        </p>
+
+        <div class="hero__actions">
+          <a href="#produkte" class="btn btn--primary">
+            Zu unseren Produkten
+            <img class="btn__icon-img" src="assets/product-arrow.png" alt="" />
+          </a>
+          <a href="#about" class="btn btn--secondary">Mehr über uns</a>
+        </div>
+
+        <div class="experience">
+          <div class="experience__image">
+            <img src="assets/50.png" alt="Über 50 Jahre Erfahrung" />
+          </div>
+          <p>
+            Über fünf Jahrzehnte Erfahrung in Herstellung und Vertrieb von
+            hochwertigem Speiseeis und Großkunden-Service.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="quality-taste" aria-label="Qualität und Geschmack">
+      <div class="quality-taste__head">
+        <h2>Qualität &amp; Geschmack</h2>
+        <p>Sie möchten wissen, warum Eis Büffel Speiseeis so angenehm cremig ist und so einmalig lecker schmeckt?</p>
+      </div>
+
+      <div class="taste-cards">
+        <article class="taste-card">
+          <div class="taste-card__image">
+            <img src="assets/fruchteis.png" alt="eisBüffe Fruchtspeiseeis" />
+          </div>
+          <div class="taste-card__content">
+            <img class="taste-card__icon" src="assets/orange.png" alt="" />
+            <h3>Eis Büffel<br />Fruchtspeiseeis</h3>
+            <p>Beim Fruchtspeiseeis besteht die Basis aus Wasser und sehr vielen frischen Früchten. Der Anteil an frischen Früchten beträgt 23%.</p>
+          </div>
+        </article>
+
+        <article class="taste-card">
+          <div class="taste-card__image">
+            <img src="assets/milchspeiseeis.png" alt="eisBüffe Milchspeiseeis" />
+          </div>
+          <div class="taste-card__content">
+            <img class="taste-card__icon" src="assets/milk.png" alt="" />
+            <h3>Eis Büffel<br />Milchspeiseeis</h3>
+            <p>Geschmacklich abgerundet wird es durch nahezu unbegrenzte Zutaten u. a. Kakao, Kaffee und Schokolade über Nüsse, Nougat bis hin zu Mandeln und Vanille.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="quality-features">
+        <article class="quality-feature">
+          <img class="quality-feature__icon" src="assets/diamond.png" alt="" />
+          <div>
+            <h3>Premium Qualität</h3>
+            <p>Wir verwenden ausschließlich ausgewählte Zutaten und traditionelle Herstellungsmethoden, um höchste Qualität für Gastronomie, Cafés und Großkunden zu garantieren.</p>
+          </div>
+        </article>
+        <article class="quality-feature">
+          <img class="quality-feature__icon" src="assets/icecream.png" alt="" />
+          <div>
+            <h3>Große Auswahl</h3>
+            <p>Von klassischen Sorten bis hin zu exklusiven Spezialkreationen – bei Eis Büffel finden Sie für jeden Geschmack das passende Eis.</p>
+          </div>
+        </article>
+        <article class="quality-feature">
+          <img class="quality-feature__icon" src="assets/truck.png" alt="" />
+          <div>
+            <h3>Zuverlässiger Service</h3>
+            <p>Schnelle Lieferung, persönliche Beratung und langjährige Erfahrung machen Eis Büffel zu Ihrem starken Partner im Speiseeis-Großhandel.</p>
+          </div>
+        </article>
+        <article class="quality-feature">
+          <img class="quality-feature__icon" src="assets/heart.png" alt="" />
+          <div>
+            <h3>Qualität &amp; Geschmack</h3>
+            <p>Unsere Rezepte verbinden traditionelles Handwerk mit modernen Standards – für ein unvergleichlich cremiges und aromatisches Geschmackserlebnis.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+
+    <section id="produkte" class="section products">
+      <div class="stats-strip" aria-label="Eis Büffel Kennzahlen">
+        <div class="stat-item">
+          <img class="stat-icon" src="assets/experience.png" alt="" />
+          <div class="stat-content">
+            <span>Über</span>
+            <strong class="counter" data-target="50" data-suffix="+">0</strong>
+            <span>Jahre Erfahrung</span>
+            <p>Tradition, Qualität und Vertrauen seit mehr als fünf Jahrzehnten.</p>
+          </div>
+        </div>
+        <div class="stat-item">
+          <img class="stat-icon" src="assets/service.png" alt="" />
+          <div class="stat-content">
+            <strong class="counter" data-target="1000" data-suffix="+">0</strong>
+            <span>Zufriedene Kunden</span>
+            <p>Vertrauen von Gastronomie, Eiscafés und Großkunden.</p>
+          </div>
+        </div>
+        <div class="stat-item">
+          <img class="stat-icon" src="assets/icecream.png" alt="" />
+          <div class="stat-content">
+            <strong class="counter" data-target="120" data-suffix="+">0</strong>
+            <span>Verschiedene Sorten</span>
+            <p>Große Auswahl an köstlichen Eissorten.</p>
+          </div>
+        </div>
+        <div class="stat-item">
+          <img class="stat-icon" src="assets/delivery.png" alt="" />
+          <div class="stat-content">
+            <span>Schnelle</span>
+            <strong>Lieferung</strong>
+            <p>Pünktlich, sicher und immer für Sie da.</p>
+          </div>
+        </div>
+        <div class="stat-item">
+          <img class="stat-icon" src="assets/quality.png" alt="" />
+          <div class="stat-content">
+            <strong class="counter" data-target="100" data-suffix="%">0</strong>
+            <span>Zuverlässigkeit</span>
+            <p>Beste Qualität und Service, auf den Sie sich verlassen können.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <div class="card__icon">🍨</div>
+          <h3>Premium Speiseeis</h3>
+          <p>Klassische und moderne Sorten mit cremiger Textur und zuverlässiger Qualität.</p>
+        </article>
+        <article class="card">
+          <div class="card__icon">🍦</div>
+          <h3>Eiscafé Sortiment</h3>
+          <p>Ideal für Theken, Becher, Waffeln und professionelle Eispräsentation.</p>
+        </article>
+        <article class="card">
+          <div class="card__icon">📦</div>
+          <h3>Großgebinde</h3>
+          <p>Effiziente Verpackungen für Restaurants, Cafés, Catering und Wiederverkäufer.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="about-banner-wrap">
+      <div class="about-banner">
+        <div class="about-banner__text">
+          <h2>Über Eis Büffel</h2>
+          <p>
+            Eis Büffel steht für traditionelle Herstellungsmethoden,
+            beste Zutaten und echten Geschmack.
+          </p>
+          <p>
+            Seit Jahren beliefern wir unsere Partner aus Gastronomie,
+            Eiscafés und Einzelhandel mit hochwertigem Speiseeis.
+            Qualität, Zuverlässigkeit und Kundenzufriedenheit sind
+            unser Versprechen.
+          </p>
+          <div class="about-signature">Eis Büffel</div>
+        </div>
+
+        <div class="about-banner__image" aria-label="Eis Büffel Bild"></div>
+
+        <div class="about-banner__contact">
+          <h3>Kontakt</h3>
+          <a href="tel:+491739675569">⌕ +49 173 9675569</a>
+          <a href="mailto:info@eis-spezial.de">✉ info@eis-spezial.de</a>
+          <span>⌖ Deutschland</span>
+          <a href="#kontakt" class="about-banner__btn">Jetzt kontaktieren →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="lieferung" class="section delivery">
+      <div class="section-head">
+        <p class="eyebrow">Lieferung</p>
+        <h2>Schnell, gekühlt und zuverlässig</h2>
+        <p>Wir beliefern Gastronomie, Eiscafés und Großkunden mit durchdachter Logistik.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <span>01</span>
+          <h3>Anfrage senden</h3>
+          <p>Kontaktieren Sie uns mit Ihrem Bedarf und gewünschten Produkten.</p>
+        </div>
+        <div class="step">
+          <span>02</span>
+          <h3>Angebot erhalten</h3>
+          <p>Sie bekommen ein passendes Angebot für Ihr Geschäft.</p>
+        </div>
+        <div class="step">
+          <span>03</span>
+          <h3>Lieferung starten</h3>
+          <p>Wir liefern zuverlässig und temperaturgerecht.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakt" class="section contact">
+      <div class="contact__box">
+        <div>
+          <p class="eyebrow">Kontakt</p>
+          <h2>Jetzt Angebot anfragen</h2>
+          <p>Schreiben Sie uns oder rufen Sie direkt an.</p>
+        </div>
+
+        <form class="contact-form">
+          <input type="text" placeholder="Ihr Name" />
+          <input type="email" placeholder="E-Mail Adresse" />
+          <input type="tel" placeholder="Telefonnummer" />
+          <textarea placeholder="Ihre Nachricht"></textarea>
+          <button type="submit" class="btn btn--primary">Anfrage senden</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <img class="footer__logo" src="assets/logo.png" alt="Eisgroßhandel Eis Büffel Logo" />
+        <p class="footer__text">Premium Speiseeis für Gastronomie, Eiscafés, Wiederverkäufer und Großkunden.</p>
+      </div>
+
+      <div class="footer__col">
+        <h3>Navigation</h3>
+        <a href="#home">Startseite</a>
+        <a href="#produkte">Produkte</a>
+        <a href="#about">Über uns</a>
+        <a href="#lieferung">Lieferung</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+
+      <div class="footer__col">
+        <h3>Produkte</h3>
+        <a href="#produkte">Eis in Wannen</a>
+        <a href="#produkte">Eis Kugeln</a>
+        <a href="#produkte">Eistüten &amp; Zubehör</a>
+        <a href="#produkte">Spezial Sorten</a>
+        <a href="#produkte">Desserts &amp; Mehr</a>
+      </div>
+
+      <div class="footer__col">
+        <h3>Service</h3>
+        <a href="#lieferung">Lieferung</a>
+        <a href="mailto:info@eis-spezial.de">Qualität</a>
+        <a href="#kontakt">Häufige Fragen</a>
+        <a href="#kontakt">Angebot anfragen</a>
+      </div>
+
+      <div class="footer__social">
+        <h3>Folgen Sie uns</h3>
+        <div class="footer__icons" aria-label="Social Media Links">
+          <a class="footer__icon" href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r=".8"></circle></svg>
+          </a>
+          <a class="footer__icon" href="#" aria-label="Facebook">f</a>
+          <a class="footer__icon" href="https://wa.me/491739675569" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.7a8 8 0 0 1-11.8 7l-3.7 1 1-3.6A8 8 0 1 1 20 11.7Z"></path><path d="M9.6 8.5c.2-.5.4-.5.7-.5h.5c.2 0 .4.1.5.4l.7 1.6c.1.3.1.5-.1.7l-.4.5c.7 1.3 1.7 2.2 3 2.9l.6-.6c.2-.2.4-.2.7-.1l1.5.7c.3.1.4.3.4.6v.4c0 .3-.1.6-.5.8-.5.2-1.3.4-2.6 0-2.4-.8-4.8-3.1-5.6-5.5-.4-1.1-.2-1.7.1-1.9Z"></path></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2026 Eisgroßhandel Eis Büffel. Alle Rechte vorbehalten.</p>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector(".menu-toggle");
+    const nav = document.querySelector(".nav-links");
+    toggle.addEventListener("click", () => nav.classList.toggle("open"));
+
+    const counters = document.querySelectorAll(".counter");
+
+    const animateCounter = (counter) => {
+      const target = Number(counter.dataset.target || 0);
+      const suffix = counter.dataset.suffix || "";
+      const duration = 1800;
+      const startTime = performance.now();
+
+      const update = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
+        const value = Math.floor(easedProgress * target);
+
+        counter.textContent = `${value}${suffix}`;
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          counter.textContent = `${target}${suffix}`;
+        }
+      };
+
+      requestAnimationFrame(update);
+    };
+
+    const counterObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.35 });
+
+    counters.forEach((counter) => counterObserver.observe(counter));
+
+    const deliverySteps = document.querySelectorAll(".delivery .step");
+
+    const deliveryObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          deliverySteps.forEach((step) => step.classList.add("show"));
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.35 });
+
+    const deliverySection = document.querySelector("#lieferung");
+    if (deliverySection) deliveryObserver.observe(deliverySection);
+
+    window.addEventListener("load", () => {
+      document.body.classList.add("page-loaded");
+    });
+
+    const revealGroups = [
+      ".hero__content",
+      ".quality-taste__head",
+      ".taste-card",
+      ".quality-features",
+      ".quality-feature",
+      ".stats-strip",
+      ".products .card",
+      ".about-banner__text",
+      ".about-banner__image",
+      ".about-banner__contact",
+      ".delivery .section-head",
+      ".contact__box",
+      ".footer__brand",
+      ".footer__col",
+      ".footer__social"
+    ];
+
+    const revealItems = document.querySelectorAll(revealGroups.join(","));
+
+    revealItems.forEach((item, index) => {
+      item.classList.add("reveal-on-scroll", `reveal-delay-${(index % 5) + 1}`);
+    });
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("reveal-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.16,
+      rootMargin: "0px 0px -70px 0px"
+    });
+
+    revealItems.forEach((item) => revealObserver.observe(item));
+  </script>
+</body>
+</html>
