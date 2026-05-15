@@ -1527,12 +1527,10 @@
     }
 
 
-    /* MOBILE SECTION END EFFECT: soft torn wave like the reference image */
+    /* MOBILE SECTION END EFFECT: full-width soft torn wave at the end of every page section */
     @media (max-width: 768px) {
-      .hero,
-      .quality-taste,
-      .delivery,
-      .about-banner-wrap {
+      main > section,
+      .footer {
         position: relative;
         overflow: hidden;
       }
@@ -1542,16 +1540,15 @@
         margin-bottom: -1px;
       }
 
-      .hero::after,
-      .quality-taste::after,
-      .delivery::after,
-      .about-banner-wrap::after {
+      main > section::after,
+      .footer::after {
         content: "";
         position: absolute;
-        left: -5%;
-        right: -5%;
+        left: 50%;
         bottom: -1px;
+        width: 110vw;
         height: 58px !important;
+        transform: translateX(-50%);
         z-index: 8;
         pointer-events: none;
         background: var(--mobile-wave-color, #fff8ee);
@@ -1566,13 +1563,19 @@
 
       .hero { --mobile-wave-color: #fff8ee; }
       .quality-taste { --mobile-wave-color: #fff6e8; padding-bottom: 82px !important; }
+      .products { --mobile-wave-color: #fff6e8; padding-bottom: 68px !important; }
       .delivery { --mobile-wave-color: #fbf3e8; padding-bottom: 82px !important; }
       .about-banner-wrap { --mobile-wave-color: #fff8ee; padding-bottom: 72px !important; }
+      .footer { --mobile-wave-color: #3a2406; padding-bottom: 50px; }
 
-      .quality-taste,
-      .delivery,
-      .about-banner-wrap {
+      main > section,
+      .footer {
         margin-bottom: -1px;
+      }
+
+      .footer__bottom {
+        position: relative;
+        z-index: 9;
       }
     }
 
@@ -1581,10 +1584,8 @@
         padding-bottom: 56px !important;
       }
 
-      .hero::after,
-      .quality-taste::after,
-      .delivery::after,
-      .about-banner-wrap::after {
+      main > section::after,
+      .footer::after {
         height: 48px !important;
         clip-path: polygon(
           0 42%, 8% 55%, 17% 46%, 27% 63%, 39% 51%,
