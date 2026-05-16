@@ -1455,6 +1455,31 @@
 </style>
 <!-- END FINAL VERIFIED MOBILE MENU FIX -->
 
+
+<!-- SMALLER bild.png NEW BADGE FIX -->
+<style>
+  .admin-modal-gallery__new-badge {
+    width: min(24%, 72px) !important;
+    height: auto !important;
+  }
+
+  .admin-image-row .admin-new-badge-preview {
+    width: 42px !important;
+    height: auto !important;
+  }
+
+  @media (max-width: 620px) {
+    .admin-modal-gallery__new-badge {
+      width: min(22%, 58px) !important;
+    }
+
+    .admin-image-row .admin-new-badge-preview {
+      width: 38px !important;
+    }
+  }
+</style>
+<!-- END SMALLER bild.png NEW BADGE FIX -->
+
 </head>
 
 <body>
@@ -2079,7 +2104,7 @@
   .admin-image-row { position: relative; display: grid; grid-template-columns: 1fr; gap: 8px; align-items: center; padding: 9px; border: 1px solid rgba(166,106,19,.18); border-radius: 18px; background: rgba(255,255,255,.75); overflow: hidden; }
   .admin-image-preview { position: relative; overflow: hidden; border-radius: 14px; }
   .admin-image-row img { width: 100%; height: 120px; object-fit: cover; border-radius: 14px; }
-  .admin-image-row .admin-new-badge-preview { position: absolute; top: 8px; right: 8px; z-index: 2; width: 70px; height: auto; object-fit: contain; border-radius: 0; filter: drop-shadow(0 8px 14px rgba(0,0,0,.20)); }
+  .admin-image-row .admin-new-badge-preview { position: absolute; top: 8px; right: 8px; z-index: 2; width: 42px; height: auto; object-fit: contain; border-radius: 0; filter: drop-shadow(0 6px 10px rgba(0,0,0,.18)); }
   .admin-image-row span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); font-size: 12px; }
   .admin-image-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .admin-image-actions .admin-btn { width: 100%; min-height: 46px; padding: 0 12px; }
@@ -2087,7 +2112,7 @@
   .admin-modal-gallery { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
   .admin-modal-gallery__item { position: relative; overflow: hidden; min-height: 150px; border-radius: 18px; border: 1px solid rgba(166,106,19,.18); box-shadow: 0 12px 25px rgba(80,48,6,.10); background: rgba(255,255,255,.72); }
   .admin-modal-gallery__item > img:first-child { width: 100%; height: 150px; object-fit: cover; border-radius: 18px; display: block; }
-  .admin-modal-gallery__new-badge { position: absolute; top: 10px; right: 10px; z-index: 2; width: min(44%, 130px); height: auto; object-fit: contain; filter: drop-shadow(0 10px 16px rgba(0,0,0,.22)); pointer-events: none; }
+  .admin-modal-gallery__new-badge { position: absolute; top: 10px; right: 10px; z-index: 2; width: min(24%, 72px); height: auto; object-fit: contain; filter: drop-shadow(0 7px 12px rgba(0,0,0,.20)); pointer-events: none; }
   .admin-modal-gallery__delete {
     position: absolute; right: 9px; top: 9px; z-index: 3; display: none; align-items: center; justify-content: center;
     min-height: 34px; padding: 0 12px; border: 0; border-radius: 999px;
@@ -2112,7 +2137,7 @@
     .admin-modal-gallery { grid-template-columns: 1fr; }
     .admin-image-list { grid-template-columns: 1fr; }
     .admin-image-row img { height: 150px; }
-    .admin-image-row .admin-new-badge-preview { width: 82px; height: auto; }
+    .admin-image-row .admin-new-badge-preview { width: 48px; height: auto; }
   }
 </style>
 
