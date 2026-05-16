@@ -4020,5 +4020,58 @@
 </style>
 <!-- END EXTRA HERO WHITE EFFECT REDUCTION -->
 
+
+<!-- SOFT WHITE TEXT GLOW UNDER MOBILE HERO COPY -->
+<style>
+  /* توهج أبيض خفيف خلف كلام الهيرو فقط لزيادة وضوح النص بدون تغطية الصورة */
+  .hero__content {
+    position: relative !important;
+    isolation: isolate !important;
+  }
+
+  @media (max-width: 1050px) {
+    .hero__content::before {
+      content: "";
+      position: absolute;
+      inset: -16px -14px -14px -14px;
+      z-index: -1;
+      pointer-events: none;
+      border-radius: 30px;
+      background:
+        radial-gradient(ellipse at 28% 45%,
+          rgba(255,255,255,.70) 0%,
+          rgba(255,248,236,.46) 42%,
+          rgba(255,246,232,.16) 70%,
+          rgba(255,246,232,0) 100%);
+      filter: blur(8px);
+    }
+
+    .hero .eyebrow,
+    .hero h1,
+    .brand-line,
+    .hero__subtitle,
+    .hero__text {
+      text-shadow:
+        0 1px 0 rgba(255,255,255,.62),
+        0 8px 24px rgba(255,255,255,.44);
+    }
+  }
+
+  @media (max-width: 520px) {
+    .hero__content::before {
+      inset: -12px -10px -12px -10px;
+      border-radius: 24px;
+      background:
+        radial-gradient(ellipse at 30% 45%,
+          rgba(255,255,255,.74) 0%,
+          rgba(255,248,236,.50) 44%,
+          rgba(255,246,232,.18) 72%,
+          rgba(255,246,232,0) 100%);
+      filter: blur(7px);
+    }
+  }
+</style>
+<!-- END SOFT WHITE TEXT GLOW UNDER MOBILE HERO COPY -->
+
 </body>
 </html>
