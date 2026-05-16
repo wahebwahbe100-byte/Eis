@@ -1145,14 +1145,15 @@
           </div>
         </div>
 
-        <form class="kontakt-form" action="https://formsubmit.co/jdjr868@gmail.com" method="POST" target="formsubmit-hidden-frame">
-          <input type="hidden" name="_subject" value="Neue Anfrage über die Webseite" />
+        <form class="kontakt-form" action="https://formsubmit.co/wahebwshbe2@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="Neue Anfrage über die Webseite Eis Büffel" />
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value="" />
           <input type="hidden" name="_url" value="" />
           <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
-          <input type="text" name="Name" placeholder="Ihr Name" required />
-          <input type="email" name="Email" placeholder="E-Mail Adresse" required />
+          <input type="text" name="name" placeholder="Ihr Name" required />
+          <input type="email" name="email" placeholder="E-Mail Adresse" required />
           <input type="tel" name="Telefon" placeholder="Telefonnummer" />
           <textarea name="Nachricht" placeholder="Ihre Nachricht" required></textarea>
 
@@ -1168,7 +1169,6 @@
           </p>
           <button type="submit" class="btn btn--primary">Anfrage senden</button>
         </form>
-        <iframe name="formsubmit-hidden-frame" title="FormSubmit" style="display:none;width:0;height:0;border:0;"></iframe>
       </div>
     </section>
   </main>
@@ -1297,40 +1297,37 @@
   (function () {
     var form = document.querySelector('.kontakt-form');
     var successMessage = document.querySelector('.success-message');
-    var submitButton = form ? form.querySelector('button[type="submit"]') : null;
-    var urlField = form ? form.querySelector('input[name="_url"]') : null;
+    if (!form || !successMessage) return;
 
-    if (!form || !successMessage || !submitButton) return;
-
-    function showMessage(type, text, icon) {
+    function showSuccess() {
       successMessage.classList.add('show');
-      successMessage.classList.toggle('error', type === 'error');
-      successMessage.querySelector('.success-message__icon').textContent = icon;
-      successMessage.querySelector('span:last-child').textContent = text;
+      successMessage.classList.remove('error');
+      successMessage.querySelector('.success-message__icon').textContent = '✓';
+      successMessage.querySelector('span:last-child').textContent = 'Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns schnellstmöglich bei Ihnen.';
     }
 
-    form.addEventListener('submit', function (event) {
-      if (!form.checkValidity()) {
-        event.preventDefault();
-        form.reportValidity();
-        return;
+    function cleanUrl(url) {
+      var clean = new URL(url);
+      clean.searchParams.delete('sent');
+      return clean.origin + clean.pathname;
+    }
+
+    if (new URLSearchParams(window.location.search).get('sent') === '1') {
+      showSuccess();
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState({}, document.title, cleanUrl(window.location.href));
       }
+    }
 
-      if (urlField && window.location && window.location.href) {
-        urlField.value = window.location.href;
-      }
-
-      submitButton.disabled = true;
-      submitButton.textContent = 'Wird gesendet...';
-
-      window.setTimeout(function () {
-        showMessage('success', 'Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns schnellstmöglich bei Ihnen.', '✓');
-        form.reset();
-        submitButton.disabled = false;
-        submitButton.textContent = 'Anfrage senden';
-      }, 1200);
+    form.addEventListener('submit', function () {
+      var pageUrl = cleanUrl(window.location.href);
+      var nextInput = form.querySelector('input[name="_next"]');
+      var urlInput = form.querySelector('input[name="_url"]');
+      if (nextInput) nextInput.value = pageUrl + '?sent=1';
+      if (urlInput) urlInput.value = pageUrl;
     });
   })();
+</script>
 </script>
 
 </body>
