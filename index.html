@@ -3443,9 +3443,9 @@
     </div>
 
     <nav class="navbar">
-      <div class="logo" aria-label="Eisgroßhandel Eis Büffe Logo">
+      <a class="logo" href="#home" aria-label="Eisgroßhandel Eis Büffe Logo">
         <img src="assets/logo.png" alt="Eisgroßhandel Eis Büffe Logo" draggable="false" />
-      </div>
+      </a>
 
       <button class="menu-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false">☰</button>
 
@@ -4560,6 +4560,93 @@
   }
 </style>
 <!-- END FINAL ONE-GLOW MOBILE HERO FIX -->
+
+
+
+<!-- LOGO IMAGE FIX: use the same previous image name assets/logo.png and make it larger -->
+<style>
+  .navbar {
+    grid-template-columns: minmax(250px, 320px) minmax(0, 1fr) !important;
+    min-height: 112px !important;
+    height: 112px !important;
+    column-gap: 24px !important;
+  }
+
+  .logo {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: fit-content !important;
+    max-width: none !important;
+    min-width: 0 !important;
+  }
+
+  .logo img {
+    display: block !important;
+    width: 230px !important;
+    max-width: none !important;
+    height: auto !important;
+    object-fit: contain !important;
+    -webkit-user-drag: none;
+    filter: drop-shadow(0 12px 22px rgba(111,65,6,.14));
+    transition: transform .28s ease, filter .28s ease;
+  }
+
+  .logo:hover img {
+    transform: translateY(-2px) scale(1.035);
+    filter: drop-shadow(0 16px 28px rgba(111,65,6,.20));
+  }
+
+  .footer__logo {
+    display: block !important;
+    width: 220px !important;
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    filter: drop-shadow(0 12px 22px rgba(111,65,6,.14));
+  }
+
+  @media (max-width: 1180px) {
+    .navbar {
+      grid-template-columns: minmax(210px, 260px) minmax(0, 1fr) !important;
+      min-height: 104px !important;
+      height: 104px !important;
+      padding-left: 34px !important;
+      padding-right: 34px !important;
+    }
+    .logo img { width: 195px !important; }
+  }
+
+  @media (max-width: 1050px) {
+    .navbar {
+      grid-template-columns: auto 1fr auto !important;
+      min-height: 92px !important;
+      height: 92px !important;
+      padding-left: 18px !important;
+      padding-right: 18px !important;
+    }
+    .logo img { width: 170px !important; }
+    .footer__logo { width: 185px !important; }
+  }
+
+  @media (max-width: 620px) {
+    .navbar {
+      min-height: 86px !important;
+      height: 86px !important;
+      padding-left: 12px !important;
+      padding-right: 12px !important;
+      column-gap: 10px !important;
+    }
+    .logo img { width: 145px !important; }
+    .footer__logo { width: 160px !important; }
+  }
+
+  @media (max-width: 420px) {
+    .logo img { width: 132px !important; }
+    .footer__logo { width: 150px !important; }
+  }
+</style>
+<!-- END LOGO IMAGE FIX -->
 
 </body>
 </html>
