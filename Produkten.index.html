@@ -2178,6 +2178,32 @@
   .admin-btn--light { background: rgba(255,255,255,.94); color: var(--gold-dark); border: 1px solid rgba(166,106,19,.24); }
   .admin-btn--danger { background: linear-gradient(135deg, #a95b34, #743014); }
   .admin-error { color: #9b2d16 !important; font-weight: 900; display: none; margin-top: 8px; }
+  .admin-upload-progress {
+    display: none;
+    gap: 7px;
+    margin-top: 8px;
+  }
+  .admin-upload-progress.is-active { display: grid; }
+  .admin-upload-progress__track {
+    width: 100%;
+    height: 12px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(166,106,19,.14);
+    border: 1px solid rgba(166,106,19,.18);
+  }
+  .admin-upload-progress__bar {
+    width: 0%;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--gold-2), var(--gold-dark));
+    transition: width .18s ease;
+  }
+  .admin-upload-progress__text {
+    color: var(--gold-dark);
+    font-size: 12px;
+    font-weight: 900;
+  }
   body.admin-mode .product-card { overflow: visible; }
   body.admin-mode .product-card::after {
     content: "Admin"; position: absolute; top: 12px; right: 12px; z-index: 8;
@@ -2273,6 +2299,10 @@
         <label for="adminEditImageFile">Kartenbild hochladen</label>
         <input id="adminEditImageFile" type="file" accept="image/*" />
         <input id="adminEditImageUrl" type="text" readonly placeholder="Kein neues Bild ausgewählt" />
+        <div class="admin-upload-progress" id="adminCardUploadProgress" aria-live="polite">
+          <div class="admin-upload-progress__track"><div class="admin-upload-progress__bar"></div></div>
+          <span class="admin-upload-progress__text">0%</span>
+        </div>
       </div>
       <div class="admin-field">
         <label for="adminEditTitleInput">Kartentitel</label>
@@ -2309,6 +2339,10 @@
         <label for="adminModalImageFile">Weitere Bilder hinzufügen</label>
         <input id="adminModalImageFile" type="file" accept="image/*" multiple />
         <input id="adminModalImageUrl" type="text" readonly placeholder="Keine neuen Bilder ausgewählt" />
+        <div class="admin-upload-progress" id="adminModalUploadProgress" aria-live="polite">
+          <div class="admin-upload-progress__track"><div class="admin-upload-progress__bar"></div></div>
+          <span class="admin-upload-progress__text">0%</span>
+        </div>
         <button class="admin-btn admin-btn--light" type="button" id="adminAddModalImageBtn">Bilder zur Vorschau hinzufügen</button>
       </div>
     </div>
@@ -2370,6 +2404,8 @@
     const modalImageFile = document.getElementById('adminModalImageFile');
     const modalImageUrl = document.getElementById('adminModalImageUrl');
     const addModalImageBtn = document.getElementById('adminAddModalImageBtn');
+    const cardUploadProgress = document.getElementById('adminCardUploadProgress');
+    const modalUploadProgress = document.getElementById('adminModalUploadProgress');
     const modalImagesList = document.getElementById('adminModalImagesList');
     const saveBtn = document.getElementById('adminSaveEditBtn');
     const resetBtn = document.getElementById('adminResetCardBtn');
@@ -2844,45 +2880,132 @@
       });
     }
 
-    async function uploadImageToSupabase(file) {
+    function setUploadProgress(progressEl, percent, text) {
+      if (!progressEl) return;
+      const safePercent = Math.max(0, Math.min(100, Math.round(percent || 0)));
+      const bar = progressEl.querySelector('.admin-upload-progress__bar');
+      const label = progressEl.querySelector('.admin-upload-progress__text');
+      progressEl.classList.add('is-active');
+      if (bar) bar.style.width = safePercent + '%';
+      if (label) label.textContent = text || (safePercent + '%');
+    }
+
+    function hideUploadProgress(progressEl) {
+      if (!progressEl) return;
+      setTimeout(function () {
+        progressEl.classList.remove('is-active');
+        const bar = progressEl.querySelector('.admin-upload-progress__bar');
+        const label = progressEl.querySelector('.admin-upload-progress__text');
+        if (bar) bar.style.width = '0%';
+        if (label) label.textContent = '0%';
+      }, 650);
+    }
+
+    async function getSupabaseAccessToken() {
+      if (!supabaseClient || !supabaseClient.auth || !supabaseClient.auth.getSession) return SUPABASE_ANON_KEY;
+      try {
+        const sessionResult = await supabaseClient.auth.getSession();
+        return (sessionResult && sessionResult.data && sessionResult.data.session && sessionResult.data.session.access_token) || SUPABASE_ANON_KEY;
+      } catch (error) {
+        return SUPABASE_ANON_KEY;
+      }
+    }
+
+    async function uploadImageToSupabase(file, onProgress) {
       if (!supabaseClient) {
-        // احتياطي: عند عدم تفعيل Supabase نحافظ على طريقة Base64 القديمة.
-        return readFileAsDataUrl(file);
+        // احتياطي فقط إذا لم تكن Supabase مفعّلة: لا يوجد ضغط للصورة، يتم حفظ الملف كـ Data URL.
+        if (onProgress) onProgress(25);
+        const dataUrl = await readFileAsDataUrl(file);
+        if (onProgress) onProgress(100);
+        return dataUrl;
       }
 
       const path = makeStoragePath(file);
-      const upload = await supabaseClient.storage.from(SUPABASE_BUCKET).upload(path, file, {
-        cacheControl: '3600',
-        upsert: false,
-        contentType: file.type || 'image/png'
-      });
-      if (upload.error) throw upload.error;
+      const encodedPath = path.split('/').map(encodeURIComponent).join('/');
+      const uploadUrl = SUPABASE_URL.replace(/\/$/, '') + '/storage/v1/object/' + encodeURIComponent(SUPABASE_BUCKET) + '/' + encodedPath;
+      const token = await getSupabaseAccessToken();
 
-      const publicUrl = supabaseClient.storage.from(SUPABASE_BUCKET).getPublicUrl(path);
-      return publicUrl.data.publicUrl;
+      return new Promise(function (resolve, reject) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', uploadUrl, true);
+        xhr.setRequestHeader('apikey', SUPABASE_ANON_KEY);
+        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        xhr.setRequestHeader('Cache-Control', '3600');
+        xhr.setRequestHeader('x-upsert', 'false');
+        xhr.setRequestHeader('Content-Type', file.type || 'application/octet-stream');
+
+        xhr.upload.onprogress = function (event) {
+          if (!onProgress) return;
+          if (event.lengthComputable) {
+            onProgress((event.loaded / event.total) * 100);
+          } else {
+            onProgress(55);
+          }
+        };
+
+        xhr.onload = function () {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            if (onProgress) onProgress(100);
+            const publicUrl = supabaseClient.storage.from(SUPABASE_BUCKET).getPublicUrl(path);
+            resolve(publicUrl.data.publicUrl);
+            return;
+          }
+          reject(new Error(xhr.responseText || ('Upload failed with status ' + xhr.status)));
+        };
+
+        xhr.onerror = function () { reject(new Error('Network upload error')); };
+        xhr.send(file); // رفع مباشر للملف الأصلي بدون ضغط أو canvas أو تغيير جودة.
+      });
     }
 
-    function fileToDataUrl(input, cb) {
+    function fileToDataUrl(input, cb, progressEl) {
       const file = input && input.files && input.files[0];
       if (!file) return;
-      uploadImageToSupabase(file)
-        .then(cb)
+      setUploadProgress(progressEl, 0, '0%');
+      uploadImageToSupabase(file, function (percent) {
+        setUploadProgress(progressEl, percent, Math.round(percent) + '%');
+      })
+        .then(function (url) {
+          setUploadProgress(progressEl, 100, 'Upload fertig');
+          hideUploadProgress(progressEl);
+          cb(url);
+        })
         .catch(function (error) {
           console.error('Supabase image upload error:', error);
+          setUploadProgress(progressEl, 0, 'Upload fehlgeschlagen');
           alert('فشل رفع الصورة إلى Supabase. سيتم حفظها مؤقتًا داخل المتصفح فقط.');
-          readFileAsDataUrl(file).then(cb);
+          readFileAsDataUrl(file).then(function (url) {
+            hideUploadProgress(progressEl);
+            cb(url);
+          });
         });
     }
 
-    function filesToDataUrls(input, cb) {
+    function filesToDataUrls(input, cb, progressEl) {
       const files = input && input.files ? Array.from(input.files) : [];
       if (!files.length) return cb([]);
-      Promise.all(files.map(uploadImageToSupabase))
-        .then(function (urls) { cb(urls.filter(Boolean)); })
+      const total = files.length;
+      setUploadProgress(progressEl, 0, '0%');
+
+      Promise.all(files.map(function (file, index) {
+        return uploadImageToSupabase(file, function (percent) {
+          const overall = ((index + (percent / 100)) / total) * 100;
+          setUploadProgress(progressEl, overall, Math.round(overall) + '%');
+        });
+      }))
+        .then(function (urls) {
+          setUploadProgress(progressEl, 100, 'Upload fertig');
+          hideUploadProgress(progressEl);
+          cb(urls.filter(Boolean));
+        })
         .catch(function (error) {
           console.error('Supabase images upload error:', error);
+          setUploadProgress(progressEl, 0, 'Upload fehlgeschlagen');
           alert('فشل رفع بعض الصور إلى Supabase. سيتم حفظها مؤقتًا داخل المتصفح فقط.');
-          Promise.all(files.map(readFileAsDataUrl)).then(function (urls) { cb(urls.filter(Boolean)); });
+          Promise.all(files.map(readFileAsDataUrl)).then(function (urls) {
+            hideUploadProgress(progressEl);
+            cb(urls.filter(Boolean));
+          });
         });
     }
 
@@ -2913,25 +3036,34 @@
     }
     if (emailInput) emailInput.addEventListener('keydown', e => { if (e.key === 'Enter') passwordInput ? passwordInput.focus() : (loginBtn && loginBtn.click()); });
     if (passwordInput) passwordInput.addEventListener('keydown', e => { if (e.key === 'Enter') loginBtn && loginBtn.click(); });
-    if (cardImageFile) cardImageFile.addEventListener('change', function () { fileToDataUrl(cardImageFile, function (url) { uploadedCardImage = url; if (cardImageUrl) cardImageUrl.value = 'Bild hochgeladen'; }); });
+    if (cardImageFile) cardImageFile.addEventListener('change', function () {
+      fileToDataUrl(cardImageFile, function (url) {
+        uploadedCardImage = url;
+        if (cardImageUrl) cardImageUrl.value = 'Bild hochgeladen';
+      }, cardUploadProgress);
+    });
     if (modalImageFile) modalImageFile.addEventListener('change', function () {
-      filesToDataUrls(modalImageFile, function (urls) {
-        uploadedModalImages = urls;
-        if (modalImageUrl) modalImageUrl.value = urls.length > 1 ? (urls.length + ' Bilder hochgeladen') : 'Bild hochgeladen';
-      });
+      const files = modalImageFile.files ? Array.from(modalImageFile.files) : [];
+      uploadedModalImages = [];
+      if (modalImageUrl) modalImageUrl.value = files.length ? (files.length + ' Bild(er) ausgewählt – bitte unten hinzufügen') : '';
     });
     if (addModalImageBtn) {
       addModalImageBtn.addEventListener('click', function () {
-        const hasUploadedFiles = Array.isArray(uploadedModalImages) && uploadedModalImages.length > 0;
-        if (hasUploadedFiles) {
-          tempModalImages = tempModalImages.concat(uploadedModalImages);
-        } else {
-          return;
-        }
-        uploadedModalImages = [];
-        if (modalImageFile) modalImageFile.value = '';
-        if (modalImageUrl) modalImageUrl.value = '';
-        renderModalImagesEditor();
+        const files = modalImageFile && modalImageFile.files ? Array.from(modalImageFile.files) : [];
+        if (!files.length) return;
+        addModalImageBtn.disabled = true;
+        addModalImageBtn.textContent = 'Bilder werden hochgeladen...';
+        filesToDataUrls(modalImageFile, function (urls) {
+          if (urls.length) {
+            tempModalImages = tempModalImages.concat(urls);
+          }
+          uploadedModalImages = [];
+          if (modalImageFile) modalImageFile.value = '';
+          if (modalImageUrl) modalImageUrl.value = urls.length > 1 ? (urls.length + ' Bilder hochgeladen') : 'Bild hochgeladen';
+          renderModalImagesEditor();
+          addModalImageBtn.disabled = false;
+          addModalImageBtn.textContent = 'Bilder zur Vorschau hinzufügen';
+        }, modalUploadProgress);
       });
     }
     if (saveBtn) {
