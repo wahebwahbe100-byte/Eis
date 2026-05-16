@@ -2578,6 +2578,26 @@
       }
     }
 
+  
+
+    /* FINAL MOBILE HERO WHITE OVERLAY TWEAK
+       خففنا تأثير الأبيض فوق صورة الهيرو في الجوال فقط. */
+    @media (max-width: 1050px) {
+      .hero {
+        background-image:
+          linear-gradient(90deg, rgba(255,246,232,.42) 0%, rgba(255,246,232,.22) 50%, rgba(255,246,232,.035) 100%),
+          url("assets/hero-mobile.png") !important;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero {
+        background-image:
+          linear-gradient(90deg, rgba(255,246,232,.44) 0%, rgba(255,246,232,.24) 53%, rgba(255,246,232,.04) 100%),
+          url("assets/hero-mobile.png") !important;
+      }
+    }
+
   </style>
 
 
