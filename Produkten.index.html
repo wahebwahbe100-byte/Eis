@@ -2346,12 +2346,14 @@
 
       const fallbackImages = Array.isArray(fallback.modalImages) ? fallback.modalImages : [];
 
-      // Wichtig: vorhandene Bilder aus dem HTML (z. B. die 3 Milchspeiseeise-Bilder)
-      // müssen immer in der Admin-Bearbeitung sichtbar sein. Darum werden sie mit
-      // gespeicherten Bildern zusammengeführt. Gelöschte Bilder bleiben nur gelöscht,
-      // nachdem diese Karte mit der neuen Version gespeichert wurde.
-      item.modalImages = uniqueImages(fallbackImages.concat(savedImages));
+      // Wichtig: Wenn der Admin Bilder gelöscht hat, dürfen die ursprünglichen
+      // HTML-Bilder nicht erneut dazugemischt werden. Darum gilt:
+      // - modalImagesTouched = true  => exakt gespeicherte Liste verwenden
+      // - modalImagesTouched = false => HTML-Standardbilder + gespeicherte Bilder zusammenführen
       item.modalImagesTouched = !!(savedItem && savedItem.modalImagesTouched);
+      item.modalImages = item.modalImagesTouched
+        ? uniqueImages(savedImages)
+        : uniqueImages(fallbackImages.concat(savedImages));
       item.modalNewBadges = Array.isArray(savedItem && savedItem.modalNewBadges) ? savedItem.modalNewBadges.filter(Boolean) : [];
       return item;
     }
@@ -2614,8 +2616,11 @@
       const item = data[index] || defaults[index];
       const modalId = cards[index] ? cards[index].getAttribute('data-modal-target') : '';
       const modal = modalId ? document.getElementById(modalId) : null;
-      const liveImages = modal ? Array.from(modal.querySelectorAll('.milch-gallery img, .admin-modal-gallery img')).map(function (im) { return im.getAttribute('src'); }).filter(Boolean) : [];
-      tempModalImages = uniqueImages((Array.isArray(item.modalImages) ? item.modalImages : []).concat(liveImages));
+      const liveImages = modal ? Array.from(modal.querySelectorAll('.admin-modal-gallery__item > img:first-child')).map(function (im) { return im.getAttribute('src'); }).filter(Boolean) : [];
+      const savedModalImages = Array.isArray(item.modalImages) ? item.modalImages : [];
+      tempModalImages = item.modalImagesTouched
+        ? uniqueImages(savedModalImages)
+        : uniqueImages(savedModalImages.concat(liveImages));
       tempModalNewBadges = Array.isArray(item.modalNewBadges) ? item.modalNewBadges.slice() : [];
       if (cardImageFile) cardImageFile.value = '';
       if (cardImageUrl) cardImageUrl.value = item.image || '';
