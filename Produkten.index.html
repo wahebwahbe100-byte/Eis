@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Produkten | Eis Büffel</title>
-  <meta name="description" content="Eis Büffel Produkten: Milchspeiseeise, Fruchtspeiseeis, Milchspeiseeis Joghurt und Eis Büffel Spezialitäten." />
+  <title>Produkten | Eis Büffe</title>
+  <meta name="description" content="Eis Büffe Produkten: Milchspeiseeise, Fruchtspeiseeis, Milchspeiseeis Joghurt und Eis Büffe Spezialitäten." />
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Great+Vibes&family=Inter:wght@400;500;600;700;800&display=swap');
@@ -1497,8 +1497,8 @@
     </div>
 
     <nav class="navbar">
-      <a class="logo" href="index.html" aria-label="Eis Büffel Startseite">
-        <img src="assets/logo.png" alt="Eis Büffel Logo" />
+      <a class="logo" href="index.html" aria-label="Eis Büffe Startseite">
+        <img src="assets/logo.png" alt="Eis Büffe Logo" />
       </a>
 
       <button class="menu-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false">☰</button>
@@ -1519,7 +1519,7 @@
     <section class="products-hero">
       <div>
         <p class="eyebrow">Unsere Produkte</p>
-        <h1>Produkten <span class="brand">Eis Büffel</span></h1>
+        <h1>Produkten <span class="brand">Eis Büffe</span></h1>
         <p>
           Entdecken Sie unsere beliebtesten Produktgruppen für Gastronomie,
           Eiscafés, Wiederverkäufer und Großkunden.
@@ -1584,11 +1584,11 @@
 
         <button class="product-card" type="button" data-modal-target="spezialitaetenModal">
           <div class="product-card__image">
-            <img src="assets/spezialitaeten.png" alt="Eis Büffel Spezialitäten" />
+            <img src="assets/spezialitaeten.png" alt="Eis Büffe Spezialitäten" />
           </div>
           <div class="product-card__body">
             <span class="product-card__number">04</span>
-            <h3>Eis Büffel Spezialitäten</h3>
+            <h3>Eis Büffe Spezialitäten</h3>
             <p>
               Besondere Kreationen und exklusive Sorten für Kunden,
               die mehr als klassische Eissorten anbieten möchten.
@@ -1647,8 +1647,8 @@
 
   <footer class="footer">
     <div class="footer__inner">
-      <img src="assets/logo.png" alt="Eis Büffel Logo" />
-      <p>© 2025 Eis Büffel. Alle Rechte vorbehalten.</p>
+      <img src="assets/logo.png" alt="Eis Büffe Logo" />
+      <p>© 2025 Eis Büffe. Alle Rechte vorbehalten.</p>
     </div>
   </footer>
 
@@ -1782,7 +1782,7 @@
       </p>
 
       <p>
-        <strong>Eis Büffel Joghurt</strong>
+        <strong>Eis Büffe Joghurt</strong>
       </p>
 
       <div class="modal-sorten-list">
@@ -2809,6 +2809,81 @@
 })();
 </script>
 <!-- END ADMIN EDITOR -->
+
+
+
+<!-- MOBILE EISSORTEN IMAGES FIX -->
+<style>
+  /* يجعل صور نافذة "Eissorten ansehen" تظهر كاملة وواضحة على الهاتف */
+  .product-modal .admin-modal-gallery,
+  .product-modal .milch-gallery {
+    width: 100% !important;
+  }
+
+  .product-modal .admin-modal-gallery__item,
+  .product-modal .milch-gallery__item {
+    background: rgba(255,255,255,.88) !important;
+  }
+
+  @media (max-width: 700px) {
+    .product-modal {
+      align-items: start !important;
+      padding: 12px !important;
+      overflow-y: auto !important;
+    }
+
+    .product-modal__box {
+      width: 100% !important;
+      max-height: calc(100vh - 24px) !important;
+      padding: 22px 14px !important;
+      border-radius: 22px !important;
+    }
+
+    .product-modal .admin-modal-gallery,
+    .product-modal .milch-gallery {
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+      gap: 14px !important;
+      margin: 18px 0 20px !important;
+    }
+
+    .product-modal .admin-modal-gallery__item,
+    .product-modal .milch-gallery__item {
+      width: 100% !important;
+      min-height: 0 !important;
+      height: auto !important;
+      aspect-ratio: auto !important;
+      border-radius: 18px !important;
+      overflow: hidden !important;
+    }
+
+    .product-modal .admin-modal-gallery__item > img:first-child,
+    .product-modal .milch-gallery__item img {
+      width: 100% !important;
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      object-fit: contain !important;
+      border-radius: 18px !important;
+      display: block !important;
+    }
+
+    .product-modal .admin-modal-gallery__new-badge {
+      width: min(20%, 54px) !important;
+      top: 8px !important;
+      right: 8px !important;
+    }
+
+    body.admin-mode .product-modal .admin-modal-gallery__delete {
+      top: 8px !important;
+      right: 8px !important;
+      min-height: 32px !important;
+      padding: 0 10px !important;
+      font-size: 11px !important;
+    }
+  }
+</style>
+<!-- END MOBILE EISSORTEN IMAGES FIX -->
 
 </body>
 </html>
