@@ -4364,6 +4364,93 @@
       border-radius: 26px !important;
     }
   }
+
+  /* FINAL REQUEST: smaller side edges around "Eis Büffe" on mobile hero */
+  @media (max-width: 768px) {
+    .hero__content {
+      padding-left: 12px !important;
+      padding-right: 10px !important;
+      max-width: 300px !important;
+    }
+
+    .hero__content::before {
+      inset: -7px -5px -8px -5px !important;
+      border-radius: 26px !important;
+      background:
+        linear-gradient(112deg,
+          rgba(255,255,255,.88) 0%,
+          rgba(255,250,241,.70) 38%,
+          rgba(255,246,232,.50) 68%,
+          rgba(255,255,255,.22) 100%),
+        radial-gradient(ellipse at 18% 18%, rgba(255,255,255,.92) 0%, rgba(255,255,255,.38) 44%, transparent 72%),
+        radial-gradient(ellipse at 82% 84%, rgba(240,196,109,.13) 0%, transparent 58%) !important;
+      box-shadow:
+        0 13px 30px rgba(80,48,6,.10),
+        0 4px 12px rgba(80,48,6,.06),
+        inset 0 1px 0 rgba(255,255,255,.86),
+        0 0 18px rgba(255,255,255,.32) !important;
+    }
+
+    .hero__content::after {
+      inset: -1px -1px !important;
+      border-radius: 24px !important;
+    }
+
+    .brand-line {
+      gap: 6px !important;
+      width: fit-content !important;
+      max-width: max-content !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    .brand-line img {
+      width: .50em !important;
+      height: .50em !important;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .hero__content {
+      padding-left: 9px !important;
+      padding-right: 7px !important;
+      max-width: 268px !important;
+    }
+
+    .hero__content::before {
+      inset: -6px -3px -7px -3px !important;
+      border-radius: 23px !important;
+    }
+
+    .hero__content::after {
+      inset: 0 !important;
+      border-radius: 22px !important;
+    }
+
+    .brand-line {
+      gap: 5px !important;
+    }
+
+    .brand-line img {
+      width: .47em !important;
+      height: .47em !important;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .hero__content {
+      padding-left: 7px !important;
+      padding-right: 5px !important;
+      max-width: 244px !important;
+    }
+
+    .hero__content::before {
+      inset: -5px -2px -6px -2px !important;
+      border-radius: 21px !important;
+    }
+  }
+
 </style>
 <!-- END FULL SITE FINAL POLISH BY CHATGPT -->
 
