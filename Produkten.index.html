@@ -1997,6 +1997,21 @@
     box-shadow: 0 18px 38px rgba(80,48,6,.28);
   }
   .admin-fab:hover { transform: translateY(-2px); }
+  .admin-logout-btn {
+    position: fixed; right: 22px; bottom: 22px; z-index: 99990;
+    display: none; align-items: center; justify-content: center; gap: 8px;
+    border: 0; border-radius: 999px; min-height: 52px; padding: 0 20px;
+    background: linear-gradient(135deg, #a95b34, #743014); color: #fff;
+    font: inherit; font-weight: 900; cursor: pointer;
+    box-shadow: 0 18px 38px rgba(80,48,6,.28);
+  }
+  body.admin-mode .admin-logout-btn { display: inline-flex; }
+  .admin-logout-btn:hover { transform: translateY(-2px); }
+  @media (max-width: 620px) {
+    .admin-logout-btn {
+      right: 14px; bottom: 14px; min-height: 48px; padding: 0 16px; font-size: 13px;
+    }
+  }
   .admin-overlay {
     position: fixed; inset: 0; z-index: 99991; display: none; place-items: center;
     padding: 18px; background: rgba(53,33,5,.62);
@@ -2169,6 +2184,7 @@
   </div>
 </div>
 <div class="admin-save-note" id="adminSaveNote">Gespeichert</div>
+<button class="admin-logout-btn" type="button" id="adminLogoutBtn" aria-label="Aus Admin-Modus abmelden">Abmelden</button>
 
 <script>
 (function () {
@@ -2222,6 +2238,7 @@
     const saveBtn = document.getElementById('adminSaveEditBtn');
     const resetBtn = document.getElementById('adminResetCardBtn');
     const saveNote = document.getElementById('adminSaveNote');
+    const adminLogoutBtn = document.getElementById('adminLogoutBtn');
 
     if (!cards.length) return;
 
@@ -2582,6 +2599,10 @@
     function disableAdminMode() {
       document.body.classList.remove('admin-mode');
       sessionStorage.removeItem(SESSION_KEY);
+      closeOverlay(loginOverlay);
+      closeOverlay(editOverlay);
+      if (passwordInput) passwordInput.value = '';
+      if (loginError) loginError.style.display = 'none';
     }
     function showSaved() {
       if (!saveNote) return;
@@ -2746,6 +2767,11 @@
           loginBtn.disabled = false;
           loginBtn.textContent = 'Einloggen';
         }
+      });
+    }
+    if (adminLogoutBtn) {
+      adminLogoutBtn.addEventListener('click', function () {
+        disableAdminMode();
       });
     }
     if (emailInput) emailInput.addEventListener('keydown', e => { if (e.key === 'Enter') passwordInput ? passwordInput.focus() : (loginBtn && loginBtn.click()); });
