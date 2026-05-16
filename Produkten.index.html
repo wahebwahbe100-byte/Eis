@@ -2165,6 +2165,9 @@
     background: #fff; padding: 13px 14px; font: inherit; color: var(--brown); outline: none;
   }
   .admin-field textarea { min-height: 105px; resize: vertical; line-height: 1.6; }
+  .admin-field input[readonly] { background: rgba(255,255,255,.58); color: var(--muted); }
+  .admin-field .admin-btn { width: fit-content; margin-top: 2px; }
+
   .admin-field input:focus, .admin-field textarea:focus { border-color: rgba(166,106,19,.62); box-shadow: 0 0 0 4px rgba(198,145,53,.13); }
   .admin-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
   .admin-btn {
@@ -2269,6 +2272,7 @@
       <div class="admin-field">
         <label for="adminEditImageFile">Kartenbild hochladen</label>
         <input id="adminEditImageFile" type="file" accept="image/*" />
+        <input id="adminEditImageUrl" type="text" readonly placeholder="Kein neues Bild ausgewählt" />
       </div>
       <div class="admin-field">
         <label for="adminEditTitleInput">Kartentitel</label>
@@ -2304,10 +2308,13 @@
       <div class="admin-field">
         <label for="adminModalImageFile">Weitere Bilder hinzufügen</label>
         <input id="adminModalImageFile" type="file" accept="image/*" multiple />
+        <input id="adminModalImageUrl" type="text" readonly placeholder="Keine neuen Bilder ausgewählt" />
+        <button class="admin-btn admin-btn--light" type="button" id="adminAddModalImageBtn">Bilder zur Vorschau hinzufügen</button>
       </div>
     </div>
     <div class="admin-actions">
       <button class="admin-btn" type="button" id="adminSaveEditBtn">Speichern</button>
+      <button class="admin-btn admin-btn--light" type="button" id="adminResetCardBtn">Zurücksetzen</button>
       <button class="admin-btn admin-btn--light" type="button" data-admin-close>Abbrechen</button>
     </div>
   </div>
@@ -2317,8 +2324,8 @@
 
 <script>
 (function () {
-  const STORAGE_KEY = 'eis-bueffel-products-admin-v5';
-  const LEGACY_STORAGE_KEYS = ['eis-bueffel-products-admin-v5', 'eis-bueffel-products-admin-v4', 'eis-bueffel-products-admin-v3', 'eisbueffel_produktkarten_v1'];
+  const STORAGE_KEY = 'eis-bueffel-products-admin-v6';
+  const LEGACY_STORAGE_KEYS = ['eis-bueffel-products-admin-v6', 'eis-bueffel-products-admin-v5', 'eis-bueffel-products-admin-v4', 'eis-bueffel-products-admin-v3', 'eisbueffel_produktkarten_v1'];
   const SESSION_KEY = 'eis-bueffel-admin-logged-in';
 
   // === SUPABASE SETTINGS ===
@@ -2392,7 +2399,7 @@
         sorten: sorten,
         // vorhandene Bilder aus der ursprünglichen Galerie (z. B. die 3 Milchspeiseeise-Bilder)
         // werden auch in der Admin-Bearbeitung angezeigt und können gelöscht werden.
-        modalImages: modal ? Array.from(modal.querySelectorAll('.milch-gallery img, .admin-modal-gallery img')).map(im => im.getAttribute('src')).filter(Boolean) : [],
+        modalImages: modal ? Array.from(modal.querySelectorAll('.modal-preview-gallery img, .milch-gallery img, .admin-modal-gallery__item > img:first-child')).map(im => im.getAttribute('src')).filter(Boolean) : [],
         modalImagesTouched: false,
         modalNewBadges: []
       };
@@ -2505,6 +2512,7 @@
     function saveLocalData(items) {
       const json = JSON.stringify(items || data);
       localStorage.setItem(STORAGE_KEY, json);
+      localStorage.setItem('eis-bueffel-products-admin-v5', json);
       localStorage.setItem('eis-bueffel-products-admin-v4', json);
       localStorage.setItem('eis-bueffel-products-admin-v3', json);
     }
@@ -2594,7 +2602,7 @@
       const top = modal.querySelector('.product-modal__top');
       if (box) {
         // لا نعرض المعرض القديم مرتين؛ كل الصور الآن تُدار من admin-modal-gallery.
-        box.querySelectorAll('.milch-gallery').forEach(function (oldGallery) {
+        box.querySelectorAll('.milch-gallery, .modal-preview-gallery').forEach(function (oldGallery) {
           oldGallery.style.display = 'none';
         });
       }
@@ -2642,7 +2650,7 @@
       }
       if (gallery) {
         gallery.innerHTML = '';
-        const images = Array.isArray(item.modalImages) ? item.modalImages.filter(Boolean).slice(0, 1) : [];
+        const images = Array.isArray(item.modalImages) ? uniqueImages(item.modalImages).filter(Boolean) : [];
         gallery.style.display = images.length ? 'grid' : 'none';
         const markedAsNew = Array.isArray(item.modalNewBadges) ? item.modalNewBadges : [];
         images.forEach(function (src, imageIndex) {
@@ -2748,7 +2756,7 @@
       const item = data[index] || defaults[index];
       const modalId = cards[index] ? cards[index].getAttribute('data-modal-target') : '';
       const modal = modalId ? document.getElementById(modalId) : null;
-      const liveImages = modal ? Array.from(modal.querySelectorAll('.admin-modal-gallery__item > img:first-child')).map(function (im) { return im.getAttribute('src'); }).filter(Boolean).slice(0, 1) : [];
+      const liveImages = modal ? Array.from(modal.querySelectorAll('.admin-modal-gallery__item > img:first-child, .modal-preview-gallery img')).map(function (im) { return im.getAttribute('src'); }).filter(Boolean) : [];
       const savedModalImages = Array.isArray(item.modalImages) ? item.modalImages : [];
       tempModalImages = item.modalImagesTouched
         ? uniqueImages(savedModalImages)
