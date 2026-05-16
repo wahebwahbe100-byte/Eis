@@ -1446,6 +1446,111 @@
 </style>
 <!-- END SMALLER bild.png NEW BADGE FIX -->
 
+
+
+<!-- MODAL SINGLE IMAGE FIX: one clear picture under the close arrow -->
+<style>
+  .modal-preview-gallery {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin: 4px 0 24px;
+  }
+
+  .modal-preview-gallery__item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    border: 1px solid rgba(166,106,19,.20);
+    background: rgba(255,255,255,.82);
+    box-shadow: 0 14px 32px rgba(80,48,6,.12);
+  }
+
+  .modal-preview-gallery__item img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+  }
+
+  @media (max-width: 760px) {
+    .modal-preview-gallery {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin: 6px 0 20px;
+    }
+    .modal-preview-gallery__item img { height: 190px; }
+  }
+
+  @media (max-width: 420px) {
+    .modal-preview-gallery__item img { height: 165px; }
+  }
+</style>
+<!-- END MODAL 4 IMAGES FIX -->
+
+
+
+<!-- EXTERNAL MODAL PRODUCT IMAGE FIX: one medium logo-like image per modal -->
+<style>
+  .product-modal .modal-preview-gallery {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 8px 0 26px !important;
+  }
+
+  .product-modal .modal-preview-gallery__item {
+    width: min(230px, 58vw) !important;
+    margin: 0 auto !important;
+    display: grid !important;
+    place-items: center !important;
+    gap: 10px !important;
+    padding: 14px !important;
+    border-radius: 28px !important;
+    background: rgba(255,255,255,.72) !important;
+    border: 1px solid rgba(166,106,19,.18) !important;
+    box-shadow: 0 18px 36px rgba(80,48,6,.12) !important;
+  }
+
+  .product-modal .modal-preview-gallery__item img {
+    width: min(170px, 44vw) !important;
+    height: min(170px, 44vw) !important;
+    object-fit: contain !important;
+    border-radius: 50% !important;
+    background: #fff8ee !important;
+    padding: 8px !important;
+    box-shadow: 0 12px 28px rgba(80,48,6,.14) !important;
+  }
+
+  .product-modal .modal-preview-gallery__item figcaption {
+    color: var(--gold-dark) !important;
+    font-weight: 900 !important;
+    font-size: 15px !important;
+    text-align: center !important;
+  }
+
+  @media (max-width: 620px) {
+    .product-modal .modal-preview-gallery {
+      margin: 6px 0 22px !important;
+    }
+
+    .product-modal .modal-preview-gallery__item {
+      width: min(210px, 62vw) !important;
+      padding: 12px !important;
+      border-radius: 24px !important;
+    }
+
+    .product-modal .modal-preview-gallery__item img {
+      width: min(150px, 46vw) !important;
+      height: min(150px, 46vw) !important;
+    }
+  }
+</style>
+<!-- END EXTERNAL MODAL PRODUCT IMAGE FIX -->
+
 </head>
 
 <body>
@@ -1628,6 +1733,13 @@
         <button class="product-modal__close" type="button" aria-label="Fenster schließen">×</button>
       </div>
 
+      <div class="modal-preview-gallery" aria-label="Produktbilder">
+        <figure class="modal-preview-gallery__item">
+          <img src="assets/VanilleEis1.png" alt="VanilleEis1" />
+          <figcaption>VanilleEis1</figcaption>
+        </figure>
+      </div>
+
       <p>
         Hauptbestandteil ist zu <strong>70% frische Milch</strong>.
         Geschmacklich abgerundet wird es durch nahezu unbegrenzte Zutaten:
@@ -1685,6 +1797,13 @@
         <button class="product-modal__close" type="button" aria-label="Fenster schließen">×</button>
       </div>
 
+      <div class="modal-preview-gallery" aria-label="Produktbilder">
+        <figure class="modal-preview-gallery__item">
+          <img src="assets/VanilleEis2.png" alt="VanilleEis2" />
+          <figcaption>VanilleEis2</figcaption>
+        </figure>
+      </div>
+
       <p>
         Beim Fruchtspeiseeis besteht die Basis aus Wasser und sehr vielen frischen Früchten.
       </p>
@@ -1729,6 +1848,13 @@
         <button class="product-modal__close" type="button" aria-label="Fenster schließen">×</button>
       </div>
 
+      <div class="modal-preview-gallery" aria-label="Produktbilder">
+        <figure class="modal-preview-gallery__item">
+          <img src="assets/VanilleEis3.png" alt="VanilleEis3" />
+          <figcaption>VanilleEis3</figcaption>
+        </figure>
+      </div>
+
       <p>
         Milchspeiseeis mit Joghurt.
       </p>
@@ -1770,6 +1896,13 @@
           <h2 id="spezialitaetenTitle">Unsere Spezialitäten</h2>
         </div>
         <button class="product-modal__close" type="button" aria-label="Fenster schließen">×</button>
+      </div>
+
+      <div class="modal-preview-gallery" aria-label="Produktbilder">
+        <figure class="modal-preview-gallery__item">
+          <img src="assets/VanilleEis4.png" alt="VanilleEis4" />
+          <figcaption>VanilleEis4</figcaption>
+        </figure>
       </div>
 
       <p>
@@ -2080,9 +2213,9 @@
   .admin-image-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .admin-image-actions .admin-btn { width: 100%; min-height: 46px; padding: 0 12px; }
   .admin-btn--new-sort { background: linear-gradient(135deg, #e53935, #8b1111) !important; }
-  .admin-modal-gallery { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .admin-modal-gallery { margin-top: 24px; display: grid; grid-template-columns: 1fr; gap: 12px; }
   .admin-modal-gallery__item { position: relative; overflow: hidden; min-height: 150px; border-radius: 18px; border: 1px solid rgba(166,106,19,.18); box-shadow: 0 12px 25px rgba(80,48,6,.10); background: rgba(255,255,255,.72); }
-  .admin-modal-gallery__item > img:first-child { width: 100%; height: 150px; object-fit: cover; border-radius: 18px; display: block; }
+  .admin-modal-gallery__item > img:first-child { width: 100%; height: 220px; object-fit: cover; border-radius: 18px; display: block; }
   .admin-modal-gallery__new-badge { position: absolute; top: 10px; right: 10px; z-index: 2; width: min(24%, 72px); height: auto; object-fit: contain; filter: drop-shadow(0 7px 12px rgba(0,0,0,.20)); pointer-events: none; }
   .admin-modal-gallery__delete {
     position: absolute; right: 9px; top: 9px; z-index: 3; display: none; align-items: center; justify-content: center;
@@ -2513,7 +2646,7 @@
       }
       if (gallery) {
         gallery.innerHTML = '';
-        const images = Array.isArray(item.modalImages) ? item.modalImages.filter(Boolean) : [];
+        const images = Array.isArray(item.modalImages) ? item.modalImages.filter(Boolean).slice(0, 1) : [];
         gallery.style.display = images.length ? 'grid' : 'none';
         const markedAsNew = Array.isArray(item.modalNewBadges) ? item.modalNewBadges : [];
         images.forEach(function (src, imageIndex) {
@@ -2619,7 +2752,7 @@
       const item = data[index] || defaults[index];
       const modalId = cards[index] ? cards[index].getAttribute('data-modal-target') : '';
       const modal = modalId ? document.getElementById(modalId) : null;
-      const liveImages = modal ? Array.from(modal.querySelectorAll('.admin-modal-gallery__item > img:first-child')).map(function (im) { return im.getAttribute('src'); }).filter(Boolean) : [];
+      const liveImages = modal ? Array.from(modal.querySelectorAll('.admin-modal-gallery__item > img:first-child')).map(function (im) { return im.getAttribute('src'); }).filter(Boolean).slice(0, 1) : [];
       const savedModalImages = Array.isArray(item.modalImages) ? item.modalImages : [];
       tempModalImages = item.modalImagesTouched
         ? uniqueImages(savedModalImages)
@@ -2911,6 +3044,76 @@
   }
 </style>
 <!-- END MOBILE EISSORTEN IMAGES FIX -->
+
+
+
+<!-- LOGO STYLE MODAL IMAGE + INDIVIDUAL IMAGE NAME -->
+<style>
+  .product-modal .modal-preview-gallery {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 10px 0 24px !important;
+  }
+
+  .product-modal .modal-preview-gallery__item {
+    width: 220px !important;
+    max-width: 72vw !important;
+    margin: 0 auto !important;
+    padding: 12px 12px 14px !important;
+    overflow: visible !important;
+    text-align: center !important;
+    border-radius: 28px !important;
+    border: 1px solid rgba(166,106,19,.22) !important;
+    background: linear-gradient(145deg, rgba(255,255,255,.94), rgba(255,246,232,.82)) !important;
+    box-shadow: 0 16px 34px rgba(80,48,6,.14) !important;
+  }
+
+  .product-modal .modal-preview-gallery__item img {
+    width: 170px !important;
+    height: 170px !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+    border: 6px solid #fff8ee !important;
+    box-shadow: 0 12px 24px rgba(80,48,6,.16) !important;
+    display: block !important;
+  }
+
+  .product-modal .modal-preview-gallery__item figcaption {
+    display: block !important;
+    margin-top: 10px !important;
+    color: var(--gold-dark) !important;
+    font-family: Cinzel, serif !important;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    line-height: 1.25 !important;
+  }
+
+  @media (max-width: 700px) {
+    .product-modal .modal-preview-gallery {
+      margin: 8px 0 20px !important;
+    }
+
+    .product-modal .modal-preview-gallery__item {
+      width: 190px !important;
+      padding: 10px 10px 12px !important;
+      border-radius: 24px !important;
+    }
+
+    .product-modal .modal-preview-gallery__item img {
+      width: 145px !important;
+      height: 145px !important;
+    }
+
+    .product-modal .modal-preview-gallery__item figcaption {
+      font-size: 14px !important;
+    }
+  }
+</style>
+<!-- END LOGO STYLE MODAL IMAGE + INDIVIDUAL IMAGE NAME -->
 
 </body>
 </html>
