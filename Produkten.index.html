@@ -1551,6 +1551,49 @@
 </style>
 <!-- END EXTERNAL MODAL PRODUCT IMAGE FIX -->
 
+
+
+<!-- DESKTOP ONLY MODAL SORTEN CARDS FIX -->
+<style>
+  /* Applies only to desktop/laptop screens. Mobile layout remains unchanged. */
+  @media (min-width: 761px) {
+    .product-modal__box {
+      width: min(1080px, calc(100vw - 56px)) !important;
+      padding: 38px 42px 42px !important;
+    }
+
+    .product-modal .modal-sorten-list {
+      grid-template-columns: repeat(auto-fit, minmax(158px, 1fr)) !important;
+      gap: 12px !important;
+      align-items: stretch !important;
+      margin-top: 26px !important;
+    }
+
+    .product-modal .modal-sorten-list span {
+      min-height: 56px !important;
+      height: 100% !important;
+      padding: 14px 16px !important;
+      border-radius: 18px !important;
+      justify-content: center !important;
+      text-align: center !important;
+      line-height: 1.35 !important;
+      white-space: normal !important;
+      overflow-wrap: anywhere !important;
+      background: linear-gradient(145deg, rgba(255,255,255,.94), rgba(255,246,232,.76)) !important;
+      border: 1px solid rgba(166,106,19,.22) !important;
+      box-shadow: 0 10px 22px rgba(80,48,6,.08) !important;
+      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease !important;
+    }
+
+    .product-modal .modal-sorten-list span:hover {
+      transform: translateY(-3px) !important;
+      border-color: rgba(166,106,19,.38) !important;
+      box-shadow: 0 16px 30px rgba(80,48,6,.12) !important;
+    }
+  }
+</style>
+<!-- END DESKTOP ONLY MODAL SORTEN CARDS FIX -->
+
 </head>
 
 <body>
