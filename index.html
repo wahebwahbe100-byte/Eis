@@ -4021,72 +4021,250 @@
 <!-- END EXTRA HERO WHITE EFFECT REDUCTION -->
 
 
-<!-- MOBILE HERO TEXT GLOW ONLY - COMPLETE FINAL -->
+<!-- SOFT WHITE TEXT GLOW UNDER MOBILE HERO COPY -->
 <style>
-  /* توهج مربع ناعم للجوال فقط، موضوع تحت اسم Eis Büffe فقط وليس حول كل الهيرو */
-  @media (max-width: 768px) {
-    .hero .brand-line {
-      position: relative !important;
-      isolation: isolate !important;
-    }
+  /* توهج أبيض خفيف خلف كلام الهيرو فقط لزيادة وضوح النص بدون تغطية الصورة */
+  .hero__content {
+    position: relative !important;
+    isolation: isolate !important;
+  }
 
-    .hero .brand-line::before {
+  @media (max-width: 1050px) {
+    .hero__content::before {
       content: "";
       position: absolute;
-      left: 50%;
-      bottom: -12px;
-      width: 82%;
-      height: 28px;
-      transform: translateX(-50%);
+      inset: -16px -14px -14px -14px;
       z-index: -1;
       pointer-events: none;
-      border-radius: 18px;
+      border-radius: 30px;
       background:
-        radial-gradient(ellipse at center,
-          rgba(255,255,255,.88) 0%,
-          rgba(255,248,236,.62) 45%,
-          rgba(255,246,232,.18) 76%,
+        radial-gradient(ellipse at 28% 45%,
+          rgba(255,255,255,.70) 0%,
+          rgba(255,248,236,.46) 42%,
+          rgba(255,246,232,.16) 70%,
           rgba(255,246,232,0) 100%);
-      filter: blur(7px);
-      opacity: .96;
-    }
-
-    .hero h1 {
-      text-shadow:
-        0 7px 12px rgba(255,248,236,.38),
-        0 13px 22px rgba(255,246,232,.20) !important;
+      filter: blur(8px);
     }
 
     .hero .eyebrow,
+    .hero h1,
+    .brand-line,
     .hero__subtitle,
     .hero__text {
-      text-shadow: none !important;
+      text-shadow:
+        0 1px 0 rgba(255,255,255,.62),
+        0 8px 24px rgba(255,255,255,.44);
     }
   }
 
   @media (max-width: 520px) {
-    .hero .brand-line::before {
-      bottom: -10px;
-      width: 86%;
-      height: 24px;
-      border-radius: 16px;
-      filter: blur(6px);
+    .hero__content::before {
+      inset: -12px -10px -12px -10px;
+      border-radius: 24px;
       background:
-        radial-gradient(ellipse at center,
-          rgba(255,255,255,.90) 0%,
-          rgba(255,248,236,.64) 46%,
-          rgba(255,246,232,.20) 76%,
+        radial-gradient(ellipse at 30% 45%,
+          rgba(255,255,255,.74) 0%,
+          rgba(255,248,236,.50) 44%,
+          rgba(255,246,232,.18) 72%,
           rgba(255,246,232,0) 100%);
-    }
-
-    .hero h1 {
-      text-shadow:
-        0 6px 10px rgba(255,248,236,.34),
-        0 11px 18px rgba(255,246,232,.18) !important;
+      filter: blur(7px);
     }
   }
 </style>
-<!-- END MOBILE HERO TEXT GLOW ONLY - COMPLETE FINAL -->
+<!-- END SOFT WHITE TEXT GLOW UNDER MOBILE HERO COPY -->
+
+
+
+<!-- FULL SITE FINAL POLISH BY CHATGPT -->
+<style>
+  :root {
+    --glass: rgba(255, 248, 236, .78);
+    --line: rgba(166, 106, 19, .18);
+  }
+
+  body {
+    background:
+      radial-gradient(circle at 8% 5%, rgba(240,196,109,.18), transparent 28%),
+      radial-gradient(circle at 92% 18%, rgba(166,106,19,.10), transparent 30%),
+      var(--cream);
+  }
+
+  .navbar {
+    border-bottom: 1px solid rgba(166,106,19,.13);
+  }
+
+  .logo img,
+  .footer__logo {
+    transform-origin: center;
+    transition: transform .28s ease, filter .28s ease;
+  }
+
+  .logo:hover img,
+  .footer__logo:hover {
+    transform: scale(1.035);
+    filter: drop-shadow(0 12px 20px rgba(111,65,6,.16));
+  }
+
+  .btn,
+  .nav-btn,
+  .angebot-pill,
+  .about-banner__btn,
+  .heritage-btn {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn::before,
+  .nav-btn::before,
+  .about-banner__btn::before,
+  .heritage-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.28) 42%, transparent 72%);
+    transform: translateX(-130%);
+    transition: transform .65s ease;
+    pointer-events: none;
+  }
+
+  .btn:hover::before,
+  .nav-btn:hover::before,
+  .about-banner__btn:hover::before,
+  .heritage-btn:hover::before {
+    transform: translateX(130%);
+  }
+
+  .section-head h2,
+  .quality-taste__head h2,
+  .about__content h2,
+  .contact__box h2,
+  .heritage-title {
+    text-wrap: balance;
+  }
+
+  .section-head p,
+  .quality-taste__head p,
+  .about__content p,
+  .contact p,
+  .heritage-copy p:not(.heritage-kicker) {
+    text-wrap: pretty;
+  }
+
+  .card,
+  .step,
+  .taste-card,
+  .quality-features,
+  .contact__box,
+  .about-banner,
+  .experience {
+    backdrop-filter: blur(12px);
+  }
+
+  .card:hover,
+  .step:hover,
+  .taste-card:hover,
+  .quality-feature:hover,
+  .experience:hover {
+    border-color: rgba(166,106,19,.34);
+  }
+
+  .stats-strip {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .stats-strip::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(circle at 18% 0%, rgba(240,196,109,.20), transparent 30%),
+      radial-gradient(circle at 80% 100%, rgba(240,196,109,.13), transparent 32%);
+  }
+
+  .contact-form button {
+    grid-column: 1 / -1;
+    width: fit-content;
+    min-width: 210px;
+  }
+
+  .footer__icon:focus-visible,
+  .btn:focus-visible,
+  .nav-links a:focus-visible,
+  .menu-toggle:focus-visible,
+  .contact-form input:focus-visible,
+  .contact-form textarea:focus-visible {
+    outline: 3px solid rgba(240,196,109,.45);
+    outline-offset: 3px;
+  }
+
+  /* Mobile hero final: glow directly on text only, no box over the image */
+  @media (max-width: 768px) {
+    .hero__content::before {
+      content: none !important;
+      display: none !important;
+    }
+
+    .hero .eyebrow,
+    .hero h1,
+    .hero .brand-line,
+    .hero__subtitle,
+    .hero__text {
+      -webkit-font-smoothing: antialiased;
+      text-shadow:
+        0 0 3px rgba(255,255,255,.98),
+        0 0 8px rgba(255,255,255,.92),
+        0 0 16px rgba(255,248,236,.82),
+        0 2px 10px rgba(111,65,6,.18) !important;
+    }
+
+    .hero h1,
+    .brand-line {
+      filter: drop-shadow(0 0 7px rgba(255,255,255,.82));
+    }
+
+    .hero__text {
+      font-weight: 600;
+    }
+
+    .hero__actions .btn,
+    .experience {
+      box-shadow: 0 14px 34px rgba(80,48,6,.15), 0 0 22px rgba(255,255,255,.36);
+    }
+  }
+
+  @media (max-width: 620px) {
+    .section,
+    .quality-taste,
+    .heritage-about {
+      padding-left: 18px !important;
+      padding-right: 18px !important;
+    }
+
+    .cards,
+    .steps,
+    .taste-cards {
+      gap: 18px;
+    }
+
+    .card,
+    .step {
+      padding: 26px 22px;
+      border-radius: 22px;
+    }
+
+    .contact__box {
+      border-radius: 26px;
+      padding: 26px 20px;
+    }
+
+    .contact-form button {
+      width: 100%;
+    }
+  }
+</style>
+<!-- END FULL SITE FINAL POLISH BY CHATGPT -->
 
 </body>
 </html>
