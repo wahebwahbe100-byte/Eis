@@ -2075,12 +2075,27 @@
     visibility: hidden !important;
     pointer-events: none !important;
   }
-  .admin-image-list { display: grid; gap: 10px; margin-top: 4px; }
-  .admin-image-row { display: grid; grid-template-columns: 72px 1fr auto; gap: 10px; align-items: center; padding: 9px; border: 1px solid rgba(166,106,19,.18); border-radius: 16px; background: rgba(255,255,255,.75); }
-  .admin-image-row img { width: 72px; height: 52px; object-fit: cover; border-radius: 12px; }
+  .admin-image-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 8px; }
+  .admin-image-row { position: relative; display: grid; grid-template-columns: 1fr; gap: 8px; align-items: center; padding: 9px; border: 1px solid rgba(166,106,19,.18); border-radius: 18px; background: rgba(255,255,255,.75); overflow: hidden; }
+  .admin-image-preview { position: relative; overflow: hidden; border-radius: 14px; }
+  .admin-image-row img { width: 100%; height: 120px; object-fit: cover; border-radius: 14px; }
+  .admin-image-row .admin-new-badge-preview { position: absolute; top: 8px; right: 8px; z-index: 2; width: 70px; height: auto; object-fit: contain; border-radius: 0; filter: drop-shadow(0 8px 14px rgba(0,0,0,.20)); }
   .admin-image-row span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); font-size: 12px; }
+  .admin-image-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .admin-image-actions .admin-btn { width: 100%; min-height: 46px; padding: 0 12px; }
+  .admin-btn--new-sort { background: linear-gradient(135deg, #e53935, #8b1111) !important; }
   .admin-modal-gallery { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-  .admin-modal-gallery img { width: 100%; height: 150px; object-fit: cover; border-radius: 18px; border: 1px solid rgba(166,106,19,.18); box-shadow: 0 12px 25px rgba(80,48,6,.10); }
+  .admin-modal-gallery__item { position: relative; overflow: hidden; min-height: 150px; border-radius: 18px; border: 1px solid rgba(166,106,19,.18); box-shadow: 0 12px 25px rgba(80,48,6,.10); background: rgba(255,255,255,.72); }
+  .admin-modal-gallery__item > img:first-child { width: 100%; height: 150px; object-fit: cover; border-radius: 18px; display: block; }
+  .admin-modal-gallery__new-badge { position: absolute; top: 10px; right: 10px; z-index: 2; width: min(44%, 130px); height: auto; object-fit: contain; filter: drop-shadow(0 10px 16px rgba(0,0,0,.22)); pointer-events: none; }
+  .admin-modal-gallery__delete {
+    position: absolute; right: 9px; top: 9px; z-index: 3; display: none; align-items: center; justify-content: center;
+    min-height: 34px; padding: 0 12px; border: 0; border-radius: 999px;
+    background: linear-gradient(135deg, #a95b34, #743014); color: #fff;
+    font: inherit; font-size: 12px; font-weight: 900; cursor: pointer;
+    box-shadow: 0 12px 24px rgba(80,48,6,.24);
+  }
+  body.admin-mode .admin-modal-gallery__delete { display: inline-flex; }
   .admin-save-note {
     position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); opacity: 0;
     z-index: 99993; padding: 12px 18px; border-radius: 999px;
@@ -2095,8 +2110,9 @@
     .admin-actions { flex-direction: column; }
     .admin-btn { width: 100%; }
     .admin-modal-gallery { grid-template-columns: 1fr; }
-    .admin-image-row { grid-template-columns: 60px 1fr; }
-    .admin-image-row .admin-btn { grid-column: 1 / -1; }
+    .admin-image-list { grid-template-columns: 1fr; }
+    .admin-image-row img { height: 150px; }
+    .admin-image-row .admin-new-badge-preview { width: 82px; height: auto; }
   }
 </style>
 
@@ -2157,20 +2173,21 @@
         <textarea id="adminSortenInput"></textarea>
         <small>Jede Sorte in eine neue Zeile schreiben. Zeile löschen = Sorte löschen.</small>
       </div>
+      <div class="admin-field admin-span">
+        <label>Vorhandene und hinzugefügte Bilder im Eissorten-Fenster</label>
+        <small>Diese Bilder erscheinen im Fenster „Eissorten ansehen“. Sie können jedes Bild hier direkt löschen.</small>
+        <div class="admin-image-list" id="adminModalImagesList"></div>
+      </div>
       <div class="admin-field">
-        <label for="adminModalImageFile">Zusätzliches Bild hinzufügen</label>
-        <input id="adminModalImageFile" type="file" accept="image/*" />
+        <label for="adminModalImageFile">Weitere Bilder hinzufügen</label>
+        <input id="adminModalImageFile" type="file" accept="image/*" multiple />
       </div>
       <div class="admin-field">
         <label for="adminModalImageUrl">Oder zusätzlicher Bild-Link</label>
         <input id="adminModalImageUrl" type="text" placeholder="assets/bild.png oder https://..." />
       </div>
       <div class="admin-field admin-span">
-        <button class="admin-btn admin-btn--light" type="button" id="adminAddModalImageBtn">+ Bild hinzufügen</button>
-      </div>
-      <div class="admin-field admin-span">
-        <label>Zusätzliche Bilder</label>
-        <div class="admin-image-list" id="adminModalImagesList"></div>
+        <button class="admin-btn admin-btn--light" type="button" id="adminAddModalImageBtn">+ Bild/Bilder hinzufügen</button>
       </div>
     </div>
     <div class="admin-actions">
@@ -2185,12 +2202,15 @@
 <script>
 (function () {
   const ADMIN_PASSWORD = 'admin123';
-  const STORAGE_KEY = 'eis-bueffel-products-admin-v3';
+  const STORAGE_KEY = 'eis-bueffel-products-admin-v5';
+  const LEGACY_STORAGE_KEYS = ['eis-bueffel-products-admin-v5', 'eis-bueffel-products-admin-v4', 'eis-bueffel-products-admin-v3', 'eisbueffel_produktkarten_v1'];
   const SESSION_KEY = 'eis-bueffel-admin-logged-in';
   let editIndex = null;
   let uploadedCardImage = '';
-  let uploadedModalImage = '';
+  let uploadedModalImages = [];
   let tempModalImages = [];
+  let tempModalNewBadges = [];
+  const NEW_BADGE_SRC = 'assets/bild.png';
 
   function ready(fn) {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
@@ -2242,7 +2262,11 @@
         modalTitle: modalTitle ? modalTitle.textContent.trim() : (title ? title.textContent.trim() : ''),
         modalText: modalText,
         sorten: sorten,
-        modalImages: []
+        // vorhandene Bilder aus der ursprünglichen Galerie (z. B. die 3 Milchspeiseeise-Bilder)
+        // werden auch in der Admin-Bearbeitung angezeigt und können gelöscht werden.
+        modalImages: modal ? Array.from(modal.querySelectorAll('.milch-gallery img, .admin-modal-gallery img')).map(im => im.getAttribute('src')).filter(Boolean) : [],
+        modalImagesTouched: false,
+        modalNewBadges: []
       };
     });
 
@@ -2262,18 +2286,53 @@
       });
     }
 
+    function uniqueImages(images) {
+      const seen = new Set();
+      return (images || []).filter(Boolean).filter(function (src) {
+        if (seen.has(src)) return false;
+        seen.add(src);
+        return true;
+      });
+    }
+
+    function normalizeItem(savedItem, fallback) {
+      const item = Object.assign({}, fallback, savedItem || {});
+      const savedImages = [];
+      ['modalImages', 'images', 'extraImages', 'galleryImages', 'eissortenImages'].forEach(function (key) {
+        if (Array.isArray(savedItem && savedItem[key])) savedImages.push.apply(savedImages, savedItem[key]);
+      });
+
+      const fallbackImages = Array.isArray(fallback.modalImages) ? fallback.modalImages : [];
+
+      // Wichtig: vorhandene Bilder aus dem HTML (z. B. die 3 Milchspeiseeise-Bilder)
+      // müssen immer in der Admin-Bearbeitung sichtbar sein. Darum werden sie mit
+      // gespeicherten Bildern zusammengeführt. Gelöschte Bilder bleiben nur gelöscht,
+      // nachdem diese Karte mit der neuen Version gespeichert wurde.
+      item.modalImages = uniqueImages(fallbackImages.concat(savedImages));
+      item.modalImagesTouched = !!(savedItem && savedItem.modalImagesTouched);
+      item.modalNewBadges = Array.isArray(savedItem && savedItem.modalNewBadges) ? savedItem.modalNewBadges.filter(Boolean) : [];
+      return item;
+    }
+
     function loadData() {
-      try {
-        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
-        if (Array.isArray(saved) && saved.length === defaults.length) {
-          return defaults.map((item, i) => Object.assign({}, item, saved[i] || {}));
-        }
-      } catch (e) {}
+      for (const key of LEGACY_STORAGE_KEYS) {
+        try {
+          const saved = JSON.parse(localStorage.getItem(key) || 'null');
+          if (Array.isArray(saved) && saved.length === defaults.length) {
+            const loaded = defaults.map((item, i) => normalizeItem(saved[i], item));
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(loaded));
+            return loaded;
+          }
+        } catch (e) {}
+      }
       return defaults.map(item => Object.assign({}, item));
     }
 
     function saveData() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      const json = JSON.stringify(data);
+      localStorage.setItem(STORAGE_KEY, json);
+      localStorage.setItem('eis-bueffel-products-admin-v4', json);
+      localStorage.setItem('eis-bueffel-products-admin-v3', json);
       showSaved();
     }
 
@@ -2291,11 +2350,11 @@
 
         const modalId = card.getAttribute('data-modal-target');
         const modal = modalId ? document.getElementById(modalId) : null;
-        if (modal) applyModalData(modal, item, defaults[index]);
+        if (modal) applyModalData(modal, item, defaults[index], index);
       });
     }
 
-    function applyModalData(modal, item, fallback) {
+    function applyModalData(modal, item, fallback, cardIndex) {
       const title = modal.querySelector('h2');
       const eyebrow = modal.querySelector('.eyebrow');
       if (title) title.textContent = item.modalTitle || item.title || fallback.modalTitle;
@@ -2303,6 +2362,12 @@
 
       const box = modal.querySelector('.product-modal__box');
       const top = modal.querySelector('.product-modal__top');
+      if (box) {
+        // لا نعرض المعرض القديم مرتين؛ كل الصور الآن تُدار من admin-modal-gallery.
+        box.querySelectorAll('.milch-gallery').forEach(function (oldGallery) {
+          oldGallery.style.display = 'none';
+        });
+      }
       if (box && top) {
         Array.from(box.children).forEach(function (child) {
           if (child.matches('p.admin-modal-text')) child.remove();
@@ -2334,20 +2399,59 @@
       }
 
       let gallery = modal.querySelector('.admin-modal-gallery');
+      const listForGallery = modal.querySelector('.modal-sorten-list');
       if (!gallery && box) {
         gallery = document.createElement('div');
         gallery.className = 'admin-modal-gallery';
+      }
+      // الصور المضافة تظهر في أعلى نافذة النكهات، قبل قائمة الأصناف، وليس في آخر النافذة.
+      if (gallery && box && listForGallery && gallery.nextElementSibling !== listForGallery) {
+        box.insertBefore(gallery, listForGallery);
+      } else if (gallery && box && !gallery.parentNode) {
         box.appendChild(gallery);
       }
       if (gallery) {
         gallery.innerHTML = '';
-        const images = Array.isArray(item.modalImages) ? item.modalImages : [];
+        const images = Array.isArray(item.modalImages) ? item.modalImages.filter(Boolean) : [];
         gallery.style.display = images.length ? 'grid' : 'none';
-        images.forEach(function (src) {
+        const markedAsNew = Array.isArray(item.modalNewBadges) ? item.modalNewBadges : [];
+        images.forEach(function (src, imageIndex) {
+          const figure = document.createElement('figure');
+          figure.className = 'admin-modal-gallery__item';
+
           const im = document.createElement('img');
           im.src = src;
           im.alt = item.modalTitle || item.title || 'Eissorten Bild';
-          gallery.appendChild(im);
+
+          const hasNewBadge = markedAsNew.indexOf(src) !== -1;
+          let badge = null;
+          if (hasNewBadge) {
+            badge = document.createElement('img');
+            badge.className = 'admin-modal-gallery__new-badge';
+            badge.src = NEW_BADGE_SRC;
+            badge.alt = 'New';
+          }
+
+          const deleteBtn = document.createElement('button');
+          deleteBtn.type = 'button';
+          deleteBtn.className = 'admin-modal-gallery__delete';
+          deleteBtn.textContent = 'Löschen';
+          deleteBtn.addEventListener('click', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            if (!document.body.classList.contains('admin-mode')) return;
+            if (typeof cardIndex !== 'number' || !data[cardIndex]) return;
+            data[cardIndex].modalImages = (data[cardIndex].modalImages || []).filter(function (_, i) { return i !== imageIndex; });
+            data[cardIndex].modalNewBadges = (data[cardIndex].modalNewBadges || []).filter(function (badgeSrc) { return badgeSrc !== src; });
+            data[cardIndex].modalImagesTouched = true;
+            saveData();
+            applyData();
+          });
+
+          figure.appendChild(im);
+          if (badge) figure.appendChild(badge);
+          figure.appendChild(deleteBtn);
+          gallery.appendChild(figure);
         });
       }
     }
@@ -2408,9 +2512,13 @@
       if (!document.body.classList.contains('admin-mode')) return;
       editIndex = index;
       uploadedCardImage = '';
-      uploadedModalImage = '';
+      uploadedModalImages = [];
       const item = data[index] || defaults[index];
-      tempModalImages = Array.isArray(item.modalImages) ? item.modalImages.slice() : [];
+      const modalId = cards[index] ? cards[index].getAttribute('data-modal-target') : '';
+      const modal = modalId ? document.getElementById(modalId) : null;
+      const liveImages = modal ? Array.from(modal.querySelectorAll('.milch-gallery img, .admin-modal-gallery img')).map(function (im) { return im.getAttribute('src'); }).filter(Boolean) : [];
+      tempModalImages = uniqueImages((Array.isArray(item.modalImages) ? item.modalImages : []).concat(liveImages));
+      tempModalNewBadges = Array.isArray(item.modalNewBadges) ? item.modalNewBadges.slice() : [];
       if (cardImageFile) cardImageFile.value = '';
       if (cardImageUrl) cardImageUrl.value = item.image || '';
       if (titleInput) titleInput.value = item.title || '';
@@ -2426,6 +2534,16 @@
       setTimeout(function () { focusImage && cardImageFile ? cardImageFile.focus() : (buttonInput && buttonInput.focus()); }, 50);
     }
 
+    function createEmojiImagePlaceholder() {
+      const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">' +
+        '<rect width="900" height="600" rx="46" fill="#fff6e8"/>' +
+        '<rect x="26" y="26" width="848" height="548" rx="38" fill="none" stroke="#d39a38" stroke-width="10" stroke-dasharray="22 18"/>' +
+        '<text x="450" y="330" text-anchor="middle" dominant-baseline="middle" font-size="170">🖼️</text>' +
+        '<text x="450" y="465" text-anchor="middle" font-family="Arial, sans-serif" font-size="46" font-weight="700" fill="#6f4106">Neues Bild</text>' +
+        '</svg>';
+      return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+    }
+
     function renderModalImagesEditor() {
       if (!modalImagesList) return;
       modalImagesList.innerHTML = '';
@@ -2439,11 +2557,29 @@
       tempModalImages.forEach(function (src, i) {
         const row = document.createElement('div');
         row.className = 'admin-image-row';
-        row.innerHTML = '<img alt="Bild"><span></span><button class="admin-btn admin-btn--danger" type="button">Löschen</button>';
-        row.querySelector('img').src = src;
+        const isMarkedNew = tempModalNewBadges.indexOf(src) !== -1;
+        row.innerHTML = '<div class="admin-image-preview"><img class="admin-base-image" alt="Bild"></div><span></span><div class="admin-image-actions"><button class="admin-btn admin-btn--danger" type="button" data-action="delete">Löschen</button><button class="admin-btn admin-btn--new-sort" type="button" data-action="new-sort"></button></div>';
+        row.querySelector('.admin-base-image').src = src;
         row.querySelector('span').textContent = src.length > 80 ? src.slice(0, 80) + '…' : src;
-        row.querySelector('button').addEventListener('click', function () {
+        if (isMarkedNew) {
+          const badge = document.createElement('img');
+          badge.className = 'admin-new-badge-preview';
+          badge.src = NEW_BADGE_SRC;
+          badge.alt = 'New';
+          row.querySelector('.admin-image-preview').appendChild(badge);
+        }
+        row.querySelector('[data-action="new-sort"]').textContent = isMarkedNew ? 'إزالة جديد' : 'صنف جديد';
+        row.querySelector('[data-action="delete"]').addEventListener('click', function () {
           tempModalImages.splice(i, 1);
+          tempModalNewBadges = tempModalNewBadges.filter(function (badgeSrc) { return badgeSrc !== src; });
+          renderModalImagesEditor();
+        });
+        row.querySelector('[data-action="new-sort"]').addEventListener('click', function () {
+          if (tempModalNewBadges.indexOf(src) === -1) {
+            tempModalNewBadges.push(src);
+          } else {
+            tempModalNewBadges = tempModalNewBadges.filter(function (badgeSrc) { return badgeSrc !== src; });
+          }
           renderModalImagesEditor();
         });
         modalImagesList.appendChild(row);
@@ -2456,6 +2592,22 @@
       const reader = new FileReader();
       reader.onload = function (event) { cb(event.target.result); };
       reader.readAsDataURL(file);
+    }
+
+    function filesToDataUrls(input, cb) {
+      const files = input && input.files ? Array.from(input.files) : [];
+      if (!files.length) return cb([]);
+      let remaining = files.length;
+      const results = new Array(files.length);
+      files.forEach(function (file, index) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          results[index] = event.target.result;
+          remaining -= 1;
+          if (remaining === 0) cb(results.filter(Boolean));
+        };
+        reader.readAsDataURL(file);
+      });
     }
 
     if (adminOpenBtn) {
@@ -2474,13 +2626,24 @@
     }
     if (passwordInput) passwordInput.addEventListener('keydown', e => { if (e.key === 'Enter') loginBtn && loginBtn.click(); });
     if (cardImageFile) cardImageFile.addEventListener('change', function () { fileToDataUrl(cardImageFile, function (url) { uploadedCardImage = url; if (cardImageUrl) cardImageUrl.value = 'Bild hochgeladen'; }); });
-    if (modalImageFile) modalImageFile.addEventListener('change', function () { fileToDataUrl(modalImageFile, function (url) { uploadedModalImage = url; if (modalImageUrl) modalImageUrl.value = 'Bild hochgeladen'; }); });
+    if (modalImageFile) modalImageFile.addEventListener('change', function () {
+      filesToDataUrls(modalImageFile, function (urls) {
+        uploadedModalImages = urls;
+        if (modalImageUrl) modalImageUrl.value = urls.length > 1 ? (urls.length + ' Bilder hochgeladen') : 'Bild hochgeladen';
+      });
+    });
     if (addModalImageBtn) {
       addModalImageBtn.addEventListener('click', function () {
-        const src = uploadedModalImage || (modalImageUrl && modalImageUrl.value.trim());
-        if (!src || src === 'Bild hochgeladen') return;
-        tempModalImages.push(src);
-        uploadedModalImage = '';
+        const typedUrl = modalImageUrl ? modalImageUrl.value.trim() : '';
+        const hasUploadedFiles = Array.isArray(uploadedModalImages) && uploadedModalImages.length > 0;
+        if (hasUploadedFiles) {
+          tempModalImages = tempModalImages.concat(uploadedModalImages);
+        } else if (typedUrl && typedUrl !== 'Bild hochgeladen' && !/Bilder hochgeladen$/.test(typedUrl)) {
+          tempModalImages.push(typedUrl);
+        } else {
+          return;
+        }
+        uploadedModalImages = [];
         if (modalImageFile) modalImageFile.value = '';
         if (modalImageUrl) modalImageUrl.value = '';
         renderModalImagesEditor();
@@ -2490,6 +2653,10 @@
       saveBtn.addEventListener('click', function () {
         if (editIndex === null) return;
         const old = data[editIndex] || defaults[editIndex];
+        if (Array.isArray(uploadedModalImages) && uploadedModalImages.length) {
+          tempModalImages = tempModalImages.concat(uploadedModalImages);
+          uploadedModalImages = [];
+        }
         data[editIndex] = {
           image: uploadedCardImage || ((cardImageUrl && cardImageUrl.value.trim() && cardImageUrl.value.trim() !== 'Bild hochgeladen') ? cardImageUrl.value.trim() : old.image),
           alt: (titleInput && titleInput.value.trim()) || old.alt || old.title,
@@ -2499,7 +2666,9 @@
           modalTitle: (modalTitleInput && modalTitleInput.value.trim()) || old.modalTitle || old.title,
           modalText: (modalTextInput && modalTextInput.value.split('\n').map(s => s.trim()).filter(Boolean)) || old.modalText,
           sorten: (sortenInput && sortenInput.value.split('\n').map(s => s.trim()).filter(Boolean)) || old.sorten,
-          modalImages: tempModalImages.slice()
+          modalImages: tempModalImages.slice(),
+          modalNewBadges: tempModalNewBadges.filter(function (badgeSrc) { return tempModalImages.indexOf(badgeSrc) !== -1; }),
+          modalImagesTouched: true
         };
         saveData(); applyData(); closeOverlay(editOverlay);
       });
