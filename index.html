@@ -4454,5 +4454,112 @@
 </style>
 <!-- END FULL SITE FINAL POLISH BY CHATGPT -->
 
+
+<!-- FINAL ONE-GLOW MOBILE HERO FIX -->
+<style>
+  @media (max-width: 768px) {
+    .hero__content {
+      position: relative !important;
+      isolation: isolate !important;
+      padding-left: 12px !important;
+      padding-right: 10px !important;
+      max-width: 300px !important;
+      border-radius: 26px !important;
+    }
+
+    .hero__content::before {
+      content: "" !important;
+      display: block !important;
+      position: absolute !important;
+      inset: -6px -4px -7px -4px !important;
+      z-index: -1 !important;
+      pointer-events: none !important;
+      border-radius: 24px !important;
+      background: linear-gradient(112deg,
+        rgba(255,255,255,.90) 0%,
+        rgba(255,250,241,.72) 40%,
+        rgba(255,246,232,.48) 70%,
+        rgba(255,255,255,.20) 100%) !important;
+      border: 1px solid rgba(255,255,255,.66) !important;
+      box-shadow:
+        0 13px 30px rgba(80,48,6,.10),
+        0 0 18px rgba(255,255,255,.30) !important;
+      backdrop-filter: blur(6px) saturate(1.05) !important;
+      -webkit-backdrop-filter: blur(6px) saturate(1.05) !important;
+      clip-path: none !important;
+      filter: none !important;
+    }
+
+    .hero__content::after {
+      content: none !important;
+      display: none !important;
+      background: none !important;
+      box-shadow: none !important;
+      filter: none !important;
+    }
+
+    .hero .eyebrow,
+    .hero h1,
+    .hero .brand-line,
+    .hero__subtitle,
+    .hero__text {
+      text-shadow:
+        0 1px 0 rgba(255,255,255,.96),
+        0 0 7px rgba(255,255,255,.58),
+        0 2px 9px rgba(111,65,6,.12) !important;
+    }
+
+    .hero h1,
+    .hero .brand-line {
+      filter: none !important;
+    }
+
+    .brand-line {
+      gap: 6px !important;
+      width: fit-content !important;
+      max-width: max-content !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    .brand-line img {
+      width: .50em !important;
+      height: .50em !important;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .hero__content {
+      padding-left: 8px !important;
+      padding-right: 6px !important;
+      max-width: 268px !important;
+      border-radius: 23px !important;
+    }
+
+    .hero__content::before {
+      inset: -5px -2px -6px -2px !important;
+      border-radius: 21px !important;
+    }
+
+    .brand-line { gap: 5px !important; }
+    .brand-line img { width: .47em !important; height: .47em !important; }
+  }
+
+  @media (max-width: 390px) {
+    .hero__content {
+      padding-left: 7px !important;
+      padding-right: 5px !important;
+      max-width: 244px !important;
+    }
+
+    .hero__content::before {
+      inset: -5px -2px -6px -2px !important;
+      border-radius: 20px !important;
+    }
+  }
+</style>
+<!-- END FINAL ONE-GLOW MOBILE HERO FIX -->
+
 </body>
 </html>
