@@ -2441,7 +2441,144 @@
       transition-delay: .65s !important;
     }
 
-</style>
+
+
+    /* ===== MOBILE HERO IMAGE FINAL FIX =====
+       يجعل صورة الهيرو على الجوال واضحة وكاملة، والنص تحتها بدون تداخل. */
+    @media (max-width: 768px) {
+      .hero {
+        min-height: auto !important;
+        height: auto !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        padding: clamp(315px, 78vw, 470px) 18px 58px !important;
+        background-color: #fff6e8 !important;
+        background-image:
+          linear-gradient(180deg,
+            rgba(255,246,232,0) 0%,
+            rgba(255,246,232,.10) 48%,
+            rgba(255,246,232,.82) 78%,
+            #fff6e8 100%),
+          url("assets/hero-mobile.png") !important;
+        background-position: center top, center top !important;
+        background-size: 100% auto, 100% auto !important;
+        background-repeat: no-repeat, no-repeat !important;
+        overflow: hidden !important;
+      }
+
+      .hero::before {
+        background:
+          radial-gradient(circle at 50% 14%, rgba(198,145,53,.14), transparent 34%),
+          radial-gradient(circle at 15% 88%, rgba(198,145,53,.10), transparent 28%) !important;
+      }
+
+      .hero::after {
+        height: 50px !important;
+      }
+
+      .hero__content {
+        width: 100% !important;
+        max-width: 560px !important;
+        margin: 0 auto !important;
+        padding-top: 0 !important;
+        text-align: center !important;
+      }
+
+      .eyebrow {
+        font-size: 12px !important;
+        letter-spacing: 2.4px !important;
+        margin-bottom: 10px !important;
+      }
+
+      .hero h1 {
+        font-size: clamp(42px, 13vw, 66px) !important;
+        line-height: .94 !important;
+        margin-bottom: 16px !important;
+      }
+
+      .brand-line {
+        justify-content: center !important;
+      }
+
+      .hero__subtitle {
+        font-size: 14px !important;
+        line-height: 1.45 !important;
+        margin-bottom: 13px !important;
+      }
+
+      .hero__text {
+        max-width: 100% !important;
+        font-size: 14.5px !important;
+        line-height: 1.72 !important;
+        margin: 0 auto 20px !important;
+      }
+
+      .hero__actions {
+        justify-content: center !important;
+        gap: 12px !important;
+        margin-bottom: 18px !important;
+      }
+
+      .hero__actions .btn {
+        width: min(100%, 330px) !important;
+        min-height: 54px !important;
+        padding: 14px 18px !important;
+        font-size: 14px !important;
+      }
+
+      .experience {
+        width: min(100%, 390px) !important;
+        margin: 0 auto !important;
+        grid-template-columns: 78px 1fr !important;
+        text-align: left !important;
+      }
+
+      .experience__image img {
+        width: 62px !important;
+        height: 62px !important;
+      }
+
+      .experience p {
+        font-size: 12.5px !important;
+        line-height: 1.58 !important;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero {
+        padding: clamp(285px, 86vw, 405px) 15px 54px !important;
+      }
+
+      .hero h1 {
+        font-size: clamp(38px, 14vw, 56px) !important;
+      }
+
+      .hero__text {
+        font-size: 13.5px !important;
+      }
+
+      .experience {
+        grid-template-columns: 68px 1fr !important;
+        padding: 12px !important;
+      }
+
+      .experience__image img {
+        width: 54px !important;
+        height: 54px !important;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .hero {
+        padding-top: clamp(260px, 90vw, 360px) !important;
+      }
+
+      .hero h1 {
+        font-size: clamp(34px, 13.5vw, 48px) !important;
+      }
+    }
+
+  </style>
 
 
 <!-- FINAL VERIFIED MOBILE MENU FIX -->
