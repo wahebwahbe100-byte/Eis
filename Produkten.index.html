@@ -2097,12 +2097,10 @@
   }
 </style>
 
-<button class="admin-fab" type="button" id="adminOpenBtn">🔐 Admin</button>
-
 <div class="admin-overlay" id="adminLoginOverlay" aria-hidden="true">
   <div class="admin-panel" role="dialog" aria-modal="true" aria-labelledby="adminLoginTitle">
     <h2 id="adminLoginTitle">Admin Login</h2>
-    <p>Geben Sie das Passwort ein, um Produktbilder, Texte und die Inhalte von „Eissorten ansehen“ zu bearbeiten.</p>
+    <p>Geben Sie das Passwort ein. Die Prüfung läuft sicher über Supabase; das Passwort steht nicht im Seiten-Code.</p>
     <div class="admin-field">
       <label for="adminPasswordInput">Passwort</label>
       <input id="adminPasswordInput" type="password" autocomplete="current-password" placeholder="Passwort eingeben" />
@@ -2170,7 +2168,6 @@
 
 <script>
 (function () {
-  const ADMIN_PASSWORD = 'admin123';
   const STORAGE_KEY = 'eis-bueffel-products-admin-v5';
   const LEGACY_STORAGE_KEYS = ['eis-bueffel-products-admin-v5', 'eis-bueffel-products-admin-v4', 'eis-bueffel-products-admin-v3', 'eisbueffel_produktkarten_v1'];
   const SESSION_KEY = 'eis-bueffel-admin-logged-in';
@@ -2200,7 +2197,6 @@
 
   ready(function () {
     const cards = Array.from(document.querySelectorAll('.product-grid .product-card'));
-    const adminOpenBtn = document.getElementById('adminOpenBtn');
     const loginOverlay = document.getElementById('adminLoginOverlay');
     const editOverlay = document.getElementById('adminEditOverlay');
     const passwordInput = document.getElementById('adminPasswordInput');
@@ -2257,6 +2253,48 @@
     createCardTools();
     removeDuplicatePencils();
     if (sessionStorage.getItem(SESSION_KEY) === '1') enableAdminMode();
+    setupHiddenAdminAccess();
+
+    function setupHiddenAdminAccess() {
+      // Admin-Zugang ist absichtlich unsichtbar: kein sichtbarer Login-Button auf der Seite.
+      // Öffnen über: ?admin=1 in der URL oder Tastenkürzel Ctrl + Alt + A.
+      function openLogin() {
+        openOverlay(loginOverlay);
+        setTimeout(function () { if (passwordInput) passwordInput.focus(); }, 50);
+      }
+
+      try {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('admin') === '1') openLogin();
+      } catch (e) {}
+
+      document.addEventListener('keydown', function (event) {
+        const key = (event.key || '').toLowerCase();
+        if (event.ctrlKey && event.altKey && key === 'a') {
+          event.preventDefault();
+          openLogin();
+        }
+      });
+    }
+
+    async function verifyAdminPassword(password) {
+      if (!password) return false;
+      if (!supabaseClient) {
+        console.error('Supabase غير مفعّل: لا يمكن التحقق من كلمة السر بدون Supabase.');
+        return false;
+      }
+
+      const result = await supabaseClient.rpc('verify_admin_password', {
+        plain_password: password
+      });
+
+      if (result.error) {
+        console.error('Supabase password verification error:', result.error);
+        return false;
+      }
+
+      return result.data === true;
+    }
 
     function removeDuplicatePencils() {
       cards.forEach(function (card) {
@@ -2534,12 +2572,10 @@
       removeDuplicatePencils();
       document.body.classList.add('admin-mode');
       sessionStorage.setItem(SESSION_KEY, '1');
-      if (adminOpenBtn) adminOpenBtn.textContent = '✎ Bearbeiten aktiv';
     }
     function disableAdminMode() {
       document.body.classList.remove('admin-mode');
       sessionStorage.removeItem(SESSION_KEY);
-      if (adminOpenBtn) adminOpenBtn.textContent = '🔐 Admin';
     }
     function showSaved() {
       if (!saveNote) return;
@@ -2686,18 +2722,24 @@
         });
     }
 
-    if (adminOpenBtn) {
-      adminOpenBtn.addEventListener('click', function () {
-        if (document.body.classList.contains('admin-mode')) disableAdminMode();
-        else { openOverlay(loginOverlay); setTimeout(() => passwordInput && passwordInput.focus(), 50); }
-      });
-    }
     if (loginBtn) {
-      loginBtn.addEventListener('click', function () {
-        if (passwordInput && passwordInput.value === ADMIN_PASSWORD) {
-          if (loginError) loginError.style.display = 'none';
-          closeOverlay(loginOverlay); enableAdminMode(); showSaved();
-        } else if (loginError) loginError.style.display = 'block';
+      loginBtn.addEventListener('click', async function () {
+        if (loginError) loginError.style.display = 'none';
+        loginBtn.disabled = true;
+        loginBtn.textContent = 'Prüfen...';
+        try {
+          const isValid = await verifyAdminPassword(passwordInput ? passwordInput.value : '');
+          if (isValid) {
+            if (passwordInput) passwordInput.value = '';
+            closeOverlay(loginOverlay); enableAdminMode(); showSaved();
+          } else if (loginError) {
+            loginError.textContent = 'Falsches Passwort oder Supabase-Verifizierung nicht eingerichtet.';
+            loginError.style.display = 'block';
+          }
+        } finally {
+          loginBtn.disabled = false;
+          loginBtn.textContent = 'Einloggen';
+        }
       });
     }
     if (passwordInput) passwordInput.addEventListener('keydown', e => { if (e.key === 'Enter') loginBtn && loginBtn.click(); });
