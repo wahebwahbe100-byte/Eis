@@ -4643,6 +4643,94 @@
     .logo img { width: 132px !important; }
     .footer__logo { width: 150px !important; }
   }
+
+
+  /* DESKTOP HERO ONLY: clearer text + elegant warm glow */
+  @media (min-width: 769px) {
+    .hero {
+      background:
+        linear-gradient(90deg,
+          rgba(34, 23, 12, .74) 0%,
+          rgba(52, 34, 16, .62) 30%,
+          rgba(67, 43, 17, .30) 56%,
+          rgba(34, 23, 12, .08) 100%),
+        radial-gradient(circle at 21% 45%, rgba(214, 151, 44, .26), transparent 34%),
+        url("assets/hero-bg.png") center right / cover no-repeat !important;
+    }
+
+    .hero__content {
+      position: relative !important;
+      isolation: isolate !important;
+      padding: 26px 32px 28px 0 !important;
+    }
+
+    .hero__content::before {
+      content: "";
+      position: absolute;
+      inset: -34px -38px -30px -24px;
+      z-index: -1;
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at 30% 32%, rgba(240,196,109,.34), transparent 35%),
+        linear-gradient(90deg, rgba(26,18,10,.50), rgba(26,18,10,.30) 58%, rgba(26,18,10,0));
+      filter: blur(.2px);
+      box-shadow:
+        0 0 54px rgba(214,151,44,.18),
+        inset 0 0 46px rgba(255,236,190,.06);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      color: #f0c46d !important;
+      text-shadow: 0 2px 10px rgba(0,0,0,.55), 0 0 16px rgba(240,196,109,.30) !important;
+    }
+
+    .hero h1 {
+      color: #f2bf62 !important;
+      text-shadow:
+        0 3px 12px rgba(0,0,0,.68),
+        0 0 22px rgba(240,196,109,.28),
+        0 1px 0 rgba(255,246,232,.22) !important;
+    }
+
+    .brand-line {
+      color: #d7952f !important;
+      text-shadow:
+        0 3px 12px rgba(0,0,0,.70),
+        0 0 24px rgba(240,196,109,.34) !important;
+    }
+
+    .brand-line img {
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,.36)) drop-shadow(0 0 12px rgba(240,196,109,.38)) !important;
+    }
+
+    .hero__subtitle {
+      color: #f0c46d !important;
+      font-weight: 900 !important;
+      text-shadow: 0 2px 9px rgba(0,0,0,.66), 0 0 14px rgba(240,196,109,.24) !important;
+    }
+
+    .hero__text {
+      color: #fff3df !important;
+      font-weight: 600 !important;
+      text-shadow: 0 2px 9px rgba(0,0,0,.66) !important;
+    }
+
+    .hero__actions .btn--primary {
+      box-shadow:
+        0 18px 36px rgba(98,58,6,.34),
+        0 0 24px rgba(240,196,109,.22),
+        inset 0 1px 0 rgba(255,255,255,.22) !important;
+    }
+
+    .experience {
+      background: rgba(255, 248, 236, .86) !important;
+      box-shadow:
+        0 22px 52px rgba(38,24,9,.22),
+        0 0 22px rgba(240,196,109,.12) !important;
+      backdrop-filter: blur(8px) !important;
+    }
+  }
 </style>
 <!-- END LOGO IMAGE FIX -->
 
