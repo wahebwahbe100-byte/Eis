@@ -2030,6 +2030,10 @@
 <!-- END FINAL VERIFIED MOBILE MENU SCRIPT -->
 
 
+<!-- SUPABASE CLIENT SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- END SUPABASE CLIENT SDK -->
+
 
 <!-- ADMIN EDITOR: products, Eissorten modal, add/delete images -->
 <style>
@@ -2230,6 +2234,18 @@
   const STORAGE_KEY = 'eis-bueffel-products-admin-v5';
   const LEGACY_STORAGE_KEYS = ['eis-bueffel-products-admin-v5', 'eis-bueffel-products-admin-v4', 'eis-bueffel-products-admin-v3', 'eisbueffel_produktkarten_v1'];
   const SESSION_KEY = 'eis-bueffel-admin-logged-in';
+
+  // === SUPABASE SETTINGS ===
+  // 1) استبدل القيمتين أدناه من Supabase Project Settings > API.
+  // 2) أنشئ جدول product_page_content وباكت product-images حسب SQL الموجود في الرد.
+  const SUPABASE_URL = 'https://qzwonskbfdpvjcduqabb.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_ALts0O-Hh463KG-T6GJXyQ_qQyas6ZD';
+  const SUPABASE_TABLE = 'product_page_content';
+  const SUPABASE_ROW_ID = 'produkten-page-v1';
+  const SUPABASE_BUCKET = 'product-images';
+  const supabaseClient = (window.supabase && SUPABASE_URL.indexOf('YOUR_PROJECT_ID') === -1 && SUPABASE_ANON_KEY.indexOf('YOUR_SUPABASE') === -1)
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    : null;
   let editIndex = null;
   let uploadedCardImage = '';
   let uploadedModalImages = [];
@@ -2297,6 +2313,7 @@
 
     let data = loadData();
     applyData();
+    syncFromSupabase();
     createCardTools();
     removeDuplicatePencils();
     if (sessionStorage.getItem(SESSION_KEY) === '1') enableAdminMode();
@@ -2353,12 +2370,68 @@
       return defaults.map(item => Object.assign({}, item));
     }
 
-    function saveData() {
-      const json = JSON.stringify(data);
+    function saveLocalData(items) {
+      const json = JSON.stringify(items || data);
       localStorage.setItem(STORAGE_KEY, json);
       localStorage.setItem('eis-bueffel-products-admin-v4', json);
       localStorage.setItem('eis-bueffel-products-admin-v3', json);
+    }
+
+    async function loadDataFromSupabase() {
+      if (!supabaseClient) return null;
+      const result = await supabaseClient
+        .from(SUPABASE_TABLE)
+        .select('data')
+        .eq('id', SUPABASE_ROW_ID)
+        .maybeSingle();
+
+      if (result.error) throw result.error;
+      const remoteData = result.data && result.data.data;
+      if (Array.isArray(remoteData) && remoteData.length === defaults.length) {
+        return defaults.map((item, i) => normalizeItem(remoteData[i], item));
+      }
+      return null;
+    }
+
+    async function syncFromSupabase() {
+      if (!supabaseClient) {
+        console.warn('Supabase غير مفعّل بعد: ضع SUPABASE_URL و SUPABASE_ANON_KEY داخل الملف.');
+        return;
+      }
+      try {
+        const remote = await loadDataFromSupabase();
+        if (remote) {
+          data = remote;
+          saveLocalData(data);
+          applyData();
+        } else {
+          await saveDataToSupabase(data);
+        }
+      } catch (error) {
+        console.error('Supabase load error:', error);
+      }
+    }
+
+    async function saveDataToSupabase(items) {
+      if (!supabaseClient) return;
+      const result = await supabaseClient
+        .from(SUPABASE_TABLE)
+        .upsert({
+          id: SUPABASE_ROW_ID,
+          data: items || data,
+          updated_at: new Date().toISOString()
+        }, { onConflict: 'id' });
+
+      if (result.error) throw result.error;
+    }
+
+    function saveData() {
+      saveLocalData(data);
       showSaved();
+      saveDataToSupabase(data).catch(function (error) {
+        console.error('Supabase save error:', error);
+        alert('تم الحفظ محليًا، لكن فشل الحفظ في Supabase. تأكد من الإعدادات والسياسات.');
+      });
     }
 
     function applyData() {
@@ -2611,28 +2684,61 @@
       });
     }
 
+    function makeStoragePath(file) {
+      const ext = (file.name.split('.').pop() || 'png').toLowerCase().replace(/[^a-z0-9]/g, '');
+      const safeName = file.name.replace(/\.[^/.]+$/, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'image';
+      return 'products/' + Date.now() + '-' + Math.random().toString(36).slice(2, 9) + '-' + safeName + '.' + ext;
+    }
+
+    function readFileAsDataUrl(file) {
+      return new Promise(function (resolve, reject) {
+        const reader = new FileReader();
+        reader.onload = function (event) { resolve(event.target.result); };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function uploadImageToSupabase(file) {
+      if (!supabaseClient) {
+        // احتياطي: عند عدم تفعيل Supabase نحافظ على طريقة Base64 القديمة.
+        return readFileAsDataUrl(file);
+      }
+
+      const path = makeStoragePath(file);
+      const upload = await supabaseClient.storage.from(SUPABASE_BUCKET).upload(path, file, {
+        cacheControl: '3600',
+        upsert: false,
+        contentType: file.type || 'image/png'
+      });
+      if (upload.error) throw upload.error;
+
+      const publicUrl = supabaseClient.storage.from(SUPABASE_BUCKET).getPublicUrl(path);
+      return publicUrl.data.publicUrl;
+    }
+
     function fileToDataUrl(input, cb) {
       const file = input && input.files && input.files[0];
       if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function (event) { cb(event.target.result); };
-      reader.readAsDataURL(file);
+      uploadImageToSupabase(file)
+        .then(cb)
+        .catch(function (error) {
+          console.error('Supabase image upload error:', error);
+          alert('فشل رفع الصورة إلى Supabase. سيتم حفظها مؤقتًا داخل المتصفح فقط.');
+          readFileAsDataUrl(file).then(cb);
+        });
     }
 
     function filesToDataUrls(input, cb) {
       const files = input && input.files ? Array.from(input.files) : [];
       if (!files.length) return cb([]);
-      let remaining = files.length;
-      const results = new Array(files.length);
-      files.forEach(function (file, index) {
-        const reader = new FileReader();
-        reader.onload = function (event) {
-          results[index] = event.target.result;
-          remaining -= 1;
-          if (remaining === 0) cb(results.filter(Boolean));
-        };
-        reader.readAsDataURL(file);
-      });
+      Promise.all(files.map(uploadImageToSupabase))
+        .then(function (urls) { cb(urls.filter(Boolean)); })
+        .catch(function (error) {
+          console.error('Supabase images upload error:', error);
+          alert('فشل رفع بعض الصور إلى Supabase. سيتم حفظها مؤقتًا داخل المتصفح فقط.');
+          Promise.all(files.map(readFileAsDataUrl)).then(function (urls) { cb(urls.filter(Boolean)); });
+        });
     }
 
     if (adminOpenBtn) {
