@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
   <title>Kontakt | Eis Büffel</title>
   <meta name="description" content="Kontaktieren Sie Eis Büffel für Angebote, Lieferung und Beratung." />
   <style>
@@ -1145,6 +1146,9 @@
         </div>
 
         <form class="kontakt-form" action="https://formsubmit.co/ajax/jdjr868@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="Neue Anfrage von Eis Büffel Kontaktformular" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_subject" value="Neue Anfrage über die Webseite" />
           <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_template" value="table" />
@@ -1313,6 +1317,11 @@
         return;
       }
 
+      if (window.location.protocol === 'file:') {
+        showMessage('error', 'Bitte laden Sie diese Seite zuerst auf Ihren Webserver hoch. FormSubmit funktioniert nicht zuverlässig, wenn die Datei direkt vom Computer geöffnet wird.', '!');
+        return;
+      }
+
       submitButton.disabled = true;
       submitButton.textContent = 'Wird gesendet...';
 
@@ -1322,12 +1331,23 @@
         headers: { 'Accept': 'application/json' }
       })
       .then(function (response) {
-        if (!response.ok) throw new Error('Senden fehlgeschlagen');
+        return response.json().catch(function () { return {}; }).then(function (data) {
+          if (!response.ok || data.success === 'false') {
+            throw new Error(data.message || 'Senden fehlgeschlagen');
+          }
+          return data;
+        });
+      })
+      .then(function () {
         showMessage('success', 'Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns schnellstmöglich bei Ihnen.', '✓');
         form.reset();
       })
-      .catch(function () {
-        showMessage('error', 'Leider konnte die Anfrage nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns telefonisch.', '!');
+      .catch(function (error) {
+        var text = 'Leider konnte die Anfrage nicht gesendet werden. Bitte prüfen Sie, ob die FormSubmit-Bestätigung im Gmail-Postfach aktiviert wurde, oder versuchen Sie es erneut.';
+        if (error && error.message && error.message.indexOf('HTML files') !== -1) {
+          text = 'Bitte laden Sie die Seite auf Ihren Webserver hoch. FormSubmit funktioniert nicht bei lokal geöffneten HTML-Dateien.';
+        }
+        showMessage('error', text, '!');
       })
       .finally(function () {
         submitButton.disabled = false;
