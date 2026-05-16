@@ -401,6 +401,12 @@
     }
 
     .kontakt-form button { border: none; cursor: pointer; width: fit-content; }
+    .kontakt-form button:disabled {
+      opacity: .72;
+      cursor: not-allowed;
+      transform: none;
+    }
+
 
     .footer-bottom {
       padding: 20px 24px;
@@ -1145,24 +1151,23 @@
           </div>
         </div>
 
-        <form class="kontakt-form" action="https://formsubmit.co/wahebwshbe2@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="Neue Anfrage über die Webseite Eis Büffel" />
-          <input type="hidden" name="_template" value="table" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_next" value="" />
-          <input type="hidden" name="_url" value="" />
-          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+        <form class="kontakt-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="29635ace-08cb-415f-b906-e8f6168bb3e7" />
+          <input type="hidden" name="subject" value="Neue Anfrage über die Webseite Eis Büffel" />
+          <input type="hidden" name="from_name" value="Eis Büffel Webseite" />
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
           <input type="text" name="name" placeholder="Ihr Name" required />
           <input type="email" name="email" placeholder="E-Mail Adresse" required />
-          <input type="tel" name="Telefon" placeholder="Telefonnummer" />
-          <textarea name="Nachricht" placeholder="Ihre Nachricht" required></textarea>
+          <input type="tel" name="phone" placeholder="Telefonnummer" />
+          <input type="text" name="Firma" placeholder="Firma / Geschäft (optional)" />
+          <textarea name="message" placeholder="Ihre Nachricht" required></textarea>
 
           <label class="consent-field">
             <input type="checkbox" name="Datenschutz" value="Einverstanden" required />
             <span>Ich bin damit einverstanden, dass diese Daten zum Zwecke der Kontaktaufnahme gespeichert und verarbeitet werden. Mir ist bekannt, dass ich meine Einwilligung jederzeit widerrufen kann.</span>
           </label>
 
-          <p class="form-note">* Bitte füllen Sie alle erforderlichen Felder aus.</p>
+          <p class="form-note">* Bitte füllen Sie alle erforderlichen Felder aus. Ihre Anfrage wird direkt per E-Mail gesendet.</p>
           <p class="success-message" role="status" aria-live="polite">
             <span class="success-message__icon" aria-hidden="true">✓</span>
             <span>Vielen Dank! Ihre Anfrage wurde erfolgreich aufgenommen. Wir melden uns schnellstmöglich bei Ihnen.</span>
@@ -1299,35 +1304,50 @@
     var successMessage = document.querySelector('.success-message');
     if (!form || !successMessage) return;
 
-    function showSuccess() {
+    var submitButton = form.querySelector('button[type="submit"]');
+
+    function showMessage(type, text) {
       successMessage.classList.add('show');
-      successMessage.classList.remove('error');
-      successMessage.querySelector('.success-message__icon').textContent = '✓';
-      successMessage.querySelector('span:last-child').textContent = 'Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns schnellstmöglich bei Ihnen.';
+      successMessage.classList.toggle('error', type === 'error');
+      successMessage.querySelector('.success-message__icon').textContent = type === 'error' ? '!' : '✓';
+      successMessage.querySelector('span:last-child').textContent = text;
     }
 
-    function cleanUrl(url) {
-      var clean = new URL(url);
-      clean.searchParams.delete('sent');
-      return clean.origin + clean.pathname;
-    }
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
 
-    if (new URLSearchParams(window.location.search).get('sent') === '1') {
-      showSuccess();
-      if (window.history && window.history.replaceState) {
-        window.history.replaceState({}, document.title, cleanUrl(window.location.href));
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Wird gesendet...';
       }
-    }
 
-    form.addEventListener('submit', function () {
-      var pageUrl = cleanUrl(window.location.href);
-      var nextInput = form.querySelector('input[name="_next"]');
-      var urlInput = form.querySelector('input[name="_url"]');
-      if (nextInput) nextInput.value = pageUrl + '?sent=1';
-      if (urlInput) urlInput.value = pageUrl;
+      var formData = new FormData(form);
+      formData.append('page_url', window.location.href);
+
+      fetch(form.action, {
+        method: 'POST',
+        body: formData
+      })
+      .then(function (response) { return response.json(); })
+      .then(function (data) {
+        if (data.success) {
+          form.reset();
+          showMessage('success', 'Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns schnellstmöglich bei Ihnen.');
+        } else {
+          showMessage('error', data.message || 'Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.');
+        }
+      })
+      .catch(function () {
+        showMessage('error', 'Beim Senden ist ein Fehler aufgetreten. Bitte prüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.');
+      })
+      .finally(function () {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Anfrage senden';
+        }
+      });
     });
   })();
-</script>
 </script>
 
 </body>
