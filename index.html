@@ -4023,38 +4023,66 @@
 
 <!-- MOBILE HERO TEXT GLOW ONLY - COMPLETE FINAL -->
 <style>
-  /* التوهج هنا للجوال فقط، ومائل لأسفل النص فقط، بدون أي صندوق أو إحاطة حول الكلام */
+  /* توهج مربع ناعم للجوال فقط، موضوع تحت اسم Eis Büffe فقط وليس حول كل الهيرو */
   @media (max-width: 768px) {
+    .hero .brand-line {
+      position: relative !important;
+      isolation: isolate !important;
+    }
+
+    .hero .brand-line::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -12px;
+      width: 82%;
+      height: 28px;
+      transform: translateX(-50%);
+      z-index: -1;
+      pointer-events: none;
+      border-radius: 18px;
+      background:
+        radial-gradient(ellipse at center,
+          rgba(255,255,255,.88) 0%,
+          rgba(255,248,236,.62) 45%,
+          rgba(255,246,232,.18) 76%,
+          rgba(255,246,232,0) 100%);
+      filter: blur(7px);
+      opacity: .96;
+    }
+
     .hero h1 {
       text-shadow:
-        0 10px 12px rgba(255,248,236,.50),
-        0 18px 24px rgba(255,246,232,.28) !important;
+        0 7px 12px rgba(255,248,236,.38),
+        0 13px 22px rgba(255,246,232,.20) !important;
     }
 
     .hero .eyebrow,
-    .hero .brand-line,
     .hero__subtitle,
     .hero__text {
-      text-shadow:
-        0 7px 10px rgba(255,248,236,.42),
-        0 13px 18px rgba(255,246,232,.22) !important;
+      text-shadow: none !important;
     }
   }
 
   @media (max-width: 520px) {
-    .hero h1 {
-      text-shadow:
-        0 8px 10px rgba(255,248,236,.46),
-        0 15px 20px rgba(255,246,232,.24) !important;
+    .hero .brand-line::before {
+      bottom: -10px;
+      width: 86%;
+      height: 24px;
+      border-radius: 16px;
+      filter: blur(6px);
+      background:
+        radial-gradient(ellipse at center,
+          rgba(255,255,255,.90) 0%,
+          rgba(255,248,236,.64) 46%,
+          rgba(255,246,232,.20) 76%,
+          rgba(255,246,232,0) 100%);
     }
 
-    .hero .eyebrow,
-    .hero .brand-line,
-    .hero__subtitle,
-    .hero__text {
+    .hero h1 {
       text-shadow:
-        0 6px 8px rgba(255,248,236,.38),
-        0 11px 15px rgba(255,246,232,.20) !important;
+        0 6px 10px rgba(255,248,236,.34),
+        0 11px 18px rgba(255,246,232,.18) !important;
     }
   }
 </style>
