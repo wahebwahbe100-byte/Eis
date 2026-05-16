@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Produkten | Eis Büffe</title>
-  <meta name="description" content="Eis Büffe Produkten: Milchspeiseeise, Fruchtspeiseeis, Milchspeiseeis Joghurt und Eis Büffe Spezialitäten." />
+  <title>Produkten | Eis Büffel</title>
+  <meta name="description" content="Eis Büffel Produkten: Milchspeiseeise, Fruchtspeiseeis, Milchspeiseeis Joghurt und Eis Büffel Spezialitäten." />
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Great+Vibes&family=Inter:wght@400;500;600;700;800&display=swap');
@@ -956,7 +956,41 @@
   .navbar > .nav-btn { display: none !important; }
   .nav-links .nav-btn-mobile { display: flex !important; }
 }
-/* FINAL FIX: correct mobile menu button and dropdown on all phones */
+
+  
+
+    /* Restored Milchspeiseeise image gallery */
+    .milch-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin: 24px 0 24px;
+    }
+    .milch-gallery__item {
+      overflow: hidden;
+      min-height: 170px;
+      border-radius: 22px;
+      background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,246,232,.58));
+      border: 1px solid rgba(166,106,19,.20);
+      box-shadow: 0 16px 34px rgba(80,48,6,.10);
+    }
+    .milch-gallery__item img {
+      width: 100%;
+      height: 100%;
+      min-height: 170px;
+      object-fit: cover;
+      transition: transform .35s ease;
+    }
+    .milch-gallery__item:hover img { transform: scale(1.04); }
+    @media (max-width: 768px) {
+      .milch-gallery { grid-template-columns: 1fr; gap: 12px; }
+      .milch-gallery__item,
+      .milch-gallery__item img { min-height: 190px; }
+    }
+
+  
+
+    /* FINAL FIX: correct mobile menu button and dropdown on all phones */
     @media (max-width: 1050px) {
       .site-header,
       .navbar {
@@ -1422,218 +1456,36 @@
 <!-- END FINAL VERIFIED MOBILE MENU FIX -->
 
 
-<!-- SMALLER bild.png NEW BADGE FIX -->
+
+<!-- DESKTOP ONLY: same image gallery display inside Eissorten ansehen -->
 <style>
-  .admin-modal-gallery__new-badge {
-    width: min(24%, 72px) !important;
-    height: auto !important;
-  }
-
-  .admin-image-row .admin-new-badge-preview {
-    width: 42px !important;
-    height: auto !important;
-  }
-
-  @media (max-width: 620px) {
-    .admin-modal-gallery__new-badge {
-      width: min(22%, 58px) !important;
-    }
-
-    .admin-image-row .admin-new-badge-preview {
-      width: 38px !important;
-    }
-  }
-</style>
-<!-- END SMALLER bild.png NEW BADGE FIX -->
-
-
-
-<!-- MODAL SINGLE IMAGE FIX: one clear picture under the close arrow -->
-<style>
-  .modal-preview-gallery {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
-    margin: 4px 0 24px;
-  }
-
-  .modal-preview-gallery__item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 20px;
-    border: 1px solid rgba(166,106,19,.20);
-    background: rgba(255,255,255,.82);
-    box-shadow: 0 14px 32px rgba(80,48,6,.12);
-  }
-
-  .modal-preview-gallery__item img {
-    width: 100%;
-    height: 230px;
-    object-fit: cover;
-    display: block;
-    border-radius: 20px;
-  }
-
-  @media (max-width: 760px) {
-    .modal-preview-gallery {
-      grid-template-columns: 1fr;
-      gap: 10px;
-      margin: 6px 0 20px;
-    }
-    .modal-preview-gallery__item img { height: 190px; }
-  }
-
-  @media (max-width: 420px) {
-    .modal-preview-gallery__item img { height: 165px; }
-  }
-</style>
-<!-- END MODAL 4 IMAGES FIX -->
-
-
-
-<!-- EXTERNAL MODAL PRODUCT IMAGE FIX: one medium logo-like image per modal -->
-<style>
-  .product-modal .modal-preview-gallery {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    margin: 8px 0 26px !important;
-  }
-
-  .product-modal .modal-preview-gallery__item {
-    width: min(230px, 58vw) !important;
-    margin: 0 auto !important;
-    display: grid !important;
-    place-items: center !important;
-    gap: 10px !important;
-    padding: 14px !important;
-    border-radius: 28px !important;
-    background: rgba(255,255,255,.72) !important;
-    border: 1px solid rgba(166,106,19,.18) !important;
-    box-shadow: 0 18px 36px rgba(80,48,6,.12) !important;
-  }
-
-  .product-modal .modal-preview-gallery__item img {
-    width: min(170px, 44vw) !important;
-    height: min(170px, 44vw) !important;
-    object-fit: contain !important;
-    border-radius: 50% !important;
-    background: #fff8ee !important;
-    padding: 8px !important;
-    box-shadow: 0 12px 28px rgba(80,48,6,.14) !important;
-  }
-
-  .product-modal .modal-preview-gallery__item figcaption {
-    color: var(--gold-dark) !important;
-    font-weight: 900 !important;
-    font-size: 15px !important;
-    text-align: center !important;
-  }
-
-  @media (max-width: 620px) {
-    .product-modal .modal-preview-gallery {
-      margin: 6px 0 22px !important;
-    }
-
-    .product-modal .modal-preview-gallery__item {
-      width: min(210px, 62vw) !important;
-      padding: 12px !important;
-      border-radius: 24px !important;
-    }
-
-    .product-modal .modal-preview-gallery__item img {
-      width: min(150px, 46vw) !important;
-      height: min(150px, 46vw) !important;
-    }
-  }
-</style>
-<!-- END EXTERNAL MODAL PRODUCT IMAGE FIX -->
-
-
-
-<!-- DESKTOP ONLY MODAL PHONE-STYLE IMAGE FIX -->
-<style>
-  /* Desktop/laptop only: make the Eissorten ansehen modal look closer to the phone design, with a clear product image. */
-  @media (min-width: 761px) {
-    .product-modal__box {
-      width: min(760px, calc(100vw - 56px)) !important;
-      padding: 34px 34px 38px !important;
-      border-radius: 28px !important;
-    }
-
-    .product-modal__top {
-      align-items: flex-start !important;
-      margin-bottom: 16px !important;
-    }
-
-    .product-modal .modal-preview-gallery {
-      width: 100% !important;
+  @media (min-width: 769px) {
+    .product-modal .milch-gallery {
       display: grid !important;
-      grid-template-columns: 1fr !important;
-      justify-content: stretch !important;
-      align-items: stretch !important;
-      margin: 8px 0 24px !important;
-      gap: 12px !important;
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      gap: 16px !important;
+      margin: 24px 0 24px !important;
     }
 
-    .product-modal .modal-preview-gallery__item {
-      width: 100% !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      display: block !important;
+    .product-modal .milch-gallery__item {
       overflow: hidden !important;
-      border-radius: 24px !important;
-      background: rgba(255,255,255,.82) !important;
+      min-height: 170px !important;
+      border-radius: 22px !important;
+      background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,246,232,.58)) !important;
       border: 1px solid rgba(166,106,19,.20) !important;
-      box-shadow: 0 16px 34px rgba(80,48,6,.12) !important;
+      box-shadow: 0 16px 34px rgba(80,48,6,.10) !important;
     }
 
-    .product-modal .modal-preview-gallery__item img {
+    .product-modal .milch-gallery__item img {
       width: 100% !important;
-      height: 260px !important;
-      max-width: none !important;
+      height: 100% !important;
+      min-height: 170px !important;
       object-fit: cover !important;
       display: block !important;
-      border-radius: 24px !important;
-      background: #fff8ee !important;
-      padding: 0 !important;
-      box-shadow: none !important;
-    }
-
-    .product-modal .modal-sorten-list {
-      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-      gap: 10px !important;
-      margin-top: 22px !important;
-    }
-
-    .product-modal .modal-sorten-list span {
-      min-height: 46px !important;
-      padding: 10px 14px !important;
-      border-radius: 999px !important;
-      background: rgba(255,255,255,.82) !important;
-      border: 1px solid rgba(166,106,19,.18) !important;
-      box-shadow: none !important;
-      color: var(--brown) !important;
-      font-size: 13px !important;
-      font-weight: 800 !important;
-      line-height: 1.3 !important;
-      text-align: center !important;
-      white-space: normal !important;
-      overflow-wrap: anywhere !important;
-      transform: none !important;
-    }
-
-    .product-modal .modal-sorten-list span:hover {
-      background: rgba(211,154,56,.14) !important;
-      color: var(--gold-dark) !important;
-      transform: none !important;
-      box-shadow: none !important;
     }
   }
 </style>
-<!-- END DESKTOP ONLY MODAL PHONE-STYLE IMAGE FIX -->
+<!-- END DESKTOP ONLY IMAGE GALLERY DISPLAY -->
 
 </head>
 
@@ -1652,8 +1504,8 @@
     </div>
 
     <nav class="navbar">
-      <a class="logo" href="index.html" aria-label="Eis Büffe Startseite">
-        <img src="assets/logo.png" alt="Eis Büffe Logo" />
+      <a class="logo" href="index.html" aria-label="Eis Büffel Startseite">
+        <img src="assets/logo.png" alt="Eis Büffel Logo" />
       </a>
 
       <button class="menu-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false">☰</button>
@@ -1674,7 +1526,7 @@
     <section class="products-hero">
       <div>
         <p class="eyebrow">Unsere Produkte</p>
-        <h1>Produkten <span class="brand">Eis Büffe</span></h1>
+        <h1>Produkten <span class="brand">Eis Büffel</span></h1>
         <p>
           Entdecken Sie unsere beliebtesten Produktgruppen für Gastronomie,
           Eiscafés, Wiederverkäufer und Großkunden.
@@ -1739,11 +1591,11 @@
 
         <button class="product-card" type="button" data-modal-target="spezialitaetenModal">
           <div class="product-card__image">
-            <img src="assets/spezialitaeten.png" alt="Eis Büffe Spezialitäten" />
+            <img src="assets/spezialitaeten.png" alt="Eis Büffel Spezialitäten" />
           </div>
           <div class="product-card__body">
             <span class="product-card__number">04</span>
-            <h3>Eis Büffe Spezialitäten</h3>
+            <h3>Eis Büffel Spezialitäten</h3>
             <p>
               Besondere Kreationen und exklusive Sorten für Kunden,
               die mehr als klassische Eissorten anbieten möchten.
@@ -1802,8 +1654,8 @@
 
   <footer class="footer">
     <div class="footer__inner">
-      <img src="assets/logo.png" alt="Eis Büffe Logo" />
-      <p>© 2025 Eis Büffe. Alle Rechte vorbehalten.</p>
+      <img src="assets/logo.png" alt="Eis Büffel Logo" />
+      <p>© 2025 Eis Büffel. Alle Rechte vorbehalten.</p>
     </div>
   </footer>
 
@@ -1817,12 +1669,6 @@
         <button class="product-modal__close" type="button" aria-label="Fenster schließen">×</button>
       </div>
 
-      <div class="modal-preview-gallery" aria-label="Produktbilder">
-        <figure class="modal-preview-gallery__item">
-          <img src="assets/VanilleEis1.png" alt="Eis Bild" />
-        </figure>
-      </div>
-
       <p>
         Hauptbestandteil ist zu <strong>70% frische Milch</strong>.
         Geschmacklich abgerundet wird es durch nahezu unbegrenzte Zutaten:
@@ -1831,6 +1677,20 @@
       <p>
         u. a. Kakao, Kaffee und Schokolade über Nüsse, Nougat bis hin zu Mandeln und Vanille.
       </p>
+
+      <div class="milch-gallery" aria-label="Milchspeiseeise Bilder">
+        <figure class="milch-gallery__item">
+          <img src="assets/milchspeiseeis-1.png" alt="Milchspeiseeise Auswahl" />
+        </figure>
+        <figure class="milch-gallery__item">
+          <img src="assets/milchspeiseeis-2.png" alt="Cremige Milchspeiseeise Sorte" />
+        </figure>
+        <figure class="milch-gallery__item">
+          <img src="assets/milchspeiseeis-3.png" alt="Milchspeiseeise Spezialität" />
+        </figure>
+      </div>
+
+
       <div class="modal-sorten-list">
         <span>Vanille</span>
         <span>Schokolade</span>
@@ -1880,12 +1740,6 @@
         <button class="product-modal__close" type="button" aria-label="Fenster schließen">×</button>
       </div>
 
-      <div class="modal-preview-gallery" aria-label="Produktbilder">
-        <figure class="modal-preview-gallery__item">
-          <img src="assets/VanilleEis2.png" alt="Eis Bild" />
-        </figure>
-      </div>
-
       <p>
         Beim Fruchtspeiseeis besteht die Basis aus Wasser und sehr vielen frischen Früchten.
       </p>
@@ -1930,18 +1784,12 @@
         <button class="product-modal__close" type="button" aria-label="Fenster schließen">×</button>
       </div>
 
-      <div class="modal-preview-gallery" aria-label="Produktbilder">
-        <figure class="modal-preview-gallery__item">
-          <img src="assets/VanilleEis3.png" alt="Eis Bild" />
-        </figure>
-      </div>
-
       <p>
         Milchspeiseeis mit Joghurt.
       </p>
 
       <p>
-        <strong>Eis Büffe Joghurt</strong>
+        <strong>Eis Büffel Joghurt</strong>
       </p>
 
       <div class="modal-sorten-list">
@@ -1977,12 +1825,6 @@
           <h2 id="spezialitaetenTitle">Unsere Spezialitäten</h2>
         </div>
         <button class="product-modal__close" type="button" aria-label="Fenster schließen">×</button>
-      </div>
-
-      <div class="modal-preview-gallery" aria-label="Produktbilder">
-        <figure class="modal-preview-gallery__item">
-          <img src="assets/VanilleEis4.png" alt="Eis Bild" />
-        </figure>
       </div>
 
       <p>
@@ -2195,10 +2037,6 @@
 <!-- END FINAL VERIFIED MOBILE MENU SCRIPT -->
 
 
-<!-- SUPABASE CLIENT SDK -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<!-- END SUPABASE CLIENT SDK -->
-
 
 <!-- ADMIN EDITOR: products, Eissorten modal, add/delete images -->
 <style>
@@ -2210,21 +2048,6 @@
     box-shadow: 0 18px 38px rgba(80,48,6,.28);
   }
   .admin-fab:hover { transform: translateY(-2px); }
-  .admin-logout-btn {
-    position: fixed; right: 22px; bottom: 22px; z-index: 99990;
-    display: none; align-items: center; justify-content: center; gap: 8px;
-    border: 0; border-radius: 999px; min-height: 52px; padding: 0 20px;
-    background: linear-gradient(135deg, #a95b34, #743014); color: #fff;
-    font: inherit; font-weight: 900; cursor: pointer;
-    box-shadow: 0 18px 38px rgba(80,48,6,.28);
-  }
-  body.admin-mode .admin-logout-btn { display: inline-flex; }
-  .admin-logout-btn:hover { transform: translateY(-2px); }
-  @media (max-width: 620px) {
-    .admin-logout-btn {
-      right: 14px; bottom: 14px; min-height: 48px; padding: 0 16px; font-size: 13px;
-    }
-  }
   .admin-overlay {
     position: fixed; inset: 0; z-index: 99991; display: none; place-items: center;
     padding: 18px; background: rgba(53,33,5,.62);
@@ -2249,9 +2072,6 @@
     background: #fff; padding: 13px 14px; font: inherit; color: var(--brown); outline: none;
   }
   .admin-field textarea { min-height: 105px; resize: vertical; line-height: 1.6; }
-  .admin-field input[readonly] { background: rgba(255,255,255,.58); color: var(--muted); }
-  .admin-field .admin-btn { width: fit-content; margin-top: 2px; }
-
   .admin-field input:focus, .admin-field textarea:focus { border-color: rgba(166,106,19,.62); box-shadow: 0 0 0 4px rgba(198,145,53,.13); }
   .admin-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
   .admin-btn {
@@ -2287,27 +2107,12 @@
     visibility: hidden !important;
     pointer-events: none !important;
   }
-  .admin-image-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 8px; }
-  .admin-image-row { position: relative; display: grid; grid-template-columns: 1fr; gap: 8px; align-items: center; padding: 9px; border: 1px solid rgba(166,106,19,.18); border-radius: 18px; background: rgba(255,255,255,.75); overflow: hidden; }
-  .admin-image-preview { position: relative; overflow: hidden; border-radius: 14px; }
-  .admin-image-row img { width: 100%; height: 120px; object-fit: cover; border-radius: 14px; }
-  .admin-image-row .admin-new-badge-preview { position: absolute; top: 8px; right: 8px; z-index: 2; width: 42px; height: auto; object-fit: contain; border-radius: 0; filter: drop-shadow(0 6px 10px rgba(0,0,0,.18)); }
+  .admin-image-list { display: grid; gap: 10px; margin-top: 4px; }
+  .admin-image-row { display: grid; grid-template-columns: 72px 1fr auto; gap: 10px; align-items: center; padding: 9px; border: 1px solid rgba(166,106,19,.18); border-radius: 16px; background: rgba(255,255,255,.75); }
+  .admin-image-row img { width: 72px; height: 52px; object-fit: cover; border-radius: 12px; }
   .admin-image-row span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); font-size: 12px; }
-  .admin-image-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .admin-image-actions .admin-btn { width: 100%; min-height: 46px; padding: 0 12px; }
-  .admin-btn--new-sort { background: linear-gradient(135deg, #e53935, #8b1111) !important; }
-  .admin-modal-gallery { margin-top: 24px; display: grid; grid-template-columns: 1fr; gap: 12px; }
-  .admin-modal-gallery__item { position: relative; overflow: hidden; min-height: 150px; border-radius: 18px; border: 1px solid rgba(166,106,19,.18); box-shadow: 0 12px 25px rgba(80,48,6,.10); background: rgba(255,255,255,.72); }
-  .admin-modal-gallery__item > img:first-child { width: 100%; height: 220px; object-fit: cover; border-radius: 18px; display: block; }
-  .admin-modal-gallery__new-badge { position: absolute; top: 10px; right: 10px; z-index: 2; width: min(24%, 72px); height: auto; object-fit: contain; filter: drop-shadow(0 7px 12px rgba(0,0,0,.20)); pointer-events: none; }
-  .admin-modal-gallery__delete {
-    position: absolute; right: 9px; top: 9px; z-index: 3; display: none; align-items: center; justify-content: center;
-    min-height: 34px; padding: 0 12px; border: 0; border-radius: 999px;
-    background: linear-gradient(135deg, #a95b34, #743014); color: #fff;
-    font: inherit; font-size: 12px; font-weight: 900; cursor: pointer;
-    box-shadow: 0 12px 24px rgba(80,48,6,.24);
-  }
-  body.admin-mode .admin-modal-gallery__delete { display: inline-flex; }
+  .admin-modal-gallery { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .admin-modal-gallery img { width: 100%; height: 150px; object-fit: cover; border-radius: 18px; border: 1px solid rgba(166,106,19,.18); box-shadow: 0 12px 25px rgba(80,48,6,.10); }
   .admin-save-note {
     position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); opacity: 0;
     z-index: 99993; padding: 12px 18px; border-radius: 999px;
@@ -2322,25 +2127,22 @@
     .admin-actions { flex-direction: column; }
     .admin-btn { width: 100%; }
     .admin-modal-gallery { grid-template-columns: 1fr; }
-    .admin-image-list { grid-template-columns: 1fr; }
-    .admin-image-row img { height: 150px; }
-    .admin-image-row .admin-new-badge-preview { width: 48px; height: auto; }
+    .admin-image-row { grid-template-columns: 60px 1fr; }
+    .admin-image-row .admin-btn { grid-column: 1 / -1; }
   }
 </style>
+
+<button class="admin-fab" type="button" id="adminOpenBtn">🔐 Admin</button>
 
 <div class="admin-overlay" id="adminLoginOverlay" aria-hidden="true">
   <div class="admin-panel" role="dialog" aria-modal="true" aria-labelledby="adminLoginTitle">
     <h2 id="adminLoginTitle">Admin Login</h2>
-    <p>Geben Sie E-Mail und Passwort ein. Die Prüfung läuft sicher über Supabase; das Passwort steht nicht im Seiten-Code.</p>
-    <div class="admin-field">
-      <label for="adminEmailInput">E-Mail</label>
-      <input id="adminEmailInput" type="email" autocomplete="username" placeholder="admin@example.com" />
-    </div>
+    <p>Geben Sie das Passwort ein, um Produktbilder, Texte und die Inhalte von „Eissorten ansehen“ zu bearbeiten.</p>
     <div class="admin-field">
       <label for="adminPasswordInput">Passwort</label>
       <input id="adminPasswordInput" type="password" autocomplete="current-password" placeholder="Passwort eingeben" />
     </div>
-    <p class="admin-error" id="adminLoginError">Falsche E-Mail oder falsches Passwort.</p>
+    <p class="admin-error" id="adminLoginError">Falsches Passwort.</p>
     <div class="admin-actions">
       <button class="admin-btn" type="button" id="adminLoginBtn">Einloggen</button>
       <button class="admin-btn admin-btn--light" type="button" data-admin-close>Schließen</button>
@@ -2356,7 +2158,10 @@
       <div class="admin-field">
         <label for="adminEditImageFile">Kartenbild hochladen</label>
         <input id="adminEditImageFile" type="file" accept="image/*" />
-        <input id="adminEditImageUrl" type="text" readonly placeholder="Kein neues Bild ausgewählt" />
+      </div>
+      <div class="admin-field">
+        <label for="adminEditImageUrl">Oder Kartenbild-Link / Pfad</label>
+        <input id="adminEditImageUrl" type="text" placeholder="assets/bild.png oder https://..." />
       </div>
       <div class="admin-field">
         <label for="adminEditTitleInput">Kartentitel</label>
@@ -2384,51 +2189,40 @@
         <textarea id="adminSortenInput"></textarea>
         <small>Jede Sorte in eine neue Zeile schreiben. Zeile löschen = Sorte löschen.</small>
       </div>
-      <div class="admin-field admin-span">
-        <label>Vorhandene und hinzugefügte Bilder im Eissorten-Fenster</label>
-        <small>Diese Bilder erscheinen im Fenster „Eissorten ansehen“. Sie können jedes Bild hier direkt löschen.</small>
-        <div class="admin-image-list" id="adminModalImagesList"></div>
+      <div class="admin-field">
+        <label for="adminModalImageFile">Zusätzliches Bild hinzufügen</label>
+        <input id="adminModalImageFile" type="file" accept="image/*" />
       </div>
       <div class="admin-field">
-        <label for="adminModalImageFile">Weitere Bilder hinzufügen</label>
-        <input id="adminModalImageFile" type="file" accept="image/*" multiple />
-        <input id="adminModalImageUrl" type="text" readonly placeholder="Keine neuen Bilder ausgewählt" />
-        <button class="admin-btn admin-btn--light" type="button" id="adminAddModalImageBtn">Bilder zur Vorschau hinzufügen</button>
+        <label for="adminModalImageUrl">Oder zusätzlicher Bild-Link</label>
+        <input id="adminModalImageUrl" type="text" placeholder="assets/bild.png oder https://..." />
+      </div>
+      <div class="admin-field admin-span">
+        <button class="admin-btn admin-btn--light" type="button" id="adminAddModalImageBtn">+ Bild hinzufügen</button>
+      </div>
+      <div class="admin-field admin-span">
+        <label>Zusätzliche Bilder</label>
+        <div class="admin-image-list" id="adminModalImagesList"></div>
       </div>
     </div>
     <div class="admin-actions">
       <button class="admin-btn" type="button" id="adminSaveEditBtn">Speichern</button>
-      <button class="admin-btn admin-btn--light" type="button" id="adminResetCardBtn">Zurücksetzen</button>
       <button class="admin-btn admin-btn--light" type="button" data-admin-close>Abbrechen</button>
+      <button class="admin-btn admin-btn--danger" type="button" id="adminResetCardBtn">Diese Karte zurücksetzen</button>
     </div>
   </div>
 </div>
 <div class="admin-save-note" id="adminSaveNote">Gespeichert</div>
-<button class="admin-logout-btn" type="button" id="adminLogoutBtn" aria-label="Aus Admin-Modus abmelden">Abmelden</button>
 
 <script>
 (function () {
-  const STORAGE_KEY = 'eis-bueffel-products-admin-v6';
-  const LEGACY_STORAGE_KEYS = ['eis-bueffel-products-admin-v6', 'eis-bueffel-products-admin-v5', 'eis-bueffel-products-admin-v4', 'eis-bueffel-products-admin-v3', 'eisbueffel_produktkarten_v1'];
+  const ADMIN_PASSWORD = 'admin123';
+  const STORAGE_KEY = 'eis-bueffel-products-admin-v3';
   const SESSION_KEY = 'eis-bueffel-admin-logged-in';
-
-  // === SUPABASE SETTINGS ===
-  // 1) استبدل القيمتين أدناه من Supabase Project Settings > API.
-  // 2) أنشئ جدول product_page_content وباكت product-images حسب SQL الموجود في الرد.
-  const SUPABASE_URL = 'https://qzwonskbfdpvjcduqabb.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publishable_ALts0O-Hh463KG-T6GJXyQ_qQyas6ZD';
-  const SUPABASE_TABLE = 'product_page_content';
-  const SUPABASE_ROW_ID = 'produkten-page-v1';
-  const SUPABASE_BUCKET = 'product-images';
-  const supabaseClient = (window.supabase && SUPABASE_URL.indexOf('YOUR_PROJECT_ID') === -1 && SUPABASE_ANON_KEY.indexOf('YOUR_SUPABASE') === -1)
-    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-    : null;
   let editIndex = null;
   let uploadedCardImage = '';
-  let uploadedModalImages = [];
+  let uploadedModalImage = '';
   let tempModalImages = [];
-  let tempModalNewBadges = [];
-  const NEW_BADGE_SRC = 'assets/bild.png';
 
   function ready(fn) {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
@@ -2437,9 +2231,9 @@
 
   ready(function () {
     const cards = Array.from(document.querySelectorAll('.product-grid .product-card'));
+    const adminOpenBtn = document.getElementById('adminOpenBtn');
     const loginOverlay = document.getElementById('adminLoginOverlay');
     const editOverlay = document.getElementById('adminEditOverlay');
-    const emailInput = document.getElementById('adminEmailInput');
     const passwordInput = document.getElementById('adminPasswordInput');
     const loginBtn = document.getElementById('adminLoginBtn');
     const loginError = document.getElementById('adminLoginError');
@@ -2458,7 +2252,6 @@
     const saveBtn = document.getElementById('adminSaveEditBtn');
     const resetBtn = document.getElementById('adminResetCardBtn');
     const saveNote = document.getElementById('adminSaveNote');
-    const adminLogoutBtn = document.getElementById('adminLogoutBtn');
 
     if (!cards.length) return;
 
@@ -2481,63 +2274,15 @@
         modalTitle: modalTitle ? modalTitle.textContent.trim() : (title ? title.textContent.trim() : ''),
         modalText: modalText,
         sorten: sorten,
-        // vorhandene Bilder aus der ursprünglichen Galerie (z. B. die 3 Milchspeiseeise-Bilder)
-        // werden auch in der Admin-Bearbeitung angezeigt und können gelöscht werden.
-        modalImages: modal ? Array.from(modal.querySelectorAll('.modal-preview-gallery img, .milch-gallery img, .admin-modal-gallery__item > img:first-child')).map(im => im.getAttribute('src')).filter(Boolean) : [],
-        modalImagesTouched: false,
-        modalNewBadges: []
+        modalImages: []
       };
     });
 
     let data = loadData();
     applyData();
-    syncFromSupabase();
     createCardTools();
     removeDuplicatePencils();
     if (sessionStorage.getItem(SESSION_KEY) === '1') enableAdminMode();
-    setupHiddenAdminAccess();
-
-    function setupHiddenAdminAccess() {
-      // Admin-Zugang ist absichtlich unsichtbar: kein sichtbarer Login-Button auf der Seite.
-      // Öffnen über: ?admin=1 in der URL oder Tastenkürzel Ctrl + Alt + A.
-      function openLogin() {
-        openOverlay(loginOverlay);
-        setTimeout(function () { if (emailInput) emailInput.focus(); else if (passwordInput) passwordInput.focus(); }, 50);
-      }
-
-      try {
-        const params = new URLSearchParams(window.location.search);
-        if (params.get('admin') === '1') openLogin();
-      } catch (e) {}
-
-      document.addEventListener('keydown', function (event) {
-        const key = (event.key || '').toLowerCase();
-        if (event.ctrlKey && event.altKey && key === 'a') {
-          event.preventDefault();
-          openLogin();
-        }
-      });
-    }
-
-    async function verifyAdminLogin(email, password) {
-      if (!email || !password) return false;
-      if (!supabaseClient) {
-        console.error('Supabase غير مفعّل: لا يمكن التحقق من تسجيل الدخول بدون Supabase.');
-        return false;
-      }
-
-      const result = await supabaseClient.rpc('verify_admin_login', {
-        input_email: email,
-        plain_password: password
-      });
-
-      if (result.error) {
-        console.error('Supabase admin login verification error:', result.error);
-        return false;
-      }
-
-      return result.data === true;
-    }
 
     function removeDuplicatePencils() {
       cards.forEach(function (card) {
@@ -2549,113 +2294,19 @@
       });
     }
 
-    function uniqueImages(images) {
-      const seen = new Set();
-      return (images || []).filter(Boolean).filter(function (src) {
-        if (seen.has(src)) return false;
-        seen.add(src);
-        return true;
-      });
-    }
-
-    function normalizeItem(savedItem, fallback) {
-      const item = Object.assign({}, fallback, savedItem || {});
-      const savedImages = [];
-      ['modalImages', 'images', 'extraImages', 'galleryImages', 'eissortenImages'].forEach(function (key) {
-        if (Array.isArray(savedItem && savedItem[key])) savedImages.push.apply(savedImages, savedItem[key]);
-      });
-
-      const fallbackImages = Array.isArray(fallback.modalImages) ? fallback.modalImages : [];
-
-      // Wichtig: Wenn der Admin Bilder gelöscht hat, dürfen die ursprünglichen
-      // HTML-Bilder nicht erneut dazugemischt werden. Darum gilt:
-      // - modalImagesTouched = true  => exakt gespeicherte Liste verwenden
-      // - modalImagesTouched = false => HTML-Standardbilder + gespeicherte Bilder zusammenführen
-      item.modalImagesTouched = !!(savedItem && savedItem.modalImagesTouched);
-      item.modalImages = item.modalImagesTouched
-        ? uniqueImages(savedImages)
-        : uniqueImages(fallbackImages.concat(savedImages));
-      item.modalNewBadges = Array.isArray(savedItem && savedItem.modalNewBadges) ? savedItem.modalNewBadges.filter(Boolean) : [];
-      return item;
-    }
-
     function loadData() {
-      for (const key of LEGACY_STORAGE_KEYS) {
-        try {
-          const saved = JSON.parse(localStorage.getItem(key) || 'null');
-          if (Array.isArray(saved) && saved.length === defaults.length) {
-            const loaded = defaults.map((item, i) => normalizeItem(saved[i], item));
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(loaded));
-            return loaded;
-          }
-        } catch (e) {}
-      }
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+        if (Array.isArray(saved) && saved.length === defaults.length) {
+          return defaults.map((item, i) => Object.assign({}, item, saved[i] || {}));
+        }
+      } catch (e) {}
       return defaults.map(item => Object.assign({}, item));
     }
 
-    function saveLocalData(items) {
-      const json = JSON.stringify(items || data);
-      localStorage.setItem(STORAGE_KEY, json);
-      localStorage.setItem('eis-bueffel-products-admin-v5', json);
-      localStorage.setItem('eis-bueffel-products-admin-v4', json);
-      localStorage.setItem('eis-bueffel-products-admin-v3', json);
-    }
-
-    async function loadDataFromSupabase() {
-      if (!supabaseClient) return null;
-      const result = await supabaseClient
-        .from(SUPABASE_TABLE)
-        .select('data')
-        .eq('id', SUPABASE_ROW_ID)
-        .maybeSingle();
-
-      if (result.error) throw result.error;
-      const remoteData = result.data && result.data.data;
-      if (Array.isArray(remoteData) && remoteData.length === defaults.length) {
-        return defaults.map((item, i) => normalizeItem(remoteData[i], item));
-      }
-      return null;
-    }
-
-    async function syncFromSupabase() {
-      if (!supabaseClient) {
-        console.warn('Supabase غير مفعّل بعد: ضع SUPABASE_URL و SUPABASE_ANON_KEY داخل الملف.');
-        return;
-      }
-      try {
-        const remote = await loadDataFromSupabase();
-        if (remote) {
-          data = remote;
-          saveLocalData(data);
-          applyData();
-        } else {
-          await saveDataToSupabase(data);
-        }
-      } catch (error) {
-        console.error('Supabase load error:', error);
-      }
-    }
-
-    async function saveDataToSupabase(items) {
-      if (!supabaseClient) return;
-      const result = await supabaseClient
-        .from(SUPABASE_TABLE)
-        .upsert({
-          id: SUPABASE_ROW_ID,
-          data: items || data,
-          updated_at: new Date().toISOString()
-        }, { onConflict: 'id' });
-
-      if (result.error) throw result.error;
-    }
-
     function saveData() {
-      saveLocalData(data);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
       showSaved();
-      saveDataToSupabase(data).catch(function (error) {
-        console.error('Supabase save error:', error);
-        alert('تم الحفظ محليًا، لكن فشل الحفظ في Supabase. تأكد من الإعدادات والسياسات.');
-      });
     }
 
     function applyData() {
@@ -2672,11 +2323,11 @@
 
         const modalId = card.getAttribute('data-modal-target');
         const modal = modalId ? document.getElementById(modalId) : null;
-        if (modal) applyModalData(modal, item, defaults[index], index);
+        if (modal) applyModalData(modal, item, defaults[index]);
       });
     }
 
-    function applyModalData(modal, item, fallback, cardIndex) {
+    function applyModalData(modal, item, fallback) {
       const title = modal.querySelector('h2');
       const eyebrow = modal.querySelector('.eyebrow');
       if (title) title.textContent = item.modalTitle || item.title || fallback.modalTitle;
@@ -2684,12 +2335,6 @@
 
       const box = modal.querySelector('.product-modal__box');
       const top = modal.querySelector('.product-modal__top');
-      if (box) {
-        // لا نعرض المعرض القديم مرتين؛ كل الصور الآن تُدار من admin-modal-gallery.
-        box.querySelectorAll('.milch-gallery, .modal-preview-gallery').forEach(function (oldGallery) {
-          oldGallery.style.display = 'none';
-        });
-      }
       if (box && top) {
         Array.from(box.children).forEach(function (child) {
           if (child.matches('p.admin-modal-text')) child.remove();
@@ -2721,59 +2366,20 @@
       }
 
       let gallery = modal.querySelector('.admin-modal-gallery');
-      const listForGallery = modal.querySelector('.modal-sorten-list');
       if (!gallery && box) {
         gallery = document.createElement('div');
         gallery.className = 'admin-modal-gallery';
-      }
-      // الصور المضافة تظهر في أعلى نافذة النكهات، قبل قائمة الأصناف، وليس في آخر النافذة.
-      if (gallery && box && listForGallery && gallery.nextElementSibling !== listForGallery) {
-        box.insertBefore(gallery, listForGallery);
-      } else if (gallery && box && !gallery.parentNode) {
         box.appendChild(gallery);
       }
       if (gallery) {
         gallery.innerHTML = '';
-        const images = Array.isArray(item.modalImages) ? uniqueImages(item.modalImages).filter(Boolean) : [];
+        const images = Array.isArray(item.modalImages) ? item.modalImages : [];
         gallery.style.display = images.length ? 'grid' : 'none';
-        const markedAsNew = Array.isArray(item.modalNewBadges) ? item.modalNewBadges : [];
-        images.forEach(function (src, imageIndex) {
-          const figure = document.createElement('figure');
-          figure.className = 'admin-modal-gallery__item';
-
+        images.forEach(function (src) {
           const im = document.createElement('img');
           im.src = src;
           im.alt = item.modalTitle || item.title || 'Eissorten Bild';
-
-          const hasNewBadge = markedAsNew.indexOf(src) !== -1;
-          let badge = null;
-          if (hasNewBadge) {
-            badge = document.createElement('img');
-            badge.className = 'admin-modal-gallery__new-badge';
-            badge.src = NEW_BADGE_SRC;
-            badge.alt = 'New';
-          }
-
-          const deleteBtn = document.createElement('button');
-          deleteBtn.type = 'button';
-          deleteBtn.className = 'admin-modal-gallery__delete';
-          deleteBtn.textContent = 'Löschen';
-          deleteBtn.addEventListener('click', function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-            if (!document.body.classList.contains('admin-mode')) return;
-            if (typeof cardIndex !== 'number' || !data[cardIndex]) return;
-            data[cardIndex].modalImages = (data[cardIndex].modalImages || []).filter(function (_, i) { return i !== imageIndex; });
-            data[cardIndex].modalNewBadges = (data[cardIndex].modalNewBadges || []).filter(function (badgeSrc) { return badgeSrc !== src; });
-            data[cardIndex].modalImagesTouched = true;
-            saveData();
-            applyData();
-          });
-
-          figure.appendChild(im);
-          if (badge) figure.appendChild(badge);
-          figure.appendChild(deleteBtn);
-          gallery.appendChild(figure);
+          gallery.appendChild(im);
         });
       }
     }
@@ -2816,14 +2422,12 @@
       removeDuplicatePencils();
       document.body.classList.add('admin-mode');
       sessionStorage.setItem(SESSION_KEY, '1');
+      if (adminOpenBtn) adminOpenBtn.textContent = '✎ Bearbeiten aktiv';
     }
     function disableAdminMode() {
       document.body.classList.remove('admin-mode');
       sessionStorage.removeItem(SESSION_KEY);
-      closeOverlay(loginOverlay);
-      closeOverlay(editOverlay);
-      if (passwordInput) passwordInput.value = '';
-      if (loginError) loginError.style.display = 'none';
+      if (adminOpenBtn) adminOpenBtn.textContent = '🔐 Admin';
     }
     function showSaved() {
       if (!saveNote) return;
@@ -2836,16 +2440,9 @@
       if (!document.body.classList.contains('admin-mode')) return;
       editIndex = index;
       uploadedCardImage = '';
-      uploadedModalImages = [];
+      uploadedModalImage = '';
       const item = data[index] || defaults[index];
-      const modalId = cards[index] ? cards[index].getAttribute('data-modal-target') : '';
-      const modal = modalId ? document.getElementById(modalId) : null;
-      const liveImages = modal ? Array.from(modal.querySelectorAll('.admin-modal-gallery__item > img:first-child, .modal-preview-gallery img')).map(function (im) { return im.getAttribute('src'); }).filter(Boolean) : [];
-      const savedModalImages = Array.isArray(item.modalImages) ? item.modalImages : [];
-      tempModalImages = item.modalImagesTouched
-        ? uniqueImages(savedModalImages)
-        : uniqueImages(savedModalImages.concat(liveImages));
-      tempModalNewBadges = Array.isArray(item.modalNewBadges) ? item.modalNewBadges.slice() : [];
+      tempModalImages = Array.isArray(item.modalImages) ? item.modalImages.slice() : [];
       if (cardImageFile) cardImageFile.value = '';
       if (cardImageUrl) cardImageUrl.value = item.image || '';
       if (titleInput) titleInput.value = item.title || '';
@@ -2861,16 +2458,6 @@
       setTimeout(function () { focusImage && cardImageFile ? cardImageFile.focus() : (buttonInput && buttonInput.focus()); }, 50);
     }
 
-    function createEmojiImagePlaceholder() {
-      const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">' +
-        '<rect width="900" height="600" rx="46" fill="#fff6e8"/>' +
-        '<rect x="26" y="26" width="848" height="548" rx="38" fill="none" stroke="#d39a38" stroke-width="10" stroke-dasharray="22 18"/>' +
-        '<text x="450" y="330" text-anchor="middle" dominant-baseline="middle" font-size="170">🖼️</text>' +
-        '<text x="450" y="465" text-anchor="middle" font-family="Arial, sans-serif" font-size="46" font-weight="700" fill="#6f4106">Neues Bild</text>' +
-        '</svg>';
-      return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
-    }
-
     function renderModalImagesEditor() {
       if (!modalImagesList) return;
       modalImagesList.innerHTML = '';
@@ -2884,135 +2471,48 @@
       tempModalImages.forEach(function (src, i) {
         const row = document.createElement('div');
         row.className = 'admin-image-row';
-        const isMarkedNew = tempModalNewBadges.indexOf(src) !== -1;
-        row.innerHTML = '<div class="admin-image-preview"><img class="admin-base-image" alt="Bild"></div><span></span><div class="admin-image-actions"><button class="admin-btn admin-btn--danger" type="button" data-action="delete">Löschen</button><button class="admin-btn admin-btn--new-sort" type="button" data-action="new-sort"></button></div>';
-        row.querySelector('.admin-base-image').src = src;
+        row.innerHTML = '<img alt="Bild"><span></span><button class="admin-btn admin-btn--danger" type="button">Löschen</button>';
+        row.querySelector('img').src = src;
         row.querySelector('span').textContent = src.length > 80 ? src.slice(0, 80) + '…' : src;
-        if (isMarkedNew) {
-          const badge = document.createElement('img');
-          badge.className = 'admin-new-badge-preview';
-          badge.src = NEW_BADGE_SRC;
-          badge.alt = 'New';
-          row.querySelector('.admin-image-preview').appendChild(badge);
-        }
-        row.querySelector('[data-action="new-sort"]').textContent = isMarkedNew ? 'Neu entfernen' : 'Neue Sorte';
-        row.querySelector('[data-action="delete"]').addEventListener('click', function () {
+        row.querySelector('button').addEventListener('click', function () {
           tempModalImages.splice(i, 1);
-          tempModalNewBadges = tempModalNewBadges.filter(function (badgeSrc) { return badgeSrc !== src; });
-          renderModalImagesEditor();
-        });
-        row.querySelector('[data-action="new-sort"]').addEventListener('click', function () {
-          if (tempModalNewBadges.indexOf(src) === -1) {
-            tempModalNewBadges.push(src);
-          } else {
-            tempModalNewBadges = tempModalNewBadges.filter(function (badgeSrc) { return badgeSrc !== src; });
-          }
           renderModalImagesEditor();
         });
         modalImagesList.appendChild(row);
       });
     }
 
-    function makeStoragePath(file) {
-      const ext = (file.name.split('.').pop() || 'png').toLowerCase().replace(/[^a-z0-9]/g, '');
-      const safeName = file.name.replace(/\.[^/.]+$/, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'image';
-      return 'products/' + Date.now() + '-' + Math.random().toString(36).slice(2, 9) + '-' + safeName + '.' + ext;
-    }
-
-    function readFileAsDataUrl(file) {
-      return new Promise(function (resolve, reject) {
-        const reader = new FileReader();
-        reader.onload = function (event) { resolve(event.target.result); };
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-    }
-
-    async function uploadImageToSupabase(file) {
-      if (!supabaseClient) {
-        // احتياطي: عند عدم تفعيل Supabase نحافظ على طريقة Base64 القديمة.
-        return readFileAsDataUrl(file);
-      }
-
-      const path = makeStoragePath(file);
-      const upload = await supabaseClient.storage.from(SUPABASE_BUCKET).upload(path, file, {
-        cacheControl: '3600',
-        upsert: false,
-        contentType: file.type || 'image/png'
-      });
-      if (upload.error) throw upload.error;
-
-      const publicUrl = supabaseClient.storage.from(SUPABASE_BUCKET).getPublicUrl(path);
-      return publicUrl.data.publicUrl;
-    }
-
     function fileToDataUrl(input, cb) {
       const file = input && input.files && input.files[0];
       if (!file) return;
-      uploadImageToSupabase(file)
-        .then(cb)
-        .catch(function (error) {
-          console.error('Supabase image upload error:', error);
-          alert('فشل رفع الصورة إلى Supabase. سيتم حفظها مؤقتًا داخل المتصفح فقط.');
-          readFileAsDataUrl(file).then(cb);
-        });
+      const reader = new FileReader();
+      reader.onload = function (event) { cb(event.target.result); };
+      reader.readAsDataURL(file);
     }
 
-    function filesToDataUrls(input, cb) {
-      const files = input && input.files ? Array.from(input.files) : [];
-      if (!files.length) return cb([]);
-      Promise.all(files.map(uploadImageToSupabase))
-        .then(function (urls) { cb(urls.filter(Boolean)); })
-        .catch(function (error) {
-          console.error('Supabase images upload error:', error);
-          alert('فشل رفع بعض الصور إلى Supabase. سيتم حفظها مؤقتًا داخل المتصفح فقط.');
-          Promise.all(files.map(readFileAsDataUrl)).then(function (urls) { cb(urls.filter(Boolean)); });
-        });
+    if (adminOpenBtn) {
+      adminOpenBtn.addEventListener('click', function () {
+        if (document.body.classList.contains('admin-mode')) disableAdminMode();
+        else { openOverlay(loginOverlay); setTimeout(() => passwordInput && passwordInput.focus(), 50); }
+      });
     }
-
     if (loginBtn) {
-      loginBtn.addEventListener('click', async function () {
-        if (loginError) loginError.style.display = 'none';
-        loginBtn.disabled = true;
-        loginBtn.textContent = 'Prüfen...';
-        try {
-          const isValid = await verifyAdminLogin(emailInput ? emailInput.value.trim() : '', passwordInput ? passwordInput.value : '');
-          if (isValid) {
-            if (passwordInput) passwordInput.value = '';
-            closeOverlay(loginOverlay); enableAdminMode(); showSaved();
-          } else if (loginError) {
-            loginError.textContent = 'Falsche E-Mail, falsches Passwort oder Supabase-Verifizierung nicht eingerichtet.';
-            loginError.style.display = 'block';
-          }
-        } finally {
-          loginBtn.disabled = false;
-          loginBtn.textContent = 'Einloggen';
-        }
+      loginBtn.addEventListener('click', function () {
+        if (passwordInput && passwordInput.value === ADMIN_PASSWORD) {
+          if (loginError) loginError.style.display = 'none';
+          closeOverlay(loginOverlay); enableAdminMode(); showSaved();
+        } else if (loginError) loginError.style.display = 'block';
       });
     }
-    if (adminLogoutBtn) {
-      adminLogoutBtn.addEventListener('click', function () {
-        disableAdminMode();
-      });
-    }
-    if (emailInput) emailInput.addEventListener('keydown', e => { if (e.key === 'Enter') passwordInput ? passwordInput.focus() : (loginBtn && loginBtn.click()); });
     if (passwordInput) passwordInput.addEventListener('keydown', e => { if (e.key === 'Enter') loginBtn && loginBtn.click(); });
     if (cardImageFile) cardImageFile.addEventListener('change', function () { fileToDataUrl(cardImageFile, function (url) { uploadedCardImage = url; if (cardImageUrl) cardImageUrl.value = 'Bild hochgeladen'; }); });
-    if (modalImageFile) modalImageFile.addEventListener('change', function () {
-      filesToDataUrls(modalImageFile, function (urls) {
-        uploadedModalImages = urls;
-        if (modalImageUrl) modalImageUrl.value = urls.length > 1 ? (urls.length + ' Bilder hochgeladen') : 'Bild hochgeladen';
-      });
-    });
+    if (modalImageFile) modalImageFile.addEventListener('change', function () { fileToDataUrl(modalImageFile, function (url) { uploadedModalImage = url; if (modalImageUrl) modalImageUrl.value = 'Bild hochgeladen'; }); });
     if (addModalImageBtn) {
       addModalImageBtn.addEventListener('click', function () {
-        const hasUploadedFiles = Array.isArray(uploadedModalImages) && uploadedModalImages.length > 0;
-        if (hasUploadedFiles) {
-          tempModalImages = tempModalImages.concat(uploadedModalImages);
-        } else {
-          return;
-        }
-        uploadedModalImages = [];
+        const src = uploadedModalImage || (modalImageUrl && modalImageUrl.value.trim());
+        if (!src || src === 'Bild hochgeladen') return;
+        tempModalImages.push(src);
+        uploadedModalImage = '';
         if (modalImageFile) modalImageFile.value = '';
         if (modalImageUrl) modalImageUrl.value = '';
         renderModalImagesEditor();
@@ -3022,12 +2522,8 @@
       saveBtn.addEventListener('click', function () {
         if (editIndex === null) return;
         const old = data[editIndex] || defaults[editIndex];
-        if (Array.isArray(uploadedModalImages) && uploadedModalImages.length) {
-          tempModalImages = tempModalImages.concat(uploadedModalImages);
-          uploadedModalImages = [];
-        }
         data[editIndex] = {
-          image: uploadedCardImage || old.image,
+          image: uploadedCardImage || ((cardImageUrl && cardImageUrl.value.trim() && cardImageUrl.value.trim() !== 'Bild hochgeladen') ? cardImageUrl.value.trim() : old.image),
           alt: (titleInput && titleInput.value.trim()) || old.alt || old.title,
           title: (titleInput && titleInput.value.trim()) || old.title,
           description: (descInput && descInput.value.trim()) || old.description,
@@ -3035,9 +2531,7 @@
           modalTitle: (modalTitleInput && modalTitleInput.value.trim()) || old.modalTitle || old.title,
           modalText: (modalTextInput && modalTextInput.value.split('\n').map(s => s.trim()).filter(Boolean)) || old.modalText,
           sorten: (sortenInput && sortenInput.value.split('\n').map(s => s.trim()).filter(Boolean)) || old.sorten,
-          modalImages: tempModalImages.slice(),
-          modalNewBadges: tempModalNewBadges.filter(function (badgeSrc) { return tempModalImages.indexOf(badgeSrc) !== -1; }),
-          modalImagesTouched: true
+          modalImages: tempModalImages.slice()
         };
         saveData(); applyData(); closeOverlay(editOverlay);
       });
@@ -3057,151 +2551,6 @@
 })();
 </script>
 <!-- END ADMIN EDITOR -->
-
-
-
-<!-- MOBILE EISSORTEN IMAGES FIX -->
-<style>
-  /* يجعل صور نافذة "Eissorten ansehen" تظهر كاملة وواضحة على الهاتف */
-  .product-modal .admin-modal-gallery,
-  .product-modal .milch-gallery {
-    width: 100% !important;
-  }
-
-  .product-modal .admin-modal-gallery__item,
-  .product-modal .milch-gallery__item {
-    background: rgba(255,255,255,.88) !important;
-  }
-
-  @media (max-width: 700px) {
-    .product-modal {
-      align-items: start !important;
-      padding: 12px !important;
-      overflow-y: auto !important;
-    }
-
-    .product-modal__box {
-      width: 100% !important;
-      max-height: calc(100vh - 24px) !important;
-      padding: 22px 14px !important;
-      border-radius: 22px !important;
-    }
-
-    .product-modal .admin-modal-gallery,
-    .product-modal .milch-gallery {
-      display: grid !important;
-      grid-template-columns: 1fr !important;
-      gap: 14px !important;
-      margin: 18px 0 20px !important;
-    }
-
-    .product-modal .admin-modal-gallery__item,
-    .product-modal .milch-gallery__item {
-      width: 100% !important;
-      min-height: 0 !important;
-      height: auto !important;
-      aspect-ratio: auto !important;
-      border-radius: 18px !important;
-      overflow: hidden !important;
-    }
-
-    .product-modal .admin-modal-gallery__item > img:first-child,
-    .product-modal .milch-gallery__item img {
-      width: 100% !important;
-      height: auto !important;
-      min-height: 0 !important;
-      max-height: none !important;
-      object-fit: contain !important;
-      border-radius: 18px !important;
-      display: block !important;
-    }
-
-    .product-modal .admin-modal-gallery__new-badge {
-      width: min(20%, 54px) !important;
-      top: 8px !important;
-      right: 8px !important;
-    }
-
-    body.admin-mode .product-modal .admin-modal-gallery__delete {
-      top: 8px !important;
-      right: 8px !important;
-      min-height: 32px !important;
-      padding: 0 10px !important;
-      font-size: 11px !important;
-    }
-  }
-</style>
-<!-- END MOBILE EISSORTEN IMAGES FIX -->
-
-
-
-<!-- LOGO STYLE MODAL IMAGE + INDIVIDUAL IMAGE NAME -->
-<style>
-  .product-modal .modal-preview-gallery {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    margin: 10px 0 24px !important;
-  }
-
-  .product-modal .modal-preview-gallery__item {
-    width: 220px !important;
-    max-width: 72vw !important;
-    margin: 0 auto !important;
-    padding: 12px 12px 14px !important;
-    overflow: visible !important;
-    text-align: center !important;
-    border-radius: 28px !important;
-    border: 1px solid rgba(166,106,19,.22) !important;
-    background: linear-gradient(145deg, rgba(255,255,255,.94), rgba(255,246,232,.82)) !important;
-    box-shadow: 0 16px 34px rgba(80,48,6,.14) !important;
-  }
-
-  .product-modal .modal-preview-gallery__item img {
-    width: 170px !important;
-    height: 170px !important;
-    max-width: 100% !important;
-    margin: 0 auto !important;
-    object-fit: cover !important;
-    border-radius: 50% !important;
-    border: 6px solid #fff8ee !important;
-    box-shadow: 0 12px 24px rgba(80,48,6,.16) !important;
-    display: block !important;
-  }
-
-  .product-modal .modal-preview-gallery__item figcaption {
-    display: block !important;
-    margin-top: 10px !important;
-    color: var(--gold-dark) !important;
-    font-family: Cinzel, serif !important;
-    font-size: 15px !important;
-    font-weight: 800 !important;
-    line-height: 1.25 !important;
-  }
-
-  @media (max-width: 700px) {
-    .product-modal .modal-preview-gallery {
-      margin: 8px 0 20px !important;
-    }
-
-    .product-modal .modal-preview-gallery__item {
-      width: 190px !important;
-      padding: 10px 10px 12px !important;
-      border-radius: 24px !important;
-    }
-
-    .product-modal .modal-preview-gallery__item img {
-      width: 145px !important;
-      height: 145px !important;
-    }
-
-    .product-modal .modal-preview-gallery__item figcaption {
-      font-size: 14px !important;
-    }
-  }
-</style>
-<!-- END LOGO STYLE MODAL IMAGE + INDIVIDUAL IMAGE NAME -->
 
 </body>
 </html>
