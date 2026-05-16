@@ -2100,12 +2100,16 @@
 <div class="admin-overlay" id="adminLoginOverlay" aria-hidden="true">
   <div class="admin-panel" role="dialog" aria-modal="true" aria-labelledby="adminLoginTitle">
     <h2 id="adminLoginTitle">Admin Login</h2>
-    <p>Geben Sie das Passwort ein. Die Prüfung läuft sicher über Supabase; das Passwort steht nicht im Seiten-Code.</p>
+    <p>Geben Sie E-Mail und Passwort ein. Die Prüfung läuft sicher über Supabase; das Passwort steht nicht im Seiten-Code.</p>
+    <div class="admin-field">
+      <label for="adminEmailInput">E-Mail</label>
+      <input id="adminEmailInput" type="email" autocomplete="username" placeholder="admin@example.com" />
+    </div>
     <div class="admin-field">
       <label for="adminPasswordInput">Passwort</label>
       <input id="adminPasswordInput" type="password" autocomplete="current-password" placeholder="Passwort eingeben" />
     </div>
-    <p class="admin-error" id="adminLoginError">Falsches Passwort.</p>
+    <p class="admin-error" id="adminLoginError">Falsche E-Mail oder falsches Passwort.</p>
     <div class="admin-actions">
       <button class="admin-btn" type="button" id="adminLoginBtn">Einloggen</button>
       <button class="admin-btn admin-btn--light" type="button" data-admin-close>Schließen</button>
@@ -2199,6 +2203,7 @@
     const cards = Array.from(document.querySelectorAll('.product-grid .product-card'));
     const loginOverlay = document.getElementById('adminLoginOverlay');
     const editOverlay = document.getElementById('adminEditOverlay');
+    const emailInput = document.getElementById('adminEmailInput');
     const passwordInput = document.getElementById('adminPasswordInput');
     const loginBtn = document.getElementById('adminLoginBtn');
     const loginError = document.getElementById('adminLoginError');
@@ -2260,7 +2265,7 @@
       // Öffnen über: ?admin=1 in der URL oder Tastenkürzel Ctrl + Alt + A.
       function openLogin() {
         openOverlay(loginOverlay);
-        setTimeout(function () { if (passwordInput) passwordInput.focus(); }, 50);
+        setTimeout(function () { if (emailInput) emailInput.focus(); else if (passwordInput) passwordInput.focus(); }, 50);
       }
 
       try {
@@ -2277,19 +2282,20 @@
       });
     }
 
-    async function verifyAdminPassword(password) {
-      if (!password) return false;
+    async function verifyAdminLogin(email, password) {
+      if (!email || !password) return false;
       if (!supabaseClient) {
-        console.error('Supabase غير مفعّل: لا يمكن التحقق من كلمة السر بدون Supabase.');
+        console.error('Supabase غير مفعّل: لا يمكن التحقق من تسجيل الدخول بدون Supabase.');
         return false;
       }
 
-      const result = await supabaseClient.rpc('verify_admin_password', {
+      const result = await supabaseClient.rpc('verify_admin_login', {
+        input_email: email,
         plain_password: password
       });
 
       if (result.error) {
-        console.error('Supabase password verification error:', result.error);
+        console.error('Supabase admin login verification error:', result.error);
         return false;
       }
 
@@ -2728,12 +2734,12 @@
         loginBtn.disabled = true;
         loginBtn.textContent = 'Prüfen...';
         try {
-          const isValid = await verifyAdminPassword(passwordInput ? passwordInput.value : '');
+          const isValid = await verifyAdminLogin(emailInput ? emailInput.value.trim() : '', passwordInput ? passwordInput.value : '');
           if (isValid) {
             if (passwordInput) passwordInput.value = '';
             closeOverlay(loginOverlay); enableAdminMode(); showSaved();
           } else if (loginError) {
-            loginError.textContent = 'Falsches Passwort oder Supabase-Verifizierung nicht eingerichtet.';
+            loginError.textContent = 'Falsche E-Mail, falsches Passwort oder Supabase-Verifizierung nicht eingerichtet.';
             loginError.style.display = 'block';
           }
         } finally {
@@ -2742,6 +2748,7 @@
         }
       });
     }
+    if (emailInput) emailInput.addEventListener('keydown', e => { if (e.key === 'Enter') passwordInput ? passwordInput.focus() : (loginBtn && loginBtn.click()); });
     if (passwordInput) passwordInput.addEventListener('keydown', e => { if (e.key === 'Enter') loginBtn && loginBtn.click(); });
     if (cardImageFile) cardImageFile.addEventListener('change', function () { fileToDataUrl(cardImageFile, function (url) { uploadedCardImage = url; if (cardImageUrl) cardImageUrl.value = 'Bild hochgeladen'; }); });
     if (modalImageFile) modalImageFile.addEventListener('change', function () {
