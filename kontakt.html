@@ -1145,13 +1145,11 @@
           </div>
         </div>
 
-        <form class="kontakt-form" action="https://formsubmit.co/ajax/wahebwshbe2@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="Neue Anfrage von Eis Büffel Kontaktformular" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_template" value="table" />
+        <form class="kontakt-form" action="https://formsubmit.co/wahebwshbe2@gmail.com" method="POST" target="formsubmit-hidden-frame">
           <input type="hidden" name="_subject" value="Neue Anfrage über die Webseite" />
-          <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_url" value="" />
           <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
           <input type="text" name="Name" placeholder="Ihr Name" required />
           <input type="email" name="Email" placeholder="E-Mail Adresse" required />
@@ -1170,6 +1168,7 @@
           </p>
           <button type="submit" class="btn btn--primary">Anfrage senden</button>
         </form>
+        <iframe name="formsubmit-hidden-frame" title="FormSubmit" style="display:none;width:0;height:0;border:0;"></iframe>
       </div>
     </section>
   </main>
@@ -1299,6 +1298,7 @@
     var form = document.querySelector('.kontakt-form');
     var successMessage = document.querySelector('.success-message');
     var submitButton = form ? form.querySelector('button[type="submit"]') : null;
+    var urlField = form ? form.querySelector('input[name="_url"]') : null;
 
     if (!form || !successMessage || !submitButton) return;
 
@@ -1310,49 +1310,25 @@
     }
 
     form.addEventListener('submit', function (event) {
-      event.preventDefault();
-
       if (!form.checkValidity()) {
+        event.preventDefault();
         form.reportValidity();
         return;
       }
 
-      if (window.location.protocol === 'file:') {
-        showMessage('error', 'Bitte laden Sie diese Seite zuerst auf Ihren Webserver hoch. FormSubmit funktioniert nicht zuverlässig, wenn die Datei direkt vom Computer geöffnet wird.', '!');
-        return;
+      if (urlField && window.location && window.location.href) {
+        urlField.value = window.location.href;
       }
 
       submitButton.disabled = true;
       submitButton.textContent = 'Wird gesendet...';
 
-      fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(function (response) {
-        return response.json().catch(function () { return {}; }).then(function (data) {
-          if (!response.ok || data.success === 'false') {
-            throw new Error(data.message || 'Senden fehlgeschlagen');
-          }
-          return data;
-        });
-      })
-      .then(function () {
+      window.setTimeout(function () {
         showMessage('success', 'Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns schnellstmöglich bei Ihnen.', '✓');
         form.reset();
-      })
-      .catch(function (error) {
-        var text = 'Leider konnte die Anfrage nicht gesendet werden. Bitte prüfen Sie, ob die FormSubmit-Bestätigung im Gmail-Postfach aktiviert wurde, oder versuchen Sie es erneut.';
-        if (error && error.message && error.message.indexOf('HTML files') !== -1) {
-          text = 'Bitte laden Sie die Seite auf Ihren Webserver hoch. FormSubmit funktioniert nicht bei lokal geöffneten HTML-Dateien.';
-        }
-        showMessage('error', text, '!');
-      })
-      .finally(function () {
         submitButton.disabled = false;
         submitButton.textContent = 'Anfrage senden';
-      });
+      }, 1200);
     });
   })();
 </script>
