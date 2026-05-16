@@ -4023,53 +4023,30 @@
 
 <!-- MOBILE HERO TEXT GLOW ONLY - COMPLETE FINAL -->
 <style>
-  /* التوهج هنا للجوال فقط، وعلى كلام الهيرو فقط، بدون تأثير على صورة الهيرو أو نسخة الديسكتوب */
+  /* التوهج هنا للجوال فقط، وتحت الكلام فقط، بدون أي شكل مربع أو مستطيل */
   @media (max-width: 768px) {
-    .hero__content {
-      position: relative !important;
-      isolation: isolate !important;
-    }
-
-    .hero__content::before {
-      content: "";
-      position: absolute;
-      inset: -18px -16px -16px -16px;
-      z-index: -1;
-      pointer-events: none;
-      border-radius: 32px;
-      background:
-        radial-gradient(ellipse at 30% 46%,
-          rgba(255,255,255,.82) 0%,
-          rgba(255,248,236,.56) 42%,
-          rgba(255,246,232,.22) 70%,
-          rgba(255,246,232,0) 100%);
-      filter: blur(9px);
-      opacity: .98;
-    }
-
     .hero .eyebrow,
     .hero h1,
     .hero .brand-line,
     .hero__subtitle,
     .hero__text {
       text-shadow:
-        0 1px 0 rgba(255,255,255,.78),
-        0 5px 16px rgba(255,255,255,.54),
-        0 10px 30px rgba(255,248,236,.42);
+        0 1px 0 rgba(255,255,255,.74),
+        0 6px 14px rgba(255,248,236,.42),
+        0 12px 26px rgba(255,246,232,.24) !important;
     }
   }
 
   @media (max-width: 520px) {
-    .hero__content::before {
-      inset: -14px -12px -14px -12px;
-      border-radius: 26px;
-      background:
-        radial-gradient(ellipse at 31% 46%,
-          rgba(255,255,255,.86) 0%,
-          rgba(255,248,236,.60) 44%,
-          rgba(255,246,232,.24) 72%,
-          rgba(255,246,232,0) 100%);
-      filter: blur(8px);
+    .hero .eyebrow,
+    .hero h1,
+    .hero .brand-line,
+    .hero__subtitle,
+    .hero__text {
+      text-shadow:
+        0 1px 0 rgba(255,255,255,.76),
+        0 5px 12px rgba(255,248,236,.40),
+        0 10px 22px rgba(255,246,232,.22) !important;
     }
   }
 </style>
