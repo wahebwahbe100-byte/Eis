@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Unternehmen | Eis Büffe</title>
-  <meta name="description" content="Serviceleistungen für Geschäftskunden, Eiscafés und Gastronomie von Eis Büffe." />
+
+  <title>Produkten | Eis Büffe</title>
+  <meta name="description" content="Eis Büffe Produkten: Milchspeiseeise, Fruchtspeiseeis, Milchspeiseeis Joghurt und Eis Büffe Spezialitäten." />
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Great+Vibes&family=Inter:wght@400;500;600;700;800&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Homemade+Apple&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Great+Vibes&family=Inter:wght@400;500;600;700;800&display=swap');
 
     :root {
       --gold: #a66a13;
@@ -22,19 +23,32 @@
       --shadow: 0 24px 60px rgba(80, 48, 6, .16);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      width: 100%;
-      max-width: 100%;
       background: var(--cream);
       color: var(--brown);
       font-family: Inter, Arial, sans-serif;
       overflow-x: hidden;
     }
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-    html, body { max-width: 100%; overflow-x: hidden; }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
 
     .topbar {
       min-height: 34px;
@@ -47,18 +61,13 @@
       gap: 18px;
       font-size: 13px;
     }
-    .topbar__left, .topbar__right { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
-    .topbar__left span {
-      display: inline-flex;
+
+    .topbar__left,
+    .topbar__right {
+      display: flex;
       align-items: center;
-      gap: 7px;
-      white-space: nowrap;
-    }
-    .topbar__emoji {
-      width: 18px;
-      height: 18px;
-      object-fit: contain;
-      flex: 0 0 auto;
+      gap: 28px;
+      flex-wrap: wrap;
     }
 
     .navbar {
@@ -72,42 +81,41 @@
       padding: 0 48px;
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 100;
       box-shadow: 0 1px 0 rgba(166, 106, 19, .12);
     }
-    .logo { display: inline-flex; align-items: center; width: fit-content; user-select: none; }
-    .logo img { width: 150px; height: auto; -webkit-user-drag: none; }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      user-select: none;
+    }
+
+    .logo img {
+      width: 150px;
+      height: auto;
+    }
 
     .nav-links {
       width: 100%;
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(7, minmax(0, 1fr));
       align-items: center;
-      gap: 14px;
-      font-size: 14px;
+      gap: 8px;
+      font-size: 12px;
       font-weight: 700;
     }
+
     .nav-links a {
-      position: relative;
       width: 100%;
       min-height: 46px;
       padding: 12px 14px;
       text-align: center;
       border-radius: 999px;
-      overflow: hidden;
       transition: color .25s ease, background .25s ease, box-shadow .25s ease, transform .25s ease;
     }
-    .nav-links a::after {
-      content: "";
-      width: 0;
-      height: 2px;
-      background: var(--gold);
-      position: absolute;
-      left: 50%;
-      bottom: 8px;
-      transform: translateX(-50%);
-      transition: width .25s ease;
-    }
+
     .nav-links a:hover,
     .nav-links a.active {
       color: var(--gold-dark);
@@ -115,76 +123,55 @@
       box-shadow: 0 10px 22px rgba(114, 70, 7, .10);
       transform: translateY(-2px);
     }
-    .nav-links a:hover::after,
-    .nav-links a.active::after { width: 42%; }
-    .nav-links .nav-btn::after { display: none; }
 
-    .menu-toggle { display: none; background: none; border: 0; font-size: 28px; color: var(--gold-dark); cursor: pointer; }
-    .nav-btn, .btn {
+    .nav-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       border-radius: 999px;
       font-weight: 800;
-      transition: .25s;
-      white-space: nowrap;
-    }
-    .nav-btn {
-      width: 100%;
       background: linear-gradient(135deg, var(--gold-2), var(--gold-dark));
-      color: #fff;
+      color: #fff !important;
       padding: 14px 18px;
       font-size: 13px;
       box-shadow: 0 14px 28px rgba(114, 70, 7, .24);
-    }
-    .btn {
-      border: 1px solid transparent;
-      padding: 15px 25px;
-      font-size: 14px;
-      min-height: 54px;
-    }
-    .btn--primary { color: #fff; background: linear-gradient(135deg, #c68b2e, #754606); box-shadow: 0 18px 34px rgba(98, 58, 6, .22); }
-    .btn--secondary { background: rgba(255,255,255,.82); border-color: rgba(166,106,19,.30); color: var(--brown); }
-    .btn:hover, .nav-btn:hover { transform: translateY(-3px); }
-    .nav-btn:hover {
-      background: linear-gradient(135deg, var(--gold-3), var(--gold-dark));
-      box-shadow: 0 18px 34px rgba(114, 70, 7, .30);
-      color: #fff;
+      white-space: nowrap;
     }
 
-    .nav-btn__icon-img {
-      width: 18px;
-      height: 18px;
-      margin-left: 8px;
-      object-fit: contain;
-      flex: 0 0 auto;
+    .menu-toggle {
+      display: none;
+      width: 52px;
+      height: 52px;
+      border: 1px solid rgba(166,106,19,.24);
+      border-radius: 16px;
+      background: rgba(255,255,255,.86);
+      color: var(--gold-dark);
+      font-size: 30px;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 12px 26px rgba(80,48,6,.12);
+      transition: transform .25s ease, background .25s ease;
     }
-    .btn__icon-img { width: 22px; height: 22px; margin-left: 10px; object-fit: contain; }
 
-    .hero {
-      min-height: calc(100vh - 126px);
+    .menu-toggle.is-open {
+      transform: rotate(90deg);
+      background: #fff;
+    }
+
+    .products-hero {
       position: relative;
-      isolation: isolate;
-      display: flex;
-      align-items: center;
-      padding: 54px 48px 74px;
+      min-height: 440px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 86px 24px 116px;
       background:
-        linear-gradient(90deg, rgba(255,246,232,.84) 0%, rgba(255,246,232,.42) 43%, rgba(255,246,232,.02) 100%),
-        url("assets/hero-bg.png") center right / cover no-repeat;
+        linear-gradient(180deg, rgba(255,246,232,.82), rgba(255,246,232,.98)),
+        url("assets/hero-bg.png") center / cover no-repeat;
       overflow: hidden;
     }
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 82% 55%, rgba(198,145,53,.14), transparent 31%),
-        radial-gradient(circle at 16% 18%, rgba(198,145,53,.10), transparent 24%);
-      z-index: -1;
-    }
 
-    /* Hero bottom organic wave - same torn/soft movement under the hero image */
-    .hero::after {
+    .products-hero::after {
       content: "";
       position: absolute;
       left: -2%;
@@ -192,8 +179,6 @@
       bottom: -1px;
       height: 88px;
       background: #fff8ee;
-      z-index: 2;
-      pointer-events: none;
       clip-path: polygon(
         0 42%, 5% 48%, 10% 58%, 16% 51%, 22% 63%,
         29% 55%, 36% 68%, 44% 58%, 52% 70%, 60% 56%,
@@ -203,7 +188,6 @@
       filter: drop-shadow(0 -10px 18px rgba(80, 48, 6, .04));
     }
 
-    .hero__content { width: 50%; max-width: 690px; z-index: 3; }
     .eyebrow {
       color: var(--gold);
       text-transform: uppercase;
@@ -213,1450 +197,594 @@
       font-weight: 800;
       margin-bottom: 14px;
     }
-    .hero h1 {
+
+    .products-hero h1 {
       font-family: Cinzel, serif;
-      text-transform: uppercase;
       color: var(--gold-dark);
-      font-size: clamp(46px, 6vw, 88px);
-      line-height: .96;
+      font-size: clamp(42px, 6vw, 82px);
+      line-height: 1;
       font-weight: 600;
-      letter-spacing: 1px;
-      margin-bottom: 22px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
     }
-    .brand-line {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      margin-top: 8px;
-      text-transform: none;
+
+    .products-hero .brand {
+      display: block;
       font-family: "Great Vibes", cursive;
       color: var(--gold);
       font-size: .82em;
+      text-transform: none;
       font-weight: 400;
-      letter-spacing: 0;
     }
-    .brand-line img {
-      width: .58em;
-      height: .58em;
-      object-fit: contain;
-      filter: drop-shadow(0 6px 8px rgba(111,65,6,.18));
-    }
-    .hero__subtitle {
-      font-family: Cinzel, serif;
-      color: var(--gold-dark);
-      font-weight: 800;
-      letter-spacing: 1.3px;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-    .hero__text { max-width: 570px; color: #4f3d29; line-height: 1.85; margin-bottom: 30px; font-size: 15px; }
-    .hero__actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 28px; }
 
-    .experience {
-      width: min(410px, 100%);
-      display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 18px;
-      background: rgba(255,255,255,.73);
-      border: 1px solid rgba(166,106,19,.20);
-      border-radius: 18px;
-      padding: 16px;
-      box-shadow: var(--shadow);
+    .products-hero p:last-child {
+      max-width: 720px;
+      color: #4f3d29;
+      line-height: 1.8;
+      margin: auto;
+      font-size: 16px;
     }
-    .experience__image {
-      display: grid;
-      place-items: center;
-      border-right: 1px solid rgba(166,106,19,.24);
-      padding-right: 14px;
-    }
-    .experience__image img { width: 86px; height: 86px; object-fit: contain; }
-    .experience p { font-size: 13px; line-height: 1.65; color: #4c3820; align-self: center; }
 
-    .quality-taste {
-      margin-top: -1px;
-      padding: 78px 48px 72px;
+    .products-section {
+      padding: 78px 48px 98px;
       background:
-        radial-gradient(circle at 18% 20%, rgba(198,145,53,.10), transparent 26%),
+        radial-gradient(circle at 18% 18%, rgba(198,145,53,.10), transparent 27%),
         radial-gradient(circle at 86% 42%, rgba(198,145,53,.08), transparent 28%),
         #fff8ee;
     }
-    .quality-taste__head {
-      max-width: 940px;
-      margin: 0 auto 22px;
+
+    .section-head {
+      max-width: 820px;
+      margin: 0 auto 42px;
       text-align: center;
     }
-    .quality-taste__head h2 {
+
+    .section-head h2 {
       font-family: Cinzel, serif;
       color: var(--brown);
-      font-size: clamp(28px, 3.2vw, 42px);
-      line-height: 1.08;
-      margin-bottom: 10px;
-      letter-spacing: .8px;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.1;
+      margin-bottom: 12px;
     }
-    .quality-taste__head p {
-      color: #1f1a13;
+
+    .section-head p {
+      color: var(--muted);
+      line-height: 1.8;
       font-size: 16px;
-      line-height: 1.7;
     }
-    .taste-cards {
+
+    .product-grid {
       max-width: 1180px;
-      margin: 0 auto 16px;
+      margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 30px;
     }
-    .taste-card {
+
+    .product-card {
+      position: relative;
       overflow: hidden;
       display: grid;
       grid-template-columns: 1.12fr .88fr;
       min-height: 190px;
+      border: 0;
+      text-align: left;
+      border-radius: 28px;
       background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,246,232,.58));
       border: 1px solid rgba(166,106,19,.22);
-      border-radius: 28px;
       box-shadow: 0 20px 48px rgba(80,48,6,.10);
+      cursor: pointer;
+      font: inherit;
+      color: inherit;
       transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
     }
-    .taste-card:hover {
+
+    .product-card:hover {
       transform: translateY(-5px);
       border-color: rgba(166,106,19,.36);
       box-shadow: 0 26px 58px rgba(80,48,6,.14);
     }
-    .taste-card__image {
+
+    .product-card:focus-visible {
+      outline: 4px solid rgba(211,154,56,.35);
+      outline-offset: 4px;
+    }
+
+    .product-card__image {
+      height: 100%;
+      min-height: 190px;
+      background: linear-gradient(145deg, #f7ead4, #fff6e8);
       overflow: hidden;
       border-radius: 26px 0 0 26px;
     }
-    .taste-card__image img {
+
+    .product-card__image img {
       width: 100%;
       height: 100%;
       min-height: 190px;
       object-fit: cover;
       transition: transform .35s ease;
     }
-    .taste-card:hover .taste-card__image img { transform: scale(1.04); }
-    .taste-card__content {
-      position: relative;
-      padding: 28px 60px 26px 26px;
-      border-radius: 0 26px 26px 0;
-    }
-    .taste-card__content h3 {
-      font-family: Cinzel, serif;
-      color: var(--gold-dark);
-      font-size: 26px;
-      line-height: 1.12;
-      margin-bottom: 14px;
-    }
-    .taste-card__content p {
-      color: #2f261b;
-      font-size: 15px;
-      line-height: 1.55;
-    }
-    .taste-card__icon {
-      position: absolute;
-      top: 22px;
-      right: 24px;
-      width: 40px;
-      height: 40px;
-      object-fit: contain;
-    }
-    .quality-features {
-      max-width: 1180px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      background: linear-gradient(145deg, rgba(255,255,255,.74), rgba(255,246,232,.50));
-      border: 1px solid rgba(166,106,19,.22);
-      border-radius: 28px;
-      box-shadow: 0 20px 48px rgba(80,48,6,.10);
-      overflow: hidden;
-    }
-    .quality-feature {
-      display: grid;
-      grid-template-columns: 72px 1fr;
-      gap: 16px;
-      padding: 26px 24px;
-      border-right: 1px solid rgba(166,106,19,.16);
-      align-items: start;
-      transition: background .25s ease, transform .25s ease;
-    }
-    .quality-feature:hover {
-      background: rgba(255,255,255,.48);
-      transform: translateY(-3px);
-    }
-    .quality-feature:last-child { border-right: 0; }
-    .quality-feature__icon {
-      width: 50px;
-      height: 50px;
-      object-fit: contain;
-      display: block;
-    }
-    .quality-feature h3 {
-      color: var(--brown);
-      font-size: 16px;
-      margin-bottom: 9px;
-    }
-    .quality-feature p {
-      color: #2f261b;
-      font-size: 13px;
-      line-height: 1.65;
+
+    .product-card:hover .product-card__image img {
+      transform: scale(1.04);
     }
 
-
-    .section { padding: 94px 48px; }
-    .section-head { max-width: 760px; margin: 0 auto 44px; text-align: center; }
-    .section h2 { font-family: Cinzel, serif; color: var(--gold-dark); font-size: clamp(34px, 4vw, 52px); line-height: 1.1; margin-bottom: 16px; }
-    .section-head p, .about__content p, .delivery p, .contact p { color: var(--muted); line-height: 1.8; }
-
-    .cards, .steps {
-      max-width: 1180px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-    .card, .step {
-      background: rgba(255,255,255,.74);
-      border: 1px solid rgba(166,106,19,.18);
-      border-radius: 25px;
-      padding: 32px;
-      box-shadow: var(--shadow);
-      transition: .25s;
-    }
-    .card:hover, .step:hover { transform: translateY(-6px); }
-    .card__icon {
-      width: 64px;
-      height: 64px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, rgba(198,145,53,.22), rgba(255,255,255,.72));
-      display: grid;
-      place-items: center;
-      font-size: 30px;
-      margin-bottom: 22px;
-    }
-    .card h3, .step h3 { color: var(--gold-dark); font-size: 22px; margin-bottom: 12px; }
-    .card p, .step p { color: var(--muted); line-height: 1.75; }
-
-    .products {
-      padding: 46px 0 0;
+    .product-card__body {
+      padding: 28px 26px 26px;
+      background: transparent;
+      min-height: 190px;
     }
 
-    .stats-strip {
-      width: 100vw;
-      max-width: none;
-      margin-left: calc(50% - 50vw);
-      margin-right: calc(50% - 50vw);
-      background: linear-gradient(180deg, #5a3703 0%, #2f1d02 100%);
-      border-radius: 0;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      color: #fff8e8;
-      box-shadow: 0 18px 42px rgba(53, 33, 5, .18);
-      overflow: hidden;
-      border-top: 1px solid rgba(240,196,109,.28);
-      border-bottom: 1px solid rgba(240,196,109,.28);
-    }
-    .stat-item {
-      min-height: 132px;
-      display: grid;
-      grid-template-columns: 68px 1fr;
-      align-items: center;
-      gap: 14px;
-      padding: 18px 28px;
-      position: relative;
-    }
-    .stat-item:not(:last-child)::after {
-      content: "";
-      position: absolute;
-      right: 0;
-      top: 22px;
-      bottom: 22px;
-      width: 1px;
-      background: rgba(240,196,109,.36);
-    }
-    .stat-icon {
-      width: 62px;
-      height: 62px;
-      object-fit: contain;
-      opacity: 1;
-      filter: none;
-    }
-    .stat-content strong {
-      display: block;
-      font-family: Cinzel, serif;
-      color: var(--gold-3);
-      font-size: clamp(26px, 2.2vw, 38px);
-      line-height: .98;
-      margin-bottom: 7px;
-      letter-spacing: .5px;
-      white-space: nowrap;
-    }
-    .stat-content span {
-      display: block;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .8px;
-      text-transform: uppercase;
-      color: #fff6dc;
-      margin-bottom: 9px;
-    }
-    .stat-content p {
-      font-size: 11px;
-      line-height: 1.55;
-      color: rgba(255,255,255,.86);
-    }
-
-
-    .about {
-      background: linear-gradient(180deg, #fff8ee, #f7ead4);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 54px;
-      align-items: center;
-    }
-    .about__image img { border-radius: 34px; box-shadow: var(--shadow); min-height: 420px; object-fit: cover; }
-    .about__content { max-width: 630px; }
-    .about__content ul { list-style: none; margin-top: 22px; }
-    .about__content li { padding: 12px 0 12px 34px; position: relative; color: #4c3820; }
-    .about__content li::before { content: "✓"; position: absolute; left: 0; color: var(--gold); font-weight: 900; }
-
-    .about-banner-wrap {
-      padding: 32px 48px;
-      background: linear-gradient(180deg, #fff8ee, #f7ead4);
-    }
-
-    .about-banner {
-      max-width: 1280px;
-      margin: 0 auto;
-      min-height: 330px;
-      display: grid;
-      grid-template-columns: minmax(0, 2.15fr) minmax(270px, .9fr);
-      align-items: stretch;
-      overflow: hidden;
-      border-radius: 0 0 8px 8px;
-      background: #fbf3e8;
-      border: 1px solid rgba(166,106,19,.14);
-      box-shadow: 0 18px 44px rgba(80,48,6,.08);
-    }
-
-    .about-banner__text {
-      min-height: 330px;
-      padding: 44px 46px 38px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background:
-        linear-gradient(90deg, rgba(255,246,232,.96) 0%, rgba(255,246,232,.78) 42%, rgba(255,246,232,.34) 100%),
-        url("assets/upper-image.png") center / cover no-repeat;
-    }
-
-    .about-banner__text h2,
-    .about-banner__contact h3 {
-      font-family: Cinzel, serif;
-      color: var(--brown);
-      font-size: 24px;
-      letter-spacing: 1px;
-      margin-bottom: 14px;
-      text-transform: uppercase;
-    }
-
-    .about-banner__text p {
-      max-width: 455px;
-      color: #2c2117;
-      font-size: 14px;
-      line-height: 1.7;
-      margin-bottom: 8px;
-    }
-
-    .about-signature {
-      font-family: "Great Vibes", cursive;
-      color: var(--gold);
-      font-size: 42px;
-      margin-top: 12px;
-    }
-
-    .about-banner__image {
-      display: none;
-    }
-
-    .about-banner__contact {
-      padding: 44px 36px;
-      background: #fbf3e8;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 14px;
-      border-left: 1px solid rgba(166,106,19,.16);
-    }
-
-    .about-banner__contact a,
-    .about-banner__contact span {
-      color: #2f261b;
-      font-size: 15px;
-    }
-
-    .about-banner__btn {
-      margin-top: 10px;
-      width: fit-content;
-      background: linear-gradient(135deg, #c0831a, #8e5709);
-      color: #fff !important;
-      padding: 15px 28px;
-      border-radius: 6px;
-      font-weight: 800;
-      box-shadow: 0 12px 26px rgba(114,70,7,.18);
-    }
-
-    .delivery { background: radial-gradient(circle at 16% 20%, rgba(198,145,53,.12), transparent 25%), var(--cream); }
-    .step span { font-family: Cinzel, serif; font-size: 42px; color: rgba(166,106,19,.33); font-weight: 700; }
-
-    .delivery .step {
-      opacity: .9;
-      transform: translateY(18px) scale(.99);
-      transition: opacity .55s ease, transform .55s ease;
-    }
-    .delivery .step.show {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-    .delivery .step:nth-child(1) { transition-delay: .04s; }
-    .delivery .step:nth-child(2) { transition-delay: .22s; }
-    .delivery .step:nth-child(3) { transition-delay: .40s; }
-
-
-
-    /* Soft page opening and light gradual section reveal */
-    body {
-      opacity: .96;
-      transform: translateY(4px);
-      transition: opacity .38s ease, transform .38s ease;
-    }
-    body.page-loaded {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-on-scroll {
-      opacity: .92;
-      transform: translateY(14px);
-      transition: opacity .55s ease, transform .55s ease;
-      will-change: opacity, transform;
-    }
-    .reveal-on-scroll.reveal-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-delay-1 { transition-delay: .04s; }
-    .reveal-delay-2 { transition-delay: .08s; }
-    .reveal-delay-3 { transition-delay: .12s; }
-    .reveal-delay-4 { transition-delay: .16s; }
-    .reveal-delay-5 { transition-delay: .20s; }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      body,
-      .reveal-on-scroll,
-      .delivery .step {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-      }
-    }
-
-    .contact { background: linear-gradient(135deg, #714306, #bd801c); }
-    .contact__box {
-      max-width: 1180px;
-      margin: auto;
-      background: rgba(255,248,236,.97);
-      border-radius: 34px;
-      padding: 44px;
-      display: grid;
-      grid-template-columns: .85fr 1.15fr;
-      gap: 40px;
-      box-shadow: 0 34px 70px rgba(51,31,4,.25);
-    }
-    .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .contact-form input, .contact-form textarea {
-      width: 100%;
-      border: 1px solid rgba(166,106,19,.24);
-      background: #fff;
-      border-radius: 15px;
-      padding: 16px;
-      font: inherit;
-      outline: none;
-    }
-    .contact-form input:focus, .contact-form textarea:focus { border-color: rgba(166,106,19,.58); box-shadow: 0 0 0 4px rgba(198,145,53,.12); }
-    .contact-form textarea { grid-column: 1 / -1; min-height: 130px; resize: vertical; }
-    .contact-form button { border: none; cursor: pointer; }
-    .footer {
-      background: linear-gradient(180deg, #fff8ee 0%, #f3e4cd 100%);
-      color: var(--brown);
-      border-top: 1px solid rgba(166,106,19,.16);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.65);
-    }
-    .footer__inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 46px 48px 38px;
-      display: grid;
-      grid-template-columns: 1.1fr .9fr .9fr 1fr;
-      gap: 42px;
-      align-items: start;
-    }
-    .footer__brand {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 14px;
-    }
-    .footer__logo {
-      width: 170px;
-      height: auto;
-      filter: drop-shadow(0 10px 18px rgba(111,65,6,.12));
-    }
-    .footer__text {
-      max-width: 260px;
-      color: #6b5a42;
-      font-size: 13px;
-      line-height: 1.7;
-    }
-    .footer__col h3,
-    .footer__social h3 {
-      font-family: Cinzel, serif;
-      color: var(--gold-dark);
-      font-size: 16px;
-      letter-spacing: .8px;
-      text-transform: uppercase;
-      margin-bottom: 13px;
-    }
-    .footer__col a {
-      display: block;
-      width: fit-content;
-      color: #4f3d29;
-      font-size: 14px;
-      line-height: 1.9;
-      transition: .25s;
-    }
-    .footer__col a:hover {
-      color: var(--gold);
-      transform: translateX(4px);
-    }
-    .footer__social {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-    .footer__icons {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      margin-top: 4px;
-    }
-    .footer__icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
+    .product-card__number {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #c0831a, #8e5709);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--gold-2), var(--gold-dark));
       color: #fff;
-      font-weight: 900;
-      font-size: 18px;
-      box-shadow: 0 12px 22px rgba(114,70,7,.18);
-      transition: .25s;
+      font-family: Cinzel, serif;
+      font-weight: 800;
+      box-shadow: 0 12px 24px rgba(114,70,7,.18);
     }
-    .footer__icon svg {
-      width: 20px;
-      height: 20px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2.2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+
+    .product-card h3 {
+      font-family: Cinzel, serif;
+      color: var(--gold-dark);
+      font-size: 22px;
+      line-height: 1.18;
+      margin-bottom: 12px;
     }
-    .footer__icon:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 28px rgba(114,70,7,.25);
-    }
-    .footer__bottom {
-      padding: 18px 24px;
-      text-align: center;
-      color: #fff8e8;
-      background: linear-gradient(90deg, #5a3703, #3a2406);
+
+    .product-card p {
+      color: #4f3d29;
+      line-height: 1.68;
       font-size: 14px;
     }
 
+    .product-card__hint {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      margin-top: 16px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--gold-2), var(--gold-dark));
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .3px;
+      text-transform: uppercase;
+      box-shadow: 0 12px 24px rgba(114,70,7,.18);
+    }
+
+    .product-card__hint::after {
+      content: "›";
+      font-size: 18px;
+      line-height: 1;
+      margin-left: 8px;
+    }
+
+    .sorten-info {
+      padding: 0 48px 90px;
+      background: #fff8ee;
+    }
+
+    .sorten-info__box {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 44px;
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at 90% 20%, rgba(211,154,56,.16), transparent 30%),
+        linear-gradient(145deg, rgba(255,255,255,.92), rgba(255,246,232,.76));
+      border: 1px solid rgba(166,106,19,.22);
+      box-shadow: var(--shadow);
+    }
+
+    .sorten-info__box h2 {
+      font-family: Cinzel, serif;
+      color: var(--gold-dark);
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .sorten-info__box h3 {
+      color: var(--gold-dark);
+      font-size: 22px;
+      margin: 28px 0 10px;
+    }
+
+    .sorten-info__box p {
+      color: #4f3d29;
+      line-height: 1.85;
+      font-size: 16px;
+      margin-bottom: 14px;
+    }
+
+    .sorten-info__details {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 28px 0 12px;
+    }
+
+    .sorten-info__details div {
+      padding: 20px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.74);
+      border: 1px solid rgba(166,106,19,.18);
+    }
+
+    .sorten-info__details strong {
+      display: block;
+      color: var(--gold-dark);
+      font-family: Cinzel, serif;
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .sorten-info__details span {
+      color: var(--brown);
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .product-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      display: none;
+      place-items: center;
+      padding: 22px;
+      background: rgba(53, 33, 5, .58);
+    }
+
+    .product-modal.open {
+      display: grid;
+      animation: fadeIn .25s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .product-modal__box {
+      width: min(960px, 100%);
+      max-height: 88vh;
+      overflow-y: auto;
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 92% 18%, rgba(211,154,56,.18), transparent 28%),
+        linear-gradient(145deg, #ffffff, #fff6e8);
+      border: 1px solid rgba(166,106,19,.24);
+      box-shadow: 0 36px 90px rgba(23, 13, 2, .34);
+      padding: 34px;
+      animation: modalIn .28s ease forwards;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(22px) scale(.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .product-modal__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .product-modal h2 {
+      font-family: Cinzel, serif;
+      color: var(--gold-dark);
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .product-modal p {
+      color: #4f3d29;
+      line-height: 1.85;
+      font-size: 16px;
+      margin-bottom: 14px;
+    }
+
+    .product-modal__close {
+      flex: 0 0 auto;
+      width: 48px;
+      height: 48px;
+      border: 0;
+      border-radius: 50%;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--gold-2), var(--gold-dark));
+      color: #fff;
+      font-size: 30px;
+      line-height: 1;
+      box-shadow: 0 14px 28px rgba(114,70,7,.22);
+      transition: transform .25s ease;
+    }
+
+    .product-modal__close:hover {
+      transform: rotate(90deg);
+    }
+
+    .modal-sorten-list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .modal-sorten-list span {
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.82);
+      border: 1px solid rgba(166,106,19,.18);
+      color: var(--brown);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .cta-band {
+      padding: 42px 48px;
+      background: linear-gradient(135deg, #714306, #bd801c);
+    }
+
+    .cta-box {
+      max-width: 1180px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      background: rgba(255,248,236,.97);
+      border-radius: 28px;
+      padding: 34px;
+      box-shadow: 0 34px 70px rgba(51,31,4,.25);
+    }
+
+    .cta-box h2 {
+      font-family: Cinzel, serif;
+      color: var(--gold-dark);
+      font-size: clamp(24px, 3vw, 38px);
+      margin-bottom: 8px;
+    }
+
+    .cta-box p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 15px 26px;
+      border-radius: 999px;
+      color: #fff;
+      background: linear-gradient(135deg, #c68b2e, #754606);
+      box-shadow: 0 18px 34px rgba(98, 58, 6, .22);
+      font-weight: 800;
+      white-space: nowrap;
+      transition: .25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .footer {
+      background: linear-gradient(180deg, #fff8ee 0%, #f3e4cd 100%);
+      border-top: 1px solid rgba(166,106,19,.16);
+    }
+
+    .footer__inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 38px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      color: #6b5a42;
+      font-size: 14px;
+    }
+
+    .footer__inner img {
+      width: 150px;
+    }
+
     @media (max-width: 1050px) {
-      .topbar { display: none; }
-      .navbar { grid-template-columns: 160px 1fr 54px; height: 80px; padding: 0 22px; }
-      .logo img { width: 118px; }
-      .menu-toggle { display: block; justify-self: end; }
-      .nav-links > .nav-btn { display: inline-flex; }
+      .topbar {
+        display: none;
+      }
+
+      .navbar {
+        grid-template-columns: 160px 1fr 58px;
+        height: 80px;
+        padding: 0 22px;
+      }
+
+      .logo img {
+        width: 118px;
+      }
+
+      .menu-toggle {
+        display: inline-grid;
+        place-items: center;
+        justify-self: end;
+      }
+
       .nav-links {
         position: absolute;
         top: 80px;
         left: 22px;
-        right: 22px;
-        display: none;
-        flex-direction: column;
-        gap: 4px;
-        background: #fff7eb;
-        border: 1px solid rgba(166,106,19,.20);
-        border-radius: 20px;
-        padding: 18px;
-        box-shadow: var(--shadow);
-      }
-      .nav-links.open { display: flex; }
-      .hero { min-height: auto; padding: 78px 24px; background-position: center; }
-      .hero__content { width: 100%; max-width: 690px; }
-      .cards, .steps, .about, .contact__box, .taste-cards, .quality-features, .stats-strip { grid-template-columns: 1fr; }
-      .footer__inner { grid-template-columns: repeat(2, 1fr); gap: 30px; padding: 42px 24px; }
-      .footer__social { align-items: flex-start; text-align: left; }
-      .footer__icons { justify-content: flex-start; }
-      .quality-taste { padding: 76px 24px 66px; }
-      .taste-card { grid-template-columns: 1fr; border-radius: 26px; }
-      .taste-card__image { border-radius: 24px 24px 0 0; }
-      .taste-card__content { border-radius: 0 0 24px 24px; }
-      .stats-strip { width: 100vw; border-radius: 0; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); }
-      .stat-item { min-height: 110px; padding: 16px 24px; }
-      .stat-item:not(:last-child)::after { top: auto; left: 24px; right: 24px; bottom: 0; width: auto; height: 1px; }
-      .quality-feature { border-right: 0; border-bottom: 1px solid rgba(166,106,19,.18); }
-      .quality-feature:last-child { border-bottom: 0; }
-      .section { padding: 72px 24px; }
-      .products { padding: 34px 0 0; }
-      .about-banner-wrap { padding: 28px 24px; }
-      .about-banner { grid-template-columns: 1fr; }
-      .about-banner__text {
-        min-height: 340px;
-        background:
-          linear-gradient(180deg, rgba(255,246,232,.94) 0%, rgba(255,246,232,.76) 58%, rgba(255,246,232,.42) 100%),
-          url("assets/upper-image.png") center / cover no-repeat;
-      }
-      .about-banner__contact { border-left: 0; border-top: 1px solid rgba(166,106,19,.16); }
-    }
-
-    @media (max-width: 620px) {
-      .hero { padding: 64px 20px; }
-      .hero h1 { font-size: 42px; }
-      .brand-line { gap: 8px; }
-      .experience { grid-template-columns: 1fr; }
-      .experience__image { border-right: none; border-bottom: 1px solid rgba(166,106,19,.24); padding: 0 0 12px; }
-      .contact-form { grid-template-columns: 1fr; }
-      .contact__box { padding: 28px; }
-      .about-banner-wrap { padding: 24px 16px; }
-      .about-banner__text, .about-banner__contact { padding: 26px 22px; }
-      .about-banner__text h2, .about-banner__contact h3 { font-size: 21px; }
-      .about-signature { font-size: 36px; }
-      .taste-card__content { padding: 24px 54px 24px 22px; }
-      .quality-feature { grid-template-columns: 56px 1fr; padding: 22px 18px; }
-      .stat-item { grid-template-columns: 66px 1fr; min-height: 132px; padding: 22px 18px; }
-      .stat-icon { width: 60px; height: 60px; }
-      .quality-feature__icon { width: 42px; height: 42px; }
-      .footer__inner { grid-template-columns: 1fr; gap: 26px; padding: 38px 22px; }
-      .footer__logo { width: 145px; }
-      .footer__social { align-items: flex-start; text-align: left; }
-      .footer__bottom { font-size: 13px; }
-    }
-
-
-    /* Complete mobile hero correction: clear image, bigger text, balanced layout on phones */
-    /* Mobile hero uses a separate image: assets/hero-mobile.png */
-    @media (max-width: 768px) {
-      body { min-width: 0; }
-
-      .topbar { display: none; }
-
-      .navbar {
-        grid-template-columns: 140px 1fr 46px;
-        height: 78px;
-        padding: 0 18px;
-      }
-
-      .logo img { width: 116px; }
-      .menu-toggle { display: block; justify-self: end; }
-      .nav-links > .nav-btn { display: inline-flex; }
-
-      .nav-links {
-        position: absolute;
-        top: 78px;
-        left: 16px;
-        right: 16px;
-        display: none;
+        right: 14px;
+        display: flex;
         flex-direction: column;
         gap: 8px;
         background: #fff7eb;
         border: 1px solid rgba(166,106,19,.20);
-        border-radius: 20px;
+        border-radius: 22px;
         padding: 18px;
         box-shadow: var(--shadow);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-14px) scale(.98);
+        transition: opacity .32s ease, transform .32s ease, visibility .32s ease;
+        pointer-events: none;
       }
 
-      .nav-links.open { display: flex; }
+      .nav-links.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+      }
 
-      .hero {
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-card {
+        grid-template-columns: 1fr;
+        border-radius: 26px;
+      }
+
+      .product-card__image {
+        border-radius: 24px 24px 0 0;
+        height: auto;
+        min-height: 190px;
+      }
+
+      .product-card__body {
         min-height: auto;
-        padding: 0 20px 56px;
+      }
+
+      .cta-box {
+        flex-direction: column;
         align-items: flex-start;
-        background:
-          linear-gradient(180deg,
-            rgba(255,246,232,.04) 0%,
-            rgba(255,246,232,.16) 38%,
-            rgba(255,246,232,.80) 58%,
-            #fff6e8 76%,
-            #fff6e8 100%),
-          url("assets/hero-mobile.png") center top / auto clamp(330px, 72vw, 470px) no-repeat;
       }
-
-      .hero::before {
-        background:
-          radial-gradient(circle at 50% 18%, rgba(198,145,53,.17), transparent 38%),
-          radial-gradient(circle at 18% 82%, rgba(198,145,53,.12), transparent 34%);
-      }
-
-      .hero::after {
-        height: 54px;
-        clip-path: polygon(
-          0 38%, 8% 54%, 17% 45%, 27% 62%, 39% 50%,
-          51% 67%, 64% 49%, 77% 61%, 89% 46%, 100% 58%,
-          100% 100%, 0 100%
-        );
-      }
-
-      .hero__content {
-        width: 100%;
-        max-width: 590px;
-        margin: 0 auto;
-        padding-top: clamp(300px, 70vw, 430px);
-        position: relative;
-        z-index: 3;
-      }
-
-      .eyebrow {
-        font-size: 14px;
-        letter-spacing: 2.6px;
-        margin-bottom: 12px;
-      }
-
-      .hero h1 {
-        font-size: clamp(52px, 15.5vw, 78px);
-        line-height: .94;
-        margin-bottom: 18px;
-      }
-
-      .brand-line {
-        justify-content: flex-start;
-        gap: 10px;
-      }
-
-      .brand-line img {
-        width: .58em;
-        height: .58em;
-      }
-
-      .hero__subtitle {
-        font-size: 16px;
-        line-height: 1.42;
-        margin-bottom: 14px;
-        letter-spacing: 1.1px;
-      }
-
-      .hero__text {
-        max-width: 100%;
-        font-size: 16px;
-        line-height: 1.78;
-        margin-bottom: 22px;
-      }
-
-      .hero__actions {
-        gap: 12px;
-        margin-bottom: 20px;
-      }
-
-      .hero__actions .btn {
-        width: 100%;
-        min-height: 56px;
-        padding: 15px 20px;
-        font-size: 15px;
-      }
-
-      .experience {
-        width: 100%;
-        grid-template-columns: 86px 1fr;
-        gap: 14px;
-        padding: 14px;
-        border-radius: 18px;
-      }
-
-      .experience__image {
-        border-right: 1px solid rgba(166,106,19,.24);
-        border-bottom: 0;
-        padding: 0 12px 0 0;
-      }
-
-      .experience__image img { width: 68px; height: 68px; }
-      .experience p { font-size: 14px; line-height: 1.62; }
-    }
-
-    @media (max-width: 520px) {
-      .hero {
-        padding-left: 18px;
-        padding-right: 18px;
-        padding-bottom: 52px;
-        background:
-          linear-gradient(180deg,
-            rgba(255,246,232,.02) 0%,
-            rgba(255,246,232,.15) 36%,
-            rgba(255,246,232,.84) 60%,
-            #fff6e8 78%,
-            #fff6e8 100%),
-          url("assets/hero-mobile.png") center top / auto clamp(300px, 86vw, 390px) no-repeat;
-      }
-
-      .hero__content { padding-top: clamp(285px, 82vw, 380px); }
-      .hero h1 { font-size: clamp(48px, 16vw, 66px); }
-      .hero__subtitle { font-size: 15px; }
-      .hero__text { font-size: 15px; }
-    }
-
-    @media (max-width: 420px) {
-      .hero {
-        padding-left: 16px;
-        padding-right: 16px;
-        background:
-          linear-gradient(180deg,
-            rgba(255,246,232,.00) 0%,
-            rgba(255,246,232,.16) 35%,
-            rgba(255,246,232,.88) 62%,
-            #fff6e8 80%,
-            #fff6e8 100%),
-          url("assets/hero-mobile.png") center top / auto clamp(280px, 92vw, 355px) no-repeat;
-      }
-
-      .hero__content { padding-top: clamp(265px, 88vw, 350px); }
-      .hero h1 { font-size: clamp(44px, 17vw, 60px); }
-      .brand-line { gap: 8px; }
-      .brand-line img { width: .54em; height: .54em; }
-      .experience { grid-template-columns: 76px 1fr; }
-      .experience__image img { width: 60px; height: 60px; }
-    }
-
-
-    /* About section copied from the first design: photo card + handwritten note + Italy mark */
-    .heritage-about {
-      padding: 54px 48px 58px;
-      background: #eee8df;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .heritage-about::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 20% 28%, rgba(166,106,19,.06), transparent 28%),
-        radial-gradient(circle at 82% 48%, rgba(111,65,6,.06), transparent 30%);
-      pointer-events: none;
-    }
-
-    .heritage-about__grid {
-      max-width: 1280px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: .95fr 1.05fr;
-      gap: 80px;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .heritage-photo-note {
-      display: grid;
-      grid-template-columns: 95px 1fr;
-      gap: 24px;
-      align-items: center;
-    }
-
-    .heritage-hand-text {
-      font-family: "Homemade Apple", cursive;
-      color: #5e4d41;
-      font-size: 19px;
-      line-height: 1.5;
-      text-align: center;
-      transform: rotate(-8deg);
-    }
-
-    .heritage-hand-text span {
-      display: block;
-      color: #b85f45;
-      font-size: 28px;
-      margin-top: 8px;
-    }
-
-    .heritage-family-photo {
-      position: relative;
-      min-height: 340px;
-      background: url("assets/anfe.png") center / cover no-repeat, #e5e0d6;
-      border: 14px solid #fff;
-      box-shadow: 0 24px 60px rgba(80, 48, 6, .16);
-      transform: rotate(-4deg);
-    }
-
-    .heritage-family-photo::before {
-      content: "";
-      position: absolute;
-      left: 22px;
-      top: -30px;
-      width: 120px;
-      height: 32px;
-      background: #718064;
-      opacity: .72;
-      transform: rotate(-8deg);
-    }
-
-    .heritage-badge {
-      position: absolute;
-      right: -34px;
-      bottom: -22px;
-      width: 104px;
-      height: 104px;
-      border-radius: 50%;
-      background: #b85f45;
-      color: #fff;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      font-size: 12px;
-      line-height: 1.35;
-      box-shadow: 0 14px 30px rgba(88,54,38,.20);
-    }
-
-    .heritage-badge strong { font-size: 15px; }
-
-    .heritage-copy {
-      position: relative;
-      min-height: 390px;
-      padding-right: 240px;
-      isolation: isolate;
-    }
-
-    .heritage-copy::after {
-      content: none;
-      display: none;
-    }
-
-    .heritage-kicker {
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      color: #243329;
-      font-weight: 900;
-      font-size: 13px;
-      margin-bottom: 18px;
-    }
-
-    .heritage-title {
-      max-width: 610px;
-      font-family: "Cormorant Garamond", serif;
-      color: #18251b;
-      font-size: clamp(42px, 4.3vw, 64px);
-      line-height: 1;
-      font-weight: 700;
-      letter-spacing: .2px;
-      margin-bottom: 24px;
-    }
-
-    .heritage-title::after {
-      content: "";
-      display: block;
-      width: 78px;
-      height: 2px;
-      background: #b85f45;
-      margin-top: 24px;
-    }
-
-    .heritage-title .heritage-flag {
-      display: inline-flex;
-      width: 70px;
-      height: 42px;
-      margin-left: 16px;
-      vertical-align: middle;
-      border: 3px solid #fff;
-      border-radius: 8px;
-      background: linear-gradient(90deg, #178b4a 0 33.333%, #ffffff 33.333% 66.666%, #d22f27 66.666% 100%);
-      box-shadow: 0 12px 24px rgba(80,48,6,.16);
-      transform: rotate(-4deg) translateY(-4px);
-      position: relative;
-    }
-
-    .heritage-title .heritage-flag::before {
-      content: "";
-      position: absolute;
-      left: -10px;
-      top: -8px;
-      width: 4px;
-      height: 62px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, #7b5a34, #3f2a13);
-      box-shadow: 0 8px 14px rgba(80,48,6,.18);
-    }
-
-    .heritage-kicker,
-    .heritage-title,
-    .heritage-copy p:not(.heritage-kicker),
-    .heritage-btn {
-      position: relative;
-      z-index: 2;
-    }
-
-    .heritage-copy p:not(.heritage-kicker) {
-      max-width: 620px;
-      color: #3f473f;
-      line-height: 1.85;
-      font-size: 17px;
-      margin-bottom: 26px;
-    }
-
-    .heritage-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 58px;
-      padding: 0 34px;
-      border-radius: 4px;
-      border: 1px solid #c8b9aa;
-      color: #18251b;
-      background: transparent;
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: .8px;
-      text-transform: uppercase;
-      transition: .25s ease;
-    }
-
-    .heritage-btn:hover {
-      background: #fff;
-      transform: translateY(-3px);
-    }
-
-    .heritage-italy-map {
-      position: absolute;
-      right: 10px;
-      top: -4px;
-      width: 255px;
-      height: auto;
-      max-height: 325px;
-      object-fit: contain;
-      opacity: .34;
-      z-index: 1;
-      pointer-events: none;
-      filter: none;
-    }
-
-    .heritage-italy-label {
-      position: absolute;
-      right: 32px;
-      bottom: 22px;
-      font-family: "Homemade Apple", cursive;
-      font-size: 18px;
-      line-height: 1.5;
-      transform: rotate(-7deg);
-      color: #473c34;
-      text-align: center;
-    }
-
-    .heritage-italy-label b {
-      font-family: Inter, sans-serif;
-      color: #b85f45;
-      font-size: 25px;
-      letter-spacing: 8px;
-    }
-
-    @media (max-width: 1050px) {
-      .heritage-about { padding: 44px 24px 54px; }
-      .heritage-about__grid { grid-template-columns: 1fr; gap: 56px; }
-      .heritage-copy { padding-right: 0; min-height: auto; }
-      .heritage-italy-map,
-      .heritage-italy-label {
-        position: relative;
-        right: auto;
-        top: auto;
-        bottom: auto;
-        display: block;
-        margin-top: 24px;
-      }
-      .heritage-italy-map { width: 210px; height: 250px; opacity: .42; }
-      .heritage-italy-label { width: fit-content; margin-left: auto; margin-right: 30px; }
     }
 
     @media (max-width: 620px) {
-      .heritage-about { padding: 38px 20px 48px; }
-      .heritage-photo-note { grid-template-columns: 1fr; gap: 22px; }
-      .heritage-hand-text { text-align: left; transform: rotate(-5deg); }
-      .heritage-family-photo { min-height: 260px; transform: none; border-width: 10px; }
-      .heritage-badge { right: -10px; bottom: -18px; width: 86px; height: 86px; }
-      .heritage-title { font-size: clamp(36px, 12vw, 48px); }
-      .heritage-copy p:not(.heritage-kicker) { font-size: 15px; }
-    }
-
-    @media (max-width: 620px) {
-      .heritage-title .heritage-flag {
-        width: 54px;
-        height: 32px;
-        margin-left: 10px;
-        border-width: 2px;
-        transform: rotate(-4deg) translateY(-2px);
-      }
-      .heritage-title .heritage-flag::before {
-        left: -8px;
-        top: -6px;
-        width: 3px;
-        height: 48px;
-      }
-    }
-
-
-    /* Mobile hero: use full mobile image without cropping from the right */
-    @media (max-width: 768px) {
-      .hero {
-        min-height: calc(100vh - 78px);
-        padding: 46px 18px 58px;
-        align-items: center;
-        background-color: #fff6e8;
-        background-image:
-          linear-gradient(90deg, rgba(255,246,232,.90) 0%, rgba(255,246,232,.58) 48%, rgba(255,246,232,.05) 100%),
-          url("assets/hero-mobile.png");
-        background-position: center top, center top;
-        background-size: 100% auto, 100% auto;
-        background-repeat: no-repeat, no-repeat;
+      .navbar {
+        grid-template-columns: 132px 1fr 58px;
+        height: 78px;
+        padding: 0 16px;
       }
 
-      .hero::before {
-        background:
-          radial-gradient(circle at 82% 55%, rgba(198,145,53,.14), transparent 31%),
-          radial-gradient(circle at 16% 18%, rgba(198,145,53,.10), transparent 24%);
+      .logo img {
+        width: 112px;
       }
 
-      .hero::after {
-        height: 58px;
-      }
-
-      .hero__content {
-        width: 56%;
-        max-width: 420px;
-        margin: 0;
-        padding-top: 0;
-      }
-
-      .hero h1 {
-        font-size: clamp(34px, 8.5vw, 54px);
-        line-height: .96;
-        margin-bottom: 14px;
-      }
-
-      .brand-line {
-        justify-content: flex-start;
-        gap: 8px;
-      }
-
-      .eyebrow {
-        font-size: 11px;
-        letter-spacing: 2px;
-        margin-bottom: 9px;
-      }
-
-      .hero__subtitle {
-        font-size: 12px;
-        line-height: 1.35;
-        margin-bottom: 10px;
-      }
-
-      .hero__text {
-        max-width: 360px;
-        font-size: 12.5px;
-        line-height: 1.6;
-        margin-bottom: 16px;
-      }
-
-      .hero__actions {
-        gap: 10px;
-        margin-bottom: 16px;
-      }
-
-      .hero__actions .btn {
-        width: auto;
-        min-height: 46px;
-        padding: 12px 16px;
-        font-size: 12px;
-      }
-
-      .experience {
-        width: min(330px, 100%);
-        grid-template-columns: 68px 1fr;
-        gap: 10px;
-        padding: 11px;
-        border-radius: 15px;
-      }
-
-      .experience__image {
-        border-right: 1px solid rgba(166,106,19,.24);
-        border-bottom: 0;
-        padding: 0 9px 0 0;
-      }
-
-      .experience__image img {
+      .menu-toggle {
         width: 52px;
         height: 52px;
+        font-size: 31px;
+        justify-self: end;
+        margin-right: -4px;
       }
 
-      .experience p {
-        font-size: 11px;
-        line-height: 1.5;
-      }
-    }
-
-    @media (max-width: 420px) {
-      .hero {
-        padding-left: 14px;
-        padding-right: 14px;
-        background-color: #fff6e8;
-        background-image:
-          linear-gradient(90deg, rgba(255,246,232,.93) 0%, rgba(255,246,232,.64) 53%, rgba(255,246,232,.06) 100%),
-          url("assets/hero-mobile.png");
-        background-position: center top, center top;
-        background-size: 100% auto, 100% auto;
-        background-repeat: no-repeat, no-repeat;
+      .nav-links {
+        top: 78px;
+        left: 16px;
+        right: 10px;
       }
 
-      .hero__content {
-        width: 61%;
-        max-width: 285px;
-        padding-top: 0;
+      .products-hero {
+        min-height: auto;
+        padding: 64px 18px 88px;
       }
 
-      .hero h1 {
-        font-size: clamp(29px, 8.8vw, 38px);
+      .products-hero h1 {
+        font-size: clamp(38px, 13vw, 58px);
       }
 
-      .hero__text {
-        font-size: 11.5px;
-        line-height: 1.5;
+      .products-section {
+        padding: 58px 18px 78px;
       }
 
-      .hero__actions .btn {
-        min-height: 42px;
-        padding: 10px 13px;
-        font-size: 11px;
+      .product-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
       }
 
-      .btn__icon-img {
-        width: 17px;
-        height: 17px;
-        margin-left: 7px;
+      .product-card {
+        min-height: auto;
+        border-radius: 26px;
       }
 
-      .experience {
-        grid-template-columns: 54px 1fr;
-        padding: 9px;
+      .product-card__image {
+        height: auto;
+        min-height: 190px;
       }
 
-      .experience__image img {
-        width: 42px;
-        height: 42px;
+      .sorten-info {
+        padding: 0 18px 68px;
       }
 
-      .experience p {
-        font-size: 10.5px;
-      }
-    }
-
-
-    /* FINAL MOBILE HERO FIX: remove the large empty space on phones */
-    @media (max-width: 768px) {
-      .hero {
-        min-height: auto !important;
-        height: auto !important;
-        padding: 26px 18px 36px !important;
-        align-items: flex-start !important;
-        background-color: #fff6e8 !important;
-        background-image:
-          linear-gradient(90deg, rgba(255,246,232,.92) 0%, rgba(255,246,232,.62) 52%, rgba(255,246,232,.08) 100%),
-          url("assets/hero-mobile.png") !important;
-        background-position: center top, center top !important;
-        background-size: 100% auto, 100% auto !important;
-        background-repeat: no-repeat, no-repeat !important;
+      .sorten-info__box {
+        padding: 26px;
+        border-radius: 26px;
       }
 
-      .hero__content {
-        width: 58% !important;
-        max-width: 390px !important;
-        margin: 0 !important;
-        padding-top: 0 !important;
+      .sorten-info__details {
+        grid-template-columns: 1fr;
       }
 
-      .hero::after {
-        height: 34px !important;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .hero {
-        padding: 22px 14px 30px !important;
+      .product-modal {
+        padding: 14px;
       }
 
-      .hero__content {
-        width: 61% !important;
-        max-width: 285px !important;
+      .product-modal__box {
+        padding: 24px 18px;
+        border-radius: 24px;
+        max-height: 86vh;
       }
 
-      .hero h1 {
-        font-size: clamp(29px, 8.8vw, 38px) !important;
+      .modal-sorten-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
       }
 
-      .hero__text {
-        font-size: 11.5px !important;
-        line-height: 1.5 !important;
-        margin-bottom: 13px !important;
+      .modal-sorten-list span {
+        font-size: 12px;
+        min-height: 36px;
       }
 
-      .hero__actions {
-        margin-bottom: 12px !important;
+      .cta-band {
+        padding: 32px 18px;
       }
 
-      .experience {
-        margin-bottom: 0 !important;
+      .cta-box {
+        padding: 26px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .footer__inner {
+        padding: 30px 22px;
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
-
-
-    /* MOBILE SECTION END EFFECT: soft torn wave like the reference image */
-    @media (max-width: 768px) {
-      .hero,
-      .quality-taste,
-      .delivery,
-      .about-banner-wrap {
-        position: relative;
-        overflow: hidden;
-      }
-
-      .hero {
-        padding-bottom: 64px !important;
-        margin-bottom: -1px;
-      }
-
-      .hero::after,
-      .quality-taste::after,
-      .delivery::after,
-      .about-banner-wrap::after {
-        content: "";
-        position: absolute;
-        left: -5%;
-        right: -5%;
-        bottom: -1px;
-        height: 58px !important;
-        z-index: 8;
-        pointer-events: none;
-        background: var(--mobile-wave-color, #fff8ee);
-        clip-path: polygon(
-          0 44%, 5% 50%, 10% 58%, 16% 49%, 22% 62%,
-          29% 53%, 36% 67%, 44% 57%, 52% 69%, 60% 55%,
-          68% 65%, 76% 51%, 84% 61%, 92% 49%, 100% 58%,
-          100% 100%, 0 100%
-        );
-        filter: drop-shadow(0 -8px 14px rgba(80,48,6,.045));
-      }
-
-      .hero { --mobile-wave-color: #fff8ee; }
-      .quality-taste { --mobile-wave-color: #fff6e8; padding-bottom: 82px !important; }
-      .delivery { --mobile-wave-color: #fbf3e8; padding-bottom: 82px !important; }
-      .about-banner-wrap { --mobile-wave-color: #fff8ee; padding-bottom: 72px !important; }
-
-      .quality-taste,
-      .delivery,
-      .about-banner-wrap {
-        margin-bottom: -1px;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .hero {
-        padding-bottom: 56px !important;
-      }
-
-      .hero::after,
-      .quality-taste::after,
-      .delivery::after,
-      .about-banner-wrap::after {
-        height: 48px !important;
-        clip-path: polygon(
-          0 42%, 8% 55%, 17% 46%, 27% 63%, 39% 51%,
-          51% 68%, 64% 50%, 77% 62%, 89% 47%, 100% 59%,
-          100% 100%, 0 100%
-        );
-      }
-    }
-
-
-    /* LAST SECTION DESKTOP + MOBILE WAVE: same organic torn effect used under the hero */
-    .about-banner-wrap {
-      position: relative;
-      overflow: hidden;
-      padding-bottom: 116px;
-      margin-bottom: -1px;
-      --last-wave-color: #fff8ee;
-    }
-
-    .about-banner-wrap::after {
-      content: "";
-      position: absolute;
-      left: -2%;
-      right: -2%;
-      bottom: -1px;
-      height: 88px;
-      background: var(--last-wave-color);
-      z-index: 8;
-      pointer-events: none;
-      clip-path: polygon(
-        0 42%, 5% 48%, 10% 58%, 16% 51%, 22% 63%,
-        29% 55%, 36% 68%, 44% 58%, 52% 70%, 60% 56%,
-        68% 66%, 76% 52%, 84% 62%, 92% 50%, 100% 59%,
-        100% 100%, 0 100%
-      );
-      filter: drop-shadow(0 -10px 18px rgba(80, 48, 6, .04));
-    }
-
-    @media (max-width: 768px) {
-      .about-banner-wrap {
-        padding-bottom: 84px !important;
-      }
-
-      .about-banner-wrap::after {
-        left: -5%;
-        right: -5%;
-        height: 58px !important;
-        clip-path: polygon(
-          0 44%, 5% 50%, 10% 58%, 16% 49%, 22% 62%,
-          29% 53%, 36% 67%, 44% 57%, 52% 69%, 60% 55%,
-          68% 65%, 76% 51%, 84% 61%, 92% 49%, 100% 58%,
-          100% 100%, 0 100%
-        );
-        filter: drop-shadow(0 -8px 14px rgba(80,48,6,.045));
-      }
-    }
-
-    @media (max-width: 520px) {
-      .about-banner-wrap {
-        padding-bottom: 72px !important;
-      }
-
-      .about-banner-wrap::after {
-        height: 48px !important;
-        clip-path: polygon(
-          0 42%, 8% 55%, 17% 46%, 27% 63%, 39% 51%,
-          51% 68%, 64% 50%, 77% 62%, 89% 47%, 100% 59%,
-          100% 100%, 0 100%
-        );
-      }
-    }
-
   
 
 /* === Unified mobile menu/button fix applied to all pages === */
@@ -1828,10 +956,7 @@
   .navbar > .nav-btn { display: none !important; }
   .nav-links .nav-btn-mobile { display: flex !important; }
 }
-
-  
-
-    /* FINAL FIX: correct mobile menu button and dropdown on all phones */
+/* FINAL FIX: correct mobile menu button and dropdown on all phones */
     @media (max-width: 1050px) {
       .site-header,
       .navbar {
@@ -2114,290 +1239,6 @@
     }
 
   </style>
-  <style>
-    /* Standalone Unternehmen page additions */
-    .nav-links { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-
-    .company-hero {
-      min-height: 560px;
-      position: relative;
-      isolation: isolate;
-      display: flex;
-      align-items: center;
-      padding: 82px 48px 112px;
-      background:
-        linear-gradient(90deg, rgba(255,246,232,.95) 0%, rgba(255,246,232,.75) 50%, rgba(255,246,232,.30) 100%),
-        radial-gradient(circle at 76% 28%, rgba(211,154,56,.18), transparent 30%),
-        url("assets/anfe.png") center right / cover no-repeat;
-      overflow: hidden;
-    }
-
-    .company-hero::after {
-      content: "";
-      position: absolute;
-      left: -2%;
-      right: -2%;
-      bottom: -1px;
-      height: 88px;
-      background: #fff8ee;
-      z-index: 2;
-      pointer-events: none;
-      clip-path: polygon(
-        0 42%, 5% 48%, 10% 58%, 16% 51%, 22% 63%,
-        29% 55%, 36% 68%, 44% 58%, 52% 70%, 60% 56%,
-        68% 66%, 76% 52%, 84% 62%, 92% 50%, 100% 59%,
-        100% 100%, 0 100%
-      );
-      filter: drop-shadow(0 -10px 18px rgba(80, 48, 6, .04));
-    }
-
-    .company-hero__content {
-      width: min(760px, 100%);
-      position: relative;
-      z-index: 3;
-    }
-
-    .company-hero h1 {
-      font-family: Cinzel, serif;
-      color: var(--gold-dark);
-      font-size: clamp(42px, 5.6vw, 76px);
-      line-height: 1.02;
-      font-weight: 700;
-      letter-spacing: .6px;
-      margin-bottom: 22px;
-      text-transform: uppercase;
-    }
-
-    .company-hero__text {
-      max-width: 650px;
-      color: #4f3d29;
-      line-height: 1.85;
-      font-size: 17px;
-      margin-bottom: 30px;
-    }
-
-    .company-story {
-      background:
-        radial-gradient(circle at 12% 18%, rgba(198,145,53,.10), transparent 26%),
-        radial-gradient(circle at 86% 46%, rgba(198,145,53,.08), transparent 28%),
-        #fff8ee;
-      padding: 82px 48px 74px;
-    }
-
-    .company-story__grid {
-      max-width: 1180px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: .95fr 1.05fr;
-      gap: 38px;
-      align-items: stretch;
-    }
-
-    .company-card,
-    .company-timeline-card {
-      background: linear-gradient(145deg, rgba(255,255,255,.84), rgba(255,246,232,.62));
-      border: 1px solid rgba(166,106,19,.22);
-      border-radius: 30px;
-      box-shadow: var(--shadow);
-      padding: 38px;
-    }
-
-    .company-card h2,
-    .company-timeline-card h2,
-    .company-cta h2 {
-      font-family: Cinzel, serif;
-      color: var(--gold-dark);
-      font-size: clamp(28px, 3vw, 42px);
-      line-height: 1.12;
-      margin-bottom: 18px;
-    }
-
-    .company-card p,
-    .company-timeline-card p,
-    .company-cta p {
-      color: #4f3d29;
-      line-height: 1.85;
-      font-size: 16px;
-      margin-bottom: 16px;
-    }
-
-    .company-signature {
-      font-family: "Great Vibes", cursive;
-      color: var(--gold);
-      font-size: 44px;
-      margin-top: 18px;
-    }
-
-    .company-timeline {
-      list-style: none;
-      display: grid;
-      gap: 18px;
-      margin-top: 24px;
-      position: relative;
-    }
-
-    .company-timeline li {
-      display: grid;
-      grid-template-columns: 92px 1fr;
-      gap: 18px;
-      align-items: start;
-      padding: 18px;
-      border-radius: 20px;
-      background: rgba(255,255,255,.64);
-      border: 1px solid rgba(166,106,19,.14);
-      transition: transform .25s ease, box-shadow .25s ease;
-    }
-
-    .company-timeline li:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 14px 28px rgba(80,48,6,.08);
-    }
-
-    .company-year {
-      min-height: 52px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, var(--gold-2), var(--gold-dark));
-      color: #fff;
-      font-family: Cinzel, serif;
-      font-weight: 900;
-      box-shadow: 0 10px 20px rgba(114,70,7,.18);
-    }
-
-    .company-timeline h3 {
-      color: var(--gold-dark);
-      font-size: 20px;
-      margin-bottom: 8px;
-    }
-
-    .company-values {
-      padding: 84px 48px;
-      background: var(--cream);
-    }
-
-    .company-values__grid {
-      max-width: 1180px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 24px;
-    }
-
-    .company-value {
-      min-height: 260px;
-      background: rgba(255,255,255,.76);
-      border: 1px solid rgba(166,106,19,.18);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      padding: 32px;
-      transition: .25s ease;
-    }
-
-    .company-value:hover { transform: translateY(-6px); }
-
-    .company-value img {
-      width: 62px;
-      height: 62px;
-      object-fit: contain;
-      margin-bottom: 22px;
-    }
-
-    .company-value h3 {
-      color: var(--gold-dark);
-      font-size: 22px;
-      margin-bottom: 12px;
-    }
-
-    .company-value p {
-      color: var(--muted);
-      line-height: 1.75;
-    }
-
-    .company-stats {
-      width: 100vw;
-      max-width: none;
-      margin-left: calc(50% - 50vw);
-      margin-right: calc(50% - 50vw);
-      background: linear-gradient(180deg, #5a3703 0%, #2f1d02 100%);
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      color: #fff8e8;
-      overflow: hidden;
-      border-top: 1px solid rgba(240,196,109,.28);
-      border-bottom: 1px solid rgba(240,196,109,.28);
-    }
-
-    .company-cta-wrap {
-      position: relative;
-      overflow: hidden;
-      padding: 72px 48px 116px;
-      background: linear-gradient(135deg, #714306, #bd801c);
-      --last-wave-color: #fff8ee;
-    }
-
-    .company-cta-wrap::after {
-      content: "";
-      position: absolute;
-      left: -2%;
-      right: -2%;
-      bottom: -1px;
-      height: 88px;
-      background: var(--last-wave-color);
-      z-index: 8;
-      pointer-events: none;
-      clip-path: polygon(
-        0 42%, 5% 48%, 10% 58%, 16% 51%, 22% 63%,
-        29% 55%, 36% 68%, 44% 58%, 52% 70%, 60% 56%,
-        68% 66%, 76% 52%, 84% 62%, 92% 50%, 100% 59%,
-        100% 100%, 0 100%
-      );
-    }
-
-    .company-cta {
-      max-width: 1080px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 2;
-      background: rgba(255,248,236,.97);
-      border-radius: 34px;
-      padding: 46px;
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 34px;
-      align-items: center;
-      box-shadow: 0 34px 70px rgba(51,31,4,.25);
-    }
-
-    .company-cta__image {
-      min-height: 260px;
-      border-radius: 26px;
-      background: url("assets/upper-image.png") center / cover no-repeat, #f7ead4;
-      box-shadow: 0 20px 42px rgba(80,48,6,.12);
-    }
-
-    @media (max-width: 1050px) {
-      .nav-links { grid-template-columns: 1fr; }
-      .company-hero { padding: 72px 24px 98px; }
-      .company-story, .company-values, .company-cta-wrap { padding-left: 24px; padding-right: 24px; }
-      .company-story__grid, .company-cta { grid-template-columns: 1fr; }
-      .company-values__grid, .company-stats { grid-template-columns: 1fr; }
-      .company-stats .stat-item:not(:last-child)::after { top: auto; left: 24px; right: 24px; bottom: 0; width: auto; height: 1px; }
-    }
-
-    @media (max-width: 620px) {
-      .company-hero { padding: 54px 20px 78px; }
-      .company-hero h1 { font-size: clamp(34px, 12vw, 48px); }
-      .company-hero__text { font-size: 15px; }
-      .company-story { padding: 62px 20px; }
-      .company-card, .company-timeline-card, .company-cta { padding: 26px 22px; border-radius: 24px; }
-      .company-timeline li { grid-template-columns: 1fr; }
-      .company-year { width: fit-content; padding: 0 18px; }
-      .company-cta-wrap { padding: 56px 20px 86px; }
-      .company-cta__image { min-height: 210px; }
-    }
-  </style>
-
 
 
 <!-- FINAL VERIFIED MOBILE MENU FIX -->
@@ -2580,14 +1421,145 @@
 </style>
 <!-- END FINAL VERIFIED MOBILE MENU FIX -->
 
+
+<!-- SMALLER bild.png NEW BADGE FIX -->
+<style>
+  .admin-modal-gallery__new-badge {
+    width: min(24%, 72px) !important;
+    height: auto !important;
+  }
+
+  .admin-image-row .admin-new-badge-preview {
+    width: 42px !important;
+    height: auto !important;
+  }
+
+  @media (max-width: 620px) {
+    .admin-modal-gallery__new-badge {
+      width: min(22%, 58px) !important;
+    }
+
+    .admin-image-row .admin-new-badge-preview {
+      width: 38px !important;
+    }
+  }
+</style>
+<!-- END SMALLER bild.png NEW BADGE FIX -->
+
+
+
+<!-- MODAL SINGLE IMAGE FIX: one clear picture under the close arrow -->
+<style>
+  .modal-preview-gallery {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin: 4px 0 24px;
+  }
+
+  .modal-preview-gallery__item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    border: 1px solid rgba(166,106,19,.20);
+    background: rgba(255,255,255,.82);
+    box-shadow: 0 14px 32px rgba(80,48,6,.12);
+  }
+
+  .modal-preview-gallery__item img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+  }
+
+  @media (max-width: 760px) {
+    .modal-preview-gallery {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin: 6px 0 20px;
+    }
+    .modal-preview-gallery__item img { height: 190px; }
+  }
+
+  @media (max-width: 420px) {
+    .modal-preview-gallery__item img { height: 165px; }
+  }
+</style>
+<!-- END MODAL 4 IMAGES FIX -->
+
+
+
+<!-- EXTERNAL MODAL PRODUCT IMAGE FIX: one medium logo-like image per modal -->
+<style>
+  .product-modal .modal-preview-gallery {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 8px 0 26px !important;
+  }
+
+  .product-modal .modal-preview-gallery__item {
+    width: min(230px, 58vw) !important;
+    margin: 0 auto !important;
+    display: grid !important;
+    place-items: center !important;
+    gap: 10px !important;
+    padding: 14px !important;
+    border-radius: 28px !important;
+    background: rgba(255,255,255,.72) !important;
+    border: 1px solid rgba(166,106,19,.18) !important;
+    box-shadow: 0 18px 36px rgba(80,48,6,.12) !important;
+  }
+
+  .product-modal .modal-preview-gallery__item img {
+    width: min(170px, 44vw) !important;
+    height: min(170px, 44vw) !important;
+    object-fit: contain !important;
+    border-radius: 50% !important;
+    background: #fff8ee !important;
+    padding: 8px !important;
+    box-shadow: 0 12px 28px rgba(80,48,6,.14) !important;
+  }
+
+  .product-modal .modal-preview-gallery__item figcaption {
+    color: var(--gold-dark) !important;
+    font-weight: 900 !important;
+    font-size: 15px !important;
+    text-align: center !important;
+  }
+
+  @media (max-width: 620px) {
+    .product-modal .modal-preview-gallery {
+      margin: 6px 0 22px !important;
+    }
+
+    .product-modal .modal-preview-gallery__item {
+      width: min(210px, 62vw) !important;
+      padding: 12px !important;
+      border-radius: 24px !important;
+    }
+
+    .product-modal .modal-preview-gallery__item img {
+      width: min(150px, 46vw) !important;
+      height: min(150px, 46vw) !important;
+    }
+  }
+</style>
+<!-- END EXTERNAL MODAL PRODUCT IMAGE FIX -->
+
 </head>
+
 <body>
   <header class="site-header">
     <div class="topbar">
       <div class="topbar__left">
-        <span><img class="topbar__emoji" src="assets/delivery.png" alt="" /> Schnelle Lieferung</span>
-        <span><img class="topbar__emoji" src="assets/quality.png" alt="" /> Beste Qualität</span>
-        <span><img class="topbar__emoji" src="assets/service.png" alt="" /> Zuverlässiger Service</span>
+        <span>🚚 Schnelle Lieferung</span>
+        <span>⭐ Beste Qualität</span>
+        <span>🤝 Zuverlässiger Service</span>
       </div>
       <div class="topbar__right">
         <a href="tel:+491739675569">☎ +49 173 9675569</a>
@@ -2596,305 +1568,431 @@
     </div>
 
     <nav class="navbar">
-      <div class="logo" aria-label="Eisgroßhandel Eis Büffe Logo">
-        <img src="assets/logo.png" alt="Eisgroßhandel Eis Büffe Logo" draggable="false" />
-      </div>
+      <a class="logo" href="index.html" aria-label="Eis Büffe Startseite">
+        <img src="assets/logo.png" alt="Eis Büffe Logo" />
+      </a>
 
       <button class="menu-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false">☰</button>
 
       <div class="nav-links">
-        <a href="index.html#home">Startseite</a>
-        <a href="index.html#produkte">Produkte</a>
-        <a href="index.html#lieferung">Lieferung</a>
-        <a href="unternehmen.html" class="active">Unternehmen</a>
+        <a href="index.html">Startseite</a>
+        <a href="unternehmen.html">Unternehmen</a>
+        <a href="Produkten.index.html" class="active">Produkte</a>
         <a href="service.html">Service</a>
-        <a href="kontakt.html" class="nav-btn">Angebot anfragen <img class="nav-btn__icon-img" src="assets/anfrage.png" alt="" /></a>
+        <a href="naehrwerttabelle.html">Nährwerttabelle</a>
+        <a href="index.html#lieferung">Lieferung</a>
+        <a href="kontakt.html" class="nav-btn">Angebot anfragen</a>
       </div>
     </nav>
   </header>
 
   <main>
-    <section class="company-hero" aria-label="Unternehmen Eis Büffe">
-      <div class="company-hero__content">
-        <p class="eyebrow">Unternehmen</p>
-        <h1>eisBüffe – wie alles begann</h1>
-        <p class="company-hero__text">
-          Seit über 50 Jahren betreibt unsere Familie mehrere Eis-Cafés in Italien.
-          Schon immer stellen wir mit viel Liebe und nach traditionellen Rezepten unser Eis selbst her.
+    <section class="products-hero">
+      <div>
+        <p class="eyebrow">Unsere Produkte</p>
+        <h1>Produkten <span class="brand">Eis Büffe</span></h1>
+        <p>
+          Entdecken Sie unsere beliebtesten Produktgruppen für Gastronomie,
+          Eiscafés, Wiederverkäufer und Großkunden.
         </p>
-        <div class="hero__actions">
-          <a href="#geschichte" class="btn btn--primary">
-            Unsere Geschichte
-            <img class="btn__icon-img" src="assets/product-arrow.png" alt="" />
-          </a>
-          <a href="kontakt.html" class="btn btn--secondary">Kontakt aufnehmen</a>
-        </div>
       </div>
     </section>
 
-    <section id="geschichte" class="company-story">
-      <div class="company-story__grid">
-        <article class="company-card">
-          <p class="eyebrow">Familientradition</p>
-          <h2>Liebe zum Eis seit Generationen</h2>
-          <p>
-            Unsere Geschichte beginnt in Italien: Dort betreibt unsere Familie seit über fünf Jahrzehnten
-            mehrere Eis-Cafés. Die Leidenschaft für hochwertiges Speiseeis, traditionelle Rezepte und
-            handwerkliche Herstellung begleitet uns bis heute.
-          </p>
-          <p>
-            Diese Erfahrung ist die Grundlage für unser Unternehmen in Deutschland. Modern in der Produktion,
-            aber traditionell im Anspruch: täglich feinste Eissorten für Gastronomie, Eiscafés und Großkunden.
-          </p>
-          <div class="company-signature">Eis Büffe</div>
-        </article>
-
-        <article class="company-timeline-card">
-          <p class="eyebrow">Grosshandel und Vertrieb in Deutschland</p>
-          <h2>Von Göttingen nach Lenglern</h2>
-          <ul class="company-timeline">
-            <li>
-              <span class="company-year">1995</span>
-              <div>
-                <h3>Start der Eisproduktion in Göttingen</h3>
-                <p>Im Jahr 1995 begann die Eisproduktion in Göttingen. Mittlerweile beliefern wir zahlreiche Eisdielen, Cafés, Restaurants, Bäcker sowie Großhandelsunternehmen deutschlandweit.</p>
-              </div>
-            </li>
-            <li>
-              <span class="company-year">2010</span>
-              <div>
-                <h3>Umzug und Erweiterung nach Lenglern</h3>
-                <p>Als die Kapazitäten nicht mehr ausreichten, wurde die Eisproduktion nach Lenglern verlagert. Nach Umbauten und Renovierungen entstand ein moderner Standort mit klarer Handschrift von eisBüffe.</p>
-              </div>
-            </li>
-            <li>
-              <span class="company-year">Heute</span>
-              <div>
-                <h3>Über 120 verschiedene Sorten</h3>
-                <p>Unsere Kunden können aus über 120 verschiedenen Sorten wählen. Probieren auch Sie unser Eis – Sie und Ihre Kunden werden begeistert sein.</p>
-              </div>
-            </li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section class="company-values" aria-label="Unsere Werte">
+    <section class="products-section">
       <div class="section-head">
-        <p class="eyebrow">Unsere Werte</p>
-        <h2>Modern, aber dennoch traditionell</h2>
-        <p>Mit zuverlässigen Partnern, hochwertigen Rohstoffen und Erfahrung haben wir uns erfolgreich am Markt etabliert.</p>
+        <p class="eyebrow">Sortiment</p>
+        <h2>Vier starke Kategorien</h2>
+        <p>
+          Wählen Sie eine Kategorie. Bei Milchspeiseeise öffnet sich eine komplette Sortenübersicht.
+        </p>
       </div>
 
-      <div class="company-values__grid">
-        <article class="company-value">
-          <img src="assets/quality.png" alt="" />
-          <h3>Traditionelle Rezepte</h3>
-          <p>Unsere Herstellung baut auf Rezepten und Erfahrung aus der italienischen Eis-Café-Tradition auf.</p>
-        </article>
-        <article class="company-value">
-          <img src="assets/icecream.png" alt="" />
-          <h3>Frische Herstellung</h3>
-          <p>Täglich werden in Lenglern feinste Eissorten frisch hergestellt – mit Sorgfalt und Leidenschaft.</p>
-        </article>
-        <article class="company-value">
-          <img src="assets/truck.png" alt="" />
-          <h3>Deutschlandweiter Vertrieb</h3>
-          <p>Wir beliefern Eisdielen, Cafés, Restaurants, Bäcker und Großhandelsunternehmen deutschlandweit.</p>
-        </article>
+      <div class="product-grid">
+        <button class="product-card" type="button" data-modal-target="milchspeiseeiseModal">
+          <div class="product-card__image">
+            <img src="assets/milchspeiseeis.png" alt="Milchspeiseeise" />
+          </div>
+          <div class="product-card__body">
+            <span class="product-card__number">01</span>
+            <h3>Milchspeiseeise</h3>
+            <p>
+              Cremige Milcheissorten mit feinem Geschmack und hochwertigen Zutaten –
+              ideal für Eiscafés und Gastronomie.
+            </p>
+            <span class="product-card__hint">Eissorten ansehen</span>
+          </div>
+        </button>
+
+        <button class="product-card" type="button" data-modal-target="fruchtspeiseeisModal">
+          <div class="product-card__image">
+            <img src="assets/fruchteis.png" alt="Fruchtspeiseeis" />
+          </div>
+          <div class="product-card__body">
+            <span class="product-card__number">02</span>
+            <h3>Fruchtspeiseeis</h3>
+            <p>
+              Fruchtige, erfrischende Sorten mit intensivem Aroma –
+              perfekt für Sommer, Dessertkarten und Eisvitrinen.
+            </p>
+            <span class="product-card__hint">Eissorten ansehen</span>
+          </div>
+        </button>
+
+        <button class="product-card" type="button" data-modal-target="joghurtModal">
+          <div class="product-card__image">
+            <img src="assets/joghurt.png" alt="Milchspeiseeis Joghurt" />
+          </div>
+          <div class="product-card__body">
+            <span class="product-card__number">03</span>
+            <h3>Milchspeiseeis Joghurt</h3>
+            <p>
+              Leicht, frisch und cremig: Joghurt-Eisvarianten für moderne Genussmomente
+              und besondere Kombinationen.
+            </p>
+            <span class="product-card__hint">Eissorten ansehen</span>
+          </div>
+        </button>
+
+        <button class="product-card" type="button" data-modal-target="spezialitaetenModal">
+          <div class="product-card__image">
+            <img src="assets/spezialitaeten.png" alt="Eis Büffe Spezialitäten" />
+          </div>
+          <div class="product-card__body">
+            <span class="product-card__number">04</span>
+            <h3>Eis Büffe Spezialitäten</h3>
+            <p>
+              Besondere Kreationen und exklusive Sorten für Kunden,
+              die mehr als klassische Eissorten anbieten möchten.
+            </p>
+            <span class="product-card__hint">Eissorten ansehen</span>
+          </div>
+        </button>
       </div>
     </section>
 
-    <section class="products" aria-label="Eis Büffe Kennzahlen">
-      <div class="company-stats">
-        <div class="stat-item">
-          <img class="stat-icon" src="assets/icecream.png" alt="" />
-          <div class="stat-content">
-            <strong>120+</strong>
-            <span>Verschiedene Sorten</span>
-            <p>Große Auswahl an feinsten Eissorten für Ihre Kunden.</p>
+    <section class="sorten-info">
+      <div class="sorten-info__box">
+        <p class="eyebrow">eisBüffe Sorten</p>
+        <h2>Über 120 verschiedene Sorten</h2>
+        <p>
+          Unsere Kunden können aus über 120 verschiedenen Sorten wählen.
+          Probieren auch Sie unser Eis. Sie und Ihre Kunden werden begeistert sein!
+        </p>
+
+        <div class="sorten-info__details">
+          <div>
+            <strong>Abpackgrösse</strong>
+            <span>5,0 Liter</span>
+          </div>
+          <div>
+            <strong>Milchspeiseeis</strong>
+            <span>70% Milch</span>
+          </div>
+          <div>
+            <strong>Fruchtspeiseeis</strong>
+            <span>25% frische Früchte</span>
           </div>
         </div>
-        <div class="stat-item">
-          <img class="stat-icon" src="assets/50.png" alt="" />
-          <div class="stat-content">
-            <strong>50+</strong>
-            <span>Jahre Familientradition</span>
-            <p>Erfahrung aus mehreren Eis-Cafés in Italien.</p>
-          </div>
-        </div>
-        <div class="stat-item">
-          <img class="stat-icon" src="assets/delivery.png" alt="" />
-          <div class="stat-content">
-            <strong>DE</strong>
-            <span>Deutschlandweit</span>
-            <p>Großhandel und Vertrieb für verschiedene Geschäftskunden.</p>
-          </div>
-        </div>
+
+        <h3>Konsistenz:</h3>
+        <p>
+          Bei gleich bleibender Temperatur lässt sich das Eis super verarbeiten und präsentieren.
+        </p>
+        <p>
+          Wir stellen auch Eis nach Ihren Vorstellungen in verschiedenen Geschmacksrichtungen her,
+          die auf dem Markt nicht erhältlich sind. Fragen Sie einfach nach und wir versuchen Ihre Wünsche zu erfüllen.
+        </p>
       </div>
     </section>
 
-    <section class="company-cta-wrap" aria-label="Eis probieren">
-      <div class="company-cta">
+    <section class="cta-band">
+      <div class="cta-box">
         <div>
-          <p class="eyebrow">Probieren auch Sie unser Eis</p>
-          <h2>Sie und Ihre Kunden werden begeistert sein.</h2>
-          <p>
-            Lernen Sie Eis Büffe kennen und entdecken Sie unser Sortiment für Ihr Geschäft.
-            Wir freuen uns auf Ihre Anfrage und eine gute Zusammenarbeit.
-          </p>
-          <a href="kontakt.html" class="btn btn--primary">Angebot anfragen</a>
+          <h2>Sie möchten unser Sortiment anfragen?</h2>
+          <p>Kontaktieren Sie uns für Beratung, Preise und Liefermöglichkeiten.</p>
         </div>
-        <div class="company-cta__image" aria-hidden="true"></div>
+        <a class="btn" href="kontakt.html">Angebot anfragen</a>
       </div>
     </section>
   </main>
 
   <footer class="footer">
     <div class="footer__inner">
-      <div class="footer__brand">
-        <img class="footer__logo" src="assets/logo.png" alt="Eisgroßhandel Eis Büffe Logo" />
-        <p class="footer__text">Premium Speiseeis für Gastronomie, Eiscafés, Wiederverkäufer und Großkunden.</p>
-      </div>
-
-      <div class="footer__col">
-        <h3>Navigation</h3>
-        <a href="index.html#home">Startseite</a>
-        <a href="index.html#produkte">Produkte</a>
-        <a href="index.html#lieferung">Lieferung</a>
-        <a href="unternehmen.html">Unternehmen</a>
-        <a href="service.html">Service</a>
-        <a href="kontakt.html">Kontakt</a>
-      </div>
-
-      <div class="footer__col">
-        <h3>Service</h3>
-        <a href="index.html#lieferung">Lieferung</a>
-        <a href="service.html">Geschäftskunden-Service</a>
-        <a href="kontakt.html">Häufige Fragen</a>
-        <a href="kontakt.html">Angebot anfragen</a>
-      </div>
-
-      <div class="footer__social">
-        <h3>Folgen Sie uns</h3>
-        <div class="footer__icons" aria-label="Social Media Links">
-          <a class="footer__icon" href="#" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r=".8"></circle></svg>
-          </a>
-          <a class="footer__icon" href="#" aria-label="Facebook">f</a>
-          <a class="footer__icon" href="https://wa.me/491739675569" aria-label="WhatsApp">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.7a8 8 0 0 1-11.8 7l-3.7 1 1-3.6A8 8 0 1 1 20 11.7Z"></path><path d="M9.6 8.5c.2-.5.4-.5.7-.5h.5c.2 0 .4.1.5.4l.7 1.6c.1.3.1.5-.1.7l-.4.5c.7 1.3 1.7 2.2 3 2.9l.6-.6c.2-.2.4-.2.7-.1l1.5.7c.3.1.4.3.4.6v.4c0 .3-.1.6-.5.8-.5.2-1.3.4-2.6 0-2.4-.8-4.8-3.1-5.6-5.5-.4-1.1-.2-1.7.1-1.9Z"></path></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="footer__bottom">
-      <p>© 2026 Eisgroßhandel Eis Büffe. Alle Rechte vorbehalten.</p>
+      <img src="assets/logo.png" alt="Eis Büffe Logo" />
+      <p>© 2025 Eis Büffe. Alle Rechte vorbehalten.</p>
     </div>
   </footer>
 
+  <div class="product-modal" id="milchspeiseeiseModal" aria-hidden="true">
+    <div class="product-modal__box" role="dialog" aria-modal="true" aria-labelledby="milchspeiseeiseTitle">
+      <div class="product-modal__top">
+        <div>
+          <p class="eyebrow">Milchspeiseeise</p>
+          <h2 id="milchspeiseeiseTitle">Milchspeiseeise</h2>
+        </div>
+        <button class="product-modal__close" type="button" aria-label="Fenster schließen">×</button>
+      </div>
+
+      <div class="modal-preview-gallery" aria-label="Produktbilder">
+        <figure class="modal-preview-gallery__item">
+          <img src="assets/VanilleEis1.png" alt="Eis Bild" />
+        </figure>
+      </div>
+
+      <p>
+        Hauptbestandteil ist zu <strong>70% frische Milch</strong>.
+        Geschmacklich abgerundet wird es durch nahezu unbegrenzte Zutaten:
+      </p>
+
+      <p>
+        u. a. Kakao, Kaffee und Schokolade über Nüsse, Nougat bis hin zu Mandeln und Vanille.
+      </p>
+      <div class="modal-sorten-list">
+        <span>Vanille</span>
+        <span>Schokolade</span>
+        <span>Nuss</span>
+        <span>Walnuss</span>
+        <span>Stracciatella</span>
+        <span>Mokka</span>
+        <span>Cappucino</span>
+        <span>Marzipan</span>
+        <span>Caramel</span>
+        <span>Raffaello</span>
+        <span>Nutella</span>
+        <span>Cookie</span>
+        <span>Alpenliebe</span>
+        <span>Snikers</span>
+        <span>Pistazie</span>
+        <span>Tiramisu</span>
+        <span>Blau</span>
+        <span>Zimt</span>
+        <span>After Eight</span>
+        <span>Marshmello</span>
+        <span>Sandorn</span>
+        <span>Bubble Gum</span>
+        <span>Zuppa Inglese</span>
+        <span>Drachenfrucht</span>
+        <span>Holunder</span>
+        <span>Kindel (Kinderschokolade)</span>
+        <span>Rochere</span>
+        <span>Waldmeister</span>
+        <span>Sahne Kirsch</span>
+        <span>Feige Caramel</span>
+        <span>Strudel</span>
+        <span>Tofi Caramel</span>
+        <span>Kinder Kaunti</span>
+        <span>Malaga</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-modal" id="fruchtspeiseeisModal" aria-hidden="true">
+    <div class="product-modal__box" role="dialog" aria-modal="true" aria-labelledby="fruchtspeiseeisTitle">
+      <div class="product-modal__top">
+        <div>
+          <p class="eyebrow">Fruchtspeiseeis</p>
+          <h2 id="fruchtspeiseeisTitle">Fruchtspeiseeis</h2>
+        </div>
+        <button class="product-modal__close" type="button" aria-label="Fenster schließen">×</button>
+      </div>
+
+      <div class="modal-preview-gallery" aria-label="Produktbilder">
+        <figure class="modal-preview-gallery__item">
+          <img src="assets/VanilleEis2.png" alt="Eis Bild" />
+        </figure>
+      </div>
+
+      <p>
+        Beim Fruchtspeiseeis besteht die Basis aus Wasser und sehr vielen frischen Früchten.
+      </p>
+
+      <p>
+        Der Anteil an frischen Früchten beträgt <strong>23%</strong>.
+      </p>
+
+      <div class="modal-sorten-list">
+        <span>Melone</span>
+        <span>Waldfrucht</span>
+        <span>Heidelbeer</span>
+        <span>Zitrone</span>
+        <span>Kiwi</span>
+        <span>Banane</span>
+        <span>Pfirsich</span>
+        <span>Ananas</span>
+        <span>Maracuja</span>
+        <span>Aprikose</span>
+        <span>Orange</span>
+        <span>Limette</span>
+        <span>Kirsch Cola</span>
+        <span>Orange Cola</span>
+        <span>Grüner Apfel</span>
+        <span>Kirsch</span>
+        <span>Himbeer</span>
+        <span>Erdbeer</span>
+        <span>Mango</span>
+        <span>Traube</span>
+        <span>Granatapfel</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-modal" id="joghurtModal" aria-hidden="true">
+    <div class="product-modal__box" role="dialog" aria-modal="true" aria-labelledby="joghurtTitle">
+      <div class="product-modal__top">
+        <div>
+          <p class="eyebrow">Milchspeiseeis Joghurt</p>
+          <h2 id="joghurtTitle">Milchspeiseeis Joghurt</h2>
+        </div>
+        <button class="product-modal__close" type="button" aria-label="Fenster schließen">×</button>
+      </div>
+
+      <div class="modal-preview-gallery" aria-label="Produktbilder">
+        <figure class="modal-preview-gallery__item">
+          <img src="assets/VanilleEis3.png" alt="Eis Bild" />
+        </figure>
+      </div>
+
+      <p>
+        Milchspeiseeis mit Joghurt.
+      </p>
+
+      <p>
+        <strong>Eis Büffe Joghurt</strong>
+      </p>
+
+      <div class="modal-sorten-list">
+        <span>Joghurt Natur</span>
+        <span>Joghurt Kirsch</span>
+        <span>Joghurt Holunder</span>
+        <span>Joghurt Pfirsich Maracuja</span>
+        <span>Joghurt Zimt</span>
+        <span>Joghurt Kiwi</span>
+        <span>Joghurt Mango Maracuja</span>
+        <span>Joghurt Pflaume</span>
+        <span>Joghurt Honig</span>
+        <span>Joghurt Gurke</span>
+        <span>Joghurt Himbeer</span>
+        <span>Joghurt Erdbeer</span>
+        <span>Joghurt Waldfrucht</span>
+        <span>Joghurt Orange</span>
+        <span>Joghurt Heidelbeer</span>
+        <span>Joghurt Apfel</span>
+        <span>Joghurt Limette</span>
+        <span>Joghurt Minze</span>
+        <span>Joghurt Tomate</span>
+        <span>Joghurt Erdbeer Schoko</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-modal" id="spezialitaetenModal" aria-hidden="true">
+    <div class="product-modal__box" role="dialog" aria-modal="true" aria-labelledby="spezialitaetenTitle">
+      <div class="product-modal__top">
+        <div>
+          <p class="eyebrow">eisBüffe Spezialitäten</p>
+          <h2 id="spezialitaetenTitle">Unsere Spezialitäten</h2>
+        </div>
+        <button class="product-modal__close" type="button" aria-label="Fenster schließen">×</button>
+      </div>
+
+      <div class="modal-preview-gallery" aria-label="Produktbilder">
+        <figure class="modal-preview-gallery__item">
+          <img src="assets/VanilleEis4.png" alt="Eis Bild" />
+        </figure>
+      </div>
+
+      <p>
+        <strong>Büffe Eis (Spezial)</strong>
+      </p>
+
+      <div class="modal-sorten-list">
+        <span>Vanille - Himbeere</span>
+        <span>Vanille - Zimt</span>
+        <span>Vanille - Mohn</span>
+        <span>Vanille - Krokant</span>
+        <span>Milcheis mit karamelisierten Nüssen</span>
+        <span>Whisky</span>
+        <span>Apfel Zimt</span>
+        <span>Rhabarber</span>
+        <span>Bananeneis mit Schokosplit</span>
+        <span>Käsekuchen</span>
+        <span>Schoko - Orange</span>
+        <span>Schoko-Chili</span>
+        <span>Cheerymania mit Amarenakirsch und Schokoladensplit</span>
+        <span>Spekulatius</span>
+        <span>Lebkuchen</span>
+        <span>Latte Macchiato</span>
+        <span>Bratapfel mit Rosinen und Zimt</span>
+        <span>Marzipan mit Schokosplit</span>
+        <span>Raffaello mit Schokosplit</span>
+        <span>Schokolade - Kirsch</span>
+        <span>Nuss - Krokant</span>
+        <span>Mou</span>
+        <span>Karamelsalz</span>
+        <span>Catalan</span>
+        <span>Pina Colada</span>
+        <span>Zartbitterschokolade</span>
+        <span>Kuhflecken Vanille Schoko</span>
+      </div>
+    </div>
+  </div>
+
   <script>
-    const toggle = document.querySelector(".menu-toggle");
-    const nav = document.querySelector(".nav-links");
-    toggle.addEventListener("click", () => nav.classList.toggle("open"));
+    (function () {
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navLinks = document.querySelector('.nav-links');
 
-    const counters = document.querySelectorAll(".counter");
+      if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', function () {
+          const isOpen = navLinks.classList.toggle('open');
+          menuToggle.classList.toggle('is-open', isOpen);
+          menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+      }
 
-    const animateCounter = (counter) => {
-      const target = Number(counter.dataset.target || 0);
-      const suffix = counter.dataset.suffix || "";
-      const duration = 1800;
-      const startTime = performance.now();
+      const openButtons = document.querySelectorAll('[data-modal-target]');
 
-      const update = (currentTime) => {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const easedProgress = 1 - Math.pow(1 - progress, 3);
-        const value = Math.floor(easedProgress * target);
+      openButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          const modalId = button.getAttribute('data-modal-target');
+          const modal = document.getElementById(modalId);
 
-        counter.textContent = `${value}${suffix}`;
+          if (!modal) return;
 
-        if (progress < 1) {
-          requestAnimationFrame(update);
-        } else {
-          counter.textContent = `${target}${suffix}`;
+          modal.classList.add('open');
+          modal.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      function closeModal(modal) {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('.product-modal').forEach(function (modal) {
+        const closeButton = modal.querySelector('.product-modal__close');
+
+        if (closeButton) {
+          closeButton.addEventListener('click', function () {
+            closeModal(modal);
+          });
         }
-      };
 
-      requestAnimationFrame(update);
-    };
+        modal.addEventListener('click', function (event) {
+          if (event.target === modal) {
+            closeModal(modal);
+          }
+        });
+      });
 
-    const counterObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animateCounter(entry.target);
-          observer.unobserve(entry.target);
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+          document.querySelectorAll('.product-modal.open').forEach(closeModal);
         }
       });
-    }, { threshold: 0.35 });
-
-    counters.forEach((counter) => counterObserver.observe(counter));
-
-    const deliverySteps = document.querySelectorAll(".delivery .step");
-
-    const deliveryObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          deliverySteps.forEach((step) => step.classList.add("show"));
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.35 });
-
-    const deliverySection = document.querySelector("#lieferung");
-    if (deliverySection) deliveryObserver.observe(deliverySection);
-
-    window.addEventListener("load", () => {
-      document.body.classList.add("page-loaded");
-    });
-
-    const revealGroups = [
-      ".hero__content",
-      ".quality-taste__head",
-      ".taste-card",
-      ".quality-features",
-      ".quality-feature",
-      ".stats-strip",
-      ".products .card",
-      ".heritage-photo-note",
-      ".heritage-copy",
-      ".delivery .section-head",
-      ".contact__box",
-      ".about-banner",
-      ".footer__brand",
-      ".footer__col",
-      ".footer__social",
-      ".company-hero__content",
-      ".company-card",
-      ".company-timeline-card",
-      ".company-value",
-      ".company-cta"
-    ];
-
-    const revealItems = document.querySelectorAll(revealGroups.join(","));
-
-    revealItems.forEach((item, index) => {
-      item.classList.add("reveal-on-scroll", `reveal-delay-${(index % 5) + 1}`);
-    });
-
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("reveal-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.16,
-      rootMargin: "0px 0px -70px 0px"
-    });
-
-    revealItems.forEach((item) => revealObserver.observe(item));
+    })();
   </script>
 
 
@@ -3011,6 +2109,1054 @@
 })();
 </script>
 <!-- END FINAL VERIFIED MOBILE MENU SCRIPT -->
+
+
+<!-- SUPABASE CLIENT SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- END SUPABASE CLIENT SDK -->
+
+
+<!-- ADMIN EDITOR: products, Eissorten modal, add/delete images -->
+<style>
+  .admin-fab {
+    position: fixed; right: 22px; bottom: 22px; z-index: 99990;
+    border: 0; border-radius: 999px; min-height: 52px; padding: 0 20px;
+    background: linear-gradient(135deg, var(--gold-2), var(--gold-dark)); color: #fff;
+    font: inherit; font-weight: 900; cursor: pointer;
+    box-shadow: 0 18px 38px rgba(80,48,6,.28);
+  }
+  .admin-fab:hover { transform: translateY(-2px); }
+  .admin-logout-btn {
+    position: fixed; right: 22px; bottom: 22px; z-index: 99990;
+    display: none; align-items: center; justify-content: center; gap: 8px;
+    border: 0; border-radius: 999px; min-height: 52px; padding: 0 20px;
+    background: linear-gradient(135deg, #a95b34, #743014); color: #fff;
+    font: inherit; font-weight: 900; cursor: pointer;
+    box-shadow: 0 18px 38px rgba(80,48,6,.28);
+  }
+  body.admin-mode .admin-logout-btn { display: inline-flex; }
+  .admin-logout-btn:hover { transform: translateY(-2px); }
+  @media (max-width: 620px) {
+    .admin-logout-btn {
+      right: 14px; bottom: 14px; min-height: 48px; padding: 0 16px; font-size: 13px;
+    }
+  }
+  .admin-overlay {
+    position: fixed; inset: 0; z-index: 99991; display: none; place-items: center;
+    padding: 18px; background: rgba(53,33,5,.62);
+  }
+  .admin-overlay.open { display: grid; }
+  .admin-panel {
+    width: min(780px, 100%); max-height: 91vh; overflow: auto;
+    border-radius: 28px; padding: 28px;
+    background: linear-gradient(145deg, #fff, #fff6e8);
+    border: 1px solid rgba(166,106,19,.26);
+    box-shadow: 0 36px 90px rgba(23,13,2,.34);
+  }
+  .admin-panel h2 { font-family: Cinzel, serif; color: var(--gold-dark); font-size: clamp(24px, 4vw, 38px); margin-bottom: 10px; }
+  .admin-panel p { color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+  .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .admin-field { display: grid; gap: 7px; margin-bottom: 14px; }
+  .admin-field.admin-span { grid-column: 1 / -1; }
+  .admin-field label { color: var(--gold-dark); font-size: 13px; font-weight: 900; }
+  .admin-field small { color: var(--muted); line-height: 1.5; }
+  .admin-field input, .admin-field textarea {
+    width: 100%; border: 1px solid rgba(166,106,19,.26); border-radius: 16px;
+    background: #fff; padding: 13px 14px; font: inherit; color: var(--brown); outline: none;
+  }
+  .admin-field textarea { min-height: 105px; resize: vertical; line-height: 1.6; }
+  .admin-field input[readonly] { background: rgba(255,255,255,.58); color: var(--muted); }
+  .admin-field .admin-btn { width: fit-content; margin-top: 2px; }
+
+  .admin-field input:focus, .admin-field textarea:focus { border-color: rgba(166,106,19,.62); box-shadow: 0 0 0 4px rgba(198,145,53,.13); }
+  .admin-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+  .admin-btn {
+    border: 0; border-radius: 999px; min-height: 47px; padding: 0 19px;
+    background: linear-gradient(135deg, var(--gold-2), var(--gold-dark)); color: #fff;
+    font: inherit; font-weight: 900; cursor: pointer; box-shadow: 0 12px 24px rgba(114,70,7,.18);
+  }
+  .admin-btn--light { background: rgba(255,255,255,.94); color: var(--gold-dark); border: 1px solid rgba(166,106,19,.24); }
+  .admin-btn--danger { background: linear-gradient(135deg, #a95b34, #743014); }
+  .admin-error { color: #9b2d16 !important; font-weight: 900; display: none; margin-top: 8px; }
+  body.admin-mode .product-card { overflow: visible; }
+  body.admin-mode .product-card::after {
+    content: "Admin"; position: absolute; top: 12px; right: 12px; z-index: 8;
+    padding: 7px 12px; border-radius: 999px; background: rgba(255,248,236,.96);
+    color: var(--gold-dark); border: 1px solid rgba(166,106,19,.22); font-size: 11px; font-weight: 900;
+    box-shadow: 0 10px 22px rgba(80,48,6,.13);
+  }
+  .admin-card-tools { position: absolute; inset: 0; z-index: 12; pointer-events: none; display: none; }
+  body.admin-mode .admin-card-tools { display: block; }
+  .admin-pencil {
+    position: absolute; width: 43px; height: 43px; border-radius: 50%; display: inline-flex;
+    align-items: center; justify-content: center; background: linear-gradient(135deg, var(--gold-2), var(--gold-dark));
+    color: #fff; font-size: 20px; font-weight: 900; cursor: pointer; pointer-events: auto;
+    box-shadow: 0 14px 28px rgba(80,48,6,.24); user-select: none;
+  }
+  .admin-pencil:hover { transform: translateY(-2px) scale(1.04); }
+  .admin-pencil--image { left: 16px; top: 16px; }
+
+  /* ONE-PENCIL FIX: no Eissorten pencil/button beside the card button */
+  .admin-pencil--content,
+  .admin-pencil--content::after {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+  .admin-image-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 8px; }
+  .admin-image-row { position: relative; display: grid; grid-template-columns: 1fr; gap: 8px; align-items: center; padding: 9px; border: 1px solid rgba(166,106,19,.18); border-radius: 18px; background: rgba(255,255,255,.75); overflow: hidden; }
+  .admin-image-preview { position: relative; overflow: hidden; border-radius: 14px; }
+  .admin-image-row img { width: 100%; height: 120px; object-fit: cover; border-radius: 14px; }
+  .admin-image-row .admin-new-badge-preview { position: absolute; top: 8px; right: 8px; z-index: 2; width: 42px; height: auto; object-fit: contain; border-radius: 0; filter: drop-shadow(0 6px 10px rgba(0,0,0,.18)); }
+  .admin-image-row span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); font-size: 12px; }
+  .admin-image-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .admin-image-actions .admin-btn { width: 100%; min-height: 46px; padding: 0 12px; }
+  .admin-btn--new-sort { background: linear-gradient(135deg, #e53935, #8b1111) !important; }
+  .admin-modal-gallery { margin-top: 24px; display: grid; grid-template-columns: 1fr; gap: 12px; }
+  .admin-modal-gallery__item { position: relative; overflow: hidden; min-height: 150px; border-radius: 18px; border: 1px solid rgba(166,106,19,.18); box-shadow: 0 12px 25px rgba(80,48,6,.10); background: rgba(255,255,255,.72); }
+  .admin-modal-gallery__item > img:first-child { width: 100%; height: 220px; object-fit: cover; border-radius: 18px; display: block; }
+  .admin-modal-gallery__new-badge { position: absolute; top: 10px; right: 10px; z-index: 2; width: min(24%, 72px); height: auto; object-fit: contain; filter: drop-shadow(0 7px 12px rgba(0,0,0,.20)); pointer-events: none; }
+  .admin-modal-gallery__delete {
+    position: absolute; right: 9px; top: 9px; z-index: 3; display: none; align-items: center; justify-content: center;
+    min-height: 34px; padding: 0 12px; border: 0; border-radius: 999px;
+    background: linear-gradient(135deg, #a95b34, #743014); color: #fff;
+    font: inherit; font-size: 12px; font-weight: 900; cursor: pointer;
+    box-shadow: 0 12px 24px rgba(80,48,6,.24);
+  }
+  body.admin-mode .admin-modal-gallery__delete { display: inline-flex; }
+  .admin-save-note {
+    position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); opacity: 0;
+    z-index: 99993; padding: 12px 18px; border-radius: 999px;
+    background: linear-gradient(135deg, var(--gold-2), var(--gold-dark)); color: #fff; font-weight: 900;
+    box-shadow: 0 18px 34px rgba(80,48,6,.24); transition: .25s ease;
+  }
+  .admin-save-note.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  @media (max-width: 700px) {
+    .admin-grid { grid-template-columns: 1fr; }
+    .admin-field.admin-span { grid-column: auto; }
+    .admin-panel { padding: 23px 18px; border-radius: 24px; }
+    .admin-actions { flex-direction: column; }
+    .admin-btn { width: 100%; }
+    .admin-modal-gallery { grid-template-columns: 1fr; }
+    .admin-image-list { grid-template-columns: 1fr; }
+    .admin-image-row img { height: 150px; }
+    .admin-image-row .admin-new-badge-preview { width: 48px; height: auto; }
+  }
+</style>
+
+<div class="admin-overlay" id="adminLoginOverlay" aria-hidden="true">
+  <div class="admin-panel" role="dialog" aria-modal="true" aria-labelledby="adminLoginTitle">
+    <h2 id="adminLoginTitle">Admin Login</h2>
+    <p>Geben Sie E-Mail und Passwort ein. Die Prüfung läuft sicher über Supabase; das Passwort steht nicht im Seiten-Code.</p>
+    <div class="admin-field">
+      <label for="adminEmailInput">E-Mail</label>
+      <input id="adminEmailInput" type="email" autocomplete="username" placeholder="admin@example.com" />
+    </div>
+    <div class="admin-field">
+      <label for="adminPasswordInput">Passwort</label>
+      <input id="adminPasswordInput" type="password" autocomplete="current-password" placeholder="Passwort eingeben" />
+    </div>
+    <p class="admin-error" id="adminLoginError">Falsche E-Mail oder falsches Passwort.</p>
+    <div class="admin-actions">
+      <button class="admin-btn" type="button" id="adminLoginBtn">Einloggen</button>
+      <button class="admin-btn admin-btn--light" type="button" data-admin-close>Schließen</button>
+    </div>
+  </div>
+</div>
+
+<div class="admin-overlay" id="adminEditOverlay" aria-hidden="true">
+  <div class="admin-panel" role="dialog" aria-modal="true" aria-labelledby="adminEditTitle">
+    <h2 id="adminEditTitle">Produktkarte & Eissorten bearbeiten</h2>
+    <p>Hier können Sie das Kartenbild, den Button „Eissorten ansehen“, die Sortenliste und zusätzliche Bilder im Fenster hinzufügen oder löschen.</p>
+    <div class="admin-grid">
+      <div class="admin-field">
+        <label for="adminEditImageFile">Kartenbild hochladen</label>
+        <input id="adminEditImageFile" type="file" accept="image/*" />
+        <input id="adminEditImageUrl" type="text" readonly placeholder="Kein neues Bild ausgewählt" />
+      </div>
+      <div class="admin-field">
+        <label for="adminEditTitleInput">Kartentitel</label>
+        <input id="adminEditTitleInput" type="text" />
+      </div>
+      <div class="admin-field">
+        <label for="adminEditButtonInput">Button-Text</label>
+        <input id="adminEditButtonInput" type="text" placeholder="Eissorten ansehen" />
+      </div>
+      <div class="admin-field admin-span">
+        <label for="adminEditDescInput">Kartenbeschreibung</label>
+        <textarea id="adminEditDescInput"></textarea>
+      </div>
+      <div class="admin-field admin-span">
+        <label for="adminModalTitleInput">Titel im Eissorten-Fenster</label>
+        <input id="adminModalTitleInput" type="text" />
+      </div>
+      <div class="admin-field admin-span">
+        <label for="adminModalTextInput">Text im Eissorten-Fenster</label>
+        <textarea id="adminModalTextInput"></textarea>
+        <small>Für mehrere Absätze jede Zeile als eigenen Absatz schreiben.</small>
+      </div>
+      <div class="admin-field admin-span">
+        <label for="adminSortenInput">Sortenliste</label>
+        <textarea id="adminSortenInput"></textarea>
+        <small>Jede Sorte in eine neue Zeile schreiben. Zeile löschen = Sorte löschen.</small>
+      </div>
+      <div class="admin-field admin-span">
+        <label>Vorhandene und hinzugefügte Bilder im Eissorten-Fenster</label>
+        <small>Diese Bilder erscheinen im Fenster „Eissorten ansehen“. Sie können jedes Bild hier direkt löschen.</small>
+        <div class="admin-image-list" id="adminModalImagesList"></div>
+      </div>
+      <div class="admin-field">
+        <label for="adminModalImageFile">Weitere Bilder hinzufügen</label>
+        <input id="adminModalImageFile" type="file" accept="image/*" multiple />
+        <input id="adminModalImageUrl" type="text" readonly placeholder="Keine neuen Bilder ausgewählt" />
+        <button class="admin-btn admin-btn--light" type="button" id="adminAddModalImageBtn">Bilder zur Vorschau hinzufügen</button>
+      </div>
+    </div>
+    <div class="admin-actions">
+      <button class="admin-btn" type="button" id="adminSaveEditBtn">Speichern</button>
+      <button class="admin-btn admin-btn--light" type="button" id="adminResetCardBtn">Zurücksetzen</button>
+      <button class="admin-btn admin-btn--light" type="button" data-admin-close>Abbrechen</button>
+    </div>
+  </div>
+</div>
+<div class="admin-save-note" id="adminSaveNote">Gespeichert</div>
+<button class="admin-logout-btn" type="button" id="adminLogoutBtn" aria-label="Aus Admin-Modus abmelden">Abmelden</button>
+
+<script>
+(function () {
+  const STORAGE_KEY = 'eis-bueffel-products-admin-v6';
+  const LEGACY_STORAGE_KEYS = ['eis-bueffel-products-admin-v6', 'eis-bueffel-products-admin-v5', 'eis-bueffel-products-admin-v4', 'eis-bueffel-products-admin-v3', 'eisbueffel_produktkarten_v1'];
+  const SESSION_KEY = 'eis-bueffel-admin-logged-in';
+
+  // === SUPABASE SETTINGS ===
+  // 1) استبدل القيمتين أدناه من Supabase Project Settings > API.
+  // 2) أنشئ جدول product_page_content وباكت product-images حسب SQL الموجود في الرد.
+  const SUPABASE_URL = 'https://qzwonskbfdpvjcduqabb.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_ALts0O-Hh463KG-T6GJXyQ_qQyas6ZD';
+  const SUPABASE_TABLE = 'product_page_content';
+  const SUPABASE_ROW_ID = 'produkten-page-v1';
+  const SUPABASE_BUCKET = 'product-images';
+  const supabaseClient = (window.supabase && SUPABASE_URL.indexOf('YOUR_PROJECT_ID') === -1 && SUPABASE_ANON_KEY.indexOf('YOUR_SUPABASE') === -1)
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    : null;
+  let editIndex = null;
+  let uploadedCardImage = '';
+  let uploadedModalImages = [];
+  let tempModalImages = [];
+  let tempModalNewBadges = [];
+  const NEW_BADGE_SRC = 'assets/bild.png';
+
+  function ready(fn) {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+    else fn();
+  }
+
+  ready(function () {
+    const cards = Array.from(document.querySelectorAll('.product-grid .product-card'));
+    const loginOverlay = document.getElementById('adminLoginOverlay');
+    const editOverlay = document.getElementById('adminEditOverlay');
+    const emailInput = document.getElementById('adminEmailInput');
+    const passwordInput = document.getElementById('adminPasswordInput');
+    const loginBtn = document.getElementById('adminLoginBtn');
+    const loginError = document.getElementById('adminLoginError');
+    const cardImageFile = document.getElementById('adminEditImageFile');
+    const cardImageUrl = document.getElementById('adminEditImageUrl');
+    const titleInput = document.getElementById('adminEditTitleInput');
+    const descInput = document.getElementById('adminEditDescInput');
+    const buttonInput = document.getElementById('adminEditButtonInput');
+    const modalTitleInput = document.getElementById('adminModalTitleInput');
+    const modalTextInput = document.getElementById('adminModalTextInput');
+    const sortenInput = document.getElementById('adminSortenInput');
+    const modalImageFile = document.getElementById('adminModalImageFile');
+    const modalImageUrl = document.getElementById('adminModalImageUrl');
+    const addModalImageBtn = document.getElementById('adminAddModalImageBtn');
+    const modalImagesList = document.getElementById('adminModalImagesList');
+    const saveBtn = document.getElementById('adminSaveEditBtn');
+    const resetBtn = document.getElementById('adminResetCardBtn');
+    const saveNote = document.getElementById('adminSaveNote');
+    const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+
+    if (!cards.length) return;
+
+    const defaults = cards.map(function (card, index) {
+      const img = card.querySelector('.product-card__image img');
+      const title = card.querySelector('h3');
+      const desc = card.querySelector('.product-card__body p');
+      const hint = card.querySelector('.product-card__hint');
+      const modalId = card.getAttribute('data-modal-target');
+      const modal = modalId ? document.getElementById(modalId) : null;
+      const modalTitle = modal ? modal.querySelector('h2') : null;
+      const modalText = modal ? Array.from(modal.querySelectorAll('.product-modal__box > p')).map(p => p.textContent.trim()).filter(Boolean) : [];
+      const sorten = modal ? Array.from(modal.querySelectorAll('.modal-sorten-list span')).map(s => s.textContent.trim()).filter(Boolean) : [];
+      return {
+        image: img ? img.getAttribute('src') : '',
+        alt: img ? img.getAttribute('alt') || '' : '',
+        title: title ? title.textContent.trim() : ('Produkt ' + (index + 1)),
+        description: desc ? desc.textContent.trim().replace(/\s+/g, ' ') : '',
+        button: hint ? hint.textContent.trim() : 'Eissorten ansehen',
+        modalTitle: modalTitle ? modalTitle.textContent.trim() : (title ? title.textContent.trim() : ''),
+        modalText: modalText,
+        sorten: sorten,
+        // vorhandene Bilder aus der ursprünglichen Galerie (z. B. die 3 Milchspeiseeise-Bilder)
+        // werden auch in der Admin-Bearbeitung angezeigt und können gelöscht werden.
+        modalImages: modal ? Array.from(modal.querySelectorAll('.modal-preview-gallery img, .milch-gallery img, .admin-modal-gallery__item > img:first-child')).map(im => im.getAttribute('src')).filter(Boolean) : [],
+        modalImagesTouched: false,
+        modalNewBadges: []
+      };
+    });
+
+    let data = loadData();
+    applyData();
+    syncFromSupabase();
+    createCardTools();
+    removeDuplicatePencils();
+    if (sessionStorage.getItem(SESSION_KEY) === '1') enableAdminMode();
+    setupHiddenAdminAccess();
+
+    function setupHiddenAdminAccess() {
+      // Admin-Zugang ist absichtlich unsichtbar: kein sichtbarer Login-Button auf der Seite.
+      // Öffnen über: ?admin=1 in der URL oder Tastenkürzel Ctrl + Alt + A.
+      function openLogin() {
+        openOverlay(loginOverlay);
+        setTimeout(function () { if (emailInput) emailInput.focus(); else if (passwordInput) passwordInput.focus(); }, 50);
+      }
+
+      try {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('admin') === '1') openLogin();
+      } catch (e) {}
+
+      document.addEventListener('keydown', function (event) {
+        const key = (event.key || '').toLowerCase();
+        if (event.ctrlKey && event.altKey && key === 'a') {
+          event.preventDefault();
+          openLogin();
+        }
+      });
+    }
+
+    async function verifyAdminLogin(email, password) {
+      if (!email || !password) return false;
+      if (!supabaseClient) {
+        console.error('Supabase غير مفعّل: لا يمكن التحقق من تسجيل الدخول بدون Supabase.');
+        return false;
+      }
+
+      const result = await supabaseClient.rpc('verify_admin_login', {
+        input_email: email,
+        plain_password: password
+      });
+
+      if (result.error) {
+        console.error('Supabase admin login verification error:', result.error);
+        return false;
+      }
+
+      return result.data === true;
+    }
+
+    function removeDuplicatePencils() {
+      cards.forEach(function (card) {
+        card.querySelectorAll('.admin-pencil--content').forEach(function (btn) { btn.remove(); });
+        const tools = card.querySelectorAll('.admin-card-tools');
+        tools.forEach(function (toolsWrap, i) { if (i > 0) toolsWrap.remove(); });
+        const pencils = card.querySelectorAll('.admin-card-tools .admin-pencil');
+        pencils.forEach(function (pencil, i) { if (i > 0) pencil.remove(); });
+      });
+    }
+
+    function uniqueImages(images) {
+      const seen = new Set();
+      return (images || []).filter(Boolean).filter(function (src) {
+        if (seen.has(src)) return false;
+        seen.add(src);
+        return true;
+      });
+    }
+
+    function normalizeItem(savedItem, fallback) {
+      const item = Object.assign({}, fallback, savedItem || {});
+      const savedImages = [];
+      ['modalImages', 'images', 'extraImages', 'galleryImages', 'eissortenImages'].forEach(function (key) {
+        if (Array.isArray(savedItem && savedItem[key])) savedImages.push.apply(savedImages, savedItem[key]);
+      });
+
+      const fallbackImages = Array.isArray(fallback.modalImages) ? fallback.modalImages : [];
+
+      // Wichtig: Wenn der Admin Bilder gelöscht hat, dürfen die ursprünglichen
+      // HTML-Bilder nicht erneut dazugemischt werden. Darum gilt:
+      // - modalImagesTouched = true  => exakt gespeicherte Liste verwenden
+      // - modalImagesTouched = false => HTML-Standardbilder + gespeicherte Bilder zusammenführen
+      item.modalImagesTouched = !!(savedItem && savedItem.modalImagesTouched);
+      item.modalImages = item.modalImagesTouched
+        ? uniqueImages(savedImages)
+        : uniqueImages(fallbackImages.concat(savedImages));
+      item.modalNewBadges = Array.isArray(savedItem && savedItem.modalNewBadges) ? savedItem.modalNewBadges.filter(Boolean) : [];
+      return item;
+    }
+
+    function loadData() {
+      for (const key of LEGACY_STORAGE_KEYS) {
+        try {
+          const saved = JSON.parse(localStorage.getItem(key) || 'null');
+          if (Array.isArray(saved) && saved.length === defaults.length) {
+            const loaded = defaults.map((item, i) => normalizeItem(saved[i], item));
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(loaded));
+            return loaded;
+          }
+        } catch (e) {}
+      }
+      return defaults.map(item => Object.assign({}, item));
+    }
+
+    function saveLocalData(items) {
+      const json = JSON.stringify(items || data);
+      localStorage.setItem(STORAGE_KEY, json);
+      localStorage.setItem('eis-bueffel-products-admin-v5', json);
+      localStorage.setItem('eis-bueffel-products-admin-v4', json);
+      localStorage.setItem('eis-bueffel-products-admin-v3', json);
+    }
+
+    async function loadDataFromSupabase() {
+      if (!supabaseClient) return null;
+      const result = await supabaseClient
+        .from(SUPABASE_TABLE)
+        .select('data')
+        .eq('id', SUPABASE_ROW_ID)
+        .maybeSingle();
+
+      if (result.error) throw result.error;
+      const remoteData = result.data && result.data.data;
+      if (Array.isArray(remoteData) && remoteData.length === defaults.length) {
+        return defaults.map((item, i) => normalizeItem(remoteData[i], item));
+      }
+      return null;
+    }
+
+    async function syncFromSupabase() {
+      if (!supabaseClient) {
+        console.warn('Supabase غير مفعّل بعد: ضع SUPABASE_URL و SUPABASE_ANON_KEY داخل الملف.');
+        return;
+      }
+      try {
+        const remote = await loadDataFromSupabase();
+        if (remote) {
+          data = remote;
+          saveLocalData(data);
+          applyData();
+        } else {
+          await saveDataToSupabase(data);
+        }
+      } catch (error) {
+        console.error('Supabase load error:', error);
+      }
+    }
+
+    async function saveDataToSupabase(items) {
+      if (!supabaseClient) return;
+      const result = await supabaseClient
+        .from(SUPABASE_TABLE)
+        .upsert({
+          id: SUPABASE_ROW_ID,
+          data: items || data,
+          updated_at: new Date().toISOString()
+        }, { onConflict: 'id' });
+
+      if (result.error) throw result.error;
+    }
+
+    function saveData() {
+      saveLocalData(data);
+      showSaved();
+      saveDataToSupabase(data).catch(function (error) {
+        console.error('Supabase save error:', error);
+        alert('تم الحفظ محليًا، لكن فشل الحفظ في Supabase. تأكد من الإعدادات والسياسات.');
+      });
+    }
+
+    function applyData() {
+      cards.forEach(function (card, index) {
+        const item = data[index] || defaults[index];
+        const img = card.querySelector('.product-card__image img');
+        const title = card.querySelector('h3');
+        const desc = card.querySelector('.product-card__body p');
+        const hint = card.querySelector('.product-card__hint');
+        if (img && item.image) { img.src = item.image; img.alt = item.alt || item.title || defaults[index].alt; }
+        if (title) title.textContent = item.title || defaults[index].title;
+        if (desc) desc.textContent = item.description || defaults[index].description;
+        if (hint) hint.textContent = item.button || defaults[index].button;
+
+        const modalId = card.getAttribute('data-modal-target');
+        const modal = modalId ? document.getElementById(modalId) : null;
+        if (modal) applyModalData(modal, item, defaults[index], index);
+      });
+    }
+
+    function applyModalData(modal, item, fallback, cardIndex) {
+      const title = modal.querySelector('h2');
+      const eyebrow = modal.querySelector('.eyebrow');
+      if (title) title.textContent = item.modalTitle || item.title || fallback.modalTitle;
+      if (eyebrow) eyebrow.textContent = item.title || fallback.title;
+
+      const box = modal.querySelector('.product-modal__box');
+      const top = modal.querySelector('.product-modal__top');
+      if (box) {
+        // لا نعرض المعرض القديم مرتين؛ كل الصور الآن تُدار من admin-modal-gallery.
+        box.querySelectorAll('.milch-gallery, .modal-preview-gallery').forEach(function (oldGallery) {
+          oldGallery.style.display = 'none';
+        });
+      }
+      if (box && top) {
+        Array.from(box.children).forEach(function (child) {
+          if (child.matches('p.admin-modal-text')) child.remove();
+        });
+        const paragraphs = Array.isArray(item.modalText) ? item.modalText : fallback.modalText;
+        paragraphs.filter(Boolean).forEach(function (txt) {
+          const p = document.createElement('p');
+          p.className = 'admin-modal-text';
+          p.textContent = txt;
+          box.insertBefore(p, box.querySelector('.modal-sorten-list'));
+        });
+        // hide original direct paragraphs after top, but keep them available if reset is used
+        Array.from(box.children).forEach(function (child) {
+          if (child.tagName === 'P' && !child.classList.contains('eyebrow') && !child.classList.contains('admin-modal-text')) {
+            child.style.display = 'none';
+          }
+        });
+      }
+
+      const list = modal.querySelector('.modal-sorten-list');
+      if (list) {
+        list.innerHTML = '';
+        const sorten = Array.isArray(item.sorten) ? item.sorten : fallback.sorten;
+        sorten.filter(Boolean).forEach(function (txt) {
+          const span = document.createElement('span');
+          span.textContent = txt;
+          list.appendChild(span);
+        });
+      }
+
+      let gallery = modal.querySelector('.admin-modal-gallery');
+      const listForGallery = modal.querySelector('.modal-sorten-list');
+      if (!gallery && box) {
+        gallery = document.createElement('div');
+        gallery.className = 'admin-modal-gallery';
+      }
+      // الصور المضافة تظهر في أعلى نافذة النكهات، قبل قائمة الأصناف، وليس في آخر النافذة.
+      if (gallery && box && listForGallery && gallery.nextElementSibling !== listForGallery) {
+        box.insertBefore(gallery, listForGallery);
+      } else if (gallery && box && !gallery.parentNode) {
+        box.appendChild(gallery);
+      }
+      if (gallery) {
+        gallery.innerHTML = '';
+        const images = Array.isArray(item.modalImages) ? uniqueImages(item.modalImages).filter(Boolean) : [];
+        gallery.style.display = images.length ? 'grid' : 'none';
+        const markedAsNew = Array.isArray(item.modalNewBadges) ? item.modalNewBadges : [];
+        images.forEach(function (src, imageIndex) {
+          const figure = document.createElement('figure');
+          figure.className = 'admin-modal-gallery__item';
+
+          const im = document.createElement('img');
+          im.src = src;
+          im.alt = item.modalTitle || item.title || 'Eissorten Bild';
+
+          const hasNewBadge = markedAsNew.indexOf(src) !== -1;
+          let badge = null;
+          if (hasNewBadge) {
+            badge = document.createElement('img');
+            badge.className = 'admin-modal-gallery__new-badge';
+            badge.src = NEW_BADGE_SRC;
+            badge.alt = 'New';
+          }
+
+          const deleteBtn = document.createElement('button');
+          deleteBtn.type = 'button';
+          deleteBtn.className = 'admin-modal-gallery__delete';
+          deleteBtn.textContent = 'Löschen';
+          deleteBtn.addEventListener('click', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            if (!document.body.classList.contains('admin-mode')) return;
+            if (typeof cardIndex !== 'number' || !data[cardIndex]) return;
+            data[cardIndex].modalImages = (data[cardIndex].modalImages || []).filter(function (_, i) { return i !== imageIndex; });
+            data[cardIndex].modalNewBadges = (data[cardIndex].modalNewBadges || []).filter(function (badgeSrc) { return badgeSrc !== src; });
+            data[cardIndex].modalImagesTouched = true;
+            saveData();
+            applyData();
+          });
+
+          figure.appendChild(im);
+          if (badge) figure.appendChild(badge);
+          figure.appendChild(deleteBtn);
+          gallery.appendChild(figure);
+        });
+      }
+    }
+
+    function createCardTools() {
+      cards.forEach(function (card, index) {
+        // تنظيف أي أقلام قديمة أو مكررة داخل البطاقة قبل إضافة القلم الصحيح
+        card.querySelectorAll('.admin-card-tools, .admin-pencil, .admin-pencil--content').forEach(function (oldTool) {
+          oldTool.remove();
+        });
+
+        const tools = document.createElement('span');
+        tools.className = 'admin-card-tools';
+        tools.innerHTML = '<span class="admin-pencil admin-pencil--image" title="Produkt bearbeiten" aria-label="Produkt bearbeiten">✎</span>';
+
+        const imageBtn = tools.querySelector('.admin-pencil--image');
+        imageBtn.addEventListener('click', function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          openEdit(index, true);
+        });
+
+        card.appendChild(tools);
+      });
+    }
+
+    function openOverlay(overlay) {
+      if (!overlay) return;
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeOverlay(overlay) {
+      if (!overlay) return;
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+      if (!document.querySelector('.product-modal.open') && !document.querySelector('.admin-overlay.open')) document.body.style.overflow = '';
+    }
+    function enableAdminMode() {
+      removeDuplicatePencils();
+      document.body.classList.add('admin-mode');
+      sessionStorage.setItem(SESSION_KEY, '1');
+    }
+    function disableAdminMode() {
+      document.body.classList.remove('admin-mode');
+      sessionStorage.removeItem(SESSION_KEY);
+      closeOverlay(loginOverlay);
+      closeOverlay(editOverlay);
+      if (passwordInput) passwordInput.value = '';
+      if (loginError) loginError.style.display = 'none';
+    }
+    function showSaved() {
+      if (!saveNote) return;
+      saveNote.classList.add('show');
+      clearTimeout(showSaved._timer);
+      showSaved._timer = setTimeout(() => saveNote.classList.remove('show'), 1500);
+    }
+
+    function openEdit(index, focusImage) {
+      if (!document.body.classList.contains('admin-mode')) return;
+      editIndex = index;
+      uploadedCardImage = '';
+      uploadedModalImages = [];
+      const item = data[index] || defaults[index];
+      const modalId = cards[index] ? cards[index].getAttribute('data-modal-target') : '';
+      const modal = modalId ? document.getElementById(modalId) : null;
+      const liveImages = modal ? Array.from(modal.querySelectorAll('.admin-modal-gallery__item > img:first-child, .modal-preview-gallery img')).map(function (im) { return im.getAttribute('src'); }).filter(Boolean) : [];
+      const savedModalImages = Array.isArray(item.modalImages) ? item.modalImages : [];
+      tempModalImages = item.modalImagesTouched
+        ? uniqueImages(savedModalImages)
+        : uniqueImages(savedModalImages.concat(liveImages));
+      tempModalNewBadges = Array.isArray(item.modalNewBadges) ? item.modalNewBadges.slice() : [];
+      if (cardImageFile) cardImageFile.value = '';
+      if (cardImageUrl) cardImageUrl.value = item.image || '';
+      if (titleInput) titleInput.value = item.title || '';
+      if (descInput) descInput.value = item.description || '';
+      if (buttonInput) buttonInput.value = item.button || 'Eissorten ansehen';
+      if (modalTitleInput) modalTitleInput.value = item.modalTitle || item.title || '';
+      if (modalTextInput) modalTextInput.value = (Array.isArray(item.modalText) ? item.modalText : []).join('\n');
+      if (sortenInput) sortenInput.value = (Array.isArray(item.sorten) ? item.sorten : []).join('\n');
+      if (modalImageFile) modalImageFile.value = '';
+      if (modalImageUrl) modalImageUrl.value = '';
+      renderModalImagesEditor();
+      openOverlay(editOverlay);
+      setTimeout(function () { focusImage && cardImageFile ? cardImageFile.focus() : (buttonInput && buttonInput.focus()); }, 50);
+    }
+
+    function createEmojiImagePlaceholder() {
+      const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">' +
+        '<rect width="900" height="600" rx="46" fill="#fff6e8"/>' +
+        '<rect x="26" y="26" width="848" height="548" rx="38" fill="none" stroke="#d39a38" stroke-width="10" stroke-dasharray="22 18"/>' +
+        '<text x="450" y="330" text-anchor="middle" dominant-baseline="middle" font-size="170">🖼️</text>' +
+        '<text x="450" y="465" text-anchor="middle" font-family="Arial, sans-serif" font-size="46" font-weight="700" fill="#6f4106">Neues Bild</text>' +
+        '</svg>';
+      return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+    }
+
+    function renderModalImagesEditor() {
+      if (!modalImagesList) return;
+      modalImagesList.innerHTML = '';
+      if (!tempModalImages.length) {
+        const empty = document.createElement('p');
+        empty.textContent = 'Keine zusätzlichen Bilder.';
+        empty.style.margin = '0';
+        modalImagesList.appendChild(empty);
+        return;
+      }
+      tempModalImages.forEach(function (src, i) {
+        const row = document.createElement('div');
+        row.className = 'admin-image-row';
+        const isMarkedNew = tempModalNewBadges.indexOf(src) !== -1;
+        row.innerHTML = '<div class="admin-image-preview"><img class="admin-base-image" alt="Bild"></div><span></span><div class="admin-image-actions"><button class="admin-btn admin-btn--danger" type="button" data-action="delete">Löschen</button><button class="admin-btn admin-btn--new-sort" type="button" data-action="new-sort"></button></div>';
+        row.querySelector('.admin-base-image').src = src;
+        row.querySelector('span').textContent = src.length > 80 ? src.slice(0, 80) + '…' : src;
+        if (isMarkedNew) {
+          const badge = document.createElement('img');
+          badge.className = 'admin-new-badge-preview';
+          badge.src = NEW_BADGE_SRC;
+          badge.alt = 'New';
+          row.querySelector('.admin-image-preview').appendChild(badge);
+        }
+        row.querySelector('[data-action="new-sort"]').textContent = isMarkedNew ? 'Neu entfernen' : 'Neue Sorte';
+        row.querySelector('[data-action="delete"]').addEventListener('click', function () {
+          tempModalImages.splice(i, 1);
+          tempModalNewBadges = tempModalNewBadges.filter(function (badgeSrc) { return badgeSrc !== src; });
+          renderModalImagesEditor();
+        });
+        row.querySelector('[data-action="new-sort"]').addEventListener('click', function () {
+          if (tempModalNewBadges.indexOf(src) === -1) {
+            tempModalNewBadges.push(src);
+          } else {
+            tempModalNewBadges = tempModalNewBadges.filter(function (badgeSrc) { return badgeSrc !== src; });
+          }
+          renderModalImagesEditor();
+        });
+        modalImagesList.appendChild(row);
+      });
+    }
+
+    function makeStoragePath(file) {
+      const ext = (file.name.split('.').pop() || 'png').toLowerCase().replace(/[^a-z0-9]/g, '');
+      const safeName = file.name.replace(/\.[^/.]+$/, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'image';
+      return 'products/' + Date.now() + '-' + Math.random().toString(36).slice(2, 9) + '-' + safeName + '.' + ext;
+    }
+
+    function readFileAsDataUrl(file) {
+      return new Promise(function (resolve, reject) {
+        const reader = new FileReader();
+        reader.onload = function (event) { resolve(event.target.result); };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function uploadImageToSupabase(file) {
+      if (!supabaseClient) {
+        // احتياطي: عند عدم تفعيل Supabase نحافظ على طريقة Base64 القديمة.
+        return readFileAsDataUrl(file);
+      }
+
+      const path = makeStoragePath(file);
+      const upload = await supabaseClient.storage.from(SUPABASE_BUCKET).upload(path, file, {
+        cacheControl: '3600',
+        upsert: false,
+        contentType: file.type || 'image/png'
+      });
+      if (upload.error) throw upload.error;
+
+      const publicUrl = supabaseClient.storage.from(SUPABASE_BUCKET).getPublicUrl(path);
+      return publicUrl.data.publicUrl;
+    }
+
+    function fileToDataUrl(input, cb) {
+      const file = input && input.files && input.files[0];
+      if (!file) return;
+      uploadImageToSupabase(file)
+        .then(cb)
+        .catch(function (error) {
+          console.error('Supabase image upload error:', error);
+          alert('فشل رفع الصورة إلى Supabase. سيتم حفظها مؤقتًا داخل المتصفح فقط.');
+          readFileAsDataUrl(file).then(cb);
+        });
+    }
+
+    function filesToDataUrls(input, cb) {
+      const files = input && input.files ? Array.from(input.files) : [];
+      if (!files.length) return cb([]);
+      Promise.all(files.map(uploadImageToSupabase))
+        .then(function (urls) { cb(urls.filter(Boolean)); })
+        .catch(function (error) {
+          console.error('Supabase images upload error:', error);
+          alert('فشل رفع بعض الصور إلى Supabase. سيتم حفظها مؤقتًا داخل المتصفح فقط.');
+          Promise.all(files.map(readFileAsDataUrl)).then(function (urls) { cb(urls.filter(Boolean)); });
+        });
+    }
+
+    if (loginBtn) {
+      loginBtn.addEventListener('click', async function () {
+        if (loginError) loginError.style.display = 'none';
+        loginBtn.disabled = true;
+        loginBtn.textContent = 'Prüfen...';
+        try {
+          const isValid = await verifyAdminLogin(emailInput ? emailInput.value.trim() : '', passwordInput ? passwordInput.value : '');
+          if (isValid) {
+            if (passwordInput) passwordInput.value = '';
+            closeOverlay(loginOverlay); enableAdminMode(); showSaved();
+          } else if (loginError) {
+            loginError.textContent = 'Falsche E-Mail, falsches Passwort oder Supabase-Verifizierung nicht eingerichtet.';
+            loginError.style.display = 'block';
+          }
+        } finally {
+          loginBtn.disabled = false;
+          loginBtn.textContent = 'Einloggen';
+        }
+      });
+    }
+    if (adminLogoutBtn) {
+      adminLogoutBtn.addEventListener('click', function () {
+        disableAdminMode();
+      });
+    }
+    if (emailInput) emailInput.addEventListener('keydown', e => { if (e.key === 'Enter') passwordInput ? passwordInput.focus() : (loginBtn && loginBtn.click()); });
+    if (passwordInput) passwordInput.addEventListener('keydown', e => { if (e.key === 'Enter') loginBtn && loginBtn.click(); });
+    if (cardImageFile) cardImageFile.addEventListener('change', function () { fileToDataUrl(cardImageFile, function (url) { uploadedCardImage = url; if (cardImageUrl) cardImageUrl.value = 'Bild hochgeladen'; }); });
+    if (modalImageFile) modalImageFile.addEventListener('change', function () {
+      filesToDataUrls(modalImageFile, function (urls) {
+        uploadedModalImages = urls;
+        if (modalImageUrl) modalImageUrl.value = urls.length > 1 ? (urls.length + ' Bilder hochgeladen') : 'Bild hochgeladen';
+      });
+    });
+    if (addModalImageBtn) {
+      addModalImageBtn.addEventListener('click', function () {
+        const hasUploadedFiles = Array.isArray(uploadedModalImages) && uploadedModalImages.length > 0;
+        if (hasUploadedFiles) {
+          tempModalImages = tempModalImages.concat(uploadedModalImages);
+        } else {
+          return;
+        }
+        uploadedModalImages = [];
+        if (modalImageFile) modalImageFile.value = '';
+        if (modalImageUrl) modalImageUrl.value = '';
+        renderModalImagesEditor();
+      });
+    }
+    if (saveBtn) {
+      saveBtn.addEventListener('click', function () {
+        if (editIndex === null) return;
+        const old = data[editIndex] || defaults[editIndex];
+        if (Array.isArray(uploadedModalImages) && uploadedModalImages.length) {
+          tempModalImages = tempModalImages.concat(uploadedModalImages);
+          uploadedModalImages = [];
+        }
+        data[editIndex] = {
+          image: uploadedCardImage || old.image,
+          alt: (titleInput && titleInput.value.trim()) || old.alt || old.title,
+          title: (titleInput && titleInput.value.trim()) || old.title,
+          description: (descInput && descInput.value.trim()) || old.description,
+          button: (buttonInput && buttonInput.value.trim()) || old.button || 'Eissorten ansehen',
+          modalTitle: (modalTitleInput && modalTitleInput.value.trim()) || old.modalTitle || old.title,
+          modalText: (modalTextInput && modalTextInput.value.split('\n').map(s => s.trim()).filter(Boolean)) || old.modalText,
+          sorten: (sortenInput && sortenInput.value.split('\n').map(s => s.trim()).filter(Boolean)) || old.sorten,
+          modalImages: tempModalImages.slice(),
+          modalNewBadges: tempModalNewBadges.filter(function (badgeSrc) { return tempModalImages.indexOf(badgeSrc) !== -1; }),
+          modalImagesTouched: true
+        };
+        saveData(); applyData(); closeOverlay(editOverlay);
+      });
+    }
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function () {
+        if (editIndex === null) return;
+        data[editIndex] = Object.assign({}, defaults[editIndex]);
+        saveData(); applyData(); closeOverlay(editOverlay);
+      });
+    }
+
+    document.querySelectorAll('[data-admin-close]').forEach(btn => btn.addEventListener('click', function () { closeOverlay(loginOverlay); closeOverlay(editOverlay); }));
+    document.querySelectorAll('.admin-overlay').forEach(overlay => overlay.addEventListener('click', function (event) { if (event.target === overlay) closeOverlay(overlay); }));
+    document.addEventListener('keydown', function (event) { if (event.key === 'Escape') { closeOverlay(loginOverlay); closeOverlay(editOverlay); } });
+  });
+})();
+</script>
+<!-- END ADMIN EDITOR -->
+
+
+
+<!-- MOBILE EISSORTEN IMAGES FIX -->
+<style>
+  /* يجعل صور نافذة "Eissorten ansehen" تظهر كاملة وواضحة على الهاتف */
+  .product-modal .admin-modal-gallery,
+  .product-modal .milch-gallery {
+    width: 100% !important;
+  }
+
+  .product-modal .admin-modal-gallery__item,
+  .product-modal .milch-gallery__item {
+    background: rgba(255,255,255,.88) !important;
+  }
+
+  @media (max-width: 700px) {
+    .product-modal {
+      align-items: start !important;
+      padding: 12px !important;
+      overflow-y: auto !important;
+    }
+
+    .product-modal__box {
+      width: 100% !important;
+      max-height: calc(100vh - 24px) !important;
+      padding: 22px 14px !important;
+      border-radius: 22px !important;
+    }
+
+    .product-modal .admin-modal-gallery,
+    .product-modal .milch-gallery {
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+      gap: 14px !important;
+      margin: 18px 0 20px !important;
+    }
+
+    .product-modal .admin-modal-gallery__item,
+    .product-modal .milch-gallery__item {
+      width: 100% !important;
+      min-height: 0 !important;
+      height: auto !important;
+      aspect-ratio: auto !important;
+      border-radius: 18px !important;
+      overflow: hidden !important;
+    }
+
+    .product-modal .admin-modal-gallery__item > img:first-child,
+    .product-modal .milch-gallery__item img {
+      width: 100% !important;
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      object-fit: contain !important;
+      border-radius: 18px !important;
+      display: block !important;
+    }
+
+    .product-modal .admin-modal-gallery__new-badge {
+      width: min(20%, 54px) !important;
+      top: 8px !important;
+      right: 8px !important;
+    }
+
+    body.admin-mode .product-modal .admin-modal-gallery__delete {
+      top: 8px !important;
+      right: 8px !important;
+      min-height: 32px !important;
+      padding: 0 10px !important;
+      font-size: 11px !important;
+    }
+  }
+</style>
+<!-- END MOBILE EISSORTEN IMAGES FIX -->
+
+
+
+<!-- LOGO STYLE MODAL IMAGE + INDIVIDUAL IMAGE NAME -->
+<style>
+  .product-modal .modal-preview-gallery {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 10px 0 24px !important;
+  }
+
+  .product-modal .modal-preview-gallery__item {
+    width: 220px !important;
+    max-width: 72vw !important;
+    margin: 0 auto !important;
+    padding: 12px 12px 14px !important;
+    overflow: visible !important;
+    text-align: center !important;
+    border-radius: 28px !important;
+    border: 1px solid rgba(166,106,19,.22) !important;
+    background: linear-gradient(145deg, rgba(255,255,255,.94), rgba(255,246,232,.82)) !important;
+    box-shadow: 0 16px 34px rgba(80,48,6,.14) !important;
+  }
+
+  .product-modal .modal-preview-gallery__item img {
+    width: 170px !important;
+    height: 170px !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+    border: 6px solid #fff8ee !important;
+    box-shadow: 0 12px 24px rgba(80,48,6,.16) !important;
+    display: block !important;
+  }
+
+  .product-modal .modal-preview-gallery__item figcaption {
+    display: block !important;
+    margin-top: 10px !important;
+    color: var(--gold-dark) !important;
+    font-family: Cinzel, serif !important;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    line-height: 1.25 !important;
+  }
+
+  @media (max-width: 700px) {
+    .product-modal .modal-preview-gallery {
+      margin: 8px 0 20px !important;
+    }
+
+    .product-modal .modal-preview-gallery__item {
+      width: 190px !important;
+      padding: 10px 10px 12px !important;
+      border-radius: 24px !important;
+    }
+
+    .product-modal .modal-preview-gallery__item img {
+      width: 145px !important;
+      height: 145px !important;
+    }
+
+    .product-modal .modal-preview-gallery__item figcaption {
+      font-size: 14px !important;
+    }
+  }
+</style>
+<!-- END LOGO STYLE MODAL IMAGE + INDIVIDUAL IMAGE NAME -->
+
+
+
+<!-- DESKTOP EISSORTEN MODAL IMAGE SIZE ONLY -->
+<style>
+  @media (min-width: 701px) {
+    .product-modal .admin-modal-gallery,
+    .product-modal .milch-gallery {
+      display: grid !important;
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      gap: 14px !important;
+      margin: 22px 0 24px !important;
+      width: 100% !important;
+    }
+
+    .product-modal .admin-modal-gallery__item,
+    .product-modal .milch-gallery__item {
+      height: 230px !important;
+      min-height: 0 !important;
+      border-radius: 14px !important;
+      overflow: hidden !important;
+      background: rgba(255,255,255,.90) !important;
+    }
+
+    .product-modal .admin-modal-gallery__item > img:first-child,
+    .product-modal .milch-gallery__item img {
+      width: 100% !important;
+      height: 230px !important;
+      min-height: 0 !important;
+      max-height: 230px !important;
+      object-fit: contain !important;
+      object-position: center !important;
+      border-radius: 14px !important;
+      display: block !important;
+      background: #fff !important;
+    }
+  }
+</style>
+<!-- END DESKTOP EISSORTEN MODAL IMAGE SIZE ONLY -->
 
 </body>
 </html>
