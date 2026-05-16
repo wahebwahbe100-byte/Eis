@@ -2004,5 +2004,521 @@
 </script>
 <!-- END FINAL VERIFIED MOBILE MENU SCRIPT -->
 
+
+
+<!-- ADMIN EDITOR: products, Eissorten modal, add/delete images -->
+<style>
+  .admin-fab {
+    position: fixed; right: 22px; bottom: 22px; z-index: 99990;
+    border: 0; border-radius: 999px; min-height: 52px; padding: 0 20px;
+    background: linear-gradient(135deg, var(--gold-2), var(--gold-dark)); color: #fff;
+    font: inherit; font-weight: 900; cursor: pointer;
+    box-shadow: 0 18px 38px rgba(80,48,6,.28);
+  }
+  .admin-fab:hover { transform: translateY(-2px); }
+  .admin-overlay {
+    position: fixed; inset: 0; z-index: 99991; display: none; place-items: center;
+    padding: 18px; background: rgba(53,33,5,.62);
+  }
+  .admin-overlay.open { display: grid; }
+  .admin-panel {
+    width: min(780px, 100%); max-height: 91vh; overflow: auto;
+    border-radius: 28px; padding: 28px;
+    background: linear-gradient(145deg, #fff, #fff6e8);
+    border: 1px solid rgba(166,106,19,.26);
+    box-shadow: 0 36px 90px rgba(23,13,2,.34);
+  }
+  .admin-panel h2 { font-family: Cinzel, serif; color: var(--gold-dark); font-size: clamp(24px, 4vw, 38px); margin-bottom: 10px; }
+  .admin-panel p { color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+  .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .admin-field { display: grid; gap: 7px; margin-bottom: 14px; }
+  .admin-field.admin-span { grid-column: 1 / -1; }
+  .admin-field label { color: var(--gold-dark); font-size: 13px; font-weight: 900; }
+  .admin-field small { color: var(--muted); line-height: 1.5; }
+  .admin-field input, .admin-field textarea {
+    width: 100%; border: 1px solid rgba(166,106,19,.26); border-radius: 16px;
+    background: #fff; padding: 13px 14px; font: inherit; color: var(--brown); outline: none;
+  }
+  .admin-field textarea { min-height: 105px; resize: vertical; line-height: 1.6; }
+  .admin-field input:focus, .admin-field textarea:focus { border-color: rgba(166,106,19,.62); box-shadow: 0 0 0 4px rgba(198,145,53,.13); }
+  .admin-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+  .admin-btn {
+    border: 0; border-radius: 999px; min-height: 47px; padding: 0 19px;
+    background: linear-gradient(135deg, var(--gold-2), var(--gold-dark)); color: #fff;
+    font: inherit; font-weight: 900; cursor: pointer; box-shadow: 0 12px 24px rgba(114,70,7,.18);
+  }
+  .admin-btn--light { background: rgba(255,255,255,.94); color: var(--gold-dark); border: 1px solid rgba(166,106,19,.24); }
+  .admin-btn--danger { background: linear-gradient(135deg, #a95b34, #743014); }
+  .admin-error { color: #9b2d16 !important; font-weight: 900; display: none; margin-top: 8px; }
+  body.admin-mode .product-card { overflow: visible; }
+  body.admin-mode .product-card::after {
+    content: "Admin"; position: absolute; top: 12px; right: 12px; z-index: 8;
+    padding: 7px 12px; border-radius: 999px; background: rgba(255,248,236,.96);
+    color: var(--gold-dark); border: 1px solid rgba(166,106,19,.22); font-size: 11px; font-weight: 900;
+    box-shadow: 0 10px 22px rgba(80,48,6,.13);
+  }
+  .admin-card-tools { position: absolute; inset: 0; z-index: 12; pointer-events: none; display: none; }
+  body.admin-mode .admin-card-tools { display: block; }
+  .admin-pencil {
+    position: absolute; width: 43px; height: 43px; border-radius: 50%; display: inline-flex;
+    align-items: center; justify-content: center; background: linear-gradient(135deg, var(--gold-2), var(--gold-dark));
+    color: #fff; font-size: 20px; font-weight: 900; cursor: pointer; pointer-events: auto;
+    box-shadow: 0 14px 28px rgba(80,48,6,.24); user-select: none;
+  }
+  .admin-pencil:hover { transform: translateY(-2px) scale(1.04); }
+  .admin-pencil--image { left: 16px; top: 16px; }
+
+  /* ONE-PENCIL FIX: no Eissorten pencil/button beside the card button */
+  .admin-pencil--content,
+  .admin-pencil--content::after {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+  .admin-image-list { display: grid; gap: 10px; margin-top: 4px; }
+  .admin-image-row { display: grid; grid-template-columns: 72px 1fr auto; gap: 10px; align-items: center; padding: 9px; border: 1px solid rgba(166,106,19,.18); border-radius: 16px; background: rgba(255,255,255,.75); }
+  .admin-image-row img { width: 72px; height: 52px; object-fit: cover; border-radius: 12px; }
+  .admin-image-row span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); font-size: 12px; }
+  .admin-modal-gallery { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .admin-modal-gallery img { width: 100%; height: 150px; object-fit: cover; border-radius: 18px; border: 1px solid rgba(166,106,19,.18); box-shadow: 0 12px 25px rgba(80,48,6,.10); }
+  .admin-save-note {
+    position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); opacity: 0;
+    z-index: 99993; padding: 12px 18px; border-radius: 999px;
+    background: linear-gradient(135deg, var(--gold-2), var(--gold-dark)); color: #fff; font-weight: 900;
+    box-shadow: 0 18px 34px rgba(80,48,6,.24); transition: .25s ease;
+  }
+  .admin-save-note.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  @media (max-width: 700px) {
+    .admin-grid { grid-template-columns: 1fr; }
+    .admin-field.admin-span { grid-column: auto; }
+    .admin-panel { padding: 23px 18px; border-radius: 24px; }
+    .admin-actions { flex-direction: column; }
+    .admin-btn { width: 100%; }
+    .admin-modal-gallery { grid-template-columns: 1fr; }
+    .admin-image-row { grid-template-columns: 60px 1fr; }
+    .admin-image-row .admin-btn { grid-column: 1 / -1; }
+  }
+</style>
+
+<button class="admin-fab" type="button" id="adminOpenBtn">🔐 Admin</button>
+
+<div class="admin-overlay" id="adminLoginOverlay" aria-hidden="true">
+  <div class="admin-panel" role="dialog" aria-modal="true" aria-labelledby="adminLoginTitle">
+    <h2 id="adminLoginTitle">Admin Login</h2>
+    <p>Geben Sie das Passwort ein, um Produktbilder, Texte und die Inhalte von „Eissorten ansehen“ zu bearbeiten.</p>
+    <div class="admin-field">
+      <label for="adminPasswordInput">Passwort</label>
+      <input id="adminPasswordInput" type="password" autocomplete="current-password" placeholder="Passwort eingeben" />
+    </div>
+    <p class="admin-error" id="adminLoginError">Falsches Passwort.</p>
+    <div class="admin-actions">
+      <button class="admin-btn" type="button" id="adminLoginBtn">Einloggen</button>
+      <button class="admin-btn admin-btn--light" type="button" data-admin-close>Schließen</button>
+    </div>
+  </div>
+</div>
+
+<div class="admin-overlay" id="adminEditOverlay" aria-hidden="true">
+  <div class="admin-panel" role="dialog" aria-modal="true" aria-labelledby="adminEditTitle">
+    <h2 id="adminEditTitle">Produktkarte & Eissorten bearbeiten</h2>
+    <p>Hier können Sie das Kartenbild, den Button „Eissorten ansehen“, die Sortenliste und zusätzliche Bilder im Fenster hinzufügen oder löschen.</p>
+    <div class="admin-grid">
+      <div class="admin-field">
+        <label for="adminEditImageFile">Kartenbild hochladen</label>
+        <input id="adminEditImageFile" type="file" accept="image/*" />
+      </div>
+      <div class="admin-field">
+        <label for="adminEditImageUrl">Oder Kartenbild-Link / Pfad</label>
+        <input id="adminEditImageUrl" type="text" placeholder="assets/bild.png oder https://..." />
+      </div>
+      <div class="admin-field">
+        <label for="adminEditTitleInput">Kartentitel</label>
+        <input id="adminEditTitleInput" type="text" />
+      </div>
+      <div class="admin-field">
+        <label for="adminEditButtonInput">Button-Text</label>
+        <input id="adminEditButtonInput" type="text" placeholder="Eissorten ansehen" />
+      </div>
+      <div class="admin-field admin-span">
+        <label for="adminEditDescInput">Kartenbeschreibung</label>
+        <textarea id="adminEditDescInput"></textarea>
+      </div>
+      <div class="admin-field admin-span">
+        <label for="adminModalTitleInput">Titel im Eissorten-Fenster</label>
+        <input id="adminModalTitleInput" type="text" />
+      </div>
+      <div class="admin-field admin-span">
+        <label for="adminModalTextInput">Text im Eissorten-Fenster</label>
+        <textarea id="adminModalTextInput"></textarea>
+        <small>Für mehrere Absätze jede Zeile als eigenen Absatz schreiben.</small>
+      </div>
+      <div class="admin-field admin-span">
+        <label for="adminSortenInput">Sortenliste</label>
+        <textarea id="adminSortenInput"></textarea>
+        <small>Jede Sorte in eine neue Zeile schreiben. Zeile löschen = Sorte löschen.</small>
+      </div>
+      <div class="admin-field">
+        <label for="adminModalImageFile">Zusätzliches Bild hinzufügen</label>
+        <input id="adminModalImageFile" type="file" accept="image/*" />
+      </div>
+      <div class="admin-field">
+        <label for="adminModalImageUrl">Oder zusätzlicher Bild-Link</label>
+        <input id="adminModalImageUrl" type="text" placeholder="assets/bild.png oder https://..." />
+      </div>
+      <div class="admin-field admin-span">
+        <button class="admin-btn admin-btn--light" type="button" id="adminAddModalImageBtn">+ Bild hinzufügen</button>
+      </div>
+      <div class="admin-field admin-span">
+        <label>Zusätzliche Bilder</label>
+        <div class="admin-image-list" id="adminModalImagesList"></div>
+      </div>
+    </div>
+    <div class="admin-actions">
+      <button class="admin-btn" type="button" id="adminSaveEditBtn">Speichern</button>
+      <button class="admin-btn admin-btn--light" type="button" data-admin-close>Abbrechen</button>
+      <button class="admin-btn admin-btn--danger" type="button" id="adminResetCardBtn">Diese Karte zurücksetzen</button>
+    </div>
+  </div>
+</div>
+<div class="admin-save-note" id="adminSaveNote">Gespeichert</div>
+
+<script>
+(function () {
+  const ADMIN_PASSWORD = 'admin123';
+  const STORAGE_KEY = 'eis-bueffel-products-admin-v3';
+  const SESSION_KEY = 'eis-bueffel-admin-logged-in';
+  let editIndex = null;
+  let uploadedCardImage = '';
+  let uploadedModalImage = '';
+  let tempModalImages = [];
+
+  function ready(fn) {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+    else fn();
+  }
+
+  ready(function () {
+    const cards = Array.from(document.querySelectorAll('.product-grid .product-card'));
+    const adminOpenBtn = document.getElementById('adminOpenBtn');
+    const loginOverlay = document.getElementById('adminLoginOverlay');
+    const editOverlay = document.getElementById('adminEditOverlay');
+    const passwordInput = document.getElementById('adminPasswordInput');
+    const loginBtn = document.getElementById('adminLoginBtn');
+    const loginError = document.getElementById('adminLoginError');
+    const cardImageFile = document.getElementById('adminEditImageFile');
+    const cardImageUrl = document.getElementById('adminEditImageUrl');
+    const titleInput = document.getElementById('adminEditTitleInput');
+    const descInput = document.getElementById('adminEditDescInput');
+    const buttonInput = document.getElementById('adminEditButtonInput');
+    const modalTitleInput = document.getElementById('adminModalTitleInput');
+    const modalTextInput = document.getElementById('adminModalTextInput');
+    const sortenInput = document.getElementById('adminSortenInput');
+    const modalImageFile = document.getElementById('adminModalImageFile');
+    const modalImageUrl = document.getElementById('adminModalImageUrl');
+    const addModalImageBtn = document.getElementById('adminAddModalImageBtn');
+    const modalImagesList = document.getElementById('adminModalImagesList');
+    const saveBtn = document.getElementById('adminSaveEditBtn');
+    const resetBtn = document.getElementById('adminResetCardBtn');
+    const saveNote = document.getElementById('adminSaveNote');
+
+    if (!cards.length) return;
+
+    const defaults = cards.map(function (card, index) {
+      const img = card.querySelector('.product-card__image img');
+      const title = card.querySelector('h3');
+      const desc = card.querySelector('.product-card__body p');
+      const hint = card.querySelector('.product-card__hint');
+      const modalId = card.getAttribute('data-modal-target');
+      const modal = modalId ? document.getElementById(modalId) : null;
+      const modalTitle = modal ? modal.querySelector('h2') : null;
+      const modalText = modal ? Array.from(modal.querySelectorAll('.product-modal__box > p')).map(p => p.textContent.trim()).filter(Boolean) : [];
+      const sorten = modal ? Array.from(modal.querySelectorAll('.modal-sorten-list span')).map(s => s.textContent.trim()).filter(Boolean) : [];
+      return {
+        image: img ? img.getAttribute('src') : '',
+        alt: img ? img.getAttribute('alt') || '' : '',
+        title: title ? title.textContent.trim() : ('Produkt ' + (index + 1)),
+        description: desc ? desc.textContent.trim().replace(/\s+/g, ' ') : '',
+        button: hint ? hint.textContent.trim() : 'Eissorten ansehen',
+        modalTitle: modalTitle ? modalTitle.textContent.trim() : (title ? title.textContent.trim() : ''),
+        modalText: modalText,
+        sorten: sorten,
+        modalImages: []
+      };
+    });
+
+    let data = loadData();
+    applyData();
+    createCardTools();
+    removeDuplicatePencils();
+    if (sessionStorage.getItem(SESSION_KEY) === '1') enableAdminMode();
+
+    function removeDuplicatePencils() {
+      cards.forEach(function (card) {
+        card.querySelectorAll('.admin-pencil--content').forEach(function (btn) { btn.remove(); });
+        const tools = card.querySelectorAll('.admin-card-tools');
+        tools.forEach(function (toolsWrap, i) { if (i > 0) toolsWrap.remove(); });
+        const pencils = card.querySelectorAll('.admin-card-tools .admin-pencil');
+        pencils.forEach(function (pencil, i) { if (i > 0) pencil.remove(); });
+      });
+    }
+
+    function loadData() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+        if (Array.isArray(saved) && saved.length === defaults.length) {
+          return defaults.map((item, i) => Object.assign({}, item, saved[i] || {}));
+        }
+      } catch (e) {}
+      return defaults.map(item => Object.assign({}, item));
+    }
+
+    function saveData() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      showSaved();
+    }
+
+    function applyData() {
+      cards.forEach(function (card, index) {
+        const item = data[index] || defaults[index];
+        const img = card.querySelector('.product-card__image img');
+        const title = card.querySelector('h3');
+        const desc = card.querySelector('.product-card__body p');
+        const hint = card.querySelector('.product-card__hint');
+        if (img && item.image) { img.src = item.image; img.alt = item.alt || item.title || defaults[index].alt; }
+        if (title) title.textContent = item.title || defaults[index].title;
+        if (desc) desc.textContent = item.description || defaults[index].description;
+        if (hint) hint.textContent = item.button || defaults[index].button;
+
+        const modalId = card.getAttribute('data-modal-target');
+        const modal = modalId ? document.getElementById(modalId) : null;
+        if (modal) applyModalData(modal, item, defaults[index]);
+      });
+    }
+
+    function applyModalData(modal, item, fallback) {
+      const title = modal.querySelector('h2');
+      const eyebrow = modal.querySelector('.eyebrow');
+      if (title) title.textContent = item.modalTitle || item.title || fallback.modalTitle;
+      if (eyebrow) eyebrow.textContent = item.title || fallback.title;
+
+      const box = modal.querySelector('.product-modal__box');
+      const top = modal.querySelector('.product-modal__top');
+      if (box && top) {
+        Array.from(box.children).forEach(function (child) {
+          if (child.matches('p.admin-modal-text')) child.remove();
+        });
+        const paragraphs = Array.isArray(item.modalText) ? item.modalText : fallback.modalText;
+        paragraphs.filter(Boolean).forEach(function (txt) {
+          const p = document.createElement('p');
+          p.className = 'admin-modal-text';
+          p.textContent = txt;
+          box.insertBefore(p, box.querySelector('.modal-sorten-list'));
+        });
+        // hide original direct paragraphs after top, but keep them available if reset is used
+        Array.from(box.children).forEach(function (child) {
+          if (child.tagName === 'P' && !child.classList.contains('eyebrow') && !child.classList.contains('admin-modal-text')) {
+            child.style.display = 'none';
+          }
+        });
+      }
+
+      const list = modal.querySelector('.modal-sorten-list');
+      if (list) {
+        list.innerHTML = '';
+        const sorten = Array.isArray(item.sorten) ? item.sorten : fallback.sorten;
+        sorten.filter(Boolean).forEach(function (txt) {
+          const span = document.createElement('span');
+          span.textContent = txt;
+          list.appendChild(span);
+        });
+      }
+
+      let gallery = modal.querySelector('.admin-modal-gallery');
+      if (!gallery && box) {
+        gallery = document.createElement('div');
+        gallery.className = 'admin-modal-gallery';
+        box.appendChild(gallery);
+      }
+      if (gallery) {
+        gallery.innerHTML = '';
+        const images = Array.isArray(item.modalImages) ? item.modalImages : [];
+        gallery.style.display = images.length ? 'grid' : 'none';
+        images.forEach(function (src) {
+          const im = document.createElement('img');
+          im.src = src;
+          im.alt = item.modalTitle || item.title || 'Eissorten Bild';
+          gallery.appendChild(im);
+        });
+      }
+    }
+
+    function createCardTools() {
+      cards.forEach(function (card, index) {
+        // تنظيف أي أقلام قديمة أو مكررة داخل البطاقة قبل إضافة القلم الصحيح
+        card.querySelectorAll('.admin-card-tools, .admin-pencil, .admin-pencil--content').forEach(function (oldTool) {
+          oldTool.remove();
+        });
+
+        const tools = document.createElement('span');
+        tools.className = 'admin-card-tools';
+        tools.innerHTML = '<span class="admin-pencil admin-pencil--image" title="Produkt bearbeiten" aria-label="Produkt bearbeiten">✎</span>';
+
+        const imageBtn = tools.querySelector('.admin-pencil--image');
+        imageBtn.addEventListener('click', function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          openEdit(index, true);
+        });
+
+        card.appendChild(tools);
+      });
+    }
+
+    function openOverlay(overlay) {
+      if (!overlay) return;
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeOverlay(overlay) {
+      if (!overlay) return;
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+      if (!document.querySelector('.product-modal.open') && !document.querySelector('.admin-overlay.open')) document.body.style.overflow = '';
+    }
+    function enableAdminMode() {
+      removeDuplicatePencils();
+      document.body.classList.add('admin-mode');
+      sessionStorage.setItem(SESSION_KEY, '1');
+      if (adminOpenBtn) adminOpenBtn.textContent = '✎ Bearbeiten aktiv';
+    }
+    function disableAdminMode() {
+      document.body.classList.remove('admin-mode');
+      sessionStorage.removeItem(SESSION_KEY);
+      if (adminOpenBtn) adminOpenBtn.textContent = '🔐 Admin';
+    }
+    function showSaved() {
+      if (!saveNote) return;
+      saveNote.classList.add('show');
+      clearTimeout(showSaved._timer);
+      showSaved._timer = setTimeout(() => saveNote.classList.remove('show'), 1500);
+    }
+
+    function openEdit(index, focusImage) {
+      if (!document.body.classList.contains('admin-mode')) return;
+      editIndex = index;
+      uploadedCardImage = '';
+      uploadedModalImage = '';
+      const item = data[index] || defaults[index];
+      tempModalImages = Array.isArray(item.modalImages) ? item.modalImages.slice() : [];
+      if (cardImageFile) cardImageFile.value = '';
+      if (cardImageUrl) cardImageUrl.value = item.image || '';
+      if (titleInput) titleInput.value = item.title || '';
+      if (descInput) descInput.value = item.description || '';
+      if (buttonInput) buttonInput.value = item.button || 'Eissorten ansehen';
+      if (modalTitleInput) modalTitleInput.value = item.modalTitle || item.title || '';
+      if (modalTextInput) modalTextInput.value = (Array.isArray(item.modalText) ? item.modalText : []).join('\n');
+      if (sortenInput) sortenInput.value = (Array.isArray(item.sorten) ? item.sorten : []).join('\n');
+      if (modalImageFile) modalImageFile.value = '';
+      if (modalImageUrl) modalImageUrl.value = '';
+      renderModalImagesEditor();
+      openOverlay(editOverlay);
+      setTimeout(function () { focusImage && cardImageFile ? cardImageFile.focus() : (buttonInput && buttonInput.focus()); }, 50);
+    }
+
+    function renderModalImagesEditor() {
+      if (!modalImagesList) return;
+      modalImagesList.innerHTML = '';
+      if (!tempModalImages.length) {
+        const empty = document.createElement('p');
+        empty.textContent = 'Keine zusätzlichen Bilder.';
+        empty.style.margin = '0';
+        modalImagesList.appendChild(empty);
+        return;
+      }
+      tempModalImages.forEach(function (src, i) {
+        const row = document.createElement('div');
+        row.className = 'admin-image-row';
+        row.innerHTML = '<img alt="Bild"><span></span><button class="admin-btn admin-btn--danger" type="button">Löschen</button>';
+        row.querySelector('img').src = src;
+        row.querySelector('span').textContent = src.length > 80 ? src.slice(0, 80) + '…' : src;
+        row.querySelector('button').addEventListener('click', function () {
+          tempModalImages.splice(i, 1);
+          renderModalImagesEditor();
+        });
+        modalImagesList.appendChild(row);
+      });
+    }
+
+    function fileToDataUrl(input, cb) {
+      const file = input && input.files && input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (event) { cb(event.target.result); };
+      reader.readAsDataURL(file);
+    }
+
+    if (adminOpenBtn) {
+      adminOpenBtn.addEventListener('click', function () {
+        if (document.body.classList.contains('admin-mode')) disableAdminMode();
+        else { openOverlay(loginOverlay); setTimeout(() => passwordInput && passwordInput.focus(), 50); }
+      });
+    }
+    if (loginBtn) {
+      loginBtn.addEventListener('click', function () {
+        if (passwordInput && passwordInput.value === ADMIN_PASSWORD) {
+          if (loginError) loginError.style.display = 'none';
+          closeOverlay(loginOverlay); enableAdminMode(); showSaved();
+        } else if (loginError) loginError.style.display = 'block';
+      });
+    }
+    if (passwordInput) passwordInput.addEventListener('keydown', e => { if (e.key === 'Enter') loginBtn && loginBtn.click(); });
+    if (cardImageFile) cardImageFile.addEventListener('change', function () { fileToDataUrl(cardImageFile, function (url) { uploadedCardImage = url; if (cardImageUrl) cardImageUrl.value = 'Bild hochgeladen'; }); });
+    if (modalImageFile) modalImageFile.addEventListener('change', function () { fileToDataUrl(modalImageFile, function (url) { uploadedModalImage = url; if (modalImageUrl) modalImageUrl.value = 'Bild hochgeladen'; }); });
+    if (addModalImageBtn) {
+      addModalImageBtn.addEventListener('click', function () {
+        const src = uploadedModalImage || (modalImageUrl && modalImageUrl.value.trim());
+        if (!src || src === 'Bild hochgeladen') return;
+        tempModalImages.push(src);
+        uploadedModalImage = '';
+        if (modalImageFile) modalImageFile.value = '';
+        if (modalImageUrl) modalImageUrl.value = '';
+        renderModalImagesEditor();
+      });
+    }
+    if (saveBtn) {
+      saveBtn.addEventListener('click', function () {
+        if (editIndex === null) return;
+        const old = data[editIndex] || defaults[editIndex];
+        data[editIndex] = {
+          image: uploadedCardImage || ((cardImageUrl && cardImageUrl.value.trim() && cardImageUrl.value.trim() !== 'Bild hochgeladen') ? cardImageUrl.value.trim() : old.image),
+          alt: (titleInput && titleInput.value.trim()) || old.alt || old.title,
+          title: (titleInput && titleInput.value.trim()) || old.title,
+          description: (descInput && descInput.value.trim()) || old.description,
+          button: (buttonInput && buttonInput.value.trim()) || old.button || 'Eissorten ansehen',
+          modalTitle: (modalTitleInput && modalTitleInput.value.trim()) || old.modalTitle || old.title,
+          modalText: (modalTextInput && modalTextInput.value.split('\n').map(s => s.trim()).filter(Boolean)) || old.modalText,
+          sorten: (sortenInput && sortenInput.value.split('\n').map(s => s.trim()).filter(Boolean)) || old.sorten,
+          modalImages: tempModalImages.slice()
+        };
+        saveData(); applyData(); closeOverlay(editOverlay);
+      });
+    }
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function () {
+        if (editIndex === null) return;
+        data[editIndex] = Object.assign({}, defaults[editIndex]);
+        saveData(); applyData(); closeOverlay(editOverlay);
+      });
+    }
+
+    document.querySelectorAll('[data-admin-close]').forEach(btn => btn.addEventListener('click', function () { closeOverlay(loginOverlay); closeOverlay(editOverlay); }));
+    document.querySelectorAll('.admin-overlay').forEach(overlay => overlay.addEventListener('click', function (event) { if (event.target === overlay) closeOverlay(overlay); }));
+    document.addEventListener('keydown', function (event) { if (event.key === 'Escape') { closeOverlay(loginOverlay); closeOverlay(editOverlay); } });
+  });
+})();
+</script>
+<!-- END ADMIN EDITOR -->
+
 </body>
 </html>
