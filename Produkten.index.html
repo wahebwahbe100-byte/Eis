@@ -2173,10 +2173,6 @@
         <input id="adminEditImageFile" type="file" accept="image/*" />
       </div>
       <div class="admin-field">
-        <label for="adminEditImageUrl">Oder Kartenbild-Link / Pfad</label>
-        <input id="adminEditImageUrl" type="text" placeholder="assets/bild.png oder https://..." />
-      </div>
-      <div class="admin-field">
         <label for="adminEditTitleInput">Kartentitel</label>
         <input id="adminEditTitleInput" type="text" />
       </div>
@@ -2210,10 +2206,6 @@
       <div class="admin-field">
         <label for="adminModalImageFile">Weitere Bilder hinzufügen</label>
         <input id="adminModalImageFile" type="file" accept="image/*" multiple />
-      </div>
-      <div class="admin-field">
-        <label for="adminModalImageUrl">Oder zusätzlicher Bild-Link</label>
-        <input id="adminModalImageUrl" type="text" placeholder="assets/bild.png oder https://..." />
       </div>
       <div class="admin-field admin-span">
         <button class="admin-btn admin-btn--light" type="button" id="adminAddModalImageBtn">+ Bild/Bilder hinzufügen</button>
@@ -2671,7 +2663,7 @@
           badge.alt = 'New';
           row.querySelector('.admin-image-preview').appendChild(badge);
         }
-        row.querySelector('[data-action="new-sort"]').textContent = isMarkedNew ? 'إزالة جديد' : 'صنف جديد';
+        row.querySelector('[data-action="new-sort"]').textContent = isMarkedNew ? 'Neu entfernen' : 'Neue Sorte';
         row.querySelector('[data-action="delete"]').addEventListener('click', function () {
           tempModalImages.splice(i, 1);
           tempModalNewBadges = tempModalNewBadges.filter(function (badgeSrc) { return badgeSrc !== src; });
@@ -2770,12 +2762,9 @@
     });
     if (addModalImageBtn) {
       addModalImageBtn.addEventListener('click', function () {
-        const typedUrl = modalImageUrl ? modalImageUrl.value.trim() : '';
         const hasUploadedFiles = Array.isArray(uploadedModalImages) && uploadedModalImages.length > 0;
         if (hasUploadedFiles) {
           tempModalImages = tempModalImages.concat(uploadedModalImages);
-        } else if (typedUrl && typedUrl !== 'Bild hochgeladen' && !/Bilder hochgeladen$/.test(typedUrl)) {
-          tempModalImages.push(typedUrl);
         } else {
           return;
         }
@@ -2794,7 +2783,7 @@
           uploadedModalImages = [];
         }
         data[editIndex] = {
-          image: uploadedCardImage || ((cardImageUrl && cardImageUrl.value.trim() && cardImageUrl.value.trim() !== 'Bild hochgeladen') ? cardImageUrl.value.trim() : old.image),
+          image: uploadedCardImage || old.image,
           alt: (titleInput && titleInput.value.trim()) || old.alt || old.title,
           title: (titleInput && titleInput.value.trim()) || old.title,
           description: (descInput && descInput.value.trim()) || old.description,
