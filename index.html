@@ -297,12 +297,25 @@
       box-shadow: var(--shadow);
     }
     .experience__image {
-      display: grid;
-      place-items: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       border-right: 1px solid rgba(166,106,19,.24);
       padding-right: 14px;
     }
     .experience__image img { width: 86px; height: 86px; object-fit: contain; }
+    .experience__label {
+      font-family: Cinzel, serif;
+      color: var(--gold-dark);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .8px;
+      text-align: center;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
     .experience p { font-size: 13px; line-height: 1.65; color: #4c3820; align-self: center; }
 
     .quality-taste {
@@ -3522,6 +3535,7 @@
         <div class="experience">
           <div class="experience__image">
             <img src="assets/50.png" alt="Über 50 Jahre Erfahrung" />
+            <span class="experience__label">JAHER Effahrung</span>
           </div>
           <p>
             Über fünf Jahrzehnte Erfahrung in Herstellung und Vertrieb von
